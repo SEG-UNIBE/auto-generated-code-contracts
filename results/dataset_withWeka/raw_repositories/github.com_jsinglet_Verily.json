@@ -1,0 +1,49 @@
+{
+  "SourcegraphEndpoint": "https://sourcegraph.com",
+  "Query": "(//@ requires )|(//@ ensures ) repo:github.com/jsinglet/Verily lang:java count:all case:yes type:file patterntype:regexp",
+  "Site": {
+    "BuildVersion": "238702_2023-08-16_5.1-acf4bcc841e5"
+  },
+  "Results": [
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "23d728695688f111f22c5c5c5d2cca986611d380"
+        },
+        "content": "package verily.lang;\n\nimport org.apache.commons.lang.SerializationUtils;\n\nimport java.io.Serializable;\n\npublic class ReadableValue\u003cT extends Serializable\u003e {\n    protected /*@ spec_public @*/ T value;\n\n    // ensures this.value != null \u0026\u0026 this.value == value;\n    //@ assignable this.value;\n    public ReadableValue(T value) {\n\n        this.value = value;\n    }\n\n    //@ ensures \\result == this.value;\n    public /*@ pure @*/ T getValue() {\n        return this.value;\n    }\n}\n",
+        "name": "ReadableValue.java",
+        "path": "parser/src/main/java/verily/lang/ReadableValue.java",
+        "url": "/github.com/jsinglet/Verily/-/blob/parser/src/main/java/verily/lang/ReadableValue.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 16,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == this.value;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/jsinglet/Verily",
+        "url": "/github.com/jsinglet/Verily"
+      }
+    }
+  ],
+  "LimitHit": false,
+  "Cloning": [],
+  "Missing": [],
+  "Timedout": [],
+  "ResultCount": 1,
+  "ElapsedMilliseconds": 62,
+  "Alert": {
+    "Title": "",
+    "Description": "",
+    "ProposedQueries": null
+  }
+}

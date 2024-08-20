@@ -1,0 +1,154 @@
+[
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "    public QueueNode next(QueueNode next) {\n      return m_Next = next;\n    } //@ nowarn Invariant; // Because it stupidly checks the Queue invariant!\n",
+        "methodStartingLine": 78,
+        "methodEndingLine": 80,
+        "jml": "//@ requires contents != null;\n//@ ensures m_Contents == contents;\n//@ ensures m_Next == null;\n//@ requires next != this ;\n//@ ensures m_Next==next && \\result==next;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "    public /*@ pure @*/ QueueNode next() {\n      return m_Next;\n    }\n",
+        "methodStartingLine": 86,
+        "methodEndingLine": 88,
+        "jml": "//@ ensures \\result == m_Next;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "    public Object contents(Object contents) {\n      return m_Contents = contents;\n    }\n",
+        "methodStartingLine": 96,
+        "methodEndingLine": 98,
+        "jml": "//@ requires contents != null;\n//@ ensures  m_Contents == contents && \\result == contents;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "    public /*@ pure @*/ Object contents() {\n      return m_Contents;\n    }\n",
+        "methodStartingLine": 104,
+        "methodEndingLine": 106,
+        "jml": "//@ ensures \\result == m_Contents;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public final synchronized void removeAllElements() {\n    m_Size = 0;\n    m_Head = null;\n    m_Tail = null;\n  }\n",
+        "methodStartingLine": 144,
+        "methodEndingLine": 148,
+        "jml": "//@ ensures m_Size == 0;\n//@ ensures m_Head == null;\n//@ ensures m_Tail == null;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public synchronized Object push(Object item) {\n    QueueNode newNode = new QueueNode(item);\n    \n    if (m_Head == null) {\n      m_Head = m_Tail = newNode;\n    } else {\n      m_Tail = m_Tail.next(newNode);\n    }\n    m_Size++;\n    return item;\n  }\n",
+        "methodStartingLine": 165,
+        "methodEndingLine": 175,
+        "jml": "//@ requires item != null;\n//@ ensures m_Head != null;\n//@ ensures m_Tail != \\old(m_Tail);\n//@ ensures m_Size == \\old(m_Size) + 1;\n//@ ensures \\old(m_Size) == 0 ==> m_Head == m_Tail; \n//@ ensures \\old(m_Size) != 0 ==> m_Head == \\old(m_Head);\n//@ ensures m_Tail.contents() == \\old(item);\n//@ ensures \\result == item;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public synchronized Object pop() \n      throws RuntimeException   // REDUNDANT, BUT ESCJAVA REQUIRES THIS\n  {\n    if (m_Head == null) {\n\tthrow new RuntimeException(\"Queue is empty\");\n    }\n    Object retval = m_Head.contents();\n    m_Size--;\n    m_Head = m_Head.next();\n    // Here we need to either tell ESC/Java some facts about\n    // the contents of the list after popping off the head,\n    // or turn off the 'invariant' warnings.\n    //\n    //@ assume m_Size == 0 <==> m_Head == null;\n    //@ assume m_Size == 1 <==> m_Head == m_Tail;\n    if (m_Head == null) {\n      m_Tail = null;\n    }\n    return retval;\n  }\n",
+        "methodStartingLine": 189,
+        "methodEndingLine": 208,
+        "jml": "//@ ensures m_Size == \\old(m_Size) - 1;\n//@ ensures m_Head == \\old(m_Head.m_Next);\n//@ ensures m_Head != null ==> m_Tail == \\old(m_Tail);\n//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public /*@ pure @*/ synchronized Object peek() \n    throws RuntimeException\n  { \n    if (m_Head == null) {\n      throw new RuntimeException(\"Queue is empty\");\n    }\n    return m_Head.contents();\n  }\n",
+        "methodStartingLine": 218,
+        "methodEndingLine": 225,
+        "jml": "//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public /*@ pure @*/ boolean empty() {\n    return m_Head == null;\n  }\n",
+        "methodStartingLine": 233,
+        "methodEndingLine": 235,
+        "jml": "//@ ensures \\result <==> m_Head == null;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public /*@ pure @*/ int size() {\n    return m_Size;\n  }\n",
+        "methodStartingLine": 243,
+        "methodEndingLine": 245,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public  /*@ pure @*/ String toString() {\n\n    String retval = \"Queue Contents \"+m_Size+\" elements\\n\";\n    QueueNode current = m_Head;\n    if (current == null) {\n      return retval + \"Empty\\n\";\n    } else {\n      while (current != null) {\n        retval += current.contents().toString()+\"\\n\"; //@nowarn Modifies;\n\tcurrent = current.next();\n      }\n    }\n    return retval;\n  } //@ nowarn Post;\n",
+        "methodStartingLine": 255,
+        "methodEndingLine": 268,
+        "jml": "//@ ensures \\result != null;\n//@ ensures (* \\result == textual description of the queue *);"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/Queue.java",
+        "code": "  public static void main(String [] argv) {\n\n    try {\n      Queue queue = new Queue();\n      for(int i = 0; i < argv.length; i++) {\n\tqueue.push(argv[i]);\n      }\n      System.out.println(\"After pushing command line arguments\");\n      System.out.println(queue.toString());\n      while (!queue.empty()) {\n\tSystem.out.println(\"Pop: \" + queue.pop().toString());\n      }\n      // try one more pop, to make sure we get an exception\n      try \n\t{\n\t  queue.pop();\n\t  System.out.println(\"ERROR: pop did not throw exception!\");\n\t}\n      catch (RuntimeException ex)\n        {\n\t  System.out.println(\"Pop on empty queue correctly gave exception.\");\n\t}\n    } catch (Exception ex) {\n      System.out.println(ex.getMessage());\n    }\n  }\n",
+        "methodStartingLine": 287,
+        "methodEndingLine": 312,
+        "jml": "//@ requires argv.length >= 0;\n//@ requires argv != null;\n//@ requires (\\forall int i; 0 <= i && i < argv.length; argv[i] != null);"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/SingleIndex.java",
+        "code": "  public void setUpper(int newUpper) {\n\n    if (newUpper >= 0) {\n      m_Upper = newUpper;\n      setValue();\n    }\n  }\n",
+        "methodStartingLine": 91,
+        "methodEndingLine": 97,
+        "jml": "//@ ensures m_SelectedIndex == -1;\n//@ ensures m_Upper == -1;\n//@ ensures m_IndexString == index;\n//@ ensures m_SelectedIndex == -1;\n//@ ensures m_Upper == -1;\n//@ ensures newUpper < 0 ==> m_Upper == \\old(m_Upper);\n//@ ensures newUpper >= 0 ==> m_Upper == newUpper;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ String getSingleIndex() {\n\n    return m_IndexString;\n  }\n",
+        "methodStartingLine": 105,
+        "methodEndingLine": 108,
+        "jml": "//@ ensures \\result == m_IndexString;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/SingleIndex.java",
+        "code": "  public void setSingleIndex(/*@non_null@*/ String index) {\n\n    m_IndexString = index;\n    m_SelectedIndex = -1;\n  }\n",
+        "methodStartingLine": 120,
+        "methodEndingLine": 124,
+        "jml": "//@ ensures m_IndexString == index;\n//@ ensures m_SelectedIndex == -1;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ String toString() {\n\n    if (m_IndexString.equals(\"\")) {\n      return \"No index set\";\n    }\n    if (m_Upper == -1) {\n      throw new RuntimeException(\"Upper limit has not been specified\");\n    }\n    return m_IndexString;\n  }\n",
+        "methodStartingLine": 134,
+        "methodEndingLine": 143,
+        "jml": "//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ int getIndex() {\n\n    if (m_IndexString.equals(\"\")) {\n      throw new RuntimeException(\"No index set\");\n    }\n    if (m_Upper == -1) {\n      throw new RuntimeException(\"No upper limit has been specified for index\");\n    }\n    return m_SelectedIndex;\n  }\n",
+        "methodStartingLine": 154,
+        "methodEndingLine": 163,
+        "jml": "//@ requires m_Upper >= 0;\n//@ requires m_IndexString.length() > 0;\n//@ ensures \\result == m_SelectedIndex;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/SingleIndex.java",
+        "code": "  public static /*@pure non_null@*/ String indexToString(int index) {\n\n    return \"\" + (index + 1);\n  }\n",
+        "methodStartingLine": 174,
+        "methodEndingLine": 177,
+        "jml": "//@ requires index >= 0;"
+    },
+    {
+        "repository": "github.com/umple/umple",
+        "file": "Umplificator/UmplifiedProjects/weka-umplified-0/src/main/java/weka/core/SingleIndex.java",
+        "code": "  public static void main(/*@non_null@*/ String [] argv) {\n\n    try {\n      if (argv.length == 0) {\n\tthrow new Exception(\"Usage: SingleIndex <indexspec>\");\n      }\n      SingleIndex singleIndex = new SingleIndex();\n      singleIndex.setSingleIndex(argv[0]);\n      singleIndex.setUpper(9);\n      System.out.println(\"Input: \" + argv[0] + \"\\n\"\n\t\t\t + singleIndex.toString());\n      int selectedIndex = singleIndex.getIndex();\n      System.out.println(selectedIndex + \"\");\n    } catch (Exception ex) {\n      ex.printStackTrace();\n      System.out.println(ex.getMessage());\n    }\n  }\n",
+        "methodStartingLine": 229,
+        "methodEndingLine": 246,
+        "jml": "//@ requires \\nonnullelements(argv);"
+    }
+]

@@ -1,0 +1,562 @@
+{
+  "SourcegraphEndpoint": "https://sourcegraph.com",
+  "Query": "(//@ requires )|(//@ ensures ) repo:github.com/darewolf-cyber/BUAA_OO lang:java count:all case:yes type:file patterntype:regexp",
+  "Site": {
+    "BuildVersion": "238702_2023-08-16_5.1-acf4bcc841e5"
+  },
+  "Results": [
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "import com.oocourse.specs1.models.Path;\n\nimport java.util.ArrayList;\nimport java.util.HashSet;\nimport java.util.Iterator;\nimport java.util.Set;\n\npublic class MyPath implements Path {\n    //@ public instance model non_null int[] nodes;\n    private ArrayList\u003cInteger\u003e path;\n    private int disNum;\n\n    public MyPath(int... nodeList) {\n        path = new ArrayList\u003c\u003e();\n        for (int i = 0;i \u003c nodeList.length;i++) {\n            path.add(nodeList[i]);\n        }\n        disNum = -1;\n    }\n\n    @Override\n    //@ ensures \\result == nodes.length;\n    public /*@pure@*/int size() {\n        return path.size();\n    }\n\n    @Override\n    /*@ requires index \u003e= 0 \u0026\u0026 index \u003c size();\n      @ assignable \\nothing;\n      @ ensures \\result == nodes[index];\n      @*/\n    public /*@pure@*/ int getNode(int index) {\n        return path.get(index);\n    }\n\n    @Override\n    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026\n    //@ i \u003c nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node) {\n        return path.contains(node);\n    }\n\n    @Override\n    /*@ ensures \\result == (\\num_of int i, j; 0 \u003c= i \u0026\u0026 i \u003c j\n                \u0026\u0026 j \u003c nodes.length;nodes[i] != nodes[j]);\n      @*/\n    public /*pure*/ int getDistinctNodeCount() {\n        if (disNum == -1) {\n            Set\u003cInteger\u003e set = new HashSet\u003c\u003e();\n            set.addAll(path);\n            disNum = set.size();\n        }\n        return disNum;\n    }\n\n    @Override\n    //@ ensures \\result == (nodes.length \u003e= 2);\n    public /*@pure@*/ boolean isValid() {\n        return path.size() \u003e= 2;\n    }\n\n    /*@ also\n      @ public normal_behavior\n      @ requires obj != null \u0026\u0026 obj instanceof Path;\n      @ assignable \\nothing;\n      @ ensures \\result == ((Path) obj).nodes.length == nodes.length) \u0026\u0026\n      @                      (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length;\n      @                           nodes[i] == ((Path) obj).nodes[i]);\n      @ also\n      @ public normal_behavior\n      @ requires obj == null || !(obj instanceof Path);\n      @ assignable \\nothing;\n      @ ensures \\result == false;\n      @*/\n    public boolean equals(Object obj) {\n        if (obj == null || !(obj instanceof Path)) {\n            return false;\n        }\n        else {\n            if (path.size() != ((Path) obj).size()) {\n                return false;\n            }\n            boolean flag = true;\n            for (int i = 0;i \u003c path.size(); i++) {\n                if (path.get(i) != ((Path) obj).getNode(i)) {\n                    flag = false;\n                    break;\n                }\n            }\n            return flag;\n        }\n    }\n\n    @Override\n    public int compareTo(Path o) {\n        for (int i = 0;i \u003c Math.min(path.size(),o.size()); i++) {\n            if (path.get(i) \u003c o.getNode(i)) {\n                return -1;\n            }\n            else if (path.get(i) \u003e o.getNode(i)) {\n                return 1;\n            }\n        }\n        return path.size() - o.size();\n    }\n\n    @Override\n    public Iterator\u003cInteger\u003e iterator() {\n        return path.iterator();\n    }\n\n    @Override\n    public int hashCode() {\n        return path.hashCode();\n    }\n}\n",
+        "name": "MyPath.java",
+        "path": "home9/src/MyPath.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/home9/src/MyPath.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 21,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == nodes.length;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 36,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 56,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (nodes.length \u003e= 2);"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "import com.oocourse.specs3.models.Path;\n\nimport java.util.ArrayList;\nimport java.util.HashSet;\nimport java.util.Iterator;\nimport java.util.Set;\n\npublic class MyPath implements Path {\n    //@ public instance model non_null int[] nodes;\n    private ArrayList\u003cInteger\u003e path;\n    private int disNum;\n\n    public MyPath(int... nodeList) {\n        path = new ArrayList\u003c\u003e();\n        for (int i : nodeList) {\n            path.add(i);\n        }\n        disNum = -1;\n    }\n\n    @Override\n    //@ ensures \\result == nodes.length;\n    public /*@pure@*/int size() {\n        return path.size();\n    }\n\n    @Override\n    /*@ requires index \u003e= 0 \u0026\u0026 index \u003c size();\n      @ assignable \\nothing;\n      @ ensures \\result == nodes[index];\n      @*/\n    public /*@pure@*/ int getNode(int index) {\n        return path.get(index);\n    }\n\n    @Override\n    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026\n    //@ i \u003c nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node) {\n        return path.contains(node);\n    }\n\n    @Override\n    /*@ ensures (\\exists int[] arr; (\\forall int i, j; 0 \u003c= i \u0026\u0026 i \u003c j\n      @     \u0026\u0026 j \u003c arr.length; arr[i] != arr[j]);\n      @    (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length;this.containsNode(arr[i]))\n      @           \u0026\u0026 (\\forall int node; this.containsNode(node);\n      @   (\\exists int j; 0 \u003c= j \u0026\u0026 j \u003c arr.length; arr[j] == node))\n      @           \u0026\u0026 (\\result == arr.length));\n      @*/\n    public /*pure*/ int getDistinctNodeCount() {\n        if (disNum == -1) {\n            Set\u003cInteger\u003e set = new HashSet\u003c\u003e(path);\n            disNum = set.size();\n        }\n        return disNum;\n    }\n\n    @Override\n    //@ ensures \\result == (nodes.length \u003e= 2);\n    public /*@pure@*/ boolean isValid() {\n        return path.size() \u003e= 2;\n    }\n\n    /*@ also\n      @ public normal_behavior\n      @ requires obj != null \u0026\u0026 obj instanceof Path;\n      @ assignable \\nothing;\n      @ ensures \\result == ((Path) obj).nodes.length == nodes.length) \u0026\u0026\n      @                      (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length;\n      @                           nodes[i] == ((Path) obj).nodes[i]);\n      @ also\n      @ public normal_behavior\n      @ requires obj == null || !(obj instanceof Path);\n      @ assignable \\nothing;\n      @ ensures \\result == false;\n      @*/\n    public boolean equals(Object obj) {\n        if (obj == null || !(obj instanceof Path)) {\n            return false;\n        }\n        else {\n            if (path.size() != ((Path) obj).size()) {\n                return false;\n            }\n            boolean flag = true;\n            for (int i = 0;i \u003c path.size(); i++) {\n                if (path.get(i) != ((Path) obj).getNode(i)) {\n                    flag = false;\n                    break;\n                }\n            }\n            return flag;\n        }\n    }\n\n    @Override\n    public int compareTo(Path o) {\n        for (int i = 0;i \u003c Math.min(path.size(),o.size()); i++) {\n            if (path.get(i) \u003c o.getNode(i)) {\n                return -1;\n            }\n            else if (path.get(i) \u003e o.getNode(i)) {\n                return 1;\n            }\n        }\n        return path.size() - o.size();\n    }\n\n    @Override\n    public Iterator\u003cInteger\u003e iterator() {\n        return path.iterator();\n    }\n\n    @Override\n    public int hashCode() {\n        return path.hashCode();\n    }\n\n    @Override\n    public /*@pure@*/ int getUnpleasantValue(int nodeId) {\n        if (containsNode(nodeId)) {\n            return (int)Math.pow(4,(nodeId % 5 + 5) % 5);\n        }\n        else {\n            return 0;\n        }\n    }\n}\n",
+        "name": "MyPath.java",
+        "path": "home11/src/MyPath.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/home11/src/MyPath.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 21,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == nodes.length;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 36,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 59,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (nodes.length \u003e= 2);"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "import com.oocourse.specs2.models.Path;\n\nimport java.util.ArrayList;\nimport java.util.HashSet;\nimport java.util.Iterator;\nimport java.util.Set;\n\npublic class MyPath implements Path {\n    //@ public instance model non_null int[] nodes;\n    private ArrayList\u003cInteger\u003e path;\n    private int disNum;\n\n    public MyPath(int... nodeList) {\n        path = new ArrayList\u003c\u003e();\n        for (int i = 0;i \u003c nodeList.length;i++) {\n            path.add(nodeList[i]);\n        }\n        disNum = -1;\n    }\n\n    @Override\n    //@ ensures \\result == nodes.length;\n    public /*@pure@*/int size() {\n        return path.size();\n    }\n\n    @Override\n    /*@ requires index \u003e= 0 \u0026\u0026 index \u003c size();\n      @ assignable \\nothing;\n      @ ensures \\result == nodes[index];\n      @*/\n    public /*@pure@*/ int getNode(int index) {\n        return path.get(index);\n    }\n\n    @Override\n    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026\n    //@ i \u003c nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node) {\n        return path.contains(node);\n    }\n\n    @Override\n    /*@ ensures (\\exists int[] arr; (\\forall int i, j; 0 \u003c= i \u0026\u0026 i \u003c j\n      @     \u0026\u0026 j \u003c arr.length; arr[i] != arr[j]);\n      @    (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length;this.containsNode(arr[i]))\n      @           \u0026\u0026 (\\forall int node; this.containsNode(node);\n      @   (\\exists int j; 0 \u003c= j \u0026\u0026 j \u003c arr.length; arr[j] == node))\n      @           \u0026\u0026 (\\result == arr.length));\n      @*/\n    public /*pure*/ int getDistinctNodeCount() {\n        if (disNum == -1) {\n            Set\u003cInteger\u003e set = new HashSet\u003c\u003e();\n            set.addAll(path);\n            disNum = set.size();\n        }\n        return disNum;\n    }\n\n    @Override\n    //@ ensures \\result == (nodes.length \u003e= 2);\n    public /*@pure@*/ boolean isValid() {\n        return path.size() \u003e= 2;\n    }\n\n    /*@ also\n      @ public normal_behavior\n      @ requires obj != null \u0026\u0026 obj instanceof Path;\n      @ assignable \\nothing;\n      @ ensures \\result == ((Path) obj).nodes.length == nodes.length) \u0026\u0026\n      @                      (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length;\n      @                           nodes[i] == ((Path) obj).nodes[i]);\n      @ also\n      @ public normal_behavior\n      @ requires obj == null || !(obj instanceof Path);\n      @ assignable \\nothing;\n      @ ensures \\result == false;\n      @*/\n    public boolean equals(Object obj) {\n        if (obj == null || !(obj instanceof Path)) {\n            return false;\n        }\n        else {\n            if (path.size() != ((Path) obj).size()) {\n                return false;\n            }\n            boolean flag = true;\n            for (int i = 0;i \u003c path.size(); i++) {\n                if (path.get(i) != ((Path) obj).getNode(i)) {\n                    flag = false;\n                    break;\n                }\n            }\n            return flag;\n        }\n    }\n\n    @Override\n    public int compareTo(Path o) {\n        for (int i = 0;i \u003c Math.min(path.size(),o.size()); i++) {\n            if (path.get(i) \u003c o.getNode(i)) {\n                return -1;\n            }\n            else if (path.get(i) \u003e o.getNode(i)) {\n                return 1;\n            }\n        }\n        return path.size() - o.size();\n    }\n\n    @Override\n    public Iterator\u003cInteger\u003e iterator() {\n        return path.iterator();\n    }\n\n    @Override\n    public int hashCode() {\n        return path.hashCode();\n    }\n}\n",
+        "name": "MyPath.java",
+        "path": "home10/src/MyPath.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/home10/src/MyPath.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 21,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == nodes.length;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 36,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 60,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (nodes.length \u003e= 2);"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "import com.oocourse.specs2.models.Graph;\nimport com.oocourse.specs2.models.NodeIdNotFoundException;\nimport com.oocourse.specs2.models.NodeNotConnectedException;\nimport com.oocourse.specs2.models.Path;\nimport com.oocourse.specs2.models.PathIdNotFoundException;\nimport com.oocourse.specs2.models.PathNotFoundException;\n\nimport java.util.HashMap;\nimport java.util.LinkedList;\n\npublic class MyGraph implements Graph {\n    //@ public instance model non_null Path[] pList;\n    //@ public instance model non_null int[] pidList;\n    //@ public invariant pList.length == pidList.length;\n    //@ public constraint Math.abs(pList.length - \\old(pList.length)) \u003c= 1;\n    private HashMap\u003cPath, Integer\u003e map;\n    private HashMap\u003cInteger, Path\u003e idmap;\n    private HashMap\u003cInteger,Integer\u003e dismap; //node-\u003enum\n    private HashMap\u003cInteger, HashMap\u003cInteger,Integer\u003e\u003e lgraph; //from-\u003e\u003cto,num\u003e\n    private HashMap\u003cInteger, HashMap\u003cInteger,Integer\u003e\u003e dist; //from-\u003e\u003cto,dist\u003e\n    private int maxid;\n    private boolean isDestroy;\n\n    public MyGraph() {\n        map = new HashMap\u003c\u003e();\n        idmap = new HashMap\u003c\u003e();\n        dismap = new HashMap\u003c\u003e();\n        lgraph = new HashMap\u003c\u003e();\n        dist = new HashMap\u003c\u003e();\n        maxid = 0;\n        isDestroy = false;\n    }\n\n    //@ ensures \\result == (\\exists Path path; path.isValid()\n    //@ \u0026\u0026 containsPath(path); path.containsNode(nodeId));\n    public /*@pure@*/ boolean containsNode(int nodeId) {\n        return lgraph.containsKey(nodeId);\n    }\n\n    /*@ ensures \\result == (\\exists Path path; path.isValid()\n      @   \u0026\u0026 containsPath(path);\n      @      (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c path.size() - 1;\n      @  (path.getNode(i) == fromNodeId \u0026\u0026 path.getNode(i + 1) == toNodeId)||\n      @    (path.getNode(i) == toNodeId \u0026\u0026 path.getNode(i + 1) == fromNodeId)));\n      @*/\n    public /*@pure@*/ boolean containsEdge(int fromNodeId, int toNodeId) {\n        return ((lgraph.containsKey(fromNodeId) \u0026\u0026\n                lgraph.get(fromNodeId).containsKey(toNodeId)) ||\n                (lgraph.containsKey(toNodeId) \u0026\u0026\n                        lgraph.get(toNodeId).containsKey(fromNodeId)));\n    }\n\n    /*@ normal_behavior\n      @ requires (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path);\n      @   path.containsNode(fromNodeId)) \u0026\u0026\n      @          (\\exists Path path; path.isValid() \u0026\u0026\n      @  containsPath(path); path.containsNode(toNodeId));\n      @ assignable \\nothing;\n      @ ensures (fromNodeId != toNodeId) ==\u003e \\result == (\\exists int[] npath;\n      @   npath.length \u003e= 2 \u0026\u0026 npath[0] == fromNodeId \u0026\u0026\n      @   npath[npath.length - 1] == toNodeId;\n      @                     (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c npath.length - 1);\n      @  containsEdge(npath[i], npath[i + 1])));\n      @ ensures (fromNodeId == toNodeId) ==\u003e \\result == true;\n      @ also\n      @ exceptional_behavior\n      @ signals (NodeIdNotFoundException e) (\\forall Path path;\n      @ containsPath(path); !path.containsNode(fromNodeId));\n      @ signals (NodeIdNotFoundException e) (\\forall Path path;\n      @ containsPath(path); !path.containsNode(toNodeId));\n      @*/\n    public boolean isConnected(int fromNodeId, int toNodeId)\n            throws NodeIdNotFoundException {\n        if (!containsNode(fromNodeId)) {\n            throw new NodeIdNotFoundException(fromNodeId);\n        }\n        else if (!containsNode(toNodeId)) {\n            throw new NodeIdNotFoundException(toNodeId);\n        }\n        else {\n            if (isDestroy) {\n                unWeightedDist();\n                isDestroy = false;\n            }\n            if (fromNodeId == toNodeId) {\n                return true;\n            }\n            if ((dist.containsKey(fromNodeId) \u0026\u0026\n                    dist.get(fromNodeId).containsKey(toNodeId)) ||\n                    (dist.containsKey(toNodeId) \u0026\u0026\n                            dist.get(toNodeId).containsKey(fromNodeId))) {\n                return true;\n            }\n            else {\n                return false;\n            }\n        }\n    }\n\n    /*@ normal_behavior\n      @ requires (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path);\n      @ path.containsNode(fromNodeId)) \u0026\u0026\n      @          (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path);\n      @ path.containsNode(toNodeId));\n      @ assignable \\nothing;\n      @ ensures (fromNodeId != toNodeId) ==\u003e (\\exists int[] spath;\n      @ spath.length \u003e= 2 \u0026\u0026 spath[0] == fromNodeId \u0026\u0026\n      @ spath[spath.length - 1] == toNodeId;\n      @             (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c spath.length - 1);\n      @ containsEdge(spath[i], spath[i + 1])) \u0026\u0026\n      @             (\\forall Path p; p.isValid() \u0026\u0026 p.getNode(0) == fromNodeId\n      @ \u0026\u0026 p.getNode(p.size() - 1) == toNodeId; p.size() \u003e= spath.length) \u0026\u0026\n      @             (\\result == spath.length - 1));\n      @ ensures (fromNodeId == toNodeId) ==\u003e \\result == 0;\n      @ also\n      @ exceptional_behavior\n      @ signals (NodeIdNotFoundException e)\n      @(\\forall Path path; containsPath(path); !path.containsNode(fromNodeId));\n      @ signals (NodeIdNotFoundException e)\n      @(\\forall Path path; containsPath(path); !path.containsNode(toNodeId));\n      @ signals (NodeNotConnectedException e)\n      @ !(\\exists int[] npath; npath.length \u003e= 2 \u0026\u0026 npath[0] == fromNodeId\n      @   \u0026\u0026 npath[npath.length - 1] == toNodeId;\n      @  (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c npath.length - 1);\n      @ containsEdge(npath[i], npath[i + 1])));\n      @*/\n    public int getShortestPathLength(int fromNodeId, int toNodeId)\n            throws NodeIdNotFoundException, NodeNotConnectedException {\n        if (!containsNode(fromNodeId)) {\n            throw new NodeIdNotFoundException(fromNodeId);\n        }\n        else if (!containsNode(toNodeId)) {\n            throw new NodeIdNotFoundException(toNodeId);\n        }\n        else {\n            if (isDestroy) {\n                unWeightedDist();\n                isDestroy = false;\n            }\n            if (fromNodeId == toNodeId) {\n                return 0;\n            }\n            if (dist.containsKey(fromNodeId) \u0026\u0026\n                    dist.get(fromNodeId).containsKey(toNodeId)) {\n                return dist.get(fromNodeId).get(toNodeId);\n            }\n            else if (dist.containsKey(toNodeId) \u0026\u0026\n                    dist.get(toNodeId).containsKey(fromNodeId)) {\n                return dist.get(toNodeId).get(fromNodeId);\n            }\n            else {\n                throw new NodeNotConnectedException(fromNodeId,toNodeId);\n            }\n        }\n    }\n\n    @Override\n    //@ ensures \\result == pList.length;\n    public /*@pure@*/int size() {\n        return map.size();\n    }\n\n    @Override\n    /*@ requires path != null;\n      @ assignable \\nothing;\n      @ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @                     pList[i].equals(path));\n      @*/\n    public /*@pure@*/ boolean containsPath(Path path) {\n        return map.containsKey(path);\n    }\n\n    @Override\n    /*@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length;\n      @                      pidList[i] == pathId);\n      @*/\n    public /*@pure@*/ boolean containsPathId(int pathId) {\n        return idmap.containsKey(pathId);\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable \\nothing;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @ pidList[i] == pathId \u0026\u0026 \\result == pList[i]);\n      @ also\n      @ public exceptional_behavior\n      @ requires !containsPathId(pathId);\n      @ assignable \\nothing;\n      @ signals_only PathIdNotFoundException;\n      @*/\n    public /*@pure@*/ Path getPathById(int pathId)\n            throws PathIdNotFoundException {\n        if (containsPathId(pathId)) {\n            return idmap.get(pathId);\n        }\n        else {\n            throw new PathIdNotFoundException(pathId);\n        }\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable \\nothing;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @ pList[i].equals(path) \u0026\u0026 pidList[i] == \\result);\n      @ also\n      @ public exceptional_behavior\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) !path.isValid();\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public /*@pure@*/ int getPathId(Path path) throws PathNotFoundException {\n        if (path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path)) {\n            return map.get(path);\n        }\n        else {\n            throw new PathNotFoundException(path);\n        }\n    }\n\n    private void unWeightedDist() {\n        //System.err.println(\"jisuan !!!!!!!!!!!\");\n        for (int v : lgraph.keySet()) {\n            // 初始化\n            HashMap\u003cInteger, Integer\u003e dm = new HashMap\u003c\u003e(); //dist.get(v);\n            for (int to : lgraph.keySet()) {\n                if (to == v) {\n                    dm.put(to, 0);\n                }\n                else {\n                    dm.put(to, -1);\n                }\n            }\n            int num = lgraph.keySet().size();\n            LinkedList\u003cInteger\u003e queue = new LinkedList\u003c\u003e();\n            queue.addLast(v);\n            int i = 1;\n            HashMap\u003cInteger, Integer\u003e distm = new HashMap\u003c\u003e();\n            distm.put(v,0);\n            while (!queue.isEmpty()) {\n                int tmp = queue.removeFirst();\n                HashMap\u003cInteger, Integer\u003e hm = lgraph.get(tmp); //找邻接点\n                for (int to : hm.keySet()) {\n                    if (dm.get(to) == -1) {\n                        dm.put(to,dm.get(tmp) + 1);\n                        distm.put(to, dm.get(tmp) + 1);\n                        queue.addLast(to);\n                        i++;\n                    }\n                }\n                if (i == num) {\n                    break;\n                }\n            }\n            dist.put(v,distm);\n            //System.err.println(dist);\n        }\n    }\n\n    private void add(int from, int to) {\n        if (lgraph.containsKey(from)) {\n            HashMap\u003cInteger, Integer\u003e hm = lgraph.get(from);\n            if (hm.containsKey(to)) {\n                hm.put(to,hm.get(to) + 1); //加入重边 没有破坏图\n            }\n            else {\n                hm.put(to,1);\n                isDestroy = true; //加入了新的边 破坏了图\n            }\n        }\n        else {\n            HashMap\u003cInteger, Integer\u003e hm = new HashMap\u003c\u003e();\n            hm.put(to,1);\n            lgraph.put(from,hm);\n            isDestroy = true; //加入了新的边 破坏了图\n        }\n    }\n\n    @Override\n    /*@ normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid();\n      @ assignable pList, pidList;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i] == path \u0026\u0026\n      @           \\result == pidList[i]);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length);\n      @      containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ normal_behavior\n      @ requires path == null || path.isValid() == false;\n      @ assignable \\nothing;\n      @ ensures \\result == 0;\n      @*/\n    public int addPath(Path path) {\n        if (path != null \u0026\u0026 path.isValid()) {\n            if (!containsPath(path)) {\n                map.put(path,maxid + 1);\n                idmap.put(maxid + 1,path);\n                for (Integer id : path) {\n                    if (dismap.containsKey(id)) {\n                        dismap.put(id,dismap.get(id) + 1);\n                    }\n                    else {\n                        dismap.put(id,1);\n                        isDestroy = true; //加入了新的点 破坏了图\n                    }\n                }\n                for (int i = 0;i \u003c path.size() - 1; i++) {\n                    int from = path.getNode(i);\n                    int to = path.getNode(i + 1);\n                    add(from,to);\n                    add(to,from);\n                }\n                maxid++;\n                //isDestroy = true; 进一步优化 只有破坏图的add才true\n                return maxid;\n            }\n            else {\n                return map.get(path);\n            }\n        }\n        else {\n            return 0;\n        }\n    }\n\n    private void remove(int from,int to) {\n        HashMap\u003cInteger, Integer\u003e hm = lgraph.get(from);\n        if (hm.get(to) == 1) {\n            hm.remove(to);\n            isDestroy = true; //删除了边 破坏了图\n        }\n        else {\n            hm.put(to,hm.get(to) - 1); //只是减少了重边 没有破坏图\n        }\n        if (hm.size() == 0) {\n            lgraph.remove(from);\n            dist.remove(from);\n            isDestroy = true; //删除了边 破坏了图\n        }\n    }\n\n    private void mapRemove(int id,Path path) {\n        map.remove(path);\n        idmap.remove(id);\n        for (Integer i : path) {\n            if (dismap.get(i) == 1) {\n                dismap.remove(i);\n                isDestroy = true; //删除了某个点 破坏了图\n            }\n            else {\n                dismap.put(i,dismap.get(i) - 1);\n            }\n        }\n        for (int i = 0;i \u003c path.size() - 1; i++) {\n            int from = path.getNode(i);\n            int to = path.getNode(i + 1);\n            remove(from,to);\n            remove(to,from);\n        }\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable pList, pidList;\n      @ ensures containsPath(path) == false;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length);\n      @ \\old(pList[i].equals(path)) \u0026\u0026\n      @           \\result == \\old(pidList[i]));\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length)\n      @  \u0026\u0026 \\old(pList[i].equals(path) == false);\n      @     containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) path.isValid() == false;\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public int removePath(Path path) throws PathNotFoundException {\n        if (path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path)) {\n            int id = map.get(path);\n            mapRemove(id,path);\n            //isDestroy = true; 进一步优化 只有破坏图的remove才true\n            return id;\n        }\n        else {\n            throw new PathNotFoundException(path);\n        }\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable pList, pidList;\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length;\n      @   pidList[i] != pathId);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @     !pList[i].equals(\\old(getPathById(pathId))));\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pidList.length)\n      @          \u0026\u0026 pidList[i] != pathId;\n      @      containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathIdNotFoundException e) !containsPathId(pathId);\n      @*/\n    public void removePathById(int pathId) throws PathIdNotFoundException {\n        if (containsPathId(pathId)) {\n            Path path = idmap.get(pathId);\n            mapRemove(pathId,path);\n            //isDestroy = true; 进一步优化 只有破坏图的remove才true\n        }\n        else {\n            throw new PathIdNotFoundException(pathId);\n        }\n    }\n\n    @Override\n    /*@ ensures (\\exists int[] arr; (\\forall int i, j; 0 \u003c= i \u0026\u0026\n      @     i \u003c j \u0026\u0026 j \u003c arr.length; arr[i] != arr[j]);\n      @         (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length;\n      @         (\\exists Path p; this.containsPath(p); p.containsNode(arr[i])))\n      @         \u0026\u0026(\\forall Path p; this.containsPath(p);\n      @      (\\forall int node; p.containsNode(node);\n      @      (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length; node == arr[i])))\n      @         \u0026\u0026(\\result == arr.length));\n      @*/\n    public /*@pure@*/int getDistinctNodeCount() { //在容器全局范围内查找不同的节点数\n        return dismap.size();\n    }\n\n}\n",
+        "name": "MyGraph.java",
+        "path": "home10/src/MyGraph.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/home10/src/MyGraph.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 33,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists Path path; path.isValid()"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 157,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == pList.length;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "import com.oocourse.specs1.models.Path;\nimport com.oocourse.specs1.models.PathContainer;\nimport com.oocourse.specs1.models.PathIdNotFoundException;\nimport com.oocourse.specs1.models.PathNotFoundException;\n\nimport java.util.HashMap;\n\npublic class MyPathContainer implements PathContainer {\n    //@ public instance model non_null Path[] pList;\n    //@ public instance model non_null int[] pidList;\n    private HashMap\u003cPath, Integer\u003e map;\n    private HashMap\u003cInteger, Path\u003e idmap;\n    private HashMap\u003cInteger,Integer\u003e dismap; //node-\u003enum\n    private int maxid;\n\n    public MyPathContainer() {\n        map = new HashMap\u003c\u003e();\n        idmap = new HashMap\u003c\u003e();\n        dismap = new HashMap\u003c\u003e();\n        maxid = 0;\n    }\n\n    @Override\n    //@ ensures \\result == pList.length;\n    public /*@pure@*/int size() {\n        return map.size();\n    }\n\n    @Override\n    /*@ requires path != null;\n      @ assignable \\nothing;\n      @ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @                     pList[i].equals(path));\n      @*/\n    public /*@pure@*/ boolean containsPath(Path path) {\n        return map.containsKey(path);\n    }\n\n    @Override\n    /*@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length;\n      @                      pidList[i] == pathId);\n      @*/\n    public /*@pure@*/ boolean containsPathId(int pathId) {\n        return idmap.containsKey(pathId);\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable \\nothing;\n      @ ensures (pidList.length == pList.length)\u0026\u0026(\\exists int i; 0 \u003c= i\n      @   \u0026\u0026 i \u003c pList.length; pidList[i] == pathId \u0026\u0026 \\result == pList[i]);\n      @ also\n      @ public exceptional_behavior\n      @ requires !containsPathId(pathId);\n      @ assignable \\nothing;\n      @ signals_only PathIdNotFoundException;\n      @*/\n    public /*@pure@*/ Path getPathById(int pathId)\n            throws PathIdNotFoundException {\n        if (containsPathId(pathId)) {\n            return idmap.get(pathId);\n        }\n        else {\n            throw new PathIdNotFoundException(pathId);\n        }\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable \\nothing;\n      @ ensures (pidList.length == pList.length) \u0026\u0026 (\\exists int i; 0 \u003c= i\n      @    \u0026\u0026 i \u003c pList.length; pList[i].equals(path) \u0026\u0026 pidList[i] == \\result);\n      @ also\n      @ public exceptional_behavior\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) !path.isValid();\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public /*@pure@*/ int getPathId(Path path) throws PathNotFoundException {\n        if (path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path)) {\n            return map.get(path);\n        }\n        else {\n            throw new PathNotFoundException(path);\n        }\n    }\n\n    @Override\n    /*@ normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid();\n      @ assignable pList, pidList;\n      @ ensures (pidList.length == pList.length);\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i] == path \u0026\u0026\n      @           \\result == pidList[i]);\n      @ ensures !\\old(containsPath(path)) ==\u003e\n      @          pList.length == (\\old(pList.length) + 1) \u0026\u0026\n      @          pidList.length == (\\old(pidList.length) + 1);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length);\n      @       containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ normal_behavior\n      @ requires path == null || path.isValid() == false;\n      @ assignable \\nothing;\n      @ ensures \\result == 0;\n      @*/\n    public int addPath(Path path) {\n        if (path != null \u0026\u0026 path.isValid()) {\n            if (!containsPath(path)) {\n                map.put(path,maxid + 1);\n                idmap.put(maxid + 1,path);\n                //path加进来 需要修改dismap\n                for (Integer id : path) {\n                    if (dismap.containsKey(id)) {\n                        dismap.put(id,dismap.get(id) + 1);\n                    }\n                    else {\n                        dismap.put(id,1);\n                    }\n                }\n                maxid++;\n                return maxid;\n            }\n            else { //path已经存在\n                return map.get(path);\n            }\n        }\n        else {\n            return 0;\n        }\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 \\old(containsPath(path));\n      @ assignable pList, pidList;\n      @ ensures containsPath(path) == false;\n      @ ensures (pidList.length == pList.length);\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length);\n      @      \\old(pList[i].equals(path)) \u0026\u0026 \\result == \\old(pidList[i]));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) path.isValid()==false;\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public int removePath(Path path) throws PathNotFoundException {\n        if (path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path)) {\n            int id = map.get(path);\n            map.remove(path);\n            idmap.remove(id);\n            //删除path成功 修改dismap path中的每一节点都应该存在于dismap中的\n            for (Integer i : path) {\n                if (dismap.get(i) == 1) { //删除就变成0了 直接remove出map\n                    dismap.remove(i);\n                }\n                else {\n                    dismap.put(i,dismap.get(i) - 1);\n                }\n            }\n            return id;\n        }\n        else {\n            throw new PathNotFoundException(path);\n        }\n    }\n\n    @Override\n    /*@ public normal_behavior\n      @ requires \\old(containsPathId(pathId));\n      @ assignable pList, pidList;\n      @ ensures pList.length == pidList.length;\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length;\n      @               pidList[i] != pathId);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @         !pList[i].equals(\\old(getPathById(pathId))));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathIdNotFoundException e) !containsPathId(pathId);\n      @*/\n    public void removePathById(int pathId) throws PathIdNotFoundException {\n        if (containsPathId(pathId)) {\n            Path path = idmap.get(pathId);\n            idmap.remove(pathId);\n            map.remove(path);\n            for (Integer i : path) {\n                if (dismap.get(i) == 1) { //删除就变成0了 直接remove出map\n                    dismap.remove(i);\n                }\n                else {\n                    dismap.put(i,dismap.get(i) - 1);\n                }\n            }\n        }\n        else {\n            throw new PathIdNotFoundException(pathId);\n        }\n    }\n\n    @Override\n    /*@ ensures \\result == (\\num_of int[] nlist;\n           (\\forall int i,j; 0 \u003c= i \u0026\u0026 i \u003c pList.length \u0026\u0026\n           0 \u003c= j \u0026\u0026 j \u003c pList[i].size();\n           (\\exists int k; 0 \u003c= k \u0026\u0026 k \u003c nlist.length;\n           nlist[k] == pList[i].getNode(j)));\n           (\\forall int m, n; 0 \u003c= m \u0026\u0026 m \u003c n \u0026\u0026 n \u003c nlist.length;\n           nlist[m] != nlist[n]));\n      @*/\n    public /*@pure@*/int getDistinctNodeCount() { //在容器全局范围内查找不同的节点数\n        //Set\u003cInteger\u003e set = new HashSet\u003c\u003e();\n        //for (Path path : map.keySet()) {\n        //    for (Integer i : path) {\n        //        set.add(i);\n        //    }\n        //}\n        //return set.size();\n        return dismap.size();\n    }\n\n}\n",
+        "name": "MyPathContainer.java",
+        "path": "home9/src/MyPathContainer.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/home9/src/MyPathContainer.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 23,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == pList.length;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs1.models;\n\npublic interface Path extends Iterable\u003cInteger\u003e, Comparable\u003cPath\u003e {\n    // Iterable\u003cInteger\u003e和Comparable\u003cPath\u003e接口的规格请参阅JDK\n    //@ public instance model non_null int[] nodes;\n\n    //@ ensures \\result == nodes.length;\n    public /*@pure@*/int size();\n\n    /*@ requires index \u003e= 0 \u0026\u0026 index \u003c size();\n      @ assignable \\nothing;\n      @ ensures \\result == nodes[index];\n      @*/\n    public /*@pure@*/ int getNode(int index);\n\n    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node);\n\n    /*@ ensures \\result == (\\num_of int i, j; 0 \u003c= i \u0026\u0026 i \u003c j \u0026\u0026 j \u003c nodes.length;\n                             nodes[i] != nodes[j]);\n      @*/\n    public /*pure*/ int getDistinctNodeCount();\n\n    /*@ also\n      @ public normal_behavior\n      @ requires obj != null \u0026\u0026 obj instanceof Path;\n      @ assignable \\nothing;\n      @ ensures \\result == ((Path) obj).nodes.length == nodes.length) \u0026\u0026\n      @                      (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == ((Path) obj).nodes[i]);\n      @ also\n      @ public normal_behavior\n      @ requires obj == null || !(obj instanceof Path);\n      @ assignable \\nothing;\n      @ ensures \\result == false;\n      @*/\n    public boolean equals(Object obj);\n\n    //@ ensures \\result == (nodes.length \u003e= 2);\n    public /*@pure@*/ boolean isValid();\n}",
+        "name": "Path.java",
+        "path": "实验指导书与课件/homework_9_guidebook-master/specs-homework-1-opensource-master/src/main/java/com/oocourse/specs1/models/Path.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_9_guidebook-master/specs-homework-1-opensource-master/src/main/java/com/oocourse/specs1/models/Path.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == nodes.length;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 15,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == node);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 37,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (nodes.length \u003e= 2);"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs2.models;\n\npublic interface Path extends Iterable\u003cInteger\u003e, Comparable\u003cPath\u003e {\n    // Iterable\u003cInteger\u003e和Comparable\u003cPath\u003e接口的规格请参阅JDK\n    //@ public instance model non_null int[] nodes;\n\n    //@ ensures \\result == nodes.length;\n    public /*@pure@*/int size();\n\n    /*@ requires index \u003e= 0 \u0026\u0026 index \u003c size();\n      @ assignable \\nothing;\n      @ ensures \\result == nodes[index];\n      @*/\n    public /*@pure@*/ int getNode(int index);\n\n    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node);\n\n    /*@ ensures (\\exists int[] arr; (\\forall int i, j; 0 \u003c= i \u0026\u0026 i \u003c j \u0026\u0026 j \u003c arr.length; arr[i] != arr[j]);\n      @             (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length;this.containsNode(arr[i]))\n      @           \u0026\u0026 (\\forall int node; this.containsNode(node); (\\exists int j; 0 \u003c= j \u0026\u0026 j \u003c arr.length; arr[j] == node))\n      @           \u0026\u0026 (\\result == arr.length));\n      @*/\n    public /*pure*/ int getDistinctNodeCount();\n\n    /*@ also\n      @ public normal_behavior\n      @ requires obj != null \u0026\u0026 obj instanceof Path;\n      @ assignable \\nothing;\n      @ ensures \\result == (((Path) obj).nodes.length == nodes.length) \u0026\u0026\n      @                      (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == ((Path) obj).nodes[i]);\n      @ also\n      @ public normal_behavior\n      @ requires obj == null || !(obj instanceof Path);\n      @ assignable \\nothing;\n      @ ensures \\result == false;\n      @*/\n    public boolean equals(Object obj);\n\n    //@ ensures \\result == (nodes.length \u003e= 2);\n    public /*@pure@*/ boolean isValid();\n}",
+        "name": "Path.java",
+        "path": "实验指导书与课件/homework_10_guidebook-master/specs-homework-2-opensource-master/src/main/java/com/oocourse/specs2/models/Path.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_10_guidebook-master/specs-homework-2-opensource-master/src/main/java/com/oocourse/specs2/models/Path.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == nodes.length;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 15,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == node);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 39,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (nodes.length \u003e= 2);"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs2.models;\n\n/**\n * 图类\n */\npublic interface Graph extends PathContainer {\n    //@ ensures \\result == (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(nodeId));\n    public /*@pure@*/ boolean containsNode(int nodeId);\n\n    /*@ ensures \\result == (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path);\n      @      (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c path.size() - 1; (path.getNode(i) == fromNodeId \u0026\u0026 path.getNode(i + 1) == toNodeId)||\n      @        (path.getNode(i) == toNodeId \u0026\u0026 path.getNode(i + 1) == fromNodeId)));\n      @*/\n    public /*@pure@*/ boolean containsEdge(int fromNodeId, int toNodeId);\n\n    /*@ normal_behavior\n      @ requires (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(fromNodeId)) \u0026\u0026\n      @          (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(toNodeId));\n      @ assignable \\nothing;\n      @ ensures (fromNodeId != toNodeId) ==\u003e \\result == (\\exists int[] npath; npath.length \u003e= 2 \u0026\u0026 npath[0] == fromNodeId \u0026\u0026 npath[npath.length - 1] == toNodeId;\n      @                     (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c npath.length - 1); containsEdge(npath[i], npath[i + 1])));\n      @ ensures (fromNodeId == toNodeId) ==\u003e \\result == true;\n      @ also\n      @ exceptional_behavior\n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(fromNodeId)); \n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(toNodeId));\n      @*/\n    public boolean isConnected(int fromNodeId, int toNodeId) throws NodeIdNotFoundException;\n\n    /*@ normal_behavior\n      @ requires (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(fromNodeId)) \u0026\u0026\n      @          (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(toNodeId));\n      @ assignable \\nothing;\n      @ ensures (fromNodeId != toNodeId) ==\u003e (\\exists int[] spath; spath.length \u003e= 2 \u0026\u0026 spath[0] == fromNodeId \u0026\u0026 spath[spath.length - 1] == toNodeId;\n      @             (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c spath.length - 1); containsEdge(spath[i], spath[i + 1])) \u0026\u0026\n      @             (\\forall Path p; p.isValid() \u0026\u0026 p.getNode(0) == fromNodeId \u0026\u0026 p.getNode(p.size() - 1) == toNodeId; p.size() \u003e= spath.length) \u0026\u0026\n      @             (\\result == spath.length - 1));\n      @ ensures (fromNodeId == toNodeId) ==\u003e \\result == 0;\n      @ also\n      @ exceptional_behavior\n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(fromNodeId)); \n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(toNodeId));\n      @ signals (NodeNotConnectedException e) !(\\exists int[] npath; npath.length \u003e= 2 \u0026\u0026 npath[0] == fromNodeId \u0026\u0026 npath[npath.length - 1] == toNodeId;\n      @                                          (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c npath.length - 1); containsEdge(npath[i], npath[i + 1])));\n      @*/\n    public int getShortestPathLength(int fromNodeId, int toNodeId) throws NodeIdNotFoundException, NodeNotConnectedException;\n}\n",
+        "name": "Graph.java",
+        "path": "实验指导书与课件/homework_10_guidebook-master/specs-homework-2-opensource-master/src/main/java/com/oocourse/specs2/models/Graph.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_10_guidebook-master/specs-homework-2-opensource-master/src/main/java/com/oocourse/specs2/models/Graph.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(nodeId));"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs1.models;\n\npublic interface PathContainer {\n    //@ public instance model non_null Path[] pList;\n    //@ public instance model non_null int[] pidList;\n\n    //@ ensures \\result == pList.length;\n    public /*@pure@*/int size();\n\n    /*@ requires path != null;\n      @ assignable \\nothing;\n      @ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @                     pList[i].equals(path));\n      @*/\n    public /*@pure@*/ boolean containsPath(Path path);\n\n    /*@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length;\n      @                      pidList[i] == pathId);\n      @*/\n    public /*@pure@*/ boolean containsPathId(int pathId);\n\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable \\nothing;\n      @ ensures (pidList.length == pList.length)\u0026\u0026(\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pidList[i] == pathId \u0026\u0026 \\result == pList[i]);\n      @ also\n      @ public exceptional_behavior\n      @ requires !containsPathId(pathId);\n      @ assignable \\nothing;\n      @ signals_only PathIdNotFoundException;\n      @*/\n    public /*@pure@*/ Path getPathById(int pathId) throws PathIdNotFoundException;\n\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable \\nothing;\n      @ ensures (pidList.length == pList.length) \u0026\u0026 (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i].equals(path) \u0026\u0026 pidList[i] == \\result);\n      @ also\n      @ public exceptional_behavior\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) !path.isValid();\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public /*@pure@*/ int getPathId(Path path) throws PathNotFoundException;\n\n    /*@ normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid();\n      @ assignable pList, pidList;\n      @ ensures (pidList.length == pList.length);\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i] == path \u0026\u0026\n      @           \\result == pidList[i]);\n      @ ensures !\\old(containsPath(path)) ==\u003e\n      @          pList.length == (\\old(pList.length) + 1) \u0026\u0026\n      @          pidList.length == (\\old(pidList.length) + 1);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length);\n      @          containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ normal_behavior\n      @ requires path == null || path.isValid() == false;\n      @ assignable \\nothing;\n      @ ensures \\result == 0;\n      @*/\n    public int addPath(Path path);\n\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 \\old(containsPath(path));\n      @ assignable pList, pidList;\n      @ ensures containsPath(path) == false;\n      @ ensures (pidList.length == pList.length);\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length); \\old(pList[i].equals(path)) \u0026\u0026\n      @           \\result == \\old(pidList[i]));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) path.isValid()==false;\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public int removePath(Path path) throws PathNotFoundException;\n\n    /*@ public normal_behavior\n      @ requires \\old(containsPathId(pathId));\n      @ assignable pList, pidList;\n      @ ensures pList.length == pidList.length;\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length; pidList[i] != pathId);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;!pList[i].equals(\\old(getPathById(pathId))));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathIdNotFoundException e) !containsPathId(pathId);\n      @*/\n    public void removePathById(int pathId) throws PathIdNotFoundException;\n\n    /*@ ensures \\result == (\\num_of int[] nlist;\n           (\\forall int i,j; 0 \u003c= i \u0026\u0026 i \u003c pList.length \u0026\u0026 0 \u003c= j \u0026\u0026 j \u003c pList[i].size();\n           (\\exists int k; 0 \u003c= k \u0026\u0026 k \u003c nlist.length; nlist[k] == pList[i].getNode(j)));\n           (\\forall int m, n; 0 \u003c= m \u0026\u0026 m \u003c n \u0026\u0026 n \u003c nlist.length; nlist[m] != nlist[n]));\n      @*/\n    public /*@pure@*/int getDistinctNodeCount(); //在容器全局范围内查找不同的节点数\n}",
+        "name": "PathContainer.java",
+        "path": "实验指导书与课件/homework_9_guidebook-master/specs-homework-1-opensource-master/src/main/java/com/oocourse/specs1/models/PathContainer.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_9_guidebook-master/specs-homework-1-opensource-master/src/main/java/com/oocourse/specs1/models/PathContainer.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == pList.length;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs2.models;\n\npublic interface PathContainer {\n    //@ public instance model non_null Path[] pList;\n    //@ public instance model non_null int[] pidList;\n    //@ public invariant pList.length == pidList.length;\n    //@ public constraint Math.abs(pList.length - \\old(pList.length)) \u003c= 1;\n\n\n    //@ ensures \\result == pList.length;\n    public /*@pure@*/int size();\n\n    /*@ requires path != null;\n      @ assignable \\nothing;\n      @ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @                     pList[i].equals(path));\n      @*/\n    public /*@pure@*/ boolean containsPath(Path path);\n\n    /*@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length;\n      @                      pidList[i] == pathId);\n      @*/\n    public /*@pure@*/ boolean containsPathId(int pathId);\n\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable \\nothing;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pidList[i] == pathId \u0026\u0026 \\result == pList[i]);\n      @ also\n      @ public exceptional_behavior\n      @ requires !containsPathId(pathId);\n      @ assignable \\nothing;\n      @ signals_only PathIdNotFoundException;\n      @*/\n    public /*@pure@*/ Path getPathById(int pathId) throws PathIdNotFoundException;\n\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable \\nothing;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i].equals(path) \u0026\u0026 pidList[i] == \\result);\n      @ also\n      @ public exceptional_behavior\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) !path.isValid();\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public /*@pure@*/ int getPathId(Path path) throws PathNotFoundException;\n\n    /*@ normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid();\n      @ assignable pList, pidList;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i] == path \u0026\u0026\n      @           \\result == pidList[i]);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length);\n      @          containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ normal_behavior\n      @ requires path == null || path.isValid() == false;\n      @ assignable \\nothing;\n      @ ensures \\result == 0;\n      @*/\n    public int addPath(Path path);\n\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable pList, pidList;\n      @ ensures containsPath(path) == false;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length); \\old(pList[i].equals(path)) \u0026\u0026\n      @           \\result == \\old(pidList[i]));\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length) \u0026\u0026 \\old(pList[i].equals(path) == false);\n      @          containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) path.isValid() == false;\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public int removePath(Path path) throws PathNotFoundException;\n\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable pList, pidList;\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length; pidList[i] != pathId);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; !pList[i].equals(\\old(getPathById(pathId))));\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pidList.length) \u0026\u0026 pidList[i] != pathId;\n      @         containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathIdNotFoundException e) !containsPathId(pathId);\n      @*/\n    public void removePathById(int pathId) throws PathIdNotFoundException;\n\n    /*@ ensures (\\exists int[] arr; (\\forall int i, j; 0 \u003c= i \u0026\u0026 i \u003c j \u0026\u0026 j \u003c arr.length; arr[i] != arr[j]);\n\t  @            (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length; (\\exists Path p; this.containsPath(p); p.containsNode(arr[i])))\n\t  @            \u0026\u0026(\\forall Path p; this.containsPath(p); (\\forall int node; p.containsNode(node); (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length; node == arr[i])))\n\t  @            \u0026\u0026(\\result == arr.length));\n\t  @*/\n    public /*@pure@*/int getDistinctNodeCount(); //在容器全局范围内查找不同的节点数\n}",
+        "name": "PathContainer.java",
+        "path": "实验指导书与课件/homework_10_guidebook-master/specs-homework-2-opensource-master/src/main/java/com/oocourse/specs2/models/PathContainer.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_10_guidebook-master/specs-homework-2-opensource-master/src/main/java/com/oocourse/specs2/models/PathContainer.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 9,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == pList.length;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs3.models;\n\npublic interface Path extends Iterable\u003cInteger\u003e, Comparable\u003cPath\u003e {\n    // Iterable\u003cInteger\u003e和Comparable\u003cPath\u003e接口的规格请参阅JDK\n    //@ public instance model non_null int[] nodes;\n\n    //@ ensures \\result == nodes.length;\n    public /*@pure@*/int size();\n\n    /*@ requires index \u003e= 0 \u0026\u0026 index \u003c size();\n      @ assignable \\nothing;\n      @ ensures \\result == nodes[index];\n      @*/\n    public /*@pure@*/ int getNode(int index);\n\n    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node);\n\n    /*@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length - 1;\n      @             (nodes[i] == fromNodeId \u0026\u0026 nodes[i + 1] == toNodeId) ||\n      @             (nodes[i + 1] == fromNodeId \u0026\u0026 nodes[i] == toNodeId));\n      @*/\n    //It is not required to implement this interface, just for constructing the JML spec.\n    public /*@pure@*/ boolean containsEdge(int fromNodeId, int toNodeId);\n\n    /*@ ensures (\\exists int[] arr; (\\forall int i, j; 0 \u003c= i \u0026\u0026 i \u003c j \u0026\u0026 j \u003c arr.length; arr[i] != arr[j]);\n      @             (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length;this.containsNode(arr[i]))\n      @           \u0026\u0026 (\\forall int node; this.containsNode(node); (\\exists int j; 0 \u003c= j \u0026\u0026 j \u003c arr.length; arr[j] == node))\n      @           \u0026\u0026 (\\result == arr.length));\n      @*/\n    public /*pure*/ int getDistinctNodeCount();\n\n    /*@ also\n      @ public normal_behavior\n      @ requires obj != null \u0026\u0026 obj instanceof Path;\n      @ assignable \\nothing;\n      @ ensures \\result == (((Path) obj).nodes.length == nodes.length) \u0026\u0026\n      @                      (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == ((Path) obj).nodes[i]);\n      @ also\n      @ public normal_behavior\n      @ requires obj == null || !(obj instanceof Path);\n      @ assignable \\nothing;\n      @ ensures \\result == false;\n      @*/\n    public boolean equals(Object obj);\n\n    //@ ensures \\result == (nodes.length \u003e= 2);\n    public /*@pure@*/ boolean isValid();\n\n    //@ ensures containsNode(nodeId) ==\u003e \\result == Math.pow(4, (nodeId % 5 + 5) % 5);\n    //@ ensures !containsNode(nodeId) ==\u003e \\result == 0;\n    public /*@pure@*/ int getUnpleasantValue(int nodeId);\n}",
+        "name": "Path.java",
+        "path": "实验指导书与课件/homework_11_guidebook-master/specs-homework-3-opensource-master-8a05b3b54a9829d7671158c3cffd4602fe39aecb/src/main/java/com/oocourse/specs3/models/Path.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_11_guidebook-master/specs-homework-3-opensource-master-8a05b3b54a9829d7671158c3cffd4602fe39aecb/src/main/java/com/oocourse/specs3/models/Path.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == nodes.length;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 15,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c nodes.length; nodes[i] == node);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 46,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (nodes.length \u003e= 2);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 49,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures containsNode(nodeId) ==\u003e \\result == Math.pow(4, (nodeId % 5 + 5) % 5);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 50,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures !containsNode(nodeId) ==\u003e \\result == 0;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs3.models;\n\n/**\n * 图类\n */\npublic interface Graph extends PathContainer {\n    //@ ensures \\result == (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(nodeId));\n    public /*@pure@*/ boolean containsNode(int nodeId);\n\n    /*@ ensures \\result == (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path);\n      @      (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c path.size() - 1; (path.getNode(i) == fromNodeId \u0026\u0026 path.getNode(i + 1) == toNodeId) ||\n      @        (path.getNode(i) == toNodeId \u0026\u0026 path.getNode(i + 1) == fromNodeId)));\n      @*/\n    public /*@pure@*/ boolean containsEdge(int fromNodeId, int toNodeId);\n\n    /*@ normal_behavior\n      @ requires (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(fromNodeId)) \u0026\u0026\n      @          (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(toNodeId));\n      @ assignable \\nothing;\n      @ ensures (fromNodeId != toNodeId) ==\u003e \\result == (\\exists int[] npath; npath.length \u003e= 2 \u0026\u0026 npath[0] == fromNodeId \u0026\u0026 npath[npath.length - 1] == toNodeId;\n      @                     (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c npath.length - 1); containsEdge(npath[i], npath[i + 1])));\n      @ ensures (fromNodeId == toNodeId) ==\u003e \\result == true;\n      @ also\n      @ exceptional_behavior\n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(fromNodeId)); \n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(toNodeId));\n      @*/\n    public /*@pure@*/ boolean isConnected(int fromNodeId, int toNodeId) throws NodeIdNotFoundException;\n\n    /*@ normal_behavior\n      @ requires (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(fromNodeId)) \u0026\u0026\n      @          (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(toNodeId));\n      @ assignable \\nothing;\n      @ ensures (fromNodeId != toNodeId) ==\u003e (\\exists int[] spath; spath.length \u003e= 2 \u0026\u0026 spath[0] == fromNodeId \u0026\u0026 spath[spath.length - 1] == toNodeId;\n      @             (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c spath.length - 1); containsEdge(spath[i], spath[i + 1])) \u0026\u0026\n      @             (\\forall Path p; p.isValid() \u0026\u0026 p.getNode(0) == fromNodeId \u0026\u0026 p.getNode(p.size() - 1) == toNodeId \u0026\u0026 \n      @               (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c p.size() - 1); containsEdge(p.getNode(i), p.getNode(i + 1))); p.size() \u003e= spath.length) \u0026\u0026\n      @             (\\result == spath.length - 1));\n      @ ensures (fromNodeId == toNodeId) ==\u003e \\result == 0;\n      @ also\n      @ exceptional_behavior\n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(fromNodeId)); \n      @ signals (NodeIdNotFoundException e) (\\forall Path path; containsPath(path); !path.containsNode(toNodeId));\n      @ signals (NodeNotConnectedException e) !(\\exists int[] npath; npath.length \u003e= 2 \u0026\u0026 npath[0] == fromNodeId \u0026\u0026 npath[npath.length - 1] == toNodeId;\n      @                                          (\\forall int i; 0 \u003c= i \u0026\u0026 (i \u003c npath.length - 1); containsEdge(npath[i], npath[i + 1])));\n      @*/\n    public /*@pure@*/ int getShortestPathLength(int fromNodeId, int toNodeId) throws NodeIdNotFoundException, NodeNotConnectedException;\n}\n",
+        "name": "Graph.java",
+        "path": "实验指导书与课件/homework_11_guidebook-master/specs-homework-3-opensource-master-8a05b3b54a9829d7671158c3cffd4602fe39aecb/src/main/java/com/oocourse/specs3/models/Graph.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_11_guidebook-master/specs-homework-3-opensource-master-8a05b3b54a9829d7671158c3cffd4602fe39aecb/src/main/java/com/oocourse/specs3/models/Graph.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == (\\exists Path path; path.isValid() \u0026\u0026 containsPath(path); path.containsNode(nodeId));"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "547ae4b8d19a2f83d32c665d67e3a5f805fec5bd"
+        },
+        "content": "package com.oocourse.specs3.models;\n\npublic interface PathContainer {\n    //@ public instance model non_null Path[] pList;\n    //@ public instance model non_null int[] pidList;\n    //@ public invariant pList.length == pidList.length;\n    //@ public constraint Math.abs(pList.length - \\old(pList.length)) \u003c= 1;\n\n\n    //@ ensures \\result == pList.length;\n    public /*@pure@*/int size();\n\n    /*@ requires path != null;\n      @ assignable \\nothing;\n      @ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length;\n      @                     pList[i].equals(path));\n      @*/\n    public /*@pure@*/ boolean containsPath(Path path);\n\n    /*@ ensures \\result == (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length;\n      @                      pidList[i] == pathId);\n      @*/\n    public /*@pure@*/ boolean containsPathId(int pathId);\n\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable \\nothing;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pidList[i] == pathId \u0026\u0026 \\result == pList[i]);\n      @ also\n      @ public exceptional_behavior\n      @ requires !containsPathId(pathId);\n      @ assignable \\nothing;\n      @ signals_only PathIdNotFoundException;\n      @*/\n    public /*@pure@*/ Path getPathById(int pathId) throws PathIdNotFoundException;\n\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable \\nothing;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i].equals(path) \u0026\u0026 pidList[i] == \\result);\n      @ also\n      @ public exceptional_behavior\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) !path.isValid();\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public /*@pure@*/ int getPathId(Path path) throws PathNotFoundException;\n\n    /*@ normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid();\n      @ assignable pList, pidList;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; pList[i] == path \u0026\u0026\n      @           \\result == pidList[i]);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length);\n      @          containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ normal_behavior\n      @ requires path == null || path.isValid() == false;\n      @ assignable \\nothing;\n      @ ensures \\result == 0;\n      @*/\n    public int addPath(Path path);\n\n    /*@ public normal_behavior\n      @ requires path != null \u0026\u0026 path.isValid() \u0026\u0026 containsPath(path);\n      @ assignable pList, pidList;\n      @ ensures containsPath(path) == false;\n      @ ensures (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length); \\old(pList[i].equals(path)) \u0026\u0026\n      @           \\result == \\old(pidList[i]));\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pList.length) \u0026\u0026 \\old(pList[i].equals(path) == false);\n      @          containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathNotFoundException e) path == null;\n      @ signals (PathNotFoundException e) path.isValid() == false;\n      @ signals (PathNotFoundException e) !containsPath(path);\n      @*/\n    public int removePath(Path path) throws PathNotFoundException;\n\n    /*@ public normal_behavior\n      @ requires containsPathId(pathId);\n      @ assignable pList, pidList;\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pidList.length; pidList[i] != pathId);\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c pList.length; !pList[i].equals(\\old(getPathById(pathId))));\n      @ ensures (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c \\old(pidList.length) \u0026\u0026 pidList[i] != pathId;\n      @         containsPath(\\old(pList[i])) \u0026\u0026 containsPathId(\\old(pidList[i])));\n      @ also\n      @ public exceptional_behavior\n      @ assignable \\nothing;\n      @ signals (PathIdNotFoundException e) !containsPathId(pathId);\n      @*/\n    public void removePathById(int pathId) throws PathIdNotFoundException;\n\n    /*@ ensures (\\exists int[] arr; (\\forall int i, j; 0 \u003c= i \u0026\u0026 i \u003c j \u0026\u0026 j \u003c arr.length; arr[i] != arr[j]);\n\t  @            (\\forall int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length; (\\exists Path p; this.containsPath(p); p.containsNode(arr[i])))\n\t  @            \u0026\u0026(\\forall Path p; this.containsPath(p); (\\forall int node; p.containsNode(node); (\\exists int i; 0 \u003c= i \u0026\u0026 i \u003c arr.length; node == arr[i])))\n\t  @            \u0026\u0026(\\result == arr.length));\n\t  @*/\n    public /*@pure@*/int getDistinctNodeCount(); //在容器全局范围内查找不同的节点数\n}",
+        "name": "PathContainer.java",
+        "path": "实验指导书与课件/homework_11_guidebook-master/specs-homework-3-opensource-master-8a05b3b54a9829d7671158c3cffd4602fe39aecb/src/main/java/com/oocourse/specs3/models/PathContainer.java",
+        "url": "/github.com/darewolf-cyber/BUAA_OO/-/blob/%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC%E4%B9%A6%E4%B8%8E%E8%AF%BE%E4%BB%B6/homework_11_guidebook-master/specs-homework-3-opensource-master-8a05b3b54a9829d7671158c3cffd4602fe39aecb/src/main/java/com/oocourse/specs3/models/PathContainer.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 9,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == pList.length;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/darewolf-cyber/BUAA_OO",
+        "url": "/github.com/darewolf-cyber/BUAA_OO"
+      }
+    }
+  ],
+  "LimitHit": false,
+  "Cloning": [],
+  "Missing": [],
+  "Timedout": [],
+  "ResultCount": 28,
+  "ElapsedMilliseconds": 2314,
+  "Alert": {
+    "Title": "",
+    "Description": "",
+    "ProposedQueries": null
+  }
+}

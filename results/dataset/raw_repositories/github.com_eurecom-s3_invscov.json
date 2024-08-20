@@ -1,0 +1,289 @@
+{
+  "SourcegraphEndpoint": "https://sourcegraph.com",
+  "Query": "(//@ requires )|(//@ ensures ) repo:github.com/eurecom-s3/invscov lang:java count:all case:yes type:file patterntype:regexp",
+  "Site": {
+    "BuildVersion": "238702_2023-08-16_5.1-acf4bcc841e5"
+  },
+  "Results": [
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3957fb6ec2f1664236a5444d27fffde494e3b30d"
+        },
+        "content": "package PolyCalc;\n\npublic class PublicTest2\n{\n  public static void run()\n  {\n    // System.out.println(\"PublicTest2\");\n\n    RatNum n;\n    RatPoly x;\n    RatTerm t;\n    RatTermVec v;\n\n    //  ========== RatPoly\n    //  coeff\n    //  kill result denom 1,2,3... then \u003e= 1\n    x = RatPoly.parse(\"1/9\");\n    x.coeff(0);\n    for (int i=0; i\u003c10; i++) {\n      x = x.negate().add(RatPoly.parse(\"2\")).mul(RatPoly.parse(\"2/3\"));\n    }\n    x = RatPoly.parse(\"NaN\");\n    x.coeff(0);\n    x.negate();\n\n    //  hintedGet\n    //  kill /*# ensures \\result.coeff.denom == 1 || \\result.coeff.denom == 3 */\n    //  replaceExpt\n    //  kill /*# requires term.coeff.denom == 1 || term.coeff.denom == 3 || term.coeff.denom == 9 */\n    RatPoly.parse(\"7*x^8+1/34*x^6+17*x^4+1/29*x^3+11*x^2+3*x+5\").div(RatPoly.parse(\"3*x^6+1/5*x^4+9*x^2+4*x+8\"));\n\n    //  ========= RatTermVec\n    //  insert\n    //  /*# requires t.coeff.denom == 1 */\n    //  /*# requires index == 1 || index == 2 || index == 3 */\n    //  //@ requires index \u003e= 0\n    //  //@ requires t != null\n    RatPoly.parse(\"7*x^8+34*x^6+17*x^4+29*x^3+11*x^2+3*x+5\").add(RatPoly.parse(\"3*x^6+5*x^4+9*x^2+4*x+8\"));\n    //  /*# requires t.expt \u003e= index */\n    v = new RatTermVec();\n    t = new RatTerm(RatNum.parse(\"0\"), 0);\n    v.insert(t, 0);\n    v.insert(t, 1);\n    //  get\n    //    result coeff != 0\n    v.get(0);\n\n    //  size\n    //  //@ \\result \u003e= 0\n    v = new RatTermVec();\n    for (int i=0; i\u003c300; i++) {\n      v.size();\n    }\n    v = new RatTermVec();\n    //  toString (debugPrint) // != null\n    for (int i=0; i\u003c20; i++) {\n      v.addElement(new RatTerm(RatNum.parse((((i \u0026 1) == 0) ? \"-\" : \"\")+(i+2)+\"/\"+(i*3)), (i*7 % 19)));\n      v.toString();\n    }\n\n    v = new RatTermVec();\n    //  insert\n    //  denom == 1\n    //  index 1,2,3   // also toString coverage\n    v.insert(new RatTerm(RatNum.parse(\"1/9\"), 0), 0); v.toString();\n    v.insert(new RatTerm(RatNum.parse(\"1/8\"), 1), 1); v.toString();\n    v.insert(new RatTerm(RatNum.parse(\"1/7\"), 2), 2); v.toString();\n    v.insert(new RatTerm(RatNum.parse(\"1/6\"), 3), 3); v.toString();\n    v.insert(new RatTerm(RatNum.parse(\"5\"), 4), 4); v.toString();\n    v.insert(new RatTerm(RatNum.parse(\"0\"), 5), 5); v.toString();\n    //  index \u003e= 0 desired\n    v = new RatTermVec();\n    t = new RatTerm(RatNum.parse(\"0\"), 0);\n    for (int i=0; i\u003c100; i++) {\n      v.insert(t, 0);\n    }\n\n    //  set\n    //  /*# requires t.coeff.denom == 1 || t.coeff.denom == 3 || t.coeff.denom == 9 */\n\n    //  ========== RatNum\n    // toString 1 2 or 3\n    n = RatNum.parse(\"1/9\");\n    n.toString();\n    n = RatNum.parse(\"NaN\");\n    n.toString();\n    // parse numer \u003e= -1\n    n = RatNum.parse(\"-111/911\");\n  }\n}\n",
+        "name": "PublicTest2.java",
+        "path": "daikon/tests/sources/PolyCalc/PublicTest2.java",
+        "url": "/github.com/eurecom-s3/invscov/-/blob/daikon/tests/sources/PolyCalc/PublicTest2.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 35,
+          "offsetAndLengths": [
+            [
+              8,
+              13
+            ]
+          ],
+          "preview": "    //  //@ requires index \u003e= 0"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 36,
+          "offsetAndLengths": [
+            [
+              8,
+              13
+            ]
+          ],
+          "preview": "    //  //@ requires t != null"
+        }
+      ],
+      "repository": {
+        "name": "github.com/eurecom-s3/invscov",
+        "url": "/github.com/eurecom-s3/invscov"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3957fb6ec2f1664236a5444d27fffde494e3b30d"
+        },
+        "content": "package MapQuick2;\n\nimport MapQuick.*;\nimport java.util.Iterator;\n\n/**\n * A Path models a sequence of nodes and the cost for travelling along\n * such a sequence.\u003cp\u003e\n *\n * Paths are immutable. \u003cp\u003e\n *\n * @specfield  cost :     double          // cost of traversing this Path\n * @specfield  elements : sequence        // the nodes in this Path\n * @endspec\n * \u003cp\u003e\n *\n * The cost of traversing a path must not decrease as the path is\n * extended with new nodes.\u003cp\u003e\n */\npublic interface Path {\n\n    // Producers\n\n    //@ ensures \\result != null // sample feeding: interfaces not traced\n    /**\n     * Creates an extended path by adding a new node to its end.\n     * @requires n != null \u0026\u0026\n                 n is a valid node type for this particular path\n\t\t implementation\n     * @return a new Path p such that\n     *       p.elements = this.elements + [ n ]\n     *    \u0026\u0026 p.cost \u003e= this.cost\n     */\n    Path extend(Object n);\n\n    // Observers\n\n    /**\n     * @return an Iterator that produces the contents of this.elements,\n     *            in order\n     */\n    //@ ensures \\result != null // sample feeding: interfaces not traced\n    //@ ensures \\result.returnsNull == false // sample feeding: interfaces not traced\n    //@ ensures \\result.moreElements // sample feeding: interfaces not traced\n    Iterator elements();\n\n    /** @return this.cost */\n    double cost();\n\n} // Path\n\n\n",
+        "name": "Path.java",
+        "path": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/Path.java",
+        "url": "/github.com/eurecom-s3/invscov/-/blob/daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/Path.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 23,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result != null // sample feeding: interfaces not traced"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 41,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result != null // sample feeding: interfaces not traced"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 42,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result.returnsNull == false // sample feeding: interfaces not traced"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 43,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result.moreElements // sample feeding: interfaces not traced"
+        }
+      ],
+      "repository": {
+        "name": "github.com/eurecom-s3/invscov",
+        "url": "/github.com/eurecom-s3/invscov"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3957fb6ec2f1664236a5444d27fffde494e3b30d"
+        },
+        "content": "package MapQuick2;\n\nimport MapQuick.*;\nimport junit.framework.Assert;\n\n/**\n * A GeoSegment models a straight line segment on the earth.\u003cp\u003e\n *\n * @specfield  name : String       // name of the geographic feature identified\n * @specfield  p1 : GeoPoint       // first endpoint of the segment\n * @specfield  p2 : GeoPoint       // second endpoint of the segment\n * @derivedfield  length : double  // straight-line distance between p1 and p2,\n *                                 // in miles\n * @derivedfield  heading : double // compass heading from p1 to p2, in degrees\n * @endspec\n * \u003cp\u003e\n * GeoSegments are immutable.\u003cp\u003e\n *\n * The choice of which endpoint is p1 and which is p2 is arbitrary.\u003cp\u003e\n *\n * A compass heading is a nonnegative real number less than 360.\n * In compass headings, north = 0, east = 90, south = 180, and west = 270.\u003cp\u003e\n *\n * When used in a map, a GeoSegment might represent part of a street,\n * boundary, or other feature.\n * As an example usage, this map\n * \u003cpre\u003e\n *  Penny Lane  a\n *              |\n *              i--j--k  Abbey Road\n *              |\n *              z\n * \u003c/pre\u003e\n * could be represented by the following GeoSegments:\n * (\"Penny Lane\", a, i), (\"Penny Lane\", z, i),\n * (\"Abbey Road\", i, j), and (\"Abbey Road\", j, k).\n */\npublic class GeoSegment  {\n\n  /*@ invariant this.name != null; */\n  /*@ invariant this.p1 != null; */\n  /*@ invariant this.p2 != null; */\n  // fields\n  /*@ spec_public */ final private String name;\n  /*@ spec_public */ final private GeoPoint p1;\n  /*@ spec_public */ final private GeoPoint p2;\n\n  /*@ requires name != null; */\n  /*@ requires p1 != null; */\n  /*@ requires p2 != null; */\n  /*@ ensures name == this.name; */\n  /*@ ensures p1 == this.p1; */\n  /**@ ensures p1.latitude == this.p1.latitude; */\n  /**@ ensures p1.longitude == this.p1.longitude; */\n  /*@ ensures p2 == this.p2; */\n  /**@ ensures p2.latitude == this.p2.latitude; */\n  /**@ ensures p2.longitude == this.p2.longitude; */\n  // Constructors\n\n  /**\n   * @requires name != null \u0026\u0026 p1 != null \u0026\u0026 p2 != null\n   * @effects constructs a new GeoSegment with the specified name and endpoints\n   */\n  public GeoSegment(String name, GeoPoint p1, GeoPoint p2)\n  {\n    Assert.assertNotNull(name);\n    Assert.assertNotNull(p1);\n    Assert.assertNotNull(p2);\n\n    this.name = name;\n    this.p1 = p1;\n    this.p2 = p2;\n  }\n\n  // Producers\n\n  //@ ensures \\result != null // sample feeding\n  /**\n   * Returns a new GeoSegment like this one, but with its endpoints reversed.\n   * @return a new GeoSegment gs such that\n   *      gs.name = this.name\n   *   \u0026\u0026 gs.p1 = this.p2\n   *   \u0026\u0026 gs.p2 = this.p1\n   */\n  public GeoSegment reverse()\n  {\n    return new GeoSegment(name, p2, p1);\n  }\n\n  /*@ ensures \\result == this.name; */\n  /**@ ensures \\result == \\old(this.name); */\n  // Observers\n\n  /** @return this.name */\n  public String name()\n  {\n    return this.name;\n  }\n\n  /*@ ensures \\result == this.p1; */\n  /**@ ensures \\result == \\old(this.p1); */\n  /**@ ensures \\result.latitude == this.p1.latitude; */\n  /**@ ensures \\result.latitude == \\old(this.p1.latitude); */\n  /**@ ensures \\result.longitude == this.p1.longitude; */\n  /**@ ensures \\result.longitude == \\old(this.p1.longitude); */\n  /** @return this.p1 */\n  public GeoPoint p1()\n  {\n    return this.p1;\n  }\n\n  /*@ ensures \\result == this.p2; */\n  /**@ ensures \\result == \\old(this.p2); */\n  /**@ ensures \\result.latitude == this.p2.latitude; */\n  /**@ ensures \\result.latitude == \\old(this.p2.latitude); */\n  /**@ ensures \\result.longitude == this.p2.longitude; */\n  /**@ ensures \\result.longitude == \\old(this.p2.longitude); */\n  /** @return this.p2 */\n  public GeoPoint p2()\n  {\n    return this.p2;\n  }\n\n  /** @return this.length */\n  public double length()\n  {\n    return p1.distanceTo(p2);\n  }\n\n  /**\n   * @requires this.length != 0\n   * @return this.heading\n   */\n  public double heading()\n  {\n    Assert.assert(length() != 0.0);\n    return p1.headingTo(p2);\n  }\n\n  /**@ also_ensures \\result != null; */\n  public String toString()\n  {\n    return \"Seg{\" + name + \",\" + p1 + \",\" + p2 + \"}\";\n  }\n\n  /**\n   * Compares the specified Object with with this GeoSegment for equality.\n   * @return    gs != null \u0026\u0026 (gs instanceof GeoSegment)\n   *         \u0026\u0026 gs.name = this.name \u0026\u0026 gs.p1 = this.p1 \u0026\u0026 gs.p2 = this.p2\n   */\n  public boolean equals(Object o)\n  {\n    if (!(o instanceof GeoSegment))\n      return false;\n\n    GeoSegment other = (GeoSegment) o;\n    return\n      this.p1.equals(other.p1) \u0026\u0026\n      this.p2.equals(other.p2) \u0026\u0026\n      this.name.equals(other.name);\n  }\n\n  // specified by superclass (Object)\n  public int hashCode()\n  {\n    return\n      name.hashCode() +\n      p1.hashCode() * 7 +\n      p2.hashCode() * 17;\n  }\n\n} // GeoSegment\n\n\n\n",
+        "name": "GeoSegment.java",
+        "path": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/GeoSegment.java",
+        "url": "/github.com/eurecom-s3/invscov/-/blob/daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/GeoSegment.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 76,
+          "offsetAndLengths": [
+            [
+              2,
+              12
+            ]
+          ],
+          "preview": "  //@ ensures \\result != null // sample feeding"
+        }
+      ],
+      "repository": {
+        "name": "github.com/eurecom-s3/invscov",
+        "url": "/github.com/eurecom-s3/invscov"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3957fb6ec2f1664236a5444d27fffde494e3b30d"
+        },
+        "content": "package MapQuick2;\n\nimport MapQuick.*;\nimport java.util.*;\nimport junit.framework.Assert;\n\n/**\n * PathFinder is a procedural abstraction which searches Graphs for a\n * shortest path.  The search is uses a greedy algorithm, which means\n * that the search space must support dynamic programming.\n */\npublic class PathFinder\n{\n\n  /*@ requires g != null; */\n  /**@ requires g.adjMap != null; */\n  /*@ requires starts != null; */\n  /*@ requires goals != null; */\n  /*@ ensures \\result != null; */\n  //@ requires starts.elementType == \\type(Path) // dfej non-List\n  //@ requires starts.containsNull == false // dfej non-List\n  /**\n   * @param g the graph to be searched\n   * @param starts start points, given by one-element paths\n   * @param goals goal points, given by graph nodes\n   *\n   * @requires no argument is null\n   * @requires starts.size \u003e= 1\n   * @requires goals.size \u003e= 1\n   * @requires for all s in starts, s instanceof Path\n   * @requires the paths in starts will accept nodes of the type found in the graph\n   * @requires for any node n in this graph, a path which ends with n\n   *   may be successfully extended by n's children\n   *\n   * @returns the shortest path from any one start to any one goal\n   *\n   * @throws NoPathException if no path exists from any start to any goal\n   *\n   * @throws IllegalArgumentException if any start or goal node is not a node in the graph\n   * @throws IllegalArgumentException if any start path does not have exactly one element\n   */\n  public static Path findPath(Graph g, Set starts, Set goals)\n    throws NoPathException\n  {\n    Assert.assertNotNull(g);\n    Assert.assertNotNull(starts);\n    Assert.assertNotNull(goals);\n    Assert.assert(starts.size() \u003e= 1);\n    Assert.assert(goals.size() \u003e= 1);\n    //@ set goals.elementType = \\type(Object) // dumb\n\n    // check arguments\n    if (false) // jeremy\n    {\n      //@ assume false // engineering\n      Iterator iter = starts.iterator();\n      while (iter.hasNext()) {\n        Path startpath = (Path) iter.next();\n        Iterator elts = startpath.elements();\n        if (!elts.hasNext()) throw new IllegalArgumentException(startpath + \" has no elements\");\n        Object start = elts.next();\n        if (elts.hasNext()) throw new IllegalArgumentException(startpath + \" has more than one element\");\n        if (!g.containsNode(start)) throw new IllegalArgumentException(start + \" is not in the graph\");\n      }\n      iter = goals.iterator();\n      while (iter.hasNext()) {\n        Object goal = iter.next();\n        if (!g.containsNode(goal)) throw new IllegalArgumentException(goal + \" is not in the graph\");\n      }\n    }\n\n\n    // Map paths = { forall start in starts | (start, [start]) }\n    // PriorityQueue active = starts\n\n    Map paths = new HashMap();\n    //@ set paths.keyType = \\type(Object) // dumb\n    //@ set paths.elementType = \\type(Path) // local variable outside Daikon scope\n    PriorityQueue active = new PriorityQueue();\n    {\n      Iterator iter = starts.iterator();\n      while (iter.hasNext()) {\n        Path startpath;\n\t{\n\t  Object jeremy_added = iter.next();\n\t  //@ assume \\typeof(jeremy_added) == \\type(Path) // dumb\n\t  startpath = (Path) jeremy_added;\n\t}\n\tIterator jeremy_added = startpath.elements();\n\t//@ assume jeremy_added.moreElements == true // not traced in Daikon, inexpressible in ESC\n        Object start = jeremy_added.next();\n        Object old = paths.put(start, startpath);\n        Assert.assert(old == null);\n\ttry { active.insert(startpath.cost(), start); } catch (PriorityQueue.DuplicateElementException e) { //@ assume false // algorithmic understanding\n\t}\n      }\n    }\n\n    // Set finished = { }\n\n    Set finished = new HashSet();\n    //@ set finished.elementType = \\type(Object) // dumb\n\n    // while active is non-empty do\n\n    while (active.size() \u003e 0) {\n\n      // y = active.extractMin()\n      // ypath = paths(y)\n      Object y = active.extractMin(); //@ nowarn Exception; // PriorityQueue not ghost-specified\n      Path ypath = (Path) paths.get(y);\n      Assert.assert(y != null);\n      Assert.assert(ypath != null);\n\n      // if (y in goals)\n      //   return ypath\n      if (goals.contains(y)) {\n        return ypath;\n      }\n\n      // for each child z of y\n      Iterator zs = g.childrenOf(y).iterator();\n      while (zs.hasNext()) {\n        Object z = zs.next();\n\t//@ assume z != null // local variable\n\n        // zpath = ypath + [z]\n        Path zpath = ypath.extend(z);\n\n        // if (z not in finished) and (z not in active)\n        if (!finished.contains(z) \u0026\u0026 !active.contains(z)) {\n\n          // [ missing from algorithm: check for y != z ]\n          if (y.equals(z)) {\n            continue;\n          }\n\n          // paths(z) = zpath\n          // insert z in active\n          Object old = paths.put(z, zpath);\n          Assert.assert(old == null);\n\t  //@ nowarn Exception; // local variable / algorithmic understanding\n          active.insert(zpath.cost(), z);\n        }\n\n      }\n\n      // insert y in finished\n      finished.add(y);\n    }\n\n    // No Path Exists\n    throw new NoPathException();\n  }\n\n  public static class NoPathException\n    extends Exception\n  {\n    // Only need the default constructor\n  }\n\n}\n",
+        "name": "PathFinder.java",
+        "path": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/PathFinder.java",
+        "url": "/github.com/eurecom-s3/invscov/-/blob/daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/PathFinder.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 19,
+          "offsetAndLengths": [
+            [
+              2,
+              13
+            ]
+          ],
+          "preview": "  //@ requires starts.elementType == \\type(Path) // dfej non-List"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 20,
+          "offsetAndLengths": [
+            [
+              2,
+              13
+            ]
+          ],
+          "preview": "  //@ requires starts.containsNull == false // dfej non-List"
+        }
+      ],
+      "repository": {
+        "name": "github.com/eurecom-s3/invscov",
+        "url": "/github.com/eurecom-s3/invscov"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3957fb6ec2f1664236a5444d27fffde494e3b30d"
+        },
+        "content": "package MapQuick;\n\nimport java.util.*;\n\n/**\n * A PriorityQueue is a collection, each of whose elements has an\n * associated priority.\u003cp\u003e\n *\n * @specfield elements : set                // contents of the priority queue\n * @specfield priority : Object -\u003e double   // priority of each element\n * @endspec\n */\npublic class PriorityQueue\n{\n\n    /*@ invariant this.heap != null; */\n    /*@ invariant this.elts != null; */\n    //@ invariant heap.elementType == \\type(Object) // dumb\n    //@ invariant heap.containsNull == false // Since daikon-depth=1, was uninstrumented\n    //@ invariant elts.elementType == \\type(Object) // dumb\n    /*@ spec_public */ private final List heap;\n    // elts is redundant, and allows a fast implementation of contains()\n    /*@ spec_public */ private final HashSet elts;\n\n    //\n    // Rep Invariant:\n    //\n    //\n    //\n\n    /**\n     * @effects creates a PriorityQueue p, where p.elements is empty\n     */\n    public PriorityQueue()\n    {\n        heap = new ArrayList();\n        //@ set heap.containsNull = false // dumb  (repeat of scored invariant)\n\t//@ set heap.elementType = \\type(Object) // dumb\n        elts = new HashSet();\n\t//@ set elts.elementType = \\type(Object) // dumb\n        // the first element of heap is a dummy element, so that\n        // the rest of the code can count from 1\n        heap.add(new Object());\n    }\n\n    /*@ requires elt != null; */\n    /**\n     * @returns true iff elt is in this.elements\n     */\n    public boolean contains(Object elt)\n    {\n        return elts.contains(elt);\n    }\n\n    //@ ensures \\result \u003e= 0 // Daikon has \u003e=1 unjustified\n    /**\n     * @returns the size of this.elements\n     */\n    public int size()\n    {\n        // the heap has a dummy element\n        int mistere = heap.size()-1;\n\t//@ assume mistere \u003e= 0 // inexpressable object invariant\n\treturn mistere;\n    }\n\n    /*@ requires elt != null; */\n    /**\n     * @modifies this\n     *\n     * @effects adds elt to this.elements and sets this.priority(elt)\n     * = priority\n     *\n     * @throws DuplicateElementException if this.elements contains elt\n     */\n    public void insert(double priority, Object elt) throws DuplicateElementException\n    {\n        if (contains(elt)) {\n            throw new DuplicateElementException(\"Queue already contains \"+elt);\n        }\n        Entry e = new Entry(priority, elt);\n        heap.add(e);\n        elts.add(elt);\n        int i = size();\n        while ((i \u003e 1) \u0026\u0026\n               (heapGet((int)(i/2)).key \u003e priority)) {\n            heap.set(i, heapGet((int)(i/2)));\n            i = (int)(i/2);\n        }\n        heap.set(i, e);\n    }\n\n    /*@ ensures \\result != null; */\n    /**\n     * Removes and returns the highest-priority element.\n     *\n     * @modifies this\n     *\n     * @returns elt such that elt is in this.elements \u0026\u0026 for all elt2\n     * in this.elements, priority(elt) \u0026lt;= priority(elt2)\n     *\n     * @effects removes elt from this.elements and from the domain of priority\n     *\n     * @throws NoSuchElementException if this.elements is empty\n     */\n    public Object extractMin() throws NoSuchElementException\n    {\n        if (heap.size() \u003c= 1) {\n            throw new NoSuchElementException(\"empty PriorityQueue\");\n        }\n        Object min = heapGet(1).value;\n        elts.remove(min);\n        int lastIndex = heap.size() - 1;\n\t//@ assume lastIndex \u003e= 1 // incompleteness: modular analysis\n        heap.set(1, heapGet(lastIndex));\n        heap.remove(lastIndex);\n        heapify(1);\n        return min;\n    }\n\n    /*@ requires i \u003e= 1; */\n    /*@ ensures \\result != null; */\n    /**@ ensures \\result.value != null; */\n    /**\n     * @requies 1 \u0026lt;= i \u0026lt; heap.size();\n     *\n     * @returns the ith element of the heap\n     */\n    private Entry heapGet(int i)\n    {\n      return (Entry) heap.get(i); //@ nowarn Cast; // inexpressible: heterogenous container\n    }\n\n    /*@ requires i \u003e= 1; */\n    /**\n     * @requires subtrees routed at 2i and 2i+1 satisfy the heap\n     * property\n     *\n     * @modifies this\n     *\n     * @effects rearranges the subtree routed at i so that the min\n     * heap property is satisfied\n     */\n    private void heapify(int i)\n    {\n        int smallest;\n        if ((2*i \u003c heap.size()) \u0026\u0026\n            (heapGet(2*i).key \u003c\n             heapGet(i).key)) {\n            smallest = 2*i;\n        }\n        else {\n            smallest = i;\n        }\n\n        if ((2*i+1 \u003c heap.size()) \u0026\u0026\n            (heapGet(2*i+1).key \u003c\n             heapGet(smallest).key)) {\n            smallest = 2*i+1;\n        }\n\n        if (i != smallest) {\n            Object temp = heapGet(i);\n            heap.set(i, heapGet(smallest));\n            heap.set(smallest, temp);\n            heapify(smallest);\n        }\n    }\n\n    /**\n     * Entry is a record class for the storage of elements in PriorityQueue.\n     */\n    private class Entry\n    {\n        /*@ invariant this.value != null; */\n        /*@ spec_public */ final double key;\n        /*@ spec_public */ final Object value;\n\n\t/*@ requires value != null */\n        public Entry(double key, Object value) {\n            this.key = key;\n            this.value = value;\n        }\n    }\n\n\n    /**\n     * DuplicateElementException is an unchecked exception which\n     * signals that an element is already in a PriorityQueue.\n     */\n    public class DuplicateElementException extends RuntimeException\n    {\n        DuplicateElementException() { }\n        DuplicateElementException(String s) { super(s); }\n    }\n}\n",
+        "name": "PriorityQueue.java",
+        "path": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick/PriorityQueue.java",
+        "url": "/github.com/eurecom-s3/invscov/-/blob/daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick/PriorityQueue.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 54,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result \u003e= 0 // Daikon has \u003e=1 unjustified"
+        }
+      ],
+      "repository": {
+        "name": "github.com/eurecom-s3/invscov",
+        "url": "/github.com/eurecom-s3/invscov"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3957fb6ec2f1664236a5444d27fffde494e3b30d"
+        },
+        "content": "package MapQuick;\n\nimport MapQuick2.*;\n\n\nimport java.io.*;\nimport java.util.*;\n\n/**\n * Abstraction to read and return filters based on killfiles\n */\npublic class KillfileReader\n{\n  /*@ invariant MapQuick.KillfileReader.debug == false; */\n  /*@ invariant MapQuick.KillfileReader.killfile_filter != null; */\n  /*@ spec_public */ private static boolean debug = false;\n  /*@ requires s != null; */\n  private static void debugln(String s) { if (debug) { System.err.println(\"KFR: \" + s); } }\n\n  /*@ requires killfile != null; */\n  /*@ ensures \\result != null; */\n  /**\n   * @return a filter which passes segments not listed in the given killfile\n   */\n  public static StreetSegmentFilter fromFile(File killfile)\n  {\n    debugln(\"Reading \" + killfile);\n    return new KillfileFilter(killfile);\n  }\n\n  //@ requires dbdir.isDirectory // outside of Daikon's grammar\n  /*@ requires dbdir != null; */\n  /*@ ensures \\result != null; */\n  /**\n   * @return a filter which passes segments not listed in $(dbdir)/*killfile.txt\n   */\n  public static StreetSegmentFilter fromDir(File dbdir)\n  {\n    if (!dbdir.isDirectory()) {\n      throw new KillfileException(\"Not a directory: \" + dbdir);\n    }\n\n    File[] files = dbdir.listFiles(killfile_filter);\n    if (files.length == 0) {\n      return new AllPassStreetSegmentFilter();\n    }\n\n    StreetSegmentFilter result = fromFile(files[0]);\n    for (int i=1; i\u003cfiles.length; i++) {\n      StreetSegmentFilter another = fromFile(files[i]);\n      result = new CompositeStreetSegmentFilter(result, another);\n    }\n\n    return result;\n  }\n\n  // filter which gives us *killfile.txt files\n  /*@ spec_public */ private static final FilenameFilter killfile_filter = new FNFilter();\n  private static class FNFilter\n    implements FilenameFilter\n  {\n    /*@ also_requires d != null; */\n    /*@ also_requires name != null; */\n    public boolean accept(File d, String name) {\n      return (name.toLowerCase().endsWith(\"killfile.txt\"));\n    }\n  }\n\n  /**\n   * Indicates that a killfile was non-existant, malformed, etc.\n   */\n  public static class KillfileException\n    extends RuntimeException\n  {\n    public KillfileException(String s) { super(s); }\n  }\n\n  /**\n   * Filter which allows all segments through\n   */\n  private static class AllPassStreetSegmentFilter\n    implements StreetSegmentFilter\n  {\n    public boolean apply(StreetSegment seg)\n    {\n      return true;\n    }\n  }\n\n  /**\n   * Filter which composes two other filters\n   */\n  private static class CompositeStreetSegmentFilter\n    implements StreetSegmentFilter\n  {\n\n    /*@ invariant this.one != null; */\n    /*@ invariant this.two != null; */\n    /*@ requires one != null; */\n    /*@ requires two != null; */\n    /*@ ensures one == this.one; */\n    /*@ ensures two == this.two; */\n    public CompositeStreetSegmentFilter(StreetSegmentFilter one, StreetSegmentFilter two)\n    {\n      this.one = one;\n      this.two = two;\n    }\n\n    /*@ spec_public */ private final StreetSegmentFilter one;\n    /*@ spec_public */ private final StreetSegmentFilter two;\n\n    /*@ also_requires seg != null; */\n    /**@ also_requires this != null; */\n    /**@ also_requires this.one != null; */\n    /**@ also_requires this.two != null; */\n    public boolean apply(StreetSegment seg)\n    {\n      return one.apply(seg) \u0026\u0026 two.apply(seg);\n    }\n  }\n\n  /**\n   * Filter which filters based on some killfile\n   */\n  private static class KillfileFilter\n    implements StreetSegmentFilter\n  {\n\n    /*@ also_requires seg != null; */\n    /*# also_ensures this.line == \\old(this.orig_line); */ // not sure: should have been suppressed?\n    /**@ also_ensures (\\result == false)  ==\u003e  (this != null); */\n    /*@ also_ensures (\\result == false)  ==\u003e  (this.kill != null); */\n    /*@ also_ensures (\\result == false)  ==\u003e  (this.limit_one != null); */\n    public boolean apply(StreetSegment seg)\n    {\n      if (kill.contains(seg)) {\n        KillfileReader.debugln(\"Killed \" + seg);\n        return false;\n      }\n\n      if (limit_one.contains(seg)) {\n        KillfileReader.debugln(\"First hit on \" + seg);\n        limit_one.remove(seg);\n        kill.add(seg);\n      }\n\n      return true;\n    }\n\n    //@ invariant kill.elementType == \\type(Object) // dumb\n    /*@ spec_public */ private final Set kill = new HashSet();\n    //@ invariant limit_one.elementType == \\type(Object) // dumb\n    /*@ spec_public */ private final Set limit_one = new HashSet();\n    {\n      //@ set kill.elementType = \\type(Object) // dumb\n      //@ set limit_one.elementType = \\type(Object) // dumb\n    }\n\n\n    // not a real field, but want scope in c-tor and helper\n    /*@ spec_public */ private String line;\n    /*@ spec_public */ private String orig_line;\n\n    /*@ requires killfile != null; */\n    private KillfileFilter(File killfile)\n    {\n      try {\n\n        BufferedReader lines = new BufferedReader(new InputStreamReader(new FileInputStream(killfile)));\n        while ((orig_line = line = lines.readLine()) != null) {\n          // e.g. \"KILL$(unnamed street)$41271599$-70181563$41273016$-70172648$1$$$     $     $UNKNOWN\"\n\n          String command = nextToken();\n          String name = nextToken();\n          int p1_lat = parseInt(nextToken());\n          int p1_long = parseInt(nextToken());\n          int p2_lat = parseInt(nextToken());\n          int p2_long = parseInt(nextToken());\n          boolean inc = (parseInt(nextToken()) != 0);\n          StreetNumberSet leftNum = makeSNS(nextToken());\n          StreetNumberSet rightNum = makeSNS(nextToken());\n          String leftZip = nextToken();\n          String rightZip = nextToken();\n          StreetClassification streetClass = StreetClassification.parse(nextToken());\n\n          StreetSegment seg =\n            new StreetSegment(new GeoPoint(p1_lat, p1_long),\n                              new GeoPoint(p2_lat, p2_long),\n                              name,\n                              leftNum,\n                              rightNum,\n                              leftZip,\n                              rightZip,\n                              streetClass,\n                              inc);\n\n          if (\"WARNING\".equals(command)) {\n            // for now, just ignore these\n          } else if (\"KILL\".equals(command)) {\n            kill.add(seg);\n          } else if (\"LIMIT_ONE\".equals(command)) {\n            limit_one.add(seg);\n          } else {\n\t    //@ assume false // engineering\n            throw new KillfileReader.KillfileException(\"Unknown command: \" + command);\n          }\n        }\n\n      } catch (IOException e) {\n\t//@ assume false // engineering\n        throw new KillfileReader.KillfileException(e.getClass() + e.getMessage());\n      }\n    }\n\n    /*@ requires num != null; */\n    /*@ requires this.line != null; */\n    /*@ requires this.orig_line != null; */\n    private int parseInt(String num)\n    {\n      try {\n        return Integer.parseInt(num);\n      } catch (NumberFormatException e) {\n\t//@ assume false // engineering\n        throw new KillfileReader.KillfileException(e.getClass() + e.getMessage() + \"'\" + orig_line + \"'\");\n      }\n    }\n\n    /*@ requires sns != null; */\n    /*@ requires this.line != null; */\n    /*@ requires this.orig_line != null; */\n    /*@ ensures \\result != null; */\n    private StreetNumberSet makeSNS(String sns)\n    {\n      return new StreetNumberSet(sns);\n    }\n\n    /*@ requires this.line != null; */\n    /*@ requires this.orig_line != null; */\n    /*@ modifies this.line; */\n    /*@ ensures \\result != null; */\n    //@ ensures this.line != null // incompleteness: modular analysis\n    private String nextToken()\n\n    {\n      if (line == null) {\n        throw new KillfileException(\"Ran out of tokens\");\n      }\n\n      String result;\n      int n = line.indexOf('$');\n      if (n \u003e= 0) {\n        result = line.substring(0, n);\n        line = line.substring(n+1);\n      } else {\n\t//@ assume false // incompleteness: modular analysis\n        result = line;\n        line = null;\n      }\n\n      return result;\n    }\n\n  }\n\n}\n\n",
+        "name": "KillfileReader.java",
+        "path": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick/KillfileReader.java",
+        "url": "/github.com/eurecom-s3/invscov/-/blob/daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick/KillfileReader.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 30,
+          "offsetAndLengths": [
+            [
+              2,
+              13
+            ]
+          ],
+          "preview": "  //@ requires dbdir.isDirectory // outside of Daikon's grammar"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 240,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures this.line != null // incompleteness: modular analysis"
+        }
+      ],
+      "repository": {
+        "name": "github.com/eurecom-s3/invscov",
+        "url": "/github.com/eurecom-s3/invscov"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3957fb6ec2f1664236a5444d27fffde494e3b30d"
+        },
+        "content": "package MapQuick2;\n\nimport MapQuick.*;\nimport java.util.*;\nimport junit.framework.Assert;\n\n/** A DirectionsFinder produces directions for traveling from one\n *   address to another in a particular geographical area.\n *   \u003cp\u003e\n *   @specfield segments : set[StreetSegment]\n *      // the set of StreetSegments which represents the geographical\n *         area for which this DirectionsFinder produces directions\n *   @endspec\n */\npublic class DirectionsFinder\n{\n    /*\n     * Private state\n     * -------------\n     *\n     * Beyond construction, the only operation on a DirectionsFinder\n     * is represented by the getDirections method.  For this, we need\n     * to be able to pull out a StreetSegment from the database based\n     * on its name and ZIP code.  This suggests that a useful\n     * representation is a mapping from ZIP code to a mapping of names\n     * to sets of street segments.\n     *\n     * (That is: segments{\"02139\"} is a Map;\n     *           segments{\"02139\"}{\"Vassar St.\"} is a Set of StreetSeg)\n     */\n    private Map segments;\n\n    /* We also need to be able to trace paths through our list of\n     * segments.  The Graph abstraction is useful for this.  Here\n     * the street segments are nodes, and intersections are\n     * represented by edges between adjacent nodes.\n     */\n    private Graph graph;\n\n\n    // Used for debugging.  If set, segments whose names start with\n    // this are printed to stderr\n    private String dumpPrefix;\n\n    /* AF(t) = { seg | exists key in t.segments s.t.\n     *                 seg is in t.segments[key] }\n     * RI: segments is non-null.  The keys of segments are non-null and\n     *     are Strings.  The values are non-null and are Maps.  In the\n     *     inner Maps, the keys are non-null and are Strings.  The values\n     *     are non-null and are Sets; these Sets are non-empty, and the\n     *     contents are non-null and are StreetSegments.\n     *\n     * RI: graph is non-null.  Every node in graph is a StreetSegment,\n     *     and is contained in segments.  There is an edge from node\n     *     s1 to node s2 if and only if the endpoint of s1 is the\n     *     startpoint of s2.\n     */\n\n    /* @effects: throws an exception if the rep invariant does\n     *           not hold.  No effects otherwise. */\n    public void checkRep()\n    {\n        /* CHECK: segments is non-null. */\n        Assert.assert(segments != null);\n\n        /* Get an iterator over the set of keys. */\n        Iterator zipIter = segments.keySet().iterator();\n\n        /* Go over each key in turn. */\n        while (zipIter.hasNext())\n        {\n            Object zip = zipIter.next();\n\n            /* CHECK: zip is non-null and is a String. */\n            Assert.assert(zip != null);\n            Assert.assert(zip instanceof String);\n\n            /* CHECK: segments[zip] is non-null and is a Map. */\n            Object byName = segments.get(zip);\n            Assert.assert(byName != null);\n            Assert.assert(byName instanceof Map);\n            Map nameMap = (Map)byName;\n\n            /* Now iterate through this Map. */\n            Iterator nameIter = nameMap.keySet().iterator();\n            while (nameIter.hasNext())\n            {\n                Object key = nameIter.next();\n\n                /* CHECK: key is non-null and is a String. */\n                Assert.assert(key != null);\n                Assert.assert(key instanceof String);\n\n                /* CHECK: nameMap[key] is non-null and is a Set. */\n                Object value = nameMap.get(key);\n                Assert.assert(value != null);\n                Assert.assert(value instanceof Set);\n\n                /* CHECK: nameMap[key] is non-empty. */\n                Set valSet = (Set)value;\n                Assert.assert(!valSet.isEmpty());\n\n                /* Now iterate over each of the things in this set. */\n                Iterator segIter = valSet.iterator();\n                while (segIter.hasNext())\n                {\n                    Object seg = segIter.next();\n\n                    /* CHECK: seg is non-null and is a StreetSegment. */\n                    Assert.assert(seg != null);\n                    Assert.assert(seg instanceof StreetSegment);\n                }\n            }\n        }\n\n        /* TODO: Add rep invariant checks for the rest of this. */\n    }\n\n    /** Produces a DirectionsFinder for a given database.\n     * @requires zf is null or is a Collection of String\n     * @return A DirectionsFinder whose set of segments is\n     *  { s | s in (new StreetSegReader(databaseName)).streetSegs () \u0026\u0026\n     *        (s.leftZip in zf || s.rightZip in zf ||\n     *         (s.leftZip.trim () == s.rightZip.trim () == \"\") ||\n     *         zf == null) }\n     * @throws InvalidDatabaseException if databaseName does not refer to a\n     *  valid tiger database.\n     */\n    public static DirectionsFinder getDirectionsFinder(String databaseName,\n                                                       Collection zf)\n        throws InvalidDatabaseException\n    {\n      return getDirectionsFinder(databaseName, zf, null);\n    }\n\n    //@ ensures \\result != null // code not instrumented\n    // package vis.\n    static DirectionsFinder getDirectionsFinder(String databaseName,\n\t\t\t\t\t\tCollection zf,\n\t\t\t\t\t\tString dumpPrefix)\n        throws InvalidDatabaseException\n    {\n        StreetSegReader ssr;\n\n\tSystem.err.println(\"Making DF for \" + databaseName);\n\tSystem.err.flush();\n\n        try\n        {\n            ssr = new StreetSegReader(databaseName);\n        }\n        catch (StreetSegReader.InvalidSourceException e)\n        {\n            throw new InvalidDatabaseException(\"Invalid Tiger database \" +\n                                               databaseName);\n        }\n\n        return new DirectionsFinder(ssr.streetSegments(), zf, dumpPrefix);\n    }\n\n    /** Creates a new DirectionsFinder from an Iterator of StreetSegments.\n     *\n     * @requires zf is null or is a Collection of String; (dumpPrefix may be null)\n     * @modifies ssIter\n     * @effects Populates this with every StreetSegment in ssIter whose\n     *   left or right zip code is in zf.  If zf is null or empty, use every\n     *   segment.  Leaves ssIter empty.\n     */\n    public DirectionsFinder(Iterator ssIter, Collection zf, String dumpPrefix)\n    {\n        // Initialize instance variables.\n        segments = new HashMap();\n        graph = new Graph();\n\tthis.dumpPrefix = dumpPrefix;\n\n        // Also keep two maps locally for quickly finding things to\n        // attach edges to.\n        Map mapByStart = new HashMap();\n        Map mapByEnd = new HashMap();\n\n        // Walk through each segment we get back.\n        while (ssIter.hasNext())\n        {\n            StreetSegment seg = (StreetSegment)ssIter.next();\n\n\t    if ((dumpPrefix != null) \u0026\u0026 seg.name().startsWith(dumpPrefix)) {\n\t        System.err.println(seg.toString());\n\t    }\n\n            // If the segment is eligible, add it to both our index\n            // by name and to the graph.\n            if (isSegmentEligible(seg, zf))\n            {\n                addToSegments(seg);\n                addToGraph(seg, mapByStart, mapByEnd);\n                seg = (StreetSegment)seg.reverse();\n                addToSegments(seg);\n                addToGraph(seg, mapByStart, mapByEnd);\n            }\n        }\n\n        // All done.  Check that the rep invariant holds.\n        checkRep();\n    }\n\n    /**\n\n    /** Determines whether or not a given segment should be part of\n     * our map.\n     *\n     * @requires zf is null or is a Collection of String\n     * @return true if:\n     *   the left ZIP code of seg is in zf;\n     *   the right ZIP code of seg is in zf;\n     *   the left and right ZIP codes are both \"\";\n     *   zf is empty; or\n     *   zf is null.\n     * @return false otherwise.\n     */\n    private boolean isSegmentEligible(StreetSegment seg, Collection zf)\n    {\n        // If the collection is null or empty, any segment is eligible.\n        if (zf == null)\n            return true;\n        if (zf.isEmpty())\n            return true;\n\n        // If both side ZIP codes are empty, the segment is eligible.\n        if (seg.leftZip().trim().equals(\"\") \u0026\u0026\n            seg.rightZip().trim().equals(\"\"))\n            return true;\n\n        // Otherwise, check both the left and right zip codes.\n        if (zf.contains(seg.leftZip()))\n            return true;\n        if (zf.contains(seg.rightZip()))\n            return true;\n\n        // Otherwise, the segment is ineligible.\n        return false;\n    }\n\n    /** Generic helper function to get a Map of street names to Sets of\n     * StreetSegments, given a ZIP code.\n     *\n     * @requires zip is non-null\n     * @modifies segments\n     * @effects If zip is in segments, return the map that it corresponds\n     *   to.  Otherwise, if create is true, create a new HashMap, add\n     *   it to segments under zip, and return the map.  If zip isn't already\n     *   in segments and create is false, return null.\n     */\n    private Map findZipMap(String zip, boolean create)\n    {\n        // Just go off and get it.\n        Map theMap = (Map)segments.get(zip);\n\n        // If we didn't find it, create one if necessary.\n        if (theMap == null \u0026\u0026 create)\n        {\n            theMap = new HashMap();\n            segments.put(zip, theMap);\n        }\n\n        return theMap;\n    }\n\n    /** Generic helper function to add a value to a set.\n     *\n     * @param value: Value to add to the set\n     * @param key: Key to add the value under\n     * @param map: Map indexing keys to Sets of values\n     * @modifies map\n     * @effects If map contains a Set for key, adds value to that\n     *   set.  Otherwise, creates a Set containing value and adds\n     *   it to map under key.\n     */\n    private static void addToSet(Object value, Object key, Map map)\n    {\n        // Pull the appropriate set out of the map.\n        Set theSet = (Set)map.get(key);\n\n        // If we lost on finding the set, create one now.  Use a\n        // HashSet under the assumption that most things will have\n        // hashCode()s and that we'll rarely be adding things.\n        if (theSet == null)\n        {\n            theSet = new HashSet();\n            map.put(key, theSet);\n        }\n\n        // Add the value to the set.\n        theSet.add(value);\n    }\n\n    /** Adds a segment to the map of names to segments.\n     *\n     * @requires seg is not already in segments\n     * @modifies segments\n     * @effects Adds seg to segments\n     */\n    private void addToSegments(StreetSegment seg)\n    {\n        Map zipMap;\n\n        // Add to the set indexed by the left ZIP code.\n        zipMap = findZipMap(seg.leftZip(), true);\n        addToSet(seg, seg.name(), zipMap);\n\n        // If the left and right ZIP codes are different, do the same\n        // for the right ZIP code.\n        if (!seg.leftZip().equals(seg.rightZip()))\n        {\n            zipMap = findZipMap(seg.rightZip(), true);\n            addToSet(seg, seg.name(), zipMap);\n        }\n    }\n\n    /** Adds a segment to the graph.\n     *\n     * @param seg: The StreetSegment to be added\n     * @param mapByStart: A Map of Sets of StreetSegments, keyed on the\n     *   starting GeoPoint of the segment\n     * @param mapByEnd: A Map of Sets of StreetSegments, keyed on the\n     *   ending GeoPoint of the segment\n     * @requires: no parameter is null, the map parameters have type\n     *   signatures as described above\n     * @modifies graph, mapByStart, mapByEnd\n     * @effects Adds seg to graph, and adds appropriate edges between\n     *   segments in the graph and the new segment.  Adds seg as\n     *   to mapByStart and mapByEnd with appropriate keys,\n     */\n    private void addToGraph(StreetSegment seg, Map mapByStart, Map mapByEnd)\n    {\n        Iterator iter;\n        Set segs;\n\n        // 1. Just go off and add the node.\n        try {\n            graph.addNode(seg);\n        }\n        catch (Exception e)\n        {\n            return;\n        }\n\n        // 2. Add edges from this node.\n        segs = (Set)mapByStart.get(seg.p2());\n        // Do nothing if there are no such segments.\n        if (segs != null)\n        {\n            iter = segs.iterator();\n            while (iter.hasNext())\n            {\n                StreetSegment other = (StreetSegment)iter.next();\n                graph.addEdge(seg, other);\n            }\n        }\n\n        // 3. Add edges to this node.\n        segs = (Set)mapByEnd.get(seg.p1());\n        if (segs != null)\n        {\n            iter = segs.iterator();\n            while (iter.hasNext())\n            {\n                StreetSegment other = (StreetSegment)iter.next();\n                graph.addEdge(other, seg);\n            }\n        }\n\n        // 4. Add this node to both maps.\n        addToSet(seg, seg.p1(), mapByStart);\n        addToSet(seg, seg.p2(), mapByEnd);\n    }\n\n    /** Gets directions between two addresses.\n     *\n     * @return A String providing directions of travel from the address\n     *  specified by the first three string arguments to the address\n     *  specified by the last three string arguments. The result string\n     *  may indicate an invalid address or that there is no path between\n     * the two addresses. The result string should be exactly what\n     *  would be printed by the \u003ca href=\"../ps6.html#text\"\u003ePS6 text-based\n     * interface\u003c/a\u003e, including any trailing newlines.\n     */\n    public String getDirections (String startNumber, String startStreet,\n                                 String startZip, String destinationNumber,\n                                 String destinationStreet,\n                                 String destinationZip)\n    {\n        checkRep();\n\n        // Parse the start and end addresses into Addresses.\n        Address start = makeAddress(startNumber, startStreet, startZip);\n        Address end = makeAddress(destinationNumber, destinationStreet,\n                                  destinationZip);\n\n        if (start == null) {\n\t  return \"Bad address: \" +\n\t    startNumber + \" \" +\n\t    startStreet + \" \" +\n\t    startZip +\n\t    \"\\n\";\n\t}\n        if (end == null) {\n\t  return \"Bad address: \" +\n\t    destinationNumber + \" \" +\n\t    destinationStreet + \" \" +\n\t    destinationZip +\n\t    \"\\n\";\n\t}\n\n        String result = \"\";\n        try\n        {\n            // Actually get directions.\n            Directions dir = getDirections(start, end);\n\n            // Build up a list of result directions.\n            result = \"Start at \" + start + \"\\n\";\n            Iterator iter = dir.getDirections();\n            while (iter.hasNext())\n            {\n                String theDir = (String)iter.next();\n                result = result + theDir + \"\\n\";\n            }\n            double l = dir.getLength() * 10;\n            l = Math.round(l);\n            l = l / 10;\n            result = result + \"Trip length: \" + l + \" miles\\n\";\n        }\n        catch (InvalidAddressException e)\n        {\n\t    result = e.getMessage() + \"\\n\";\n        }\n        catch (NoPathException e)\n        {\n\t    result = e.getMessage() + \"\\n\";\n        }\n\n        checkRep();\n        return result;\n    }\n\n    /** Makes an Address from a set of three strings.\n     *\n     * @return A new Address corresponding to the provided parameters,\n     *   or null if the address is not parseable.\n     */\n    private Address makeAddress(String num, String street, String zip)\n    {\n        int theNum;\n        try\n        {\n            theNum = Integer.parseInt(num);\n        }\n        catch (NumberFormatException e)\n        {\n            return null;\n        }\n\n        return new Address(theNum, street, zip);\n    }\n\n    /** Gets directions from start to end.\n     *\n     * @throws InvalidAddressException if start or end is not in the\n     *  geographical area covered by this DirectionsFinder.\n     * @throws NoPathException if no path could be found from start to end.\n     * @return A Directions providing directions of travel from start to end.\n     */\n    public Directions getDirections (Address start, Address end)\n        throws InvalidAddressException, NoPathException\n    {\n        checkRep();\n\n        // Find start and end segments.  These may throw\n        // InvalidAddressExceptions; let those just be passed on.\n        Set startSegSet = findSegments(start);\n        Set endSegSet = findSegments(end);\n\n        // Turn these into appropriate parameters for PathFinder.\n        // In particular, the start set needs to be a Set of\n        // one-element Paths.\n        Set startPathSet = new HashSet();\n        Iterator segIter = startSegSet.iterator();\n        CompositeRoutePath crp;\n        while (segIter.hasNext())\n        {\n            StreetSegment seg = (StreetSegment)segIter.next();\n            crp = new CompositeRoutePath(seg);\n            startPathSet.add(crp);\n        }\n\n        // Okay, find the shortest path.\n        try\n        {\n            Path result = PathFinder.findPath(graph, startPathSet, endSegSet);\n            crp = (CompositeRoutePath)result;\n        }\n        catch (PathFinder.NoPathException e)\n        {\n            throw new NoPathException(\"No path from \" + start + \" to \" + end);\n        }\n\n        // Create and return a RouteDirections object.\n        return new RouteDirections(start, end, crp);\n    }\n\n    /** Returns a Set of all StreetSegments containing a given address.\n     *\n     * @requires addr is not null\n     * @return A non-empty Set of StreetSegments containing addr.\n     * @throws InvalidAddressException if addr doesn't match any\n     *   segments\n     */\n    private Set findSegments(Address addr)\n        throws InvalidAddressException\n    {\n        // 1. Look up the ZIP code to get a map of street names to segments.\n        Map byName = (Map)segments.get(addr.getZipcode());\n        if (byName == null)\n            throw new InvalidAddressException(\"No such zipcode: \" + addr);\n\n        // 2. Look up the street by name to get a Set of segments.\n        Set segSet = (Set)byName.get(addr.getName());\n        if (segSet == null)\n            throw new InvalidAddressException(\"No such street: \" + addr);\n\n        // 3. Trim this down to a Set of segments containing our\n        // number.\n        Set theSet = new HashSet();\n        Iterator segIter = segSet.iterator();\n        while (segIter.hasNext())\n        {\n            StreetSegment seg = (StreetSegment)segIter.next();\n            if (seg.contains(addr.getNum()))\n                theSet.add(seg);\n        }\n\n        // 4. If we found nothing, throw an exception.\n        if (theSet.isEmpty())\n            throw new InvalidAddressException(\"No such number: \" + addr);\n\n        // 5. All done!\n        return theSet;\n    }\n\n}\n",
+        "name": "DirectionsFinder.java",
+        "path": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/DirectionsFinder.java",
+        "url": "/github.com/eurecom-s3/invscov/-/blob/daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/DirectionsFinder.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 135,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result != null // code not instrumented"
+        }
+      ],
+      "repository": {
+        "name": "github.com/eurecom-s3/invscov",
+        "url": "/github.com/eurecom-s3/invscov"
+      }
+    }
+  ],
+  "LimitHit": false,
+  "Cloning": [],
+  "Missing": [],
+  "Timedout": [],
+  "ResultCount": 13,
+  "ElapsedMilliseconds": 68,
+  "Alert": {
+    "Title": "",
+    "Description": "",
+    "ProposedQueries": null
+  }
+}

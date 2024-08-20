@@ -1,0 +1,34 @@
+[
+    {
+        "repository": "github.com/Waikato/moa",
+        "file": "moa/src/main/java/moa/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1604,
+        "methodEndingLine": 1612,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/Waikato/moa",
+        "file": "moa/src/main/java/moa/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ int[] array, /*@non_null@*/  int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1627,
+        "methodEndingLine": 1635,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/Waikato/moa",
+        "file": "moa/src/main/java/moa/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1650,
+        "methodEndingLine": 1663,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/Waikato/moa",
+        "file": "moa/src/main/java/moa/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ int[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1786,
+        "methodEndingLine": 1799,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    }
+]

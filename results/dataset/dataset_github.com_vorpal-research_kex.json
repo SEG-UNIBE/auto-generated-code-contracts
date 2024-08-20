@@ -1,0 +1,34 @@
+[
+    {
+        "repository": "github.com/vorpal-research/kex",
+        "file": "kex-test/src/main/kotlin/org/vorpal/research/kex/test/javadebug/TreeMap.java",
+        "code": "    public V get(final int key) {\n        final Entry<V> p = getEntry(key);\n        return (p == null ? null : p.value);\n    }\n",
+        "methodStartingLine": 639,
+        "methodEndingLine": 642,
+        "jml": "//@ requires ((this.root == null) || this.root.consistency()) && (this.size == this.realSize());\n//@ ensures true;"
+    },
+    {
+        "repository": "github.com/vorpal-research/kex",
+        "file": "kex-test/src/main/kotlin/org/vorpal/research/kex/test/javadebug/TreeMap.java",
+        "code": "    public int lastKey() {\n        return TreeMap.key(lastEntry());\n    }\n",
+        "methodStartingLine": 701,
+        "methodEndingLine": 703,
+        "jml": "//@ requires ((this.root == null) || this.root.consistency()) && (this.size == this.realSize());\n//@ ensures true;"
+    },
+    {
+        "repository": "github.com/vorpal-research/kex",
+        "file": "kex-test/src/main/kotlin/org/vorpal/research/kex/test/javadebug/TreeMap.java",
+        "code": "    public V put(final int key, final V value) {\n        Entry<V> t = this.root;\n\n        if (t == null) {\n            incrementSize();\n            this.root = new Entry<V>(key, value, null);\n            return null;\n        }\n\n        while (true) {\n            final int cmp = compare(key, t.key);\n            if (cmp == 0) {\n                return t.setValue(value);\n            } else if (cmp < 0) {\n                if (t.left != null) {\n                    t = t.left;\n                } else {\n                    incrementSize();\n                    t.left = new Entry<V>(key, value, t);\n                    fixAfterInsertion(t.left);\n                    return null;\n                }\n            } else { // cmp > 0\n                if (t.right != null) {\n                    t = t.right;\n                } else {\n                    incrementSize();\n                    t.right = new Entry<V>(key, value, t);\n                    fixAfterInsertion(t.right);\n                    return null;\n                }\n            }\n        }\n        // return null;\n    }\n",
+        "methodStartingLine": 707,
+        "methodEndingLine": 741,
+        "jml": "//@ requires ((this.root == null) || this.root.consistency()) && (this.size == this.realSize());\n//@ ensures ((this.root != null) && this.root.consistency());"
+    },
+    {
+        "repository": "github.com/vorpal-research/kex",
+        "file": "kex-test/src/main/kotlin/org/vorpal/research/kex/test/javadebug/TreeMap.java",
+        "code": "    public V remove(final int key) {\n        final Entry<V> p = getEntry(key);\n        if (p == null) {\n            return null;\n        }\n\n        final V oldValue = p.value;\n        deleteEntry(p);\n        return oldValue;\n    }\n",
+        "methodStartingLine": 788,
+        "methodEndingLine": 797,
+        "jml": "//@ requires ((this.root == null) || this.root.consistency()) && (this.size == this.realSize());\n//@ ensures ((this.root == null) || this.root.consistency()) && (this.size == this.realSize());"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "repository": "github.com/ddadaal/Homework",
+        "file": "Testing/Practice1/BinaryHeap/src/main/java/net/mooctest/BinaryHeap.java",
+        "code": "    public void insert( int x ) throws Overflow\n    {\n        if( isFull( ) )\n            throw new Overflow( );\n\n        // Percolate up\n        int hole = ++currentSize;\n        for( ; hole > 1 && x< array[ hole / 2 ]; hole /= 2 )\n            array[ hole ] = array[ hole / 2 ];\n        array[ hole ] = x;\n    }\n",
+        "methodStartingLine": 51,
+        "methodEndingLine": 61,
+        "jml": "//@ requires capacity > 0;\n//@ ensures isEmpty();"
+    },
+    {
+        "repository": "github.com/ddadaal/Homework",
+        "file": "Testing/Practice1/BinaryHeap/src/main/java/net/mooctest/BinaryHeap.java",
+        "code": "    public void makeEmpty( )\n    {\n        currentSize = 0;\n    }\n",
+        "methodStartingLine": 138,
+        "methodEndingLine": 141,
+        "jml": "//@ ensures isEmpty();"
+    },
+    {
+        "repository": "github.com/ddadaal/Homework",
+        "file": "Testing/Practice1/BinaryHeap/src.backup/main/java/net/mooctest/BinaryHeap.java",
+        "code": "    public void insert( int x ) throws Overflow\n    {\n        if( isFull( ) )\n            throw new Overflow( );\n\n        // Percolate up\n        int hole = ++currentSize;\n        for( ; hole > 1 && x< array[ hole / 2 ]; hole /= 2 )\n            array[ hole ] = array[ hole / 2 ];\n        array[ hole ] = x;\n    }\n",
+        "methodStartingLine": 51,
+        "methodEndingLine": 61,
+        "jml": "//@ requires capacity > 0;\n//@ ensures isEmpty();"
+    },
+    {
+        "repository": "github.com/ddadaal/Homework",
+        "file": "Testing/Practice1/BinaryHeap/src.backup/main/java/net/mooctest/BinaryHeap.java",
+        "code": "    public void makeEmpty( )\n    {\n        currentSize = 0;\n    }\n",
+        "methodStartingLine": 138,
+        "methodEndingLine": 141,
+        "jml": "//@ ensures isEmpty();"
+    }
+]

@@ -1,0 +1,28 @@
+TicTacToe Notes
+---------------
+2005-02-20 -- Version 0 of TicTacToe
+- Introduce TicTacToe to model the game and GameDriver to play the game
+- Initially there is no logic -- we just instantiate a game and print it
+---
+2005-02-20 -- Version 1 -- model game state
+- Add TestTicTacToe.testState to exercise game state
+- Add TicTacToe getters and setters for game state (use chess notation)
+- Add preconditions for getters and setters
+- Add TicTacToe.toString to visualize game state
+---
+2005-02-20 -- Version 2 -- add game logic
+- Add test scenarios to TestTicTacToe -- check winner and squares left
+- Add Player class; constructor for scripted moves
+- Add TicTacToe methods to move, and test for winning
+- Expand GameDriver to instantiate Player and trigger moves
+---
+2005-02-21 -- Version 3 -- introduce interface; silent printing
+- Add BoardGame interface
+- Introduce NullOutputStream object to support silent testing
+- Move all printing from Player etc. to GameDriver (need BoardGame.currentPlayer())
+- Change GameDriver to print to a PrintStream
+- TestTicTacToe plays game with a PrintStream(new NullOutputStream)
+---
+2005-02-21 -- Version 4 -- introduce AbstractBoardGame
+- TicTacToe inherits from AbstractBoardGame
+- For now, move all features from TicTacToe to AbstractBoardGame

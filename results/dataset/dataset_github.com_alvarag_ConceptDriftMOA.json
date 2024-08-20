@@ -1,0 +1,18 @@
+[
+    {
+        "repository": "github.com/alvarag/ConceptDriftMOA",
+        "file": "src/main/java/utils/Utils.java",
+        "code": "    private static void quickSort(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                                  int left, int right) {\n\n      if (left < right) {\n        int middle = partition(array, index, left, right);\n        quickSort(array, index, left, middle);\n        quickSort(array, index, middle + 1, right);\n      }\n    }\n",
+        "methodStartingLine": 161,
+        "methodEndingLine": 169,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/alvarag/ConceptDriftMOA",
+        "file": "src/main/java/utils/Utils.java",
+        "code": "    private static void quickSort(/*@non_null@*/ int[] array, /*@non_null@*/  int[] index, \n                                  int left, int right) {\n\n      if (left < right) {\n        int middle = partition(array, index, left, right);\n        quickSort(array, index, left, middle);\n        quickSort(array, index, middle + 1, right);\n      }\n    }\n",
+        "methodStartingLine": 184,
+        "methodEndingLine": 192,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    }
+]

@@ -1,0 +1,66 @@
+[
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/OLD/demos/basics/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    public Object getFirst() {\n        if (size == 0)\n            throw new NoSuchElementException();\n\n        return header.next.element;\n    }\n",
+        "methodStartingLine": 151,
+        "methodEndingLine": 156,
+        "jml": "//@ requires size > 0;"
+    },
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/OLD/demos/basics/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    public void clear() {\n        modCount++;\n        header.next = header.previous = header;\n        size = 0;\n    }\n",
+        "methodStartingLine": 347,
+        "methodEndingLine": 351,
+        "jml": "//@ ensures size == 0;"
+    },
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/OLD/demos/basics/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    private Entry addBefore(Object o, Entry e) {\n        Entry newEntry = new Entry(o, e, e.previous);\n        newEntry.previous.next = newEntry;\n        newEntry.next.previous = newEntry;\n        size++;\n        modCount++;\n        return newEntry;\n    }\n",
+        "methodStartingLine": 651,
+        "methodEndingLine": 658,
+        "jml": "//@ requires inList(e);"
+    },
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/OLD/demos/basics/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    public Object[] toArray() {\n        Object[] result = new Object[size];\n        int i = 0;\n        for (Entry e = header.next; e != header; e = e.next)\n            result[i++] = e.element;\n        return result;\n    }\n",
+        "methodStartingLine": 705,
+        "methodEndingLine": 711,
+        "jml": "//@ ensures \\result != null && \\result.length == size;"
+    },
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/3-coverage-jacoco/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    public Object getFirst() {\n        if (size == 0)\n            throw new NoSuchElementException();\n\n        return header.next.element;\n    }\n",
+        "methodStartingLine": 151,
+        "methodEndingLine": 156,
+        "jml": "//@ requires size > 0;"
+    },
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/3-coverage-jacoco/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    public void clear() {\n        modCount++;\n        header.next = header.previous = header;\n        size = 0;\n    }\n",
+        "methodStartingLine": 347,
+        "methodEndingLine": 351,
+        "jml": "//@ ensures size == 0;"
+    },
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/3-coverage-jacoco/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    private Entry addBefore(Object o, Entry e) {\n        Entry newEntry = new Entry(o, e, e.previous);\n        newEntry.previous.next = newEntry;\n        newEntry.next.previous = newEntry;\n        size++;\n        modCount++;\n        return newEntry;\n    }\n",
+        "methodStartingLine": 651,
+        "methodEndingLine": 658,
+        "jml": "//@ requires inList(e);"
+    },
+    {
+        "repository": "github.com/STAR-RG/practical_testing_book",
+        "file": "demos/3-coverage-jacoco/doublelinkedlist/src/main/java/DoubleLinkedList.java",
+        "code": "    public Object[] toArray() {\n        Object[] result = new Object[size];\n        int i = 0;\n        for (Entry e = header.next; e != header; e = e.next)\n            result[i++] = e.element;\n        return result;\n    }\n",
+        "methodStartingLine": 705,
+        "methodEndingLine": 711,
+        "jml": "//@ ensures \\result != null && \\result.length == size;"
+    }
+]

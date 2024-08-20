@@ -1,0 +1,538 @@
+[
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Utils.java",
+        "code": "        public IStorage getStorage() throws CoreException {\n            return (IStorage)this;\n        }\n",
+        "methodStartingLine": 497,
+        "methodEndingLine": 499,
+        "jml": "//@ ensures \\return == this;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Utils.java",
+        "code": "    public void showMessage(/*@Nullable*/Shell shell, /*@Nullable*/String title, String msg) {\n        MessageDialog.openInformation(\n                shell,\n                title,\n                msg);\n    }\n",
+        "methodStartingLine": 666,
+        "methodEndingLine": 671,
+        "jml": "//@ requires msg != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Widgets.java",
+        "code": "    public String value() {\n      return text.getText();\n    }\n",
+        "methodStartingLine": 198,
+        "methodEndingLine": 200,
+        "jml": "//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Widgets.java",
+        "code": "    public String value() {\n      return text.getText();\n    }\n",
+        "methodStartingLine": 302,
+        "methodEndingLine": 304,
+        "jml": "//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/MenuActions.java",
+        "code": "    public final void selectionChanged(final IAction action, final ISelection selection) {\n        this.selection = selection;\n    }\n",
+        "methodStartingLine": 40,
+        "methodEndingLine": 42,
+        "jml": "//@ ensures this.selection != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void addWidget(Composite parent) {\n\t\t\tAbstractPreference.ChoiceOption opt = (AbstractPreference.ChoiceOption)option;\n\t\t\tComposite composite = new Widgets.HComposite(parent,2);\n\t\t\twidget = new Combo(composite, SWT.READ_ONLY);\n\t\t\twidget.setItems(opt.choices());\n\t\t\twidget.select(opt.getIndexValue());\n\t\t\twidget.setVisibleItemCount(opt.choices().length);\n\t\t\twidget.setToolTipText(opt.tooltip());\n\t\t\torg.eclipse.swt.widgets.Label label2 = new org.eclipse.swt.widgets.Label(composite,SWT.NONE);\n\t\t\tlabel2.setText(opt.label());\n\t\t\tlabel2.setToolTipText(opt.tooltip());\n\t\t}\n",
+        "methodStartingLine": 90,
+        "methodEndingLine": 102,
+        "jml": "//@ ensures widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\tpublic String value() { return widget.getText(); }\n",
+        "methodStartingLine": 112,
+        "methodEndingLine": 112,
+        "jml": "//@ requires widget != null;\n//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void addWidget(Composite parent) {\n\t\t\tString fn = ((AbstractPreference.StringOption)option).getValue();\n\t\t\twidget = new Widgets.FileTextField(parent,option.label(),fn,option.tooltip(),50);\n\t\t}\n",
+        "methodStartingLine": 171,
+        "methodEndingLine": 175,
+        "jml": "//@ ensures widget == null;\n//@ ensures this.option == option;\n//@ ensures widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\tpublic String value() { return widget.value().trim(); }\n",
+        "methodStartingLine": 183,
+        "methodEndingLine": 183,
+        "jml": "//@ requires widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void setDefault() {\n\t\t\twidget.setText(((AbstractPreference.StringOption)option).getDefault());\n\t\t}\n",
+        "methodStartingLine": 191,
+        "methodEndingLine": 194,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void setOptionValue() { ((AbstractPreference.StringOption)option).setValue(value()); } \n",
+        "methodStartingLine": 202,
+        "methodEndingLine": 203,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void addWidget(Composite parent) {\n\t\t\tString fn = ((AbstractPreference.StringOption)option).getValue();\n\t\t\twidget = new Widgets.DirTextField(parent,option.label(),fn,option.tooltip(),80);\n\t\t}\n",
+        "methodStartingLine": 240,
+        "methodEndingLine": 244,
+        "jml": "//@ ensures widget == null;\n//@ ensures this.option == option;\n//@ ensures widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\tpublic String value() { return widget.value().trim(); }\n",
+        "methodStartingLine": 256,
+        "methodEndingLine": 256,
+        "jml": "//@ requires widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void setDefault() {\n\t\t\twidget.setText(((AbstractPreference.StringOption)option).getDefault());\n\t\t}\n",
+        "methodStartingLine": 264,
+        "methodEndingLine": 267,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void setOptionValue() { ((AbstractPreference.StringOption)option).setValue(value()); } \n",
+        "methodStartingLine": 275,
+        "methodEndingLine": 276,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void addWidget(Composite parent) {\n\t\t\twidget = new Button(parent,SWT.CHECK);\n\t\t\twidget.setText(option.label());\n\t\t\twidget.setToolTipText(option.tooltip());\n\t\t\twidget.setSelection(((AbstractPreference.BooleanOption)option).getValue());\n\t\t}\n",
+        "methodStartingLine": 311,
+        "methodEndingLine": 317,
+        "jml": "//@ requires option != null;\n//@ ensures this.option == option;\n//@ requires option != null;\n//@ ensures widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\tpublic boolean value() { return widget.getSelection(); }\n",
+        "methodStartingLine": 325,
+        "methodEndingLine": 325,
+        "jml": "//@ requires widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void setDefault() {\n\t\t\twidget.setSelection(((AbstractPreference.BooleanOption)option).getDefault());\n\t\t}\n",
+        "methodStartingLine": 333,
+        "methodEndingLine": 336,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void setOptionValue() { ((AbstractPreference.BooleanOption)option).setValue(value()); } \n",
+        "methodStartingLine": 344,
+        "methodEndingLine": 345,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n        public void addWidget(Composite parent) {\n            AbstractPreference.IntOption opt = (AbstractPreference.IntOption)option;\n            Composite composite = new Widgets.HComposite(parent,2);\n            org.eclipse.swt.widgets.Label label2 = new org.eclipse.swt.widgets.Label(composite,SWT.NONE);\n            label2.setText(opt.label());\n            label2.setToolTipText(opt.tooltip());\n            widget = new Combo(composite, SWT.READ_ONLY);\n            widget.setItems(choices);\n            widget.select(opt.getValue());\n            widget.setVisibleItemCount(choices.length);\n            widget.setToolTipText(opt.tooltip());\n\n//            widget = new Button(parent,SWT.CHECK);\n//            widget.setText(option.label());\n//            widget.setToolTipText(option.tooltip());\n//            widget.setSelection(((AbstractPreference.BooleanOption)option).getValue());\n        }\n",
+        "methodStartingLine": 387,
+        "methodEndingLine": 404,
+        "jml": "//@ requires option != null;\n//@ ensures this.option == option;\n//@ requires option != null;\n//@ ensures widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "        public int value() { return widget.getSelectionIndex(); }\n",
+        "methodStartingLine": 412,
+        "methodEndingLine": 412,
+        "jml": "//@ requires widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n        public void setDefault() {\n            widget.select(((AbstractPreference.IntOption)option).getDefault());\n        }\n",
+        "methodStartingLine": 420,
+        "methodEndingLine": 423,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n        public void setOptionValue() { ((AbstractPreference.IntOption)option).setValue(value()); } \n",
+        "methodStartingLine": 431,
+        "methodEndingLine": 432,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n        public void addWidget(Composite parent) {\n          Composite composite = new Widgets.HComposite(parent,2);\n          org.eclipse.swt.widgets.Label label2 = new org.eclipse.swt.widgets.Label(composite,SWT.NONE);\n          label2.setText(option.label());\n          label2.setToolTipText(option.tooltip());\n          widget = new Text(composite, SWT.SINGLE);\n          widget.setText(((AbstractPreference.StringOption)option).getValue());\n          widget.setToolTipText(option.tooltip());\n        }\n",
+        "methodStartingLine": 468,
+        "methodEndingLine": 477,
+        "jml": "//@ requires option != null;\n//@ ensures this.option == option;\n//@ requires option != null;\n//@ ensures widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "        public String value() { return widget.getText(); }\n",
+        "methodStartingLine": 485,
+        "methodEndingLine": 485,
+        "jml": "//@ requires widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n        public void setDefault() {\n            widget.setText(((AbstractPreference.StringOption)option).getDefault());\n        }\n",
+        "methodStartingLine": 493,
+        "methodEndingLine": 496,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n        public void setOptionValue() {\n          ((AbstractPreference.StringOption)option).setValue(value()); \n        } \n",
+        "methodStartingLine": 504,
+        "methodEndingLine": 507,
+        "jml": "//@ requires widget != null;\n//@ requires option != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/PreferenceWidget.java",
+        "code": "\t\t@Override\n\t\tpublic void addWidget(Composite parent) {\n\t\t\twidget = new Widgets.LabeledSeparator(parent,label);\n\t\t}\n",
+        "methodStartingLine": 544,
+        "methodEndingLine": 547,
+        "jml": "//@ requires label != null;\n//@ ensures this.label == label;\n//@ ensures widget != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/AbstractPreference.java",
+        "code": "        public void setValue(int i) { preferenceStore().setValue(key,choices[i]); } \n",
+        "methodStartingLine": 291,
+        "methodEndingLine": 291,
+        "jml": "//@ requires 0<=i && i<choices.length;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/AbstractPreference.java",
+        "code": "        private int lookup(String s) {\n            for (int i=0; i<choices.length; ++i) {\n                if (s.equals(choices[i])) return i;\n            }\n            return -1;\n        }\n",
+        "methodStartingLine": 302,
+        "methodEndingLine": 307,
+        "jml": "//@ requires s != null;\n//@ ensures \\result != -1 ==> choices[\\result].equals(s);\n//@ ensures \\result == -1 ==> (\\forall int i; 0<=i && i<choices.length; !choices[i].equals(s));"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/impl/Pos.java",
+        "code": "\t\tprotected int nextLineTermination(int pos) {\n\t\t\tchar c;\n\t\t\tif (pos >= chars().length()) return chars().length()-1; // If the length is indeterminate, length() should be INT_MAX\n\t\t\twhile ((c=charAt(pos)) != '\\n' && c != '\\r' && c != CharSequenceInfinite.endChar) ++pos;\n\t\t\tif (c == '\\r' && charAt(pos+1) == '\\n') ++pos;\n\t\t\telse if (c == CharSequenceInfinite.endChar) --pos;\n\t\t\treturn pos;\n\t\t}\n",
+        "methodStartingLine": 144,
+        "methodEndingLine": 151,
+        "jml": "//@ requires pos >= 0;\n//@ ensures \\result >= pos;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/impl/Script.java",
+        "code": "\t@Override\n\tpublic /*@Nullable*/IStringLiteral filename() {\n\t\treturn filename;\n\t}\n",
+        "methodStartingLine": 30,
+        "methodEndingLine": 33,
+        "jml": "//@ ensures \\result == filename;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/impl/Script.java",
+        "code": "\t@Override\n\tpublic /*@Nullable*/List<ICommand> commands() {\n\t\treturn commands;\n\t}\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 44,
+        "jml": "//@ ensures \\result == commands;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/impl/Script.java",
+        "code": "\tpublic void add(ICommand command) {\n\t\tif (commands == null) commands = new LinkedList<ICommand>();  // FIXME - test without this line\n\t\tcommands.add(command);\n\t}\n",
+        "methodStartingLine": 61,
+        "methodEndingLine": 64,
+        "jml": "//@ requires (filename != null) != (list != null);\n//@ requires commands() != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/sexpr/Parser.java",
+        "code": "\tpublic boolean checkNoArg() {\n\t\ttry {\n\t\t\tif (!isRP()) {\n\t\t\t\tif (isEOD()) {\n\t\t\t\t\tsmtConfig.log.logError(smtConfig.responseFactory.error(\n\t\t\t\t\t\t\t\"The input ends with an unmatched left parenthesis\",\n\t\t\t\t\t\t\tpos(savedlp.pos(),savedlp.pos())));\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t\tsmtConfig.log.logError(smtConfig.responseFactory.error(\n\t\t\t\t\t\t\"A \" + commandName + \" command takes no arguments\",\n\t\t\t\t\t\tpeekToken().pos())); \n\t\t\t\treturn false;\n\t\t\t} else {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t} catch (ParserException e) {\n\t\t\tsmtConfig.log.logError(smt().responseFactory.error(\n\t\t\t\t\t\"A failure occurred while parsing a command: \" + e,\n\t\t\t\t\te.pos()));\n\t\t\treturn false;\n\t\t}\n\n\t}\n",
+        "methodStartingLine": 257,
+        "methodEndingLine": 280,
+        "jml": "//@ requires savedlp != null && commandName != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/command/C_pop.java",
+        "code": "\tstatic public /*@Nullable*/ C_pop parse(Parser p) throws ParserException {\n\t\tINumeral num = p.parseNumeral();\n\t\tif (num == null) return null;\n\t\treturn new C_pop(num);\n\t}\n",
+        "methodStartingLine": 49,
+        "methodEndingLine": 53,
+        "jml": "//@ requires n.value().compareTo(BigInteger.ZERO) > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/command/C_push.java",
+        "code": "\tstatic public /*@Nullable*/ C_push parse(Parser p) throws ParserException {\n\t\tINumeral num = p.parseNumeral();\n\t\tif (num == null) return null;\n\t\treturn new C_push(num);\n\t}\n",
+        "methodStartingLine": 49,
+        "methodEndingLine": 53,
+        "jml": "//@ requires n.value().compareTo(BigInteger.ZERO) > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_cvc.java",
+        "code": "\t\tprivate <T extends IExpr> String rightassoc(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tT n = iter.next();\n\t\t\tif (!iter.hasNext()) {\n\t\t\t\treturn n.accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(n.accept(this));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(rightassoc(fcnname,iter));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 726,
+        "methodEndingLine": 741,
+        "jml": "//@ requires iter.hasNext();"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_cvc.java",
+        "code": "\t\tprivate <T extends IExpr> String remove_leftassoc(String fcnname, int length, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tif (length == 1) {\n\t\t\t\treturn iter.next().accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(remove_leftassoc(fcnname,length-1,iter));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(iter.next().accept(this));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 745,
+        "methodEndingLine": 759,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_cvc.java",
+        "code": "\t\tprivate <T extends IAccept> String remove_chainable(String newName, int length, Iterator<IExpr> iter ) throws IVisitor.VisitorException {\n\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\tif (length == 2) {\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(iter.next().accept(this));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(newName);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(iter.next().accept(this));\n\t\t\t\tsb.append(\")\");\n\t\t\t} else {\n\t\t\t\tboolean first = true;\n\t\t\t\tIExpr left = iter.next();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\twhile (iter.hasNext()) {\n\t\t\t\t\tif (first) first = false; else sb.append(\" AND \");\n\t\t\t\t\tsb.append(\"(\");\n\t\t\t\t\tsb.append(left.accept(this));\n\t\t\t\t\tsb.append(\" \");\n\t\t\t\t\tsb.append(newName);\n\t\t\t\t\tsb.append(\" \");\n\t\t\t\t\tsb.append((left = iter.next()).accept(this));\n\t\t\t\t\tsb.append(\")\");\n\t\t\t\t}\n\t\t\t\tsb.append(\")\");\n\t\t\t}\n\t\t\treturn sb.toString();\n\t\t}\n",
+        "methodStartingLine": 763,
+        "methodEndingLine": 790,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/CharSequenceSocket.java",
+        "code": "\t@Override\n\tprotected boolean readChars() throws java.io.IOException {\n\t\twhile (true) {\n\t\t\tif (needsNewConnection) {\n\t\t\t\tif (rdr != null) rdr.close();\n\t\t\t\tif (clientSocket != null) clientSocket.close();\n\n\t\t\t\t// Wait for a client to initiate a call\n\t\t\t\tclientSocket = serverSocket.accept();\n\n\t\t\t\t// Create the input and output streams\n\t\t\t\t// FIXME - use a listener?\n\t\t\t\t// FIXME - are there any other exceptions?  what if the connection is unexpectedly broken\n\t\t\t\tsmtConfig.log.out = new PrintStream(clientSocket.getOutputStream(),true);\n\t\t\t\trdr = new BufferedReader(\n\t\t\t\t\t\tnew InputStreamReader(\n\t\t\t\t\t\t\t\tclientSocket.getInputStream()));\n\t\t\t\tneedsNewConnection = false;\n\t\t\t}\n\t\t\t/*@SuppressWarnings(\"nullness\")*/\n\t\t\t/*@NonNull*/ Reader nnrdr = rdr;\n\t\t\tint nread = 0;\n\t\t\tdo {\n\t\t\t\tnread = nnrdr.read(buf,amountRead,buf.length-amountRead);\n\t\t\t\tif (nread == -1) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tif (smtConfig.verbose != 0) smtConfig.log.logDiag(\"SOCKET READ \" + nread + \":\" + new String(buf,amountRead,nread));\n\t\t\t\tamountRead += nread;\n\t\t\t} while (amountRead < buf.length && nnrdr.ready());\n\n\t\t\tif (nread == -1) {\n\t\t\t\tneedsNewConnection = true;\n\t\t\t\t// end of file so no characters read - go read some more\n\t\t\t} else if (buf[amountRead-1] == 0) {\n\t\t\t\tamountRead--;\n\t\t\t\tneedsNewConnection = true;\n\t\t\t\tif (nread > 1) return true;\n\t\t\t\t// read only the 0 so no characters read - go read some more\n\t\t\t} else {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t}\n\t}\n",
+        "methodStartingLine": 60,
+        "methodEndingLine": 103,
+        "jml": "//@ requires initialSize > 0 && sizeIncrease >= 0 && sizeMultiple >= 1;\n//@ requires !(sizeIncrease == 0 && sizeMultiple == 1)\n//@ requires !needsNewConnection => rdr != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/CharSequenceReader.java",
+        "code": "\t@Override\n\tprotected boolean readChars() throws java.io.IOException {\n\t\tint nread;\n\t\t// It appears that rdr.ready() can be false when a file has been completely\n\t\t// read and the next read will return -1 - there does not appear to be a way\n\t\t// to determine that the reader is at the end of file without issuing the\n\t\t// final read (which might block if we are interactive)\n\t\tif (!rdr.ready() && prompter != null) {\n\t\t\tprompter.prompt();\n\t\t}\n\t\tdo {\n\t\t\tnread = rdr.read(buf,amountRead,buf.length-amountRead);\n\t\t\tif (nread == -1) {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t\tamountRead += nread;\n\t\t} while (amountRead < buf.length && rdr.ready());\n\t\treturn true;\n\t}\n",
+        "methodStartingLine": 48,
+        "methodEndingLine": 66,
+        "jml": "//@ requires initialSize > 0 && sizeIncrease >= 0 && sizeMultiple >= 1;\n//@ requires !(sizeIncrease == 0 && sizeMultiple == 1)"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_yices.java",
+        "code": "\t\tprivate <T extends IExpr> String remove_rightassoc(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tT n = iter.next();\n\t\t\tif (!iter.hasNext()) {\n\t\t\t\treturn n.accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(n.accept(this));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(remove_rightassoc(fcnname,iter));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 701,
+        "methodEndingLine": 716,
+        "jml": "//@ requires iter.hasNext();"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_yices.java",
+        "code": "\t\tprivate <T extends IExpr> String remove_leftassoc(String fcnname, int length, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tif (length == 1) {\n\t\t\t\treturn iter.next().accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(remove_leftassoc(fcnname,length-1,iter));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(iter.next().accept(this));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 720,
+        "methodEndingLine": 734,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_yices.java",
+        "code": "\t\tprivate <T extends IAccept> String remove_chainable(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\tsb.append(\"(and \");\n\t\t\tT left = iter.next();\n\t\t\twhile (iter.hasNext()) {\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(left.accept(this));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append((left=iter.next()).accept(this));\n\t\t\t\tsb.append(\")\");\n\t\t\t}\n\t\t\tsb.append(\")\");\n\t\t\treturn sb.toString();\n\t\t}\n",
+        "methodStartingLine": 738,
+        "methodEndingLine": 753,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/CharSequenceInfinite.java",
+        "code": "\t@Override\n\tpublic char charAt(int index) {\n\t\tif (index >= amountRead) {\n\t\t\tif (index >= buf.length) {\n\t\t\t\t// We need +1 because one needs a buffer of at least size 2 to include index=1\n\t\t\t\t// We add an additional +1 so that there is room to hold an End-of-input character if necessary\n\t\t\t\texpandBuffer(index+2);\n\t\t\t}\n\t\t\ttry {\n\t\t\t\twhile (amountRead <= index) {\n\t\t\t\t\tif (!readChars()){\n\t\t\t\t\t\t//SMT.out.println(\"END OF INPUT READ\");\n\t\t\t\t\t\tbuf[amountRead++] = endChar;\n\t\t\t\t\t\tlength = amountRead;\n\t\t\t\t\t\treturn endChar;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t} catch (IOException e) {\n\t\t\t\t// Note: we catch IOException and turn it into a RuntimeException\n\t\t\t\t// (so it does not have to be declared) because the inherited \n\t\t\t\t// signature for charAt(int) does not declare any thrown exceptions\n\t\t\t\tthrow new RuntimeException(e);\n\t\t\t}\n\t\t}\n\t\treturn buf[index];\n\t}\n",
+        "methodStartingLine": 90,
+        "methodEndingLine": 115,
+        "jml": "//@ requires initialSize > 0 && sizeIncrease >= 0 && sizeMultiple >= 1;\n//@ requires !(sizeIncrease == 0 && sizeMultiple == 1)\n//@ requires index >= 0;\n//@ ensures index < amountRead;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/CharSequenceInfinite.java",
+        "code": "\tprivate void expandBuffer(int newSize) {\n\t\tint newlength = buf.length;\n\t\tdo {\n\t\t\tint k = (int) Math.ceil(newlength*sizeMultiple+sizeIncrease);\n\t\t\tnewlength = (k <= newlength) ? newlength+100 : k; // check for both bad parameters and for integer overflow\n\t\t} while (newSize > newlength);\n\t\tchar[] nbuf = new char[newlength];\n\t\tSystem.arraycopy(buf,0,nbuf,0,amountRead);\n\t\tbuf = nbuf;\n\t}\n",
+        "methodStartingLine": 139,
+        "methodEndingLine": 148,
+        "jml": "//@ requires buf.length > amountRead;\n//@ ensures \\result => amountRead > \\old(amountRead);\n//@ ensures !\\result ==> amountRead == \\old(amountRead);\n//@ ensures buf[0..\\old(amountRead)-1] == \\old(buf[0..amountRead-1]);\n//@ requires newSize > 0;\n//@ ensures buf.length >= newSize && buf.length > \\old(buf.length);\n//@ ensures (\\forall int i; 0<=i && i<amountRead; buf[i] == \\old(buf[i]));"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_yices2.java",
+        "code": "\t\tprivate <T extends IExpr> String remove_rightassoc(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tT n = iter.next();\n\t\t\tif (!iter.hasNext()) {\n\t\t\t\treturn n.accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(n.accept(this));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(remove_rightassoc(fcnname,iter));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 788,
+        "methodEndingLine": 803,
+        "jml": "//@ requires iter.hasNext();"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_yices2.java",
+        "code": "\t\tprivate <T extends IExpr> String remove_leftassoc(String fcnname, int length, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tif (length == 1) {\n\t\t\t\treturn iter.next().accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(remove_leftassoc(fcnname,length-1,iter));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(iter.next().accept(this));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 807,
+        "methodEndingLine": 821,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_yices2.java",
+        "code": "\t\tprivate <T extends IAccept> String remove_chainable(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\tsb.append(\"(and \");\n\t\t\tT left = iter.next();\n\t\t\twhile (iter.hasNext()) {\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(left.accept(this));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append((left=iter.next()).accept(this));\n\t\t\t\tsb.append(\")\");\n\t\t\t}\n\t\t\tsb.append(\")\");\n\t\t\treturn sb.toString();\n\t\t}\n",
+        "methodStartingLine": 825,
+        "methodEndingLine": 840,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_z3_4_3.java",
+        "code": "\t\tprotected <T extends IExpr> void leftassoc(String fcnname, int length, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tif (length == 1) {\n\t\t\t\titer.next().accept(this);\n\t\t\t} else {\n\t\t\t\ttry {\n\t\t\t\t\tw.append(\"(\");\n\t\t\t\t\tw.append(fcnname);\n\t\t\t\t\tw.append(\" \");\n\t\t\t\t\tleftassoc(fcnname,length-1,iter);\n\t\t\t\t\tw.append(\" \");\n\t\t\t\t\titer.next().accept(this);\n\t\t\t\t\tw.append(\")\");\n\t\t\t\t} catch (IOException ex) {\n\t\t\t\t\tthrow new IVisitor.VisitorException(ex,null); // FIXME - null ?\n\t\t\t\t}\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 747,
+        "methodEndingLine": 763,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_z3_4_3.java",
+        "code": "\t\tprotected <T extends IExpr> void rightassoc(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tT n = iter.next();\n\t\t\tif (!iter.hasNext()) {\n\t\t\t\tn.accept(this);\n\t\t\t} else {\n\t\t\t\ttry {\n\t\t\t\t\tw.append(\"(\");\n\t\t\t\t\tw.append(fcnname);\n\t\t\t\t\tw.append(\" \");\n\t\t\t\t\tn.accept(this);\n\t\t\t\t\tw.append(\" \");\n\t\t\t\t\trightassoc(fcnname,iter);\n\t\t\t\t\tw.append(\")\");\n\t\t\t\t} catch (IOException ex) {\n\t\t\t\t\tthrow new IVisitor.VisitorException(ex,null); // FIXME - null ?\n\t\t\t\t}\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 766,
+        "methodEndingLine": 783,
+        "jml": "//@ requires iter.hasNext();"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_z3_4_3.java",
+        "code": "\t\tprotected <T extends IAccept> void chainable(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\ttry {\n\t\t\t\tw.append(\"(and \");\n\t\t\t\tT left = iter.next();\n\t\t\t\twhile (iter.hasNext()) {\n\t\t\t\t\tw.append(\"(\");\n\t\t\t\t\tw.append(fcnname);\n\t\t\t\t\tw.append(\" \");\n\t\t\t\t\tleft.accept(this);\n\t\t\t\t\tw.append(\" \");\n\t\t\t\t\t(left=iter.next()).accept(this);\n\t\t\t\t\tw.append(\")\");\n\t\t\t\t}\n\t\t\t\tw.append(\")\");\n\t\t\t} catch (IOException ex) {\n\t\t\t\tthrow new IVisitor.VisitorException(ex,null); // FIXME - null ?\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 788,
+        "methodEndingLine": 805,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_simplify.java",
+        "code": "\t@Override\n\tpublic IResponse pop(int number) {\n\t\tIResponse status = super.pop(number);\n\t\tif (!status.isOK()) return status;\n\t\ttry {\n\t\t\twhile (--number >= 0) { \n\t\t\t\tconjunction = pushesStack.remove(0);\n\t\t\t\tString s = solverProcess.sendAndListen(\"(BG_POP)\");\n\t\t\t\t// FIXME - check for error in s -- System.out.println(\"HEARD \" + s);\n\t\t\t}\n\t\t\treturn smtConfig.responseFactory.success();\n\t\t} catch (IOException e) {\n\t\t\treturn smtConfig.responseFactory.error(\"Failed to push\");\n\t\t}\n\t}\n",
+        "methodStartingLine": 215,
+        "methodEndingLine": 229,
+        "jml": "//@ requires number >= 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_simplify.java",
+        "code": "\t@Override\n\tpublic IResponse push(int number) {\n\t\tIResponse status = super.push(number);\n\t\tif (!status.isOK()) return status;\n\t\ttry {\n\t\t\twhile (--number >= 0) { \n\t\t\t\tpushesStack.add(0,conjunction);\n\t\t\t\tString s = solverProcess.sendAndListen(\"(BG_PUSH (EQ 0 0))\");\n\t\t\t\t// FIXME - check for error in s -- System.out.println(\"HEARD \" + s);\n\t\t\t}\n\t\t\treturn smtConfig.responseFactory.success();\n\t\t} catch (IOException e) {\n\t\t\treturn smtConfig.responseFactory.error(\"Failed to push\");\n\t\t}\n\t}\n",
+        "methodStartingLine": 232,
+        "methodEndingLine": 246,
+        "jml": "//@ requires number >= 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_simplify.java",
+        "code": "\t\tprivate <T extends IExpr> String rightassoc(String fcnname, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tT n = iter.next();\n\t\t\tif (!iter.hasNext()) {\n\t\t\t\treturn n.accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(n.accept(this));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(rightassoc(fcnname,iter));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 660,
+        "methodEndingLine": 675,
+        "jml": "//@ requires iter.hasNext();"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.SMT/src/org/smtlib/solvers/Solver_simplify.java",
+        "code": "\t\tprivate <T extends IExpr> String leftassoc(String fcnname, int length, Iterator<T> iter ) throws IVisitor.VisitorException {\n\t\t\tif (length == 1) {\n\t\t\t\treturn iter.next().accept(this);\n\t\t\t} else {\n\t\t\t\tStringBuilder sb = new StringBuilder();\n\t\t\t\tsb.append(\"(\");\n\t\t\t\tsb.append(fcnname);\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(leftassoc(fcnname,length-1,iter));\n\t\t\t\tsb.append(\" \");\n\t\t\t\tsb.append(iter.next().accept(this));\n\t\t\t\tsb.append(\")\");\n\t\t\t\treturn sb.toString();\n\t\t\t}\n\t\t}\n",
+        "methodStartingLine": 679,
+        "methodEndingLine": 693,
+        "jml": "//@ requires iter.hasNext();\n//@ requires length > 0;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Preferences.java",
+        "code": "\tpublic void setDefaults(PreferenceWidget[] ws) {\n\t\tfor (int i = 0; i<ws.length; ++i) {\n\t\t\tws[i].setDefault();\n\t\t}\n\t}\n",
+        "methodStartingLine": 403,
+        "methodEndingLine": 407,
+        "jml": "//@ requires ws != null;\n//@ requires \\nonnullelements(ws);"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Preferences.java",
+        "code": "\tpublic void setOptionValue(PreferenceWidget[] ws) {\n\t\tfor (int i=0; i<ws.length; ++i) {\n\t\t\tws[i].setOptionValue();\n\t\t}\n\t}\n",
+        "methodStartingLine": 416,
+        "methodEndingLine": 420,
+        "jml": "//@ requires ws != null;\n//@ requires \\nonnullelements(ws);"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Preferences.java",
+        "code": "\tpublic void addWidgets(PreferenceWidget[] ws, Composite composite) {\n\t\taddWidgets(ws,0,ws.length,composite);\n\t}\n",
+        "methodStartingLine": 446,
+        "methodEndingLine": 448,
+        "jml": "//@ requires ws != null && composite != null;\n//@ requires \\nonnullelements(ws);"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/Preferences.java",
+        "code": "\tpublic void addWidgets(PreferenceWidget[] ws, int offset, int num, Composite composite) {\n\t\tfor (int i=0; i<num; ++i) {\n\t\t\tws[offset+i].addWidget(composite);\n\t\t}\n\t}\n",
+        "methodStartingLine": 462,
+        "methodEndingLine": 466,
+        "jml": "//@ requires ws != null && composite != null;\n//@ requires offset >= 0 && offset < ws.length;\n//@ requires num >= 0 && offset + num < ws.length;\n//@ requires \\nonnullelements(ws);"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/ConsoleLogger.java",
+        "code": "\tpublic MessageConsoleStream getConsoleStream() {\n\t\tif (stream == null) {\n\t\t\t/*@Mutable*/ MessageConsole console = null;\n\t\t\tIConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();\n\t\t\t/*@Mutable*/ IConsole[] existing = consoleManager.getConsoles();\n\t\t\tfor (int i=0; i<existing.length; ++i) {\n\t\t\t\tif (existing[i].getName().equals(consoleName)) {\n\t\t\t\t\tconsole = (/*@Mutable*/ MessageConsole)existing[i];\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (console == null) {\n\t\t\t\tconsole = new MessageConsole(consoleName,null);\n\t\t\t\tconsoleManager.addConsoles(new IConsole[]{console});\n\t\t\t}\n\t\t\tstream = console.newMessageStream();\n\t\t}\n\t\treturn stream;\n\t}\n",
+        "methodStartingLine": 83,
+        "methodEndingLine": 101,
+        "jml": "//@ requires consoleName != null;\n//@ requires Activator.plugin != null;\n//@ ensures \\result.consoleName == consoleName;\n//@ ensures \\result != null;\n//@ ensures \\result == stream;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/ConsoleLogger.java",
+        "code": "\t@Override\n\tpublic void log(String msg) {\n\t\tgetConsoleStream().print(msg);\n\t}\n",
+        "methodStartingLine": 114,
+        "methodEndingLine": 117,
+        "jml": "//@ requires msg != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/ConsoleLogger.java",
+        "code": "\t@Override\n\tpublic void logln(String msg) {\n\t\tgetConsoleStream().println(msg);\n\t}\n",
+        "methodStartingLine": 125,
+        "methodEndingLine": 128,
+        "jml": "//@ requires msg != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/ConsoleLogger.java",
+        "code": "\tpublic PrintStream stream() {\n\t\tif (printStream == null) printStream = new PrintStream(getConsoleStream());\n\t\treturn printStream;\n\t}\n",
+        "methodStartingLine": 168,
+        "methodEndingLine": 171,
+        "jml": "//@ ensures \\result != null;\n//@ ensures \\result == printStream;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/ContextAction.java",
+        "code": "    @Override\n\tpublic void setActivePart(IAction action, IWorkbenchPart targetPart) {\n\t\tshell = targetPart.getSite().getShell();\n\t}\n",
+        "methodStartingLine": 38,
+        "methodEndingLine": 41,
+        "jml": "//@ ensures this.shell != null;"
+    },
+    {
+        "repository": "github.com/lip6/ITSTools",
+        "file": "smt/lip6.smtlib.plugin.SMTPlugin/src/org/smtlib/plugin/ContextAction.java",
+        "code": "    @Override\n\tpublic void selectionChanged(IAction action, ISelection selection) {\n        this.selection = selection;\n\t}\n",
+        "methodStartingLine": 53,
+        "methodEndingLine": 56,
+        "jml": "//@ ensures this.selection != null;"
+    }
+]

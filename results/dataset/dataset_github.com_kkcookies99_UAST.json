@@ -1,0 +1,506 @@
+[
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2157.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2157.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2157.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2187.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2187.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2187.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2217.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2217.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2217.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2247.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2247.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2247.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2277.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2277.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2277.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2307.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2307.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2307.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2337.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2337.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2337.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2367.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2367.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2367.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2397.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2397.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2397.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2427.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2427.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2427.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2457.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2457.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2457.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2487.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2487.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2487.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2517.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2517.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/train/quicksort/java/2517.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1917.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1917.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1917.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1947.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1947.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1947.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1977.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1977.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/1977.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/2007.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/2007.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/valid/quicksort/java/2007.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2037.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2037.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2037.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2067.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2067.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2067.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2097.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2097.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2097.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2127.java",
+        "code": "    private static void quicksort(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        if (stop - start > 1) {\n            int p = pivot(a, start, stop, ulimit, llimit);\n            quicksort(a, start, p, a[p], llimit);\n            quicksort(a, p+1, stop, ulimit, a[p]);\n        }\n    }\n",
+        "methodStartingLine": 24,
+        "methodEndingLine": 31,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures a != null;\n//@ ensures start >= 0 && stop <= a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2127.java",
+        "code": "    private static int pivot(int[] a, int start, int stop, int ulimit, int llimit)\n    {\n        int p = partition(a, a[start], start+1, stop, ulimit, llimit);\n        if (start < p)\n            swap(a, start, p);\n        return p;\n    }\n",
+        "methodStartingLine": 41,
+        "methodEndingLine": 47,
+        "jml": "//@ requires a != null;\n//@ requires start < stop;\n//@ requires start >= 0;\n//@ requires stop <= a.length;\n//@ ensures \\result >= 0 && \\result < a.length;"
+    },
+    {
+        "repository": "github.com/kkcookies99/UAST",
+        "file": "Dataset/JC/test/quicksort/java/2127.java",
+        "code": "    private static int partition(int[] a, int pivot, int start, int stop, int ulimit, int llimit)\n    {\n        if (start >= stop) \n            return start - 1;\n        if (a[start] < pivot)\n            return partition(a, pivot, start + 1, stop, ulimit, llimit);\n        if (a[--stop] > pivot)\n            return partition(a, pivot, start, stop, ulimit, llimit);\n        if (start < stop) {\n            swap(a, start, stop);\n            return partition(a, pivot, start+1, stop, ulimit, llimit);\n        } else\n            return start;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 69,
+        "jml": "//@ requires a != null;\n//@ requires start >= 0 && start <= a.length;\n//@ requires stop >= 0 && stop <= a.length;\n//@ ensures (\\result >= 0 && \\result < a.length) || \\result == start -1;"
+    }
+]

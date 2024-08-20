@@ -1,0 +1,706 @@
+[
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1705,
+        "methodEndingLine": 1713,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ int[] array, /*@non_null@*/  int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1728,
+        "methodEndingLine": 1736,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1751,
+        "methodEndingLine": 1764,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ int[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1779,
+        "methodEndingLine": 1792,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "    public QueueNode next(QueueNode next) {\n      return m_Next = next;\n    } //@ nowarn Invariant; // Because it stupidly checks the Queue invariant!\n",
+        "methodStartingLine": 108,
+        "methodEndingLine": 110,
+        "jml": "//@ requires contents != null;\n//@ ensures m_Contents == contents;\n//@ ensures m_Next == null;\n//@ requires next != this ;\n//@ ensures m_Next==next && \\result==next;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "    public /*@ pure @*/ QueueNode next() {\n      return m_Next;\n    }\n",
+        "methodStartingLine": 116,
+        "methodEndingLine": 118,
+        "jml": "//@ ensures \\result == m_Next;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "    public Object contents(Object contents) {\n      return m_Contents = contents;\n    }\n",
+        "methodStartingLine": 126,
+        "methodEndingLine": 128,
+        "jml": "//@ requires contents != null;\n//@ ensures  m_Contents == contents && \\result == contents;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "    public /*@ pure @*/ Object contents() {\n      return m_Contents;\n    }\n",
+        "methodStartingLine": 134,
+        "methodEndingLine": 136,
+        "jml": "//@ ensures \\result == m_Contents;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public final synchronized void removeAllElements() {\n    m_Size = 0;\n    m_Head = null;\n    m_Tail = null;\n  }\n",
+        "methodStartingLine": 165,
+        "methodEndingLine": 169,
+        "jml": "//@ ensures m_Size == 0;\n//@ ensures m_Head == null;\n//@ ensures m_Tail == null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public synchronized Object push(Object item) {\n    QueueNode newNode = new QueueNode(item);\n    \n    if (m_Head == null) {\n      m_Head = m_Tail = newNode;\n    } else {\n      m_Tail = m_Tail.next(newNode);\n    }\n    m_Size++;\n    return item;\n  }\n",
+        "methodStartingLine": 186,
+        "methodEndingLine": 196,
+        "jml": "//@ requires item != null;\n//@ ensures m_Head != null;\n//@ ensures m_Tail != \\old(m_Tail);\n//@ ensures m_Size == \\old(m_Size) + 1;\n//@ ensures \\old(m_Size) == 0 ==> m_Head == m_Tail; \n//@ ensures \\old(m_Size) != 0 ==> m_Head == \\old(m_Head);\n//@ ensures m_Tail.contents() == \\old(item);\n//@ ensures \\result == item;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public synchronized Object pop() \n      throws RuntimeException   // REDUNDANT, BUT ESCJAVA REQUIRES THIS\n  {\n    if (m_Head == null) {\n\tthrow new RuntimeException(\"Queue is empty\");\n    }\n    Object retval = m_Head.contents();\n    m_Size--;\n    m_Head = m_Head.next();\n    // Here we need to either tell ESC/Java some facts about\n    // the contents of the list after popping off the head,\n    // or turn off the 'invariant' warnings.\n    //\n    //@ assume m_Size == 0 <==> m_Head == null;\n    //@ assume m_Size == 1 <==> m_Head == m_Tail;\n    if (m_Head == null) {\n      m_Tail = null;\n    }\n    return retval;\n  }\n",
+        "methodStartingLine": 210,
+        "methodEndingLine": 229,
+        "jml": "//@ ensures m_Size == \\old(m_Size) - 1;\n//@ ensures m_Head == \\old(m_Head.m_Next);\n//@ ensures m_Head != null ==> m_Tail == \\old(m_Tail);\n//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public /*@ pure @*/ synchronized Object peek() \n    throws RuntimeException\n  { \n    if (m_Head == null) {\n      throw new RuntimeException(\"Queue is empty\");\n    }\n    return m_Head.contents();\n  }\n",
+        "methodStartingLine": 239,
+        "methodEndingLine": 246,
+        "jml": "//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public /*@ pure @*/ boolean empty() {\n    return m_Head == null;\n  }\n",
+        "methodStartingLine": 254,
+        "methodEndingLine": 256,
+        "jml": "//@ ensures \\result <==> m_Head == null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public /*@ pure @*/ int size() {\n    return m_Size;\n  }\n",
+        "methodStartingLine": 264,
+        "methodEndingLine": 266,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public  /*@ pure @*/ String toString() {\n\n    String retval = \"Queue Contents \"+m_Size+\" elements\\n\";\n    QueueNode current = m_Head;\n    if (current == null) {\n      return retval + \"Empty\\n\";\n    } else {\n      while (current != null) {\n        retval += current.contents().toString()+\"\\n\"; //@nowarn Modifies;\n\tcurrent = current.next();\n      }\n    }\n    return retval;\n  } //@ nowarn Post;\n",
+        "methodStartingLine": 276,
+        "methodEndingLine": 289,
+        "jml": "//@ ensures \\result != null;\n//@ ensures (* \\result == textual description of the queue *);"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Queue.java",
+        "code": "  public static void main(String [] argv) {\n\n    try {\n      Queue queue = new Queue();\n      for(int i = 0; i < argv.length; i++) {\n\tqueue.push(argv[i]);\n      }\n      System.out.println(\"After pushing command line arguments\");\n      System.out.println(queue.toString());\n      while (!queue.empty()) {\n\tSystem.out.println(\"Pop: \" + queue.pop().toString());\n      }\n      // try one more pop, to make sure we get an exception\n      try \n\t{\n\t  queue.pop();\n\t  System.out.println(\"ERROR: pop did not throw exception!\");\n\t}\n      catch (RuntimeException ex)\n        {\n\t  System.out.println(\"Pop on empty queue correctly gave exception.\");\n\t}\n    } catch (Exception ex) {\n      System.out.println(ex.getMessage());\n    }\n  }\n",
+        "methodStartingLine": 299,
+        "methodEndingLine": 324,
+        "jml": "//@ requires argv.length >= 0;\n//@ requires argv != null;\n//@ requires (\\forall int i; 0 <= i && i < argv.length; argv[i] != null);"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "    public final /*@pure@*/ boolean hasMoreElements() {\n\n      if (m_Counter < m_Vector.size()) {\n\treturn true;\n      }\n      return false;\n    }\n",
+        "methodStartingLine": 129,
+        "methodEndingLine": 135,
+        "jml": "//@ requires 0 <= special && special < vector.size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final void addElement(Object element) {\n\n    Object[] newObjects;\n\n    if (m_Size == m_Objects.length) {\n      newObjects = new Object[m_CapacityMultiplier *\n\t\t\t     (m_Objects.length +\n\t\t\t      m_CapacityIncrement)];\n      System.arraycopy(m_Objects, 0, newObjects, 0, m_Size);\n      m_Objects = newObjects;\n    }\n    m_Objects[m_Size] = element;\n    m_Size++;\n  }\n",
+        "methodStartingLine": 202,
+        "methodEndingLine": 215,
+        "jml": "//@ requires capacity >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int capacity() {\n  \n    return m_Objects.length;\n  }\n",
+        "methodStartingLine": 223,
+        "methodEndingLine": 226,
+        "jml": "//@ ensures \\result == m_Objects.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object elementAt(int index) {\n\n    return m_Objects[index];\n  }\n",
+        "methodStartingLine": 271,
+        "methodEndingLine": 274,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < m_Objects.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Enumeration elements(int index) {\n  \n    return new FastVectorEnumeration(this, index);\n  }\n",
+        "methodStartingLine": 294,
+        "methodEndingLine": 297,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object firstElement() {\n\n    return m_Objects[0];\n  }\n",
+        "methodStartingLine": 320,
+        "methodEndingLine": 323,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object lastElement() {\n\n    return m_Objects[m_Size - 1];\n  }\n",
+        "methodStartingLine": 376,
+        "methodEndingLine": 379,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final void removeElementAt(int index) {\n\n    System.arraycopy(m_Objects, index + 1, m_Objects, index, \n                     m_Size - index - 1);\n    m_Size--;\n  }\n",
+        "methodStartingLine": 387,
+        "methodEndingLine": 392,
+        "jml": "//@ requires 0 <= index && index < m_Size;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final void setElementAt(Object element, int index) {\n\n    m_Objects[index] = element;\n  }\n",
+        "methodStartingLine": 450,
+        "methodEndingLine": 453,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int size() {\n\n    return m_Size;\n  }\n",
+        "methodStartingLine": 461,
+        "methodEndingLine": 464,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/FastVector.java",
+        "code": "  public final void swap(int first, int second) {\n\n    Object help = m_Objects[first];\n\n    m_Objects[first] = m_Objects[second];\n    m_Objects[second] = help;\n  }\n",
+        "methodStartingLine": 474,
+        "methodEndingLine": 480,
+        "jml": "//@ requires 0 <= first && first < size();\n//@ requires 0 <= second && second < size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1702,
+        "methodEndingLine": 1710,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ int[] array, /*@non_null@*/  int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1725,
+        "methodEndingLine": 1733,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1748,
+        "methodEndingLine": 1761,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ int[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1776,
+        "methodEndingLine": 1789,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "    public final /*@pure@*/ boolean hasMoreElements() {\n\n      if (m_Counter < m_Vector.size()) {\n\treturn true;\n      }\n      return false;\n    }\n",
+        "methodStartingLine": 129,
+        "methodEndingLine": 135,
+        "jml": "//@ requires 0 <= special && special < vector.size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final void addElement(Object element) {\n\n    Object[] newObjects;\n\n    if (m_Size == m_Objects.length) {\n      newObjects = new Object[m_CapacityMultiplier *\n\t\t\t     (m_Objects.length +\n\t\t\t      m_CapacityIncrement)];\n      System.arraycopy(m_Objects, 0, newObjects, 0, m_Size);\n      m_Objects = newObjects;\n    }\n    m_Objects[m_Size] = element;\n    m_Size++;\n  }\n",
+        "methodStartingLine": 202,
+        "methodEndingLine": 215,
+        "jml": "//@ requires capacity >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int capacity() {\n  \n    return m_Objects.length;\n  }\n",
+        "methodStartingLine": 223,
+        "methodEndingLine": 226,
+        "jml": "//@ ensures \\result == m_Objects.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object elementAt(int index) {\n\n    return m_Objects[index];\n  }\n",
+        "methodStartingLine": 271,
+        "methodEndingLine": 274,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < m_Objects.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Enumeration elements(int index) {\n  \n    return new FastVectorEnumeration(this, index);\n  }\n",
+        "methodStartingLine": 294,
+        "methodEndingLine": 297,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object firstElement() {\n\n    return m_Objects[0];\n  }\n",
+        "methodStartingLine": 320,
+        "methodEndingLine": 323,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object lastElement() {\n\n    return m_Objects[m_Size - 1];\n  }\n",
+        "methodStartingLine": 376,
+        "methodEndingLine": 379,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final void removeElementAt(int index) {\n\n    System.arraycopy(m_Objects, index + 1, m_Objects, index, \n                     m_Size - index - 1);\n    m_Size--;\n  }\n",
+        "methodStartingLine": 387,
+        "methodEndingLine": 392,
+        "jml": "//@ requires 0 <= index && index < m_Size;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final void setElementAt(Object element, int index) {\n\n    m_Objects[index] = element;\n  }\n",
+        "methodStartingLine": 450,
+        "methodEndingLine": 453,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int size() {\n\n    return m_Size;\n  }\n",
+        "methodStartingLine": 461,
+        "methodEndingLine": 464,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/Statistical_Classifiers/Logistic/core/FastVector.java",
+        "code": "  public final void swap(int first, int second) {\n\n    Object help = m_Objects[first];\n\n    m_Objects[first] = m_Objects[second];\n    m_Objects[second] = help;\n  }\n",
+        "methodStartingLine": 474,
+        "methodEndingLine": 480,
+        "jml": "//@ requires 0 <= first && first < size();\n//@ requires 0 <= second && second < size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ Attribute attribute(int index) {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\treturn Attributes.getAttribute(index);\n\t}\n",
+        "methodStartingLine": 182,
+        "methodEndingLine": 188,
+        "jml": "//@ ensures m_Dataset == null;\n//@ ensures m_Dataset == null;\n//@ requires numAttributes > 0;    // Or maybe == 0 is okay too?\n//@ ensures m_Dataset == null;\n//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ Attribute attributeSparse(int indexOfIndex) {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\treturn m_Dataset.attribute(indexOfIndex);\n\t}\n",
+        "methodStartingLine": 200,
+        "methodEndingLine": 206,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ Attribute classAttribute() {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\treturn m_Dataset.classAttribute();\n\t}\n",
+        "methodStartingLine": 216,
+        "methodEndingLine": 222,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ int classIndex() {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\treturn m_Dataset.classIndex();\n\t}\n",
+        "methodStartingLine": 232,
+        "methodEndingLine": 238,
+        "jml": "//@ requires m_Dataset != null;\n//@ ensures  \\result == m_Dataset.classIndex();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ boolean classIsMissing() {\n\n\t\tif (classIndex() < 0) {\n\t\t\tthrow new UnassignedClassException(\"Class is not set!\");\n\t\t}\n\t\treturn isMissing(classIndex());\n\t}\n",
+        "methodStartingLine": 248,
+        "methodEndingLine": 254,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ double classValue() {\n\n\t\tif (classIndex() < 0) {\n\t\t\tthrow new UnassignedClassException(\"Class is not set!\");\n\t\t}\n\t\treturn value(classIndex());\n\t}\n",
+        "methodStartingLine": 267,
+        "methodEndingLine": 273,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ Instances dataset() {\n\n\t\treturn m_Dataset;\n\t}\n",
+        "methodStartingLine": 301,
+        "methodEndingLine": 304,
+        "jml": "//@ ensures \\result == m_Dataset;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic void deleteAttributeAt(int position) {\n\n\t\tif (m_Dataset != null) {\n\t\t\tthrow new RuntimeException(\"Instance has access to a dataset!\");\n\t\t}\n\t\tforceDeleteAttributeAt(position);\n\t}\n",
+        "methodStartingLine": 317,
+        "methodEndingLine": 323,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ Enumeration enumerateAttributes() {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\treturn m_Dataset.enumerateAttributes();\n\t}\n",
+        "methodStartingLine": 333,
+        "methodEndingLine": 339,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ boolean equalHeaders(Instance inst) {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\treturn m_Dataset.equalHeaders(inst.m_Dataset);\n\t}\n",
+        "methodStartingLine": 351,
+        "methodEndingLine": 357,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ boolean hasMissingValue() {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\tfor (int i = 0; i < numAttributes(); i++) {\n\t\t\tif (i != classIndex()) {\n\t\t\t\tif (isMissing(i)) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "methodStartingLine": 366,
+        "methodEndingLine": 379,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic void insertAttributeAt(int position) {\n\n\t\tif (m_Dataset != null) {\n\t\t\tthrow new RuntimeException(\"Instance has accesss to a dataset!\");\n\t\t}\n\t\tif ((position < 0) ||\n\t\t\t\t(position > numAttributes())) {\n\t\t\tthrow new IllegalArgumentException(\"Can't insert attribute: index out \"+\n\t\t\t\"of range\");\n\t\t}\n\t\tforceInsertAttributeAt(position);\n\t}\n",
+        "methodStartingLine": 406,
+        "methodEndingLine": 417,
+        "jml": "//@ requires m_Dataset == null;\n//@ requires 0 <= position && position <= numAttributes();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ int numAttributes() {\n\n\t\treturn m_AttValues.length;\n\t}\n",
+        "methodStartingLine": 511,
+        "methodEndingLine": 514,
+        "jml": "//@ ensures \\result == m_AttValues.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ int numClasses() {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\treturn m_Dataset.numClasses();\n\t}\n",
+        "methodStartingLine": 525,
+        "methodEndingLine": 531,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic /*@pure@*/ int numValues() {\n\n\t\treturn m_AttValues.length;\n\t}\n",
+        "methodStartingLine": 539,
+        "methodEndingLine": 542,
+        "jml": "//@ ensures \\result == m_AttValues.length;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic void setClassMissing() {\n\n\t\tif (classIndex() < 0) {\n\t\t\tthrow new UnassignedClassException(\"Class is not set!\");\n\t\t}\n\t\tsetMissing(classIndex());\n\t}\n",
+        "methodStartingLine": 577,
+        "methodEndingLine": 583,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic void setClassValue(double value) {\n\n\t\tif (classIndex() < 0) {\n\t\t\tthrow new UnassignedClassException(\"Class is not set!\");\n\t\t}\n\t\tsetValue(classIndex(), value);\n\t}\n",
+        "methodStartingLine": 598,
+        "methodEndingLine": 604,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic final void setClassValue(String value) {\n\n\t\tif (classIndex() < 0) {\n\t\t\tthrow new UnassignedClassException(\"Class is not set!\");\n\t\t}\n\t\tsetValue(classIndex(), value);\n\t}\n",
+        "methodStartingLine": 621,
+        "methodEndingLine": 627,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic final void setValue(int attIndex, String value) {\n\t\tAttribute a = Attributes.getAttribute(attIndex);\n\t\tint valIndex;\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t}\n\t\tif (!(a.getType()==Attribute.NOMINAL)) {\n\t\t\tthrow new IllegalArgumentException(\"Attribute neither nominal nor string!\");\n\t\t}\n//\t\tvalIndex = attribute(attIndex).indexOfValue(value);\n//\t\tif (valIndex == -1) {\n//\t\t\tif (a.getType()==Attribute.NOMINAL) {\n//\t\t\t\tthrow new IllegalArgumentException(\"Value not defined for given nominal attribute!\");\n//\t\t\t} else {\n//\t\t\t\tattribute(attIndex).forceAddValue(value);\n//\t\t\t\tvalIndex = attribute(attIndex).indexOfValue(value);\n//\t\t\t}\n//\t\t}\n\t\tvalIndex = -1;\n\t\tfor(int i=0;i<a.getNumNominalValues();i++)\n\t\t\tif(a.getNominalValue(i).compareTo(value)==0)\n\t\t\t\tvalIndex = i;\n\t\tsetValue(attIndex, (double)valIndex); \n\t}\n",
+        "methodStartingLine": 718,
+        "methodEndingLine": 742,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instance.java",
+        "code": "\tpublic final /*@pure@*/ String stringValue(int attIndex) {\n\n\t\tif (m_Dataset == null) {\n\t\t\tthrow new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n\t\t} \n\t\treturn stringValue(m_Dataset.attribute(attIndex));\n\t}\n",
+        "methodStartingLine": 858,
+        "methodEndingLine": 864,
+        "jml": "//@ requires m_Dataset != null;\n//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tprotected void initialize(Instances dataset, int capacity) {\n\t\tif (capacity < 0)\n\t\t\tcapacity = 0;\n\n\t\t// Strings only have to be \"shallow\" copied because\n\t\t// they can't be modified.\n\t\tm_ClassIndex   = dataset.m_ClassIndex;\n\t\tm_RelationName = dataset.m_RelationName;\n\t\tm_Attributes   = dataset.m_Attributes;\n\t\tm_Instances    = new FastVector(capacity);\n\t}\n",
+        "methodStartingLine": 216,
+        "methodEndingLine": 226,
+        "jml": "//@ requires capacity >= 0;\n//@ ensures classIndex() == -1;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic void add(/*@non_null@*/ Instance instance) {\n\n\t\tInstance newInstance = (Instance)instance.copy();\n\n\t\tnewInstance.setDataset(this);\n\t\tm_Instances.addElement(newInstance);\n\t}\n",
+        "methodStartingLine": 306,
+        "methodEndingLine": 312,
+        "jml": "//@ requires 0 <= first;\n//@ requires 0 <= toCopy;\n//@ requires first + toCopy <= source.numInstances();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ Attribute attribute(int index) {\n\n\t\treturn (Attribute) m_Attributes.elementAt(index);\n\t}\n",
+        "methodStartingLine": 323,
+        "methodEndingLine": 326,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < m_Attributes.size();\n//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ Attribute classAttribute() {\n\n\t\tif (m_ClassIndex < 0) {\n\t\t\tthrow new UnassignedClassException(\"Class index is negative (not set)!\");\n\t\t}\n\t\treturn attribute(m_ClassIndex);\n\t}\n",
+        "methodStartingLine": 412,
+        "methodEndingLine": 418,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic void delete(int index) {\n\n\t\tm_Instances.removeElementAt(index);\n\t}\n",
+        "methodStartingLine": 455,
+        "methodEndingLine": 458,
+        "jml": "//@ requires 0 <= index && index < numInstances();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic void deleteAttributeAt(int position) {\n\n\t\tif ((position < 0) || (position >= m_Attributes.size())) {\n\t\t\tthrow new IllegalArgumentException(\"Index out of range\");\n\t\t}\n\t\tif (position == m_ClassIndex) {\n\t\t\tthrow new IllegalArgumentException(\"Can't delete class attribute\");\n\t\t}\n\t\tfreshAttributeInfo();\n\t\tif (m_ClassIndex > position) {\n\t\t\tm_ClassIndex--;\n\t\t}\n\t\tm_Attributes.removeElementAt(position);\n\t\tfor (int i = position; i < m_Attributes.size(); i++) {\n\t\t\tAttribute current = (Attribute)m_Attributes.elementAt(i);\n//\t\t\tcurrent.setIndex(current.index() - 1);\n\t\t}\n\t\tfor (int i = 0; i < numInstances(); i++) {\n\t\t\tinstance(i).forceDeleteAttributeAt(position); \n\t\t}\n\t}\n",
+        "methodStartingLine": 471,
+        "methodEndingLine": 491,
+        "jml": "//@ requires 0 <= position && position < numAttributes();\n//@ requires position != classIndex();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic void deleteWithMissing(int attIndex) {\n\n\t\tFastVector newInstances = new FastVector(numInstances());\n\n\t\tfor (int i = 0; i < numInstances(); i++) {\n\t\t\tif (!instance(i).isMissing(attIndex)) {\n\t\t\t\tnewInstances.addElement(instance(i));\n\t\t\t}\n\t\t}\n\t\tm_Instances = newInstances;\n\t}\n",
+        "methodStartingLine": 531,
+        "methodEndingLine": 541,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@non_null pure@*/ Instance firstInstance() {\n\n\t\treturn (Instance)m_Instances.firstElement();\n\t}\n",
+        "methodStartingLine": 618,
+        "methodEndingLine": 621,
+        "jml": "//@ requires numInstances() > 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic void insertAttributeAt(/*@non_null@*/ Attribute att, int position) {\n\n\t\tif ((position < 0) ||\n\t\t\t\t(position > m_Attributes.size())) {\n\t\t\tthrow new IllegalArgumentException(\"Index out of range\");\n\t\t}\n\t\tfreshAttributeInfo();\n//\t\tatt.setIndex(position);\n\t\tm_Attributes.insertElementAt(att, position);\n\t\tfor (int i = position + 1; i < m_Attributes.size(); i++) {\n\t\t\tAttribute current = (Attribute)m_Attributes.elementAt(i);\n//\t\t\tcurrent.setIndex(indexOf(current) + 1);\n\t\t}\n\t\tfor (int i = 0; i < numInstances(); i++) {\n\t\t\tinstance(i).forceInsertAttributeAt(position);\n\t\t}\n\t\tif (m_ClassIndex >= position) {\n\t\t\tm_ClassIndex++;\n\t\t}\n\t}\n",
+        "methodStartingLine": 651,
+        "methodEndingLine": 670,
+        "jml": "//@ requires 0 <= position;\n//@ requires position <= numAttributes();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@non_null pure@*/ Instance instance(int index) {\n\n\t\treturn (Instance)m_Instances.elementAt(index);\n\t}\n",
+        "methodStartingLine": 680,
+        "methodEndingLine": 683,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < numInstances();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@non_null pure@*/ Instance lastInstance() {\n\n\t\treturn (Instance)m_Instances.lastElement();\n\t}\n",
+        "methodStartingLine": 744,
+        "methodEndingLine": 747,
+        "jml": "//@ requires numInstances() > 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ int numAttributes() {\n\n\t\treturn m_Attributes.size();\n\t}\n",
+        "methodStartingLine": 807,
+        "methodEndingLine": 810,
+        "jml": "//@ ensures \\result == m_Attributes.size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ int numClasses() {\n\n\t\tif (m_ClassIndex < 0) {\n\t\t\tthrow new UnassignedClassException(\"Class index is negative (not set)!\");\n\t\t}\n\t\tif (!(classAttribute().getType()==Attribute.NOMINAL)) {\n\t\t\treturn 1;\n\t\t} else {\n\t\t\treturn classAttribute().getNumNominalValues();\n\t\t}\n\t}\n",
+        "methodStartingLine": 820,
+        "methodEndingLine": 830,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ int numDistinctValues(int attIndex) {\n\n\t\tif (!(attribute(attIndex).getType()==Attribute.NOMINAL)) {\n\t\t\tdouble [] attVals = attributeToDoubleArray(attIndex);\n\t\t\tint [] sorted = Utils.sort(attVals);\n\t\t\tdouble prev = 0;\n\t\t\tint counter = 0;\n\t\t\tfor (int i = 0; i < sorted.length; i++) {\n\t\t\t\tInstance current = instance(sorted[i]);\n\t\t\t\tif (current.isMissing(attIndex)) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tif ((i == 0) || \n\t\t\t\t\t\t(current.value(attIndex) > prev)) {\n\t\t\t\t\tprev = current.value(attIndex);\n\t\t\t\t\tcounter++;\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn counter;\n\t\t} else {\n\t\t\treturn attribute(attIndex).getNumNominalValues();\n\t\t}\n\t}\n",
+        "methodStartingLine": 842,
+        "methodEndingLine": 864,
+        "jml": "//@ requires 0 <= attIndex;\n//@ requires attIndex < numAttributes();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ int numInstances() {\n\n\t\treturn m_Instances.size();\n\t}\n",
+        "methodStartingLine": 885,
+        "methodEndingLine": 888,
+        "jml": "//@ ensures \\result == m_Instances.size();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ String relationName() {\n\n\t\treturn m_RelationName;\n\t}\n",
+        "methodStartingLine": 949,
+        "methodEndingLine": 952,
+        "jml": "//@ ensures \\result == m_RelationName;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic Instances testCV(int numFolds, int numFold) {\n\n\t\tint numInstForFold, first, offset;\n\t\tInstances test;\n\n\t\tif (numFolds < 2) {\n\t\t\tthrow new IllegalArgumentException(\"Number of folds must be at least 2!\");\n\t\t}\n\t\tif (numFolds > numInstances()) {\n\t\t\tthrow new IllegalArgumentException(\"Can't have more folds than instances!\");\n\t\t}\n\t\tnumInstForFold = numInstances() / numFolds;\n\t\tif (numFold < numInstances() % numFolds){\n\t\t\tnumInstForFold++;\n\t\t\toffset = numFold;\n\t\t}else\n\t\t\toffset = numInstances() % numFolds;\n\t\ttest = new Instances(this, numInstForFold);\n\t\tfirst = numFold * (numInstances() / numFolds) + offset;\n\t\tcopyInstances(first, test, numInstForFold);\n\t\treturn test;\n\t}\n",
+        "methodStartingLine": 1260,
+        "methodEndingLine": 1281,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic Instances trainCV(int numFolds, int numFold) {\n\n\t\tint numInstForFold, first, offset;\n\t\tInstances train;\n\n\t\tif (numFolds < 2) {\n\t\t\tthrow new IllegalArgumentException(\"Number of folds must be at least 2!\");\n\t\t}\n\t\tif (numFolds > numInstances()) {\n\t\t\tthrow new IllegalArgumentException(\"Can't have more folds than instances!\");\n\t\t}\n\t\tnumInstForFold = numInstances() / numFolds;\n\t\tif (numFold < numInstances() % numFolds) {\n\t\t\tnumInstForFold++;\n\t\t\toffset = numFold;\n\t\t}else\n\t\t\toffset = numInstances() % numFolds;\n\t\ttrain = new Instances(this, numInstances() - numInstForFold);\n\t\tfirst = numFold * (numInstances() / numFolds) + offset;\n\t\tcopyInstances(0, train, first);\n\t\tcopyInstances(first + numInstForFold, train,\n\t\t\t\tnumInstances() - first - numInstForFold);\n\n\t\treturn train;\n\t}\n",
+        "methodStartingLine": 1338,
+        "methodEndingLine": 1362,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic Instances trainCV(int numFolds, int numFold, Random random) {\n\n\t\tInstances train = trainCV(numFolds, numFold);\n\t\ttrain.randomize(random);\n\t\treturn train;\n\t}\n",
+        "methodStartingLine": 1379,
+        "methodEndingLine": 1384,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic /*@pure@*/ double [] attributeToDoubleArray(int index) {\n\n\t\tdouble [] result = new double[numInstances()];\n\t\tfor (int i = 0; i < result.length; i++) {\n\t\t\tresult[i] = instance(i).value(index);\n\t\t}\n\t\treturn result;\n\t}\n",
+        "methodStartingLine": 1489,
+        "methodEndingLine": 1496,
+        "jml": "//@ requires 0 <= index && index < numAttributes();\n//@ requires 0 <= index && index < numAttributes();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tprotected void copyInstances(int from, /*@non_null@*/ Instances dest, int num) {\n\n\t\tfor (int i = 0; i < num; i++) {\n\t\t\tdest.add(instance(from + i));\n\t\t}\n\t}\n",
+        "methodStartingLine": 1597,
+        "methodEndingLine": 1602,
+        "jml": "//@ requires 0 <= from && from <= numInstances() - num;\n//@ requires 0 <= num;"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tprotected int partition(int attIndex, int l, int r) {\n\n\t\tdouble pivot = instance((l + r) / 2).value(attIndex);\n\n\t\twhile (l < r) {\n\t\t\twhile ((instance(l).value(attIndex) < pivot) && (l < r)) {\n\t\t\t\tl++;\n\t\t\t}\n\t\t\twhile ((instance(r).value(attIndex) > pivot) && (l < r)) {\n\t\t\t\tr--;\n\t\t\t}\n\t\t\tif (l < r) {\n\t\t\t\tswap(l, r);\n\t\t\t\tl++;\n\t\t\t\tr--;\n\t\t\t}\n\t\t}\n\t\tif ((l == r) && (instance(r).value(attIndex) > pivot)) {\n\t\t\tr--;\n\t\t} \n\n\t\treturn r;\n\t}\n",
+        "methodStartingLine": 1644,
+        "methodEndingLine": 1666,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= left && left <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tprotected void quickSort(int attIndex, int left, int right) {\n\n\t\tif (left < right) {\n\t\t\tint middle = partition(attIndex, left, right);\n\t\t\tquickSort(attIndex, left, middle);\n\t\t\tquickSort(attIndex, middle + 1, right);\n\t\t}\n\t}\n",
+        "methodStartingLine": 1678,
+        "methodEndingLine": 1685,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= first && first <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tprotected int select(int attIndex, int left, int right, int k) {\n\n\t\tif (left == right) {\n\t\t\treturn left;\n\t\t} else {\n\t\t\tint middle = partition(attIndex, left, right);\n\t\t\tif ((middle - left + 1) >= k) {\n\t\t\t\treturn select(attIndex, left, middle, k);\n\t\t\t} else {\n\t\t\t\treturn select(attIndex, middle + 1, right, k - (middle - left + 1));\n\t\t\t}\n\t\t}\n\t}\n",
+        "methodStartingLine": 1700,
+        "methodEndingLine": 1712,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= first && first <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tpublic void swap(int i, int j){\n\n\t\tm_Instances.swap(i, j);\n\t}\n",
+        "methodStartingLine": 1744,
+        "methodEndingLine": 1747,
+        "jml": "//@ requires 0 <= i && i < numInstances();\n//@ requires 0 <= j && j < numInstances();"
+    },
+    {
+        "repository": "github.com/triguero/MRPR",
+        "file": "src/org/apache/mahout/keel/Algorithms/SVM/SMO/core/Instances.java",
+        "code": "\tprotected int indexOf(Attribute att){\n\t\tint index = -1;\n\t\tfor(int i=0;i<Attributes.getNumAttributes() && index==-1;i++){\n\t\t\tif(Attributes.getAttribute(i)==att)\n\t\t\t\tindex = i;\n\t\t}\n\t\treturn index;\n\t}\n",
+        "methodStartingLine": 2093,
+        "methodEndingLine": 2100,
+        "jml": "//@ requires argv != null;\n//@ requires argv.length == 1;\n//@ requires argv[0] != null;"
+    }
+]

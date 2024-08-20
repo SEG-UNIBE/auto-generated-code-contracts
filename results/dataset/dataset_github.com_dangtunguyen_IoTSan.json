@@ -1,0 +1,66 @@
+[
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/HierarchyQuery.java",
+        "code": "public static boolean implementsInterface(SootClass theClass, \n\t\t\t\t\t  SootClass theInterface) {\n\tList workList = new ArrayList();\n\n\t// iterates up the type and interface hierarchy\n\tworkList.add(theClass);\n\twhile (!workList.isEmpty()) {\n\t    SootClass current = (SootClass)workList.remove(0);\n\n\t    List interfaces = current.getInterfaces();\n\t    if (interfaces.contains(theInterface)) return true;\n\n\t    workList.addAll(interfaces);\n\t    if (current.hasSuperClass()) workList.add(current.getSuperClass());\n\t}\n\treturn false;\n}\n",
+        "methodStartingLine": 98,
+        "methodEndingLine": 114,
+        "jml": "//@ requires theClass != null;\n//@ requires theInterface != null;"
+    },
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/HierarchyQuery.java",
+        "code": "public static boolean extendsClass(SootClass theClass, \n\t\t\t\t   SootClass theSuperType) {\n\tSootClass current = theClass;\n\twhile (current.hasSuperClass()) {\n\t    if (current.getSuperClass() == theSuperType) return true;\n\t    current = current.getSuperClass();\n\t}\n\treturn false;\n}\n",
+        "methodStartingLine": 127,
+        "methodEndingLine": 135,
+        "jml": "//@ requires theClass != null;\n//@ requires theSuperType != null;"
+    },
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/HierarchyQuery.java",
+        "code": "private static void lowerClasses(SootClass theClassInterface, List classList) {\n\tList children = (List)subType.get(theClassInterface);\n\n\tfor (Iterator childIt = children.iterator(); childIt.hasNext(); ) {\n\t    SootClass current = (SootClass)childIt.next();\n \t    lowerClasses(current, classList);\n\t    if (!Modifier.isInterface(current.getModifiers()) &&\n\t\t!classList.contains(current)) {\n\t        classList.add(current);\n\t    } \n\t}\n}\n",
+        "methodStartingLine": 155,
+        "methodEndingLine": 166,
+        "jml": "//@ requires theClassInterface != null;\n//@ requires classList != null;"
+    },
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/HierarchyQuery.java",
+        "code": "public static List orderedClasses(SootClass theClassInterface) {\n\tbuildSubMap(theClassInterface);\n\n\tList classList = new ArrayList();\n\tlowerClasses(theClassInterface, classList);\n\n\tObject oa[] = classList.toArray();\n\t\n\t// bubble-sort the quasi-ordered list by the extends partial order\n\tfor (int i = 0; i < oa.length-1; i++) { \n\t    for (int j = oa.length-1; j > i; j--) {\n\t\tif ( extendsClass((SootClass)oa[j], (SootClass)oa[j-1]) ) {\n\t\t    Object tmp = oa[j]; \n\t\t    oa[j] = oa[j-1]; \n\t\t    oa[j-1] = tmp; \n\t        } \n\t    } \n\t} \n\n\t// create a new list to load the values in the order\n\tclassList = new ArrayList();\n\tfor (int i = 0; i < oa.length; i++) { \n\t    classList.add(i,oa[i]);\n\t}\n\treturn classList;\n}\n",
+        "methodStartingLine": 184,
+        "methodEndingLine": 209,
+        "jml": "//@ requires theClassInterface != null;"
+    },
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/HierarchyQuery.java",
+        "code": "private static void buildSubMap(SootClass theClass) {\n\nlog.debug(\"buildSubMap: \" + theClass);\n\n\tsubType = new Hashtable();\n\tList allClasses = theClass.getManager().getClasses();\n\tfor (Iterator classIt = allClasses.iterator(); classIt.hasNext(); ) {\n\t    SootClass current = (SootClass)classIt.next();\n\n\t    // Look for a parent in the class hierarchy\n            if (current.hasSuperClass()) {\n\t\tSootClass parent = current.getSuperClass();\n\t\tif (subType.get(parent) == null) {\n\t\t    subType.put(parent, new ArrayList());\n\t\t}\n\t\t((List)subType.get(parent)).add(current);\n\t    }\n\n\t    // Look for parents in the interface hierarchy\n            if (current.getInterfaceCount() > 0) {\n\t\tList interfaces = current.getInterfaces();\n\t\tfor (Iterator interfaceIt = interfaces.iterator(); \n\t\t     interfaceIt.hasNext(); ) {\n\t\t    SootClass anInterface = (SootClass)interfaceIt.next();\n\t\t    if (subType.get(anInterface) == null) {\n\t\t        subType.put(anInterface, new ArrayList());\n\t\t    }\n\t\t    ((List)subType.get(anInterface)).add(current);\n\t\t}\n\t    }\n\n\t    // If not already created, we create a list of descendents\n\t    if (subType.get(current) == null) { \n\t\tsubType.put(current, new ArrayList());\n\t    }\n\n\t}\n}\n",
+        "methodStartingLine": 224,
+        "methodEndingLine": 261,
+        "jml": "//@ requires theClass != null;"
+    },
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/IdentifyRunnableClasses.java",
+        "code": "private static boolean FindRun(SootClass theClass) {\n\t// Check to see if this class implements Runnable\n\tif (theClass.implementsInterface(\"java.lang.Runnable\")) {\n\t  // return run method\n\t  theRun = theClass.getMethod(\"run\", new ArrayList(), VoidType.v());\n\t  log.debug(\"propogating run method from \" + theClass);\n\t  return true; \n\t}\n\n\t// Check to see if this class extends Thread\n\t//   check to see if it implements a run method\n\tif (theClass.hasSuperClass() &&\n\t    theClass.getSuperClass().getName().equals(\"java.lang.Thread\")) {\n\t  // if there is no run method generate an empty one\n\t  if (!theClass.declaresMethod(\"run\", new ArrayList(), VoidType.v())) {\n\t    theRun = new SootMethod(\"run\", new ArrayList(), VoidType.v());\n\t    JimpleBody body = (JimpleBody) Jimple.v().newBody(theRun);\n\t    theClass.addMethod(theRun);\n\t    log.debug(\"adding empty method for \" + theClass);\n\t  } else {\n\t    theRun = theClass.getMethod(\"run\", new ArrayList(), VoidType.v());\n\t    log.debug(\"propogating run method from \" + theClass);\n\t  }\n\t  return true; \n\t}\n\n\t// search up\n\tif (theClass.hasSuperClass() && FindRun(theClass.getSuperClass())) {\n\t  // if there is a local \"run\" method then reset theRun\n\t  if (theClass.declaresMethod(\"run\", new ArrayList(), VoidType.v())) {\n\t    theRun = theClass.getMethod(\"run\", new ArrayList(), VoidType.v());\n\t    log.debug(\"propogating run method from \" + theClass);\n\t  } else {\n\t    log.debug(\"propogating run method\");\n          }\n\t  return true; \n\t}\n\n\treturn false;\n}\n",
+        "methodStartingLine": 91,
+        "methodEndingLine": 130,
+        "jml": "//@ requires theClass != null;"
+    },
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/IdentifyRunnableClasses.java",
+        "code": "public static boolean implementsInterface(SootClass theClass, String intName) {\n\tboolean verdict = false;\n\tif ( theClass.implementsInterface(intName) ) {\n\t  verdict = true;\n\t} else {\n\t  if ( theClass.getInterfaceCount() == 0 ) {\n\t    verdict = false;\n\t  } else {\n            Iterator iiIter = theClass.getInterfaces().iterator();\n\t    while (iiIter.hasNext()) {\n\t      SootClass theInterface = (SootClass)iiIter.next();\n\t      verdict = implementsInterface(theInterface, intName);\n\t      if (verdict) break;\n\n\t      if (theInterface.hasSuperClass()) {\n\t\tverdict = implementsInterface(theInterface.getSuperClass(), intName);\n\t      }\n\t      if (verdict) break;\n\t    }\n\t  }\n\t}\n\treturn verdict;\n}\n",
+        "methodStartingLine": 143,
+        "methodEndingLine": 165,
+        "jml": "//@ requires theClass != null;\n//@ requires name != null;"
+    },
+    {
+        "repository": "github.com/dangtunguyen/IoTSan",
+        "file": "src/edu/ksu/cis/bandera/prog/IdentifyRunnableClasses.java",
+        "code": "public static java.util.HashSet identify(Enumeration scIter) {\n\tjava.util.HashSet tmpClasses = new java.util.HashSet();\n\n\twhile (scIter.hasMoreElements()) {\n\t  SootClass theClass = (SootClass) scIter.nextElement();\n\n\t  log.debug(\"trying to identify \" + theClass);\n\n\t  /* [Thomas, April 29, 2017]\n\t   * We will accept main function with the following format:\n\t   * public void main() {}\n\t   * */\n\t  \n  \t  // Check to see if this class has a \"main\" method\n\t  ca.mcgill.sable.util.LinkedList args = new ca.mcgill.sable.util.LinkedList();\n//\t  args.add(ca.mcgill.sable.soot.ArrayType.v(RefType.v(\"java.lang.String\"), 1));\n//\t  if (theClass.declaresMethod(\"main\", args, VoidType.v())) {\n\t  if (SpinUtil.containEvtHandlerMethod(theClass)) {\n//\t    int mods = \n//\t        theClass.getMethod(\"main\", args, VoidType.v()).getModifiers();\n\t    tmpClasses.add(theClass);\n//\t    if (Modifier.isPublic(mods) && Modifier.isStatic(mods)) {\n//  \t      tmpClasses.add(theClass);\n//\t      continue;\n//\t    }\n\t  }\n\n  \t  // Check to see if this class implements Runnable or a\n          // sub-interface of Runable\n\t  if (implementsInterface(theClass, \"java.lang.Runnable\")) {\n\t    tmpClasses.add(theClass);\n\t    continue;\n\t  }\n\n\t  // Check to see if this class extends Thread\n\t  //   check to see if it implements a run method\n\t  if (theClass.hasSuperClass() &&\n\t      theClass.getSuperClass().getName().equals(\"java.lang.Thread\")) {\n\t    // if there is no run method generate an empty one\n \t    if (!theClass.declaresMethod(\"run\", new ArrayList(), \n\t\t\t\t\t\tVoidType.v())) {\n\t      SootMethod newRun = new SootMethod(\"run\", new ArrayList(), \n\t\t\t\t\t\t\tVoidType.v());\n\t      JimpleBody body = (JimpleBody) Jimple.v().newBody(newRun);\n\t      theClass.addMethod(newRun);\n\t      log.debug(\"adding empty run method for \" + theClass);\n\t    }\n\t    tmpClasses.add(theClass);\n\t    continue;\n\t  }\n\n  \t  // If neither of the above then search up the type hierarchy\n\t  // to see if a supertype extends Thread\n\t  //   recurse up the hierarchy searching\n\t  //   if found then pick up the lowest \"run\" method coming down\n\t  //\n\t  // Also check to see if a supertype implements Runnable\n\t  // directly or indirectly  \n\t  //   recurse up the hierarchy searching\n\t  //   if found then pick up the lowest \"run\" method coming down\n\t  {\n\t    theRun = null;\n\t    if (theClass.hasSuperClass() && FindRun(theClass.getSuperClass())) {\n              // ensure that there is no local \"run\" method\n \t      if (!theClass.declaresMethod(\"run\", new ArrayList(), \n\t \t\t\t\t\t  VoidType.v())) {\n\t        SootMethod newRun = new SootMethod(\"run\", new ArrayList(), \n\t\t\t\t\t\t\t  VoidType.v());\n\t        JimpleBody body = (JimpleBody) Jimple.v().newBody(newRun);\n\t        body.getStmtList().addAll(\n\t\t  ((JimpleBody) theRun.getBody(Jimple.v())).getStmtList());\n\t        body.getLocals().addAll(\n\t\t  ((JimpleBody) theRun.getBody(Jimple.v())).getLocals());\n\t        body.getTraps().addAll(\n\t\t  ((JimpleBody) theRun.getBody(Jimple.v())).getTraps());\n\t        newRun.storeBody(Jimple.v(), body);\n\t        theClass.addMethod(newRun);\n\t        log.debug(\"adding inherited run method for \" + theClass);\n\t      }\n\t      tmpClasses.add(theClass);\n\t      continue;\n\t    }\n\t  }\n\t}\n\treturn tmpClasses;\n}\n",
+        "methodStartingLine": 179,
+        "methodEndingLine": 264,
+        "jml": "//@ requires scIter != null;\n//@ ensures ret != null;"
+    }
+]

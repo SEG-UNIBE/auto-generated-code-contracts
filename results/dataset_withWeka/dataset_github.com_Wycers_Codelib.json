@@ -1,0 +1,18 @@
+[
+    {
+        "repository": "github.com/Wycers/Codelib",
+        "file": "Software Testing/binaryheap/src/main/java/net/mooctest/BinaryHeap.java",
+        "code": "    public void insert(int x) throws Overflow {\n        if (isFull())\n            throw new Overflow();\n\n        // Percolate up\n        int hole = ++currentSize;\n        for (; hole > 1 && x < array[hole / 2]; hole /= 2)\n            array[hole] = array[hole / 2];\n        array[hole] = x;\n    }\n",
+        "methodStartingLine": 52,
+        "methodEndingLine": 61,
+        "jml": "//@ requires capacity > 0;\n//@ ensures isEmpty();"
+    },
+    {
+        "repository": "github.com/Wycers/Codelib",
+        "file": "Software Testing/binaryheap/src/main/java/net/mooctest/BinaryHeap.java",
+        "code": "    public void makeEmpty() {\n        currentSize = 0;\n    }\n",
+        "methodStartingLine": 139,
+        "methodEndingLine": 141,
+        "jml": "//@ ensures isEmpty();"
+    }
+]

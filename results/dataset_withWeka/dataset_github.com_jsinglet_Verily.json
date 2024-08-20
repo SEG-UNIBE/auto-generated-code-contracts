@@ -1,0 +1,10 @@
+[
+    {
+        "repository": "github.com/jsinglet/Verily",
+        "file": "parser/src/main/java/verily/lang/ReadableValue.java",
+        "code": "    public /*@ pure @*/ T getValue() {\n        return this.value;\n    }\n",
+        "methodStartingLine": 18,
+        "methodEndingLine": 20,
+        "jml": "//@ ensures \\result == this.value;"
+    }
+]

@@ -1,0 +1,98 @@
+[
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home9/src/MyPath.java",
+        "code": "    @Override\n    \n    public /*@pure@*/int size() {\n        return path.size();\n    }\n",
+        "methodStartingLine": 21,
+        "methodEndingLine": 25,
+        "jml": "//@ ensures \\result == nodes.length;"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home9/src/MyPath.java",
+        "code": "    @Override\n    \n    //@ i < nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node) {\n        return path.contains(node);\n    }\n",
+        "methodStartingLine": 36,
+        "methodEndingLine": 41,
+        "jml": "//@ ensures \\result == (\\exists int i; 0 <= i &&"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home9/src/MyPath.java",
+        "code": "    @Override\n    \n    public /*@pure@*/ boolean isValid() {\n        return path.size() >= 2;\n    }\n",
+        "methodStartingLine": 56,
+        "methodEndingLine": 60,
+        "jml": "//@ ensures \\result == (nodes.length >= 2);"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home11/src/MyPath.java",
+        "code": "    @Override\n    \n    public /*@pure@*/int size() {\n        return path.size();\n    }\n",
+        "methodStartingLine": 21,
+        "methodEndingLine": 25,
+        "jml": "//@ ensures \\result == nodes.length;"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home11/src/MyPath.java",
+        "code": "    @Override\n    \n    //@ i < nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node) {\n        return path.contains(node);\n    }\n",
+        "methodStartingLine": 36,
+        "methodEndingLine": 41,
+        "jml": "//@ ensures \\result == (\\exists int i; 0 <= i &&"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home11/src/MyPath.java",
+        "code": "    @Override\n    \n    public /*@pure@*/ boolean isValid() {\n        return path.size() >= 2;\n    }\n",
+        "methodStartingLine": 59,
+        "methodEndingLine": 63,
+        "jml": "//@ ensures \\result == (nodes.length >= 2);"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home10/src/MyPath.java",
+        "code": "    @Override\n    \n    public /*@pure@*/int size() {\n        return path.size();\n    }\n",
+        "methodStartingLine": 21,
+        "methodEndingLine": 25,
+        "jml": "//@ ensures \\result == nodes.length;"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home10/src/MyPath.java",
+        "code": "    @Override\n    \n    //@ i < nodes.length; nodes[i] == node);\n    public /*@pure@*/ boolean containsNode(int node) {\n        return path.contains(node);\n    }\n",
+        "methodStartingLine": 36,
+        "methodEndingLine": 41,
+        "jml": "//@ ensures \\result == (\\exists int i; 0 <= i &&"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home10/src/MyPath.java",
+        "code": "    @Override\n    \n    public /*@pure@*/ boolean isValid() {\n        return path.size() >= 2;\n    }\n",
+        "methodStartingLine": 60,
+        "methodEndingLine": 64,
+        "jml": "//@ ensures \\result == (nodes.length >= 2);"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home10/src/MyGraph.java",
+        "code": "    public /*@pure@*/ boolean containsNode(int nodeId) {\n        return lgraph.containsKey(nodeId);\n    }\n",
+        "methodStartingLine": 36,
+        "methodEndingLine": 38,
+        "jml": "//@ ensures \\result == (\\exists Path path; path.isValid()"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home10/src/MyGraph.java",
+        "code": "    @Override\n    \n    public /*@pure@*/int size() {\n        return map.size();\n    }\n",
+        "methodStartingLine": 157,
+        "methodEndingLine": 161,
+        "jml": "//@ ensures \\result == pList.length;"
+    },
+    {
+        "repository": "github.com/darewolf-cyber/BUAA_OO",
+        "file": "home9/src/MyPathContainer.java",
+        "code": "    @Override\n    \n    public /*@pure@*/int size() {\n        return map.size();\n    }\n",
+        "methodStartingLine": 23,
+        "methodEndingLine": 27,
+        "jml": "//@ ensures \\result == pList.length;"
+    }
+]

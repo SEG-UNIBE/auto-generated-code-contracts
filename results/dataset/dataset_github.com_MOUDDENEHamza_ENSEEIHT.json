@@ -1,0 +1,242 @@
+[
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP13/ModeleMorpionSimple.java",
+        "code": "    private void jouer(int i, int j) {\n        this.cases[i][j] = this.joueur;\n        this.nbCoups++;\n\n        // Mettre à jour gagnee\n        // XXX: Ceci ne marche que pour un Morpion de taille 3 !\n        gagnee = gagnee ||\n                ((cases[i][0] == cases[i][1]    // ligne pleine\n                        && cases[i][1] == cases[i][2])\n                        || (cases[0][j] == cases[1][j]    // colonne pleine\n                        && cases[1][j] == cases[2][j])\n                        || (i == j    // première diagonale pleine\n                        && cases[0][0] == cases[1][1]\n                        && cases[1][1] == cases[2][2])\n                        || (i + j == 2    // deuxième diagonale pleine\n                        && cases[0][2] == cases[1][1]\n                        && cases[1][1] == cases[2][0]));\n    }\n",
+        "methodStartingLine": 106,
+        "methodEndingLine": 123,
+        "jml": "//@ requires estVide(i,j);\n//@ ensures getValeur(i,j) == joueur;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tprivate void _set(int j, int m, int a) {\n\t\tthis.jour = j;\n\t\tthis.mois = m;\n\t\tthis.annee = a;\n\t}\n",
+        "methodStartingLine": 89,
+        "methodEndingLine": 93,
+        "jml": "//@ requires Date.estValide(j, m, a);\n//@ ensures getJour() == j;\n//@ ensures getMois() == m;\n//@ ensures getAnnee() == a;\n//@ requires Date.estAnneeValide(a);\n//@ requires Date.estQuantiemeValide(q, a);\n//@ ensures getQuantieme() == q;\n//@ ensures getAnnee() == a;\n//@ requires Date.estValide(j, m, a);\n//@ ensures this.jour == j;\n//@ ensures this.mois == m;\n//@ ensures this.annee == a;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic void set(int j, int m, int a) {\n\t\tthis._set(j, m, a);\n\t}\n",
+        "methodStartingLine": 105,
+        "methodEndingLine": 107,
+        "jml": "//@ requires Date.estValide(j, m, a);\n//@ ensures getJour() == j;\n//@ ensures getMois() == m;\n//@ ensures getAnnee() == a;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tprivate void _set(int q, int a) {\n\t\t// Initialiser l'année\n\t\tthis.annee = a;\n\n\t\t// Initialiser le mois\n\t\tthis.mois = 1;\n\t\twhile (q > nbJoursDansMois(this.mois, a)) { //  le mois est terminé\n\t\t\tq = q - nbJoursDansMois(this.mois, a);\n\t\t\tthis.mois++;\n\t\t}\n\n\t\t// Initialiser les jours\n\t\tthis.jour = q;\n\t}\n",
+        "methodStartingLine": 119,
+        "methodEndingLine": 132,
+        "jml": "//@ requires Date.estAnneeValide(a);\n//@ requires Date.estQuantiemeValide(q, a);\n//@ ensures getQuantieme() == q;\n//@ ensures getAnnee() == a;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic void set(int q, int a) {\n\t\tthis._set(q, a);\n\t}\n",
+        "methodStartingLine": 143,
+        "methodEndingLine": 145,
+        "jml": "//@ requires Date.estAnneeValide(a);\n//@ requires Date.estQuantiemeValide(q, a);\n//@ ensures getQuantieme() == q;\n//@ ensures getAnnee() == a;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic static boolean estJourValide(int j, int m, int a) {\n\t\treturn 1 <= j && j <= nbJoursDansMois(m, a);\n\t}\n",
+        "methodStartingLine": 260,
+        "methodEndingLine": 262,
+        "jml": "//@ requires Date.estAnneeValide(a);\n//@ requires Date.estMoisValide(m);"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic static boolean estMoisValide(int m) {\n\t\treturn 1 <= m && m <= 12;\n\t}\n",
+        "methodStartingLine": 269,
+        "methodEndingLine": 271,
+        "jml": "//@ ensures \\result <==> (1 <= m && m <= 12);"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic static boolean estAnneeValide(int a) {\n\t\treturn a > 0;\n\t}\n",
+        "methodStartingLine": 294,
+        "methodEndingLine": 296,
+        "jml": "//@ ensures \\result <==> a > 0;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic boolean ge(Date autre) {\n\t\treturn ! this.lt(autre);\n\t}\n",
+        "methodStartingLine": 344,
+        "methodEndingLine": 346,
+        "jml": "//@ ensures \\result == ! lt(autre);"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic boolean gt(Date autre) {\n\t\treturn autre.lt(this);\n\t\t\t\t// Utilisation obligatoire de this (on ne peut pas s'en passer).\n\t}\n",
+        "methodStartingLine": 354,
+        "methodEndingLine": 357,
+        "jml": "//@ ensures \\result == autre.lt(this);"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic boolean le(Date autre) {\n\t\treturn  ! autre.lt(this);\n\t}\n",
+        "methodStartingLine": 365,
+        "methodEndingLine": 367,
+        "jml": "//@ ensures \\result == !autre.lt(this);"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP07/Date.java",
+        "code": "\tpublic boolean equals(Date autre) {\n\t\treturn autre != null\n\t\t\t\t&& this.getAnnee() == autre.getAnnee()\n\t\t\t\t&& this.getMois() == autre.getMois()\n\t\t\t\t&& this.getJour() == autre.getJour();\n\t}\n",
+        "methodStartingLine": 378,
+        "methodEndingLine": 383,
+        "jml": "//@ ensures \\result == (le(autre) && ge(autre));"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP08/Cellule.java",
+        "code": "\tpublic Cellule<T> getSuiv() {\n\t\treturn this.suiv;\n\t}\n",
+        "methodStartingLine": 33,
+        "methodEndingLine": 35,
+        "jml": "//@ requires this.suiv != null;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/menu/Menu.java",
+        "code": "\tpublic /*@ pure @*/ int getNbEntrees() {\n\t\treturn this.entrees.size();\n\t}\n",
+        "methodStartingLine": 45,
+        "methodEndingLine": 47,
+        "jml": "//@ requires sonTitre != null;\t// le titre existe\n//@ ensures getNbEntrees() == 0;\t// le menu est vide\n//@ ensures estQuitte() == false;\t// pas encore quitter !"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/menu/Menu.java",
+        "code": "\tprivate /*@ pure @*/ Entree getEntree(int i) {\n\t\tif (i > 0) {\n\t\t\treturn this.entrees.get(i-1);\n\t\t} else {\n\t\t\treturn entreeQuitter;\n\t\t}\n\t}\n",
+        "methodStartingLine": 54,
+        "methodEndingLine": 60,
+        "jml": "//@ requires  0 <= i && i <= getNbEntrees();"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/menu/Menu.java",
+        "code": "\tpublic void ajouter(String texte, Commande cmd) {\n\t\tthis.entrees.add(new Entree(texte, cmd));\n\t}\n",
+        "methodStartingLine": 72,
+        "methodEndingLine": 74,
+        "jml": "//@ requires texte != null && texte.length() > 0; // texte dÃ©fini\n//@ requires cmd != null;\t\t// commande dÃ©finie"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/menu/Menu.java",
+        "code": "\tpublic void selectionner() {\n\t\t// Choisir une entrée\n\t\tthis.estQuitte = false;\n\t\tint choix;\n\t\tboolean choix_valide = false;\n\t\tdo {\n\t\t\tchoix = Console.readInt(\"Votre choix : \");\n\t\t\tchoix_valide = 0 <= choix\n\t\t\t\t\t\t\t&& choix <= this.getNbEntrees();\n\t\t\tif (!choix_valide) {\n\t\t\t\tSystem.out.println(\"Le numéro doit être compris entre \"\n\t\t\t\t\t\t+ 0 + \" et \"\n\t\t\t\t\t\t+ this.getNbEntrees() + \" !\");\n\t\t\t}\n\t\t} while (!choix_valide);\n\n\t\tthis.selection = this.getEntree(choix).getCommande();\n\t}\n",
+        "methodStartingLine": 110,
+        "methodEndingLine": 127,
+        "jml": "//@ ensures ! estQuitte();"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/Personne.java",
+        "code": "\t/*@ pure @*/ public String getNom() {\n\t\treturn this.nom;\n\t}\n",
+        "methodStartingLine": 39,
+        "methodEndingLine": 41,
+        "jml": "//@ requires nom != null && nom.length() > 0;\t// nom dÃ©fini\n//@ requires prenom != null && prenom.length() > 0;\t// prÃ©nom dÃ©fini\n//@ ensures getPrenom() == prenom;\n//@ ensures getNom() == nom;\n//@ ensures masculin ==> estHomme();\n//@ ensures !masculin ==> estFemme();"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/menu/Entree.java",
+        "code": "\tpublic /*@ pure @*/ String getIntitule() {\n\t\treturn intitule;\n\t}\n",
+        "methodStartingLine": 36,
+        "methodEndingLine": 38,
+        "jml": "//@ requires uneCommande != null;\t// la commande existe\n//@ requires unIntitule != null && unIntitule.length() > 0;\n//@ ensures getIntitule() == unIntitule;\n//@ ensures getCommande() == uneCommande;"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/Historique.java",
+        "code": "\tpublic void enregistrer(double info) {\n\t\tthis.valeurs.add(info);\n\t}\n",
+        "methodStartingLine": 23,
+        "methodEndingLine": 25,
+        "jml": "//@ ensures getNbValeurs() == 0;\t// historique vide\n//@ ensures getNbValeurs() == \\old(getNbValeurs()) + 1;\t// entier enregistrÃ©\n//@ ensures getValeur(getNbValeurs()) == info;\t// n ajoutÃ© en fin d'historique"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/Historique.java",
+        "code": "\tpublic /*@ pure @*/ double getValeur(int i) {\n\t\treturn this.valeurs.get(i-1);\n\t}\n",
+        "methodStartingLine": 35,
+        "methodEndingLine": 37,
+        "jml": "//@ requires 1 <= i && i <= getNbValeurs();\t// indice correct"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/Historique.java",
+        "code": "\tpublic /*@ pure @*/ int getNbValeurs() {\n\t\treturn this.valeurs.size();\n\t}\n",
+        "methodStartingLine": 43,
+        "methodEndingLine": 45,
+        "jml": "//@ ensures getNbValeurs() >= 0;\t// nb positif de valeurs"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/CompteSimple.java",
+        "code": "\tpublic String getNumero() {\n\t\treturn this.numero;\n\t}\n",
+        "methodStartingLine": 63,
+        "methodEndingLine": 65,
+        "jml": "//@ requires leTitulaire != null;\t// le titulaire existe\n//@ requires depotInitial >= 0;\t// montant initial strictement positif\n//@ ensures getSolde() == depotInitial;\t// solde initialisÃ©\n//@ ensures getTitulaire() == leTitulaire;\t// titulaire initialisÃ©\n//@ requires titulaire != null;\t\t// le titulaire existe\n//@ ensures getSolde() == 0;\t\t// pas de dÃ©pÃ´t initial\n//@ ensures getTitulaire() == titulaire;\t// titulaire initialisÃ©"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/CompteSimple.java",
+        "code": "\tpublic void crediter(double montant) {\n\t\tthis.solde = this.solde + montant;\n\t}\n",
+        "methodStartingLine": 90,
+        "methodEndingLine": 92,
+        "jml": "//@ requires montant > 0;\n//@ ensures getSolde() == \\old(getSolde()) + montant; // montant crÃ©ditÃ©"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/CompteSimple.java",
+        "code": "\tpublic void debiter(double montant) {\n\t\tthis.solde = this.solde - montant;\n\t}\n",
+        "methodStartingLine": 99,
+        "methodEndingLine": 101,
+        "jml": "//@ requires montant > 0;\n//@ ensures getSolde() == \\old(getSolde()) - montant; // montant dÃ©bitÃ©"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "2A/S8/PAT/TP4/comptes/CompteCourant.java",
+        "code": "\t@Override public void crediter(double montant) {\n\t\tsuper.crediter(montant);\n\t\tthis.operations.enregistrer(montant);\n\t}\n",
+        "methodStartingLine": 40,
+        "methodEndingLine": 43,
+        "jml": "//@ requires titulaire != null;\t\t// le titulaire existe\n//@ ensures getSolde() == 0;\t\t// pas de dÃ©pÃ´t initial\n//@ ensures getTitulaire() == titulaire;\t// titulaire initialisÃ©\n//@ requires titulaire != null;\t// le titulaire existe\n//@ requires depotInitial >= 0;\t// montant initial strictement positif\n//@ ensures getSolde() == depotInitial;\t// solde initialisÃ©\n//@ ensures getTitulaire() == titulaire;\t// titulaire initialisÃ©"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/editeur/LigneStringBuffer.java",
+        "code": "\tpublic int getLongueur() {\n\t\treturn caracteres.length();\n\t}\n",
+        "methodStartingLine": 29,
+        "methodEndingLine": 31,
+        "jml": "//@ ensures getLongueur() == 0;\t// la ligne est vide"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/editeur/commande/CommandeAjouterFin.java",
+        "code": "\tpublic void executer() {\n\t\tString texte = Console.readLine(\"Texte à insérer : \");\n\t\tfor (int i = 0; i < texte.length(); i++) {\n\t\t\tligne.ajouterFin(texte.charAt(i));\n\t\t}\n\t}\n",
+        "methodStartingLine": 23,
+        "methodEndingLine": 28,
+        "jml": "//@ requires l != null;\t// la ligne doit Ãªtre dÃ©finie"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/editeur/commande/CommandeCurseurReculer.java",
+        "code": "\tpublic void executer() {\n\t\tligne.reculer();\n\t}\n",
+        "methodStartingLine": 22,
+        "methodEndingLine": 24,
+        "jml": "//@ requires l != null;\t// la ligne doit Ãªtre dÃ©finie"
+    },
+    {
+        "repository": "github.com/MOUDDENEHamza/ENSEEIHT",
+        "file": "1A/S6/TOB/TPs/TP10/editeur/commande/CommandeCurseurAvancer.java",
+        "code": "\tpublic void executer() {\n\t\tligne.avancer();\n\t}\n",
+        "methodStartingLine": 22,
+        "methodEndingLine": 24,
+        "jml": "//@ requires l != null;\t// la ligne doit Ãªtre dÃ©finie"
+    }
+]

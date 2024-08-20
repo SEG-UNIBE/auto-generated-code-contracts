@@ -1,0 +1,66 @@
+[
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "demos/java/jml/Set.java",
+        "code": "    /*@ pure @*/ public int size() {\n        return 0;\n    }\n",
+        "methodStartingLine": 21,
+        "methodEndingLine": 23,
+        "jml": "//@ ensures \\result >= 0;"
+    },
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "slides/code/jml/pure.java",
+        "code": "    public void add(A element) { ... }\n",
+        "methodStartingLine": 8,
+        "methodEndingLine": 8,
+        "jml": "//@ ensures getElementCount() =="
+    },
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "slides/code/19ss-a6e.java",
+        "code": "    int combine(int left, int right) {\n        return Math.max(Math.abs(left), Math.abs(right));\n    }\n",
+        "methodStartingLine": 6,
+        "methodEndingLine": 8,
+        "jml": "//@ requires left != Integer.MIN_VALUE;\n//@ requires right != Integer.MIN_VALUE;\n//@ ensures \\result <= left || \\result <= right;\n//@ ensures \\result >= left && \\result >= right;"
+    },
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "slides/code/19ss-a6d.java",
+        "code": "    int combine(int left, int right) {\n        return Math.max(Math.abs(left), Math.abs(right));\n    }\n",
+        "methodStartingLine": 6,
+        "methodEndingLine": 8,
+        "jml": "//@ requires left != Integer.MIN_VALUE;\n//@ requires right != Integer.MIN_VALUE;\n//@ ensures \\result <= left || \\result <= right;\n//@ ensures \\result >= left && \\result >= right;"
+    },
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "slides/code/jml/ensures.java",
+        "code": "String[] reverse(String [] s) { ... }\n",
+        "methodStartingLine": 2,
+        "methodEndingLine": 2,
+        "jml": "//@ ensures \\result.length() == s.length();"
+    },
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "slides/code/jml/ensures.java",
+        "code": "void deposit(int amount) {\n    this.balance += amount;\n}\n",
+        "methodStartingLine": 6,
+        "methodEndingLine": 8,
+        "jml": "//@ requires amount > 0;\n//@ ensures balance > \\old(balance);"
+    },
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "slides/code/jml/requires.java",
+        "code": "int divide(int a, int b) {\n    return a / b;\n}\n",
+        "methodStartingLine": 2,
+        "methodEndingLine": 4,
+        "jml": "//@ requires b != 0;"
+    },
+    {
+        "repository": "github.com/pbrinkmeier/pp-tut",
+        "file": "slides/code/jml/specpublic.java",
+        "code": "    public void add(A element) { ... }\n",
+        "methodStartingLine": 7,
+        "methodEndingLine": 7,
+        "jml": "//@ ensures elementCount =="
+    }
+]

@@ -1,0 +1,227 @@
+{
+  "SourcegraphEndpoint": "https://sourcegraph.com",
+  "Query": "(//@ requires )|(//@ ensures ) repo:github.com/FeatureIDE/FeatureIDE lang:java count:all case:yes type:file patterntype:regexp",
+  "Site": {
+    "BuildVersion": "238702_2023-08-16_5.1-acf4bcc841e5"
+  },
+  "Results": [
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3046a14eddb76e0d7e037565f45a6b06ae9106f1"
+        },
+        "content": "\n/**\n * A card of the deck.\n */\npublic /*nullable_by_default*/ class Card {\n\n  /** The Constant MIN_SUIT. */\n  public static final int MIN_SUIT = 0;\n\n  /** The Constant MAX_SUIT. */\n  public static final int MAX_SUIT = 3;\n\n  /** The Constant MIN_RANK. */\n  public static final int MIN_RANK = 2;\n\n  /** The Constant MAX_RANK. */\n  public static final int MAX_RANK = 14;\n\n  /** The suit. */\n  private /*@spec_public@*/ int suit;\n\n  /** The value. */\n  private /*@spec_public@*/ int rank;\n\n  //@ public invariant MIN_RANK \u003c= rank \u0026 rank \u003c= MAX_RANK;\n  //@ public invariant MIN_SUIT \u003c= suit \u0026 suit \u003c= MAX_SUIT;\n\n  /**\n   * Instantiates a new card.\n   * @param cardRank\n   *          Rank of the card.\n   * @param cardSuit\n   *          Suit of the card.\n   */\n   /*@ public normal_behavior\n       requires MIN_RANK \u003c= cardRank \u0026 cardRank \u003c= MAX_RANK;\n       requires MIN_SUIT \u003c= cardSuit \u0026 cardSuit \u003c= MAX_SUIT ;\n       assignable rank, suit;\n       ensures rank == cardRank;\n       ensures suit == cardSuit;\n    */\n  public Card(final int cardRank, final int cardSuit) {\n    this.rank = cardRank;\n    this.suit = cardSuit;\n  }\n\n  /**\n   * @param newRank the new value\n   */\n  /*@ public normal_behavior\n      requires MIN_RANK \u003c= newRank \u0026\u0026 newRank \u003c= MAX_RANK;\n      assignable rank;\n      ensures rank == newRank;\n   */\n  public final void setRank(final int newRank) {\n    this.rank = newRank;\n    //@ assert false;\n    //@ assert false;\n  }\n\n  /**\n   * @return the rank of card\n   */\n  //@ ensures \\result == rank;\n  public final /*@pure@*/ int getRank() {\n    //@ assert false;\n    //@ assert false;\n    return this.rank;\n  }\n\n  /**\n   * @param newSuit the new suit\n   */\n  /*@ public normal_behavior\n      requires MIN_SUIT \u003c= newSuit \u0026\u0026 newSuit \u003c= MAX_SUIT;\n      assignable suit;\n      ensures suit == newSuit;\n   */\n  public final void setSuit(final int newSuit) {\n    suit = newSuit;\n    //@ assert false;\n    //@ assert false;\n  }\n\n  /**\n   * @return the suit\n   */\n  /*@ ensures \\result == suit;@*/\n  public final /*@pure@*/ int getSuit() {\n    //@ assert false;\n    //@ assert false;\n    return suit;\n  }\n\n\n public static class Suit {\n    public static final int CLUBS = 0;\n    public static final int DIAMONDS = 1;\n    public static final int HEARTS = 2;\n    public static final int SPADES = 3;\n  }\n\n public static class Rank {\n    public static final int DEUCE = 2;\n    public static final int THREE = 3;\n    public static final int FOUR = 4;\n    public static final int FIVE = 5;\n    public static final int SIX = 6;\n    public static final int SEVEN = 7;\n    public static final int EIGHT = 8;\n    public static final int NINE = 9;\n    public static final int TEN = 10;\n    public static final int JACK = 11;\n    public static final int QUEEN = 12;\n    public static final int KING = 13;\n    public static final int ACE = 14;\n  }\n\n}",
+        "name": "Card.java",
+        "path": "plugins/de.ovgu.featureide.examples/featureide_examples/PokerSPL-FH-JML/features/Cards/Card.java",
+        "url": "/github.com/FeatureIDE/FeatureIDE/-/blob/plugins/de.ovgu.featureide.examples/featureide_examples/PokerSPL-FH-JML/features/Cards/Card.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 63,
+          "offsetAndLengths": [
+            [
+              2,
+              12
+            ]
+          ],
+          "preview": "  //@ ensures \\result == rank;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/FeatureIDE/FeatureIDE",
+        "url": "/github.com/FeatureIDE/FeatureIDE"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3046a14eddb76e0d7e037565f45a6b06ae9106f1"
+        },
+        "content": "// Copyright (C) 2003 Iowa State University\n\n// This file is part of JML\n\n// JML is free software; you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation; either version 2, or (at your option)\n// any later version.\n\n// JML is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with JML; see the file COPYING.  If not, write to\n// the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.\n\n/** Directed arcs for directed graphs.\n * @author Katie Becker\n * @author Gary T. Leavens\n */\npublic class Arc implements Cloneable {\n\n    private /*@ spec_public non_null @*/ NodeType source;\n    private /*@ spec_public non_null @*/ NodeType target;\n    \n    //@ private invariant_redundantly source != null \u0026\u0026 target != null;\n\n    /** Initialize this arc with the given source and target. */\n    /*@ public normal_behavior\n      @   requires_redundantly source != null \u0026\u0026 target != null;\n      @   assignable this.source, this.target;\n      @   ensures this.source == source\n      @        \u0026\u0026 this.target == target;\n      @*/\n    public Arc(NodeType source, NodeType target) {\n        this.source = source;\n        this.target = target;\n    }\n\n    /*@ also\n      @   public normal_behavior\n      @     requires o instanceof Arc;\n      @     ensures \\result\n      @             ==\u003e ((Arc)o).source.equals(this.source)\n      @                 \u0026\u0026 ((Arc)o).target.equals(this.target);\n      @ also\n      @   public normal_behavior\n      @     requires !(o instanceof Arc);\n      @     ensures \\result == false;\n      @*/\n    public /*@pure@*/ boolean equals (Object o) {\n        return (o instanceof Arc) \n            \u0026\u0026 ((Arc)o).source.equals(source)\n            \u0026\u0026 ((Arc)o).target.equals(target);\n    }\n\n    /*@ also\n      @   public normal_behavior\n      @     ensures \\result instanceof Arc\n      @         \u0026\u0026 (\\result).equals(this);\n      @*/\n    public /*@pure@*/ Object clone() {\n        Arc res;\n        try {\n            res = (Arc)super.clone();\n        } catch (CloneNotSupportedException e) {\n            // should not happen\n            throw new InternalError(e.getMessage());\n        }\n\t// source and target refs are shared between object and clone\n\t// so they do not need to be reassigned\n\t//@ assume res.source == source \u0026\u0026 res.target == target;\n\treturn res;\n    }\n    \n    public /*@pure@*/ int hashCode() {\n        return source.hashCode() + target.hashCode();\n    }\n\n    /** Invert the direction of this arc. */\n    /*@ public normal_behavior\n      @   assignable source, target;\n      @   ensures source == \\old(target) \u0026\u0026 target == \\old(source);\n      @*/\n    public void flip() {\n        NodeType temp = source;\n        source = target;\n        target = temp;\n    }\n\n    /** Get the source node of this arc. */\n    /*@ public normal_behavior\n      @   assignable \\nothing;\n      @   ensures \\result == source;           \n      @*/\n    public /*@pure@*/ NodeType getSource() {\n        return source;\n    }\n\n    /** Set the source node of this arc to the given node. */\n    /*@ public normal_behavior\n      @   requires_redundantly source != null;\n      @   assignable this.source;\n      @   ensures this.source == source;           \n      @*/\n    public void setSource(NodeType source) {\n        this.source = source;\n    }\n\n    /** Get the target node of this arc. */\n    /*@ public normal_behavior\n      @   assignable \\nothing;\n      @   ensures \\result == target;           \n      @*/\n    public /*@pure@*/ NodeType getTarget() {\n        return target;\n    }\n\n    /** Set the target node of this arc to the given node. */\n    /*@ public normal_behavior\n      @   requires_redundantly target != null;\n      @   assignable this.target;\n      @   ensures this.target == target;           \n      @*/\n    public void setTarget(NodeType target) {\n        this.target = target;\n    }\n\n    /** Return the name of this class. */\n    //@ ensures \\result != null;\n    protected /*@pure@*/ String className() {\n        return \"Arc\";\n    }\n\n    public String toString() {\n        return className() + \"[from: \" + source + \", to: \" + target + \"]\";\n    }\n}\n",
+        "name": "Arc.java",
+        "path": "plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/features/DiGraph/Arc.java",
+        "url": "/github.com/FeatureIDE/FeatureIDE/-/blob/plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/features/DiGraph/Arc.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 131,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result != null;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/FeatureIDE/FeatureIDE",
+        "url": "/github.com/FeatureIDE/FeatureIDE"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3046a14eddb76e0d7e037565f45a6b06ae9106f1"
+        },
+        "content": "// @(#)$Id: ArcType.java 1199 2009-02-17 19:42:32Z smshaner $\n\n// Copyright (C) 1998, 1999 Iowa State University\n\n// This file is part of JML\n\n// JML is free software; you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation; either version 2, or (at your option)\n// any later version.\n\n// JML is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with JML; see the file COPYING.  If not, write to\n// the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.\n\n/*@ pure */ public class ArcType implements JMLType {\n\n    //@ public model NodeType from;\n    //@ public model NodeType to;\n    //@ public invariant from != null \u0026\u0026 to != null;\n\n    private NodeType _from;\n    //@                   in from;\n\n    private NodeType _to;\n    //@                 in to;\n\n    //@ private represents from \u003c- _from;\n    //@ private represents to \u003c- _to;\n\n    //@ private invariant_redundantly _from != null \u0026\u0026 _to != null;\n\n    /*@ public normal_behavior\n    @   requires from != null \u0026\u0026 to != null;\n    @   assignable this.from, this.to;\n    @   ensures this.from.equals(from)\n    @        \u0026\u0026 this.to.equals(to);\n    @*/\n    public ArcType(NodeType from, NodeType to) {\n        _from = from;\n        _to = to;\n    }\n\n    /*@ also\n    @   public normal_behavior\n    @   {|\n    @     requires o instanceof ArcType;\n    @     ensures \\result\n    @        \u003c==\u003e ((ArcType)o).from.equals(from)\n    @             \u0026\u0026 ((ArcType)o).to.equals(to);\n    @   also\n    @     requires !(o instanceof ArcType);\n    @     ensures \\result == false;\n    @   |}\n    @*/\n    public boolean equals( /*@nullable@*/ Object o) {\n        return o instanceof ArcType\n            \u0026\u0026 ((ArcType)o)._from.equals(_from)\n            \u0026\u0026 ((ArcType)o)._to.equals(_to);\n    }\n\n    public int hashCode() {\n        return _from.hashCode() + _to.hashCode();\n    }\n\n    //@ ensures \\result == from;\n    public NodeType getFrom() {\n        return _from;\n    }\n\n    //@ ensures \\result == to;\n    public NodeType getTo() {\n        return _to;\n    }\n\n    /*@ also\n    @   public normal_behavior\n    @     ensures \\result instanceof ArcType\n    @          \u0026\u0026 (\\result).equals(this);\n    @*/\n    public Object clone() {\n        return new ArcType(_from, _to);\n    }\n\n    protected String className() {\n        return \"ArcType\";\n    }\n\n    public String toString() {\n        return className() + \"[from: \" + _from + \", to: \" + _to + \"]\";\n    }\n}\n",
+        "name": "ArcType.java",
+        "path": "plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/features/DiGraph/ArcType.java",
+        "url": "/github.com/FeatureIDE/FeatureIDE/-/blob/plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/features/DiGraph/ArcType.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 70,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == from;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 75,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == to;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/FeatureIDE/FeatureIDE",
+        "url": "/github.com/FeatureIDE/FeatureIDE"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3046a14eddb76e0d7e037565f45a6b06ae9106f1"
+        },
+        "content": "//@ model import org.jmlspecs.models.*;\n\n/** Sets of integers implemented as binary search trees.\n *  This implementation demonstrates the use of JML's helper modifier.\n * @author Katie Becker\n * @author Gary T. Leavens\n * @author Arthur Thomas\n */\npublic class IntegerSet {\n\n    /** Is this tree empty?  When this is true, rootValue is not defined. */\n    private boolean isEmpty;\n    //@                 in theSet;\n    /** The integer at the root of the set. */\n    private int rootValue;\n    //@                 in theSet;\n    /** The left subtree, which may be null. */\n    private /*@ nullable @*/ IntegerSet left;\n    //@                         in theSet;\n    //@                         maps left.theSet \\into theSet;\n    /** The right subtree, which may be null. */\n    private /*@ nullable @*/ IntegerSet right;\n    //@                          in theSet;\n    //@                          maps right.theSet \\into theSet;\n    /** The parent of this subtree, which may be null. */\n    private /*@ nullable @*/ IntegerSet parent;\n    //@                          in theSet;\n\n    //@  private represents theSet \u003c- abstractValue();\n\n    /*@ private invariant (left != null || right != null) ==\u003e !isEmpty; \n      @\n      @ private invariant left != null ==\u003e\n      @            (\\forall JMLInteger i; i != null \u0026\u0026 left.theSet.has(i);\n      @                                   i.intValue() \u003c rootValue);\n      @ private invariant right != null ==\u003e\n      @            (\\forall JMLInteger i; i != null \u0026\u0026 right.theSet.has(i);\n      @                                   rootValue \u003c i.intValue());\n      @\n      @ private invariant parent != null ==\u003e !parent.isEmpty;\n      @ private invariant parent != null \u0026\u0026 parent.left != null\n      @                   ==\u003e parent.left.rootValue \u003c parent.rootValue; \n      @ private invariant parent != null \u0026\u0026 parent.right != null\n      @                   ==\u003e parent.rootValue \u003c parent.right.rootValue;\n      @*/\n\n    /*@ private invariant left != null\n      @                    ==\u003e !left.isEmpty \u0026\u0026 left.rootValue \u003c rootValue;\n      @  private invariant right != null\n      @                    ==\u003e !right.isEmpty \u0026\u0026 rootValue \u003c right.rootValue;\n      @*/\n\n    /** Initialize this integer set to be empty. */\n    /*@ public normal_behavior\n      @   assignable theSet;\n      @   ensures theSet.isEmpty();\n      @*/\n    public IntegerSet() {\n        isEmpty = true;\n        parent = null;\n        constrHelper();\n    }\n\n    /*@ protected normal_behavior\n      @   assignable theSet;\n      @   ensures theSet.equals(new JMLValueSet(new JMLInteger(elem))); \n      @*/\n    protected IntegerSet(int elem, IntegerSet par) {\n        isEmpty = false;\n        rootValue = elem;\n        parent = par;\n        constrHelper();\n    }\n\n    /** Set the left and right to null. */\n    //@ private normal_behavior\n    //@   assignable theSet;\n    //@   ensures left == null \u0026\u0026 right == null;\n    //@   ensures \\not_modified(isEmpty) \u0026\u0026 \\not_modified(parent);\n    //@   ensures \\not_modified(rootValue);\n    private /*@ helper @*/ void constrHelper() {\n        right = null;\n        left = null;\n    }\n\n    // specification inherited\n    public void insert(int elem) {\n        if (isEmpty) {\n            isEmpty = false;\n            rootValue = elem;\n        } else if (rootValue != elem) {\n            if (elem \u003c rootValue) {\n                if (left == null) {\n                    left = new IntegerSet(elem, this);\n                } else {\n                    left.insert(elem);\n                }\n            } else {\n                //@ assume rootValue \u003c elem;\n                if (right == null) {\n                    right = new IntegerSet(elem, this);\n                } else {\n                    right.insert(elem);\n                }\n            }\n        }\n    }\n\n    // specification is inherited\n    public /*@ pure @*/\n\tboolean isMember(int elem) {\n        if (isEmpty) {\n            return false;\n        } else if (rootValue == elem) {\n            return true;\n        } else if (elem \u003c rootValue) {\n            if (left == null) {\n                return false;\n            } else {\n                return left.isMember(elem);\n            }\n        } else {\n            //@ assume rootValue \u003c elem;\n            if (right == null) {\n                return false;\n            } else {\n                return right.isMember(elem);\n            }\n        }\n    }\n\n    // specification is inherited\n    public void remove(int elem) {\n        removeHelper(elem);\n    }\n\n    /** Remove the given integer from this set.  Note that the\n     *  invariants don't all apply to this method.  That is important,\n     *  because the tree surgery done by this method calls this method\n     *  recursively in states in which the invariant does not hold.\n     */\n    /*@ private normal_behavior\n      @   assignable theSet;\n      @   ensures theSet.equals( \\old(theSet.remove(new JMLInteger(elem))) );\n      @*/\n    private /*@ helper @*/ void removeHelper(int elem) {\n        if (!isEmpty) {\n            if (rootValue == elem) {\n                if (left == null \u0026\u0026 right == null) {\n                    removeLeaf();\n                } else {\n                    removeRoot();\n                }\n            } else if (elem \u003c rootValue) {\n                if (left != null) {\n                    left.removeHelper(elem);\n                }\n            } else {\n                //@ assume rootValue \u003c elem;\n                if (right != null) {\n                    right.removeHelper(elem);\n                }\n            }\n        }\n    }\n\n    /** Replace the current node with the successor or predecessor. */\n    //@ requires left != null || right != null;\n    //@ assignable theSet;\n    private /*@ helper @*/ void removeRoot() {\n        IntegerSet next = getSuccessor(); \n        if (next == null) {                 \n            next = getPredecessor();            \n            //@ assume next != null;\n            rootValue = next.rootValue; // left subtree\n            left.removeHelper(rootValue);\n        } else { // right subtree\n            //@ assume next != null;\n            rootValue = next.rootValue;\n            right.removeHelper(rootValue);\n        }\n    }\n\n    /** Remove an integer from a leaf node. */\n    /*@ requires left == null \u0026\u0026 right == null;\n      @ {|\n      @    requires parent != null;\n      @    assignable parent.theSet, isEmpty;\n      @  also\n      @    requires parent == null;\n      @    assignable isEmpty;\n      @ |}\n      @*/\n    private /*@ helper @*/ void removeLeaf() {\n        if (parent != null) {\n            if (isLeftChild()) {\n                parent.left = null;\n            } else {\n                parent.right = null;\n            }\n        }\n        // empty this node\n        isEmpty = true;\n    }\n\n    /** Is this node and left child of its parent?. */\n    //@ requires parent != null;\n    private /*@ helper pure @*/ boolean isLeftChild() {\n        return parent.left == this;\n    }\n\n    /*@ requires right == null;\n      @  ensures \\result == null;\n      @ also\n      @  requires right != null;\n      @  ensures \\result != null\n      @          \u0026\u0026 \\result.theSet.has(new JMLInteger(\n      @                (\\min int i; right.theSet.has(new JMLInteger(i)); i)));\n      @*/\n    private /*@ helper pure nullable @*/ IntegerSet getSuccessor() {\n        IntegerSet tree = right;\n        if (right != null) {\n            while (tree.left != null) {\n                tree = tree.left;\n            }\n            //@ assert tree.left == null;\n        }\n        return tree;\n    }\n\n    /*@ requires left == null;\n      @  ensures \\result == null;\n      @ also\n      @  requires left != null;\n      @  ensures \\result != null\n      @          \u0026\u0026 \\result.theSet.has(new JMLInteger(\n      @                (\\max int i; left.theSet.has(new JMLInteger(i)); i)));\n      @*/\n    private /*@ helper pure nullable @*/ IntegerSet getPredecessor() {\n        IntegerSet tree = left;\n        if (left != null) {\n            while (tree.right != null) {\n                tree = tree.right;\n            }\n            //@ assert tree.right == null;\n        }\n        return tree;\n    }\n\n    // specification is inherited\n    public /*@ pure @*/ String toString() {\n        return \"{\" + this.printTree(true) + \"}\";\n    }\n\n    /*@ protected normal_behavior\n      @   assignable \\nothing;\n      @   ensures \\result != null;\n      @*/\n    protected /*@ pure @*/ String printTree(boolean isFirst) {\n        String ans = \"\";\n\n        if (!isEmpty) {\n            if (left != null) {\n                ans += left.printTree(isFirst);\n                if (!left.isEmpty) {\n                    isFirst = false;\n                }\n            }\n            if (!isFirst) {\n                ans += \", \";\n            }\n            ans += Integer.toString(rootValue);\n            if (right != null) {\n                ans += right.printTree(false);\n            }\n        }\n\t\t\n        return ans;\n    }\n\n    /** Return the abstract value of this IntegerSet. */\n    /*@\n      @  ensures \\result != null;\n      public model pure JMLValueSet abstractValue()\n      {\n          JMLValueSet ret = new JMLValueSet();\n          if (!isEmpty) { \n              if (left != null) {\n                  ret = ret.union(left.abstractValue());\n              }\n              ret = ret.insert(new JMLInteger(rootValue));\n              if (right != null) {\n                  ret = ret.union(right.abstractValue());\n              }\n          }\n          return ret;\n      }  @*/\n\n}",
+        "name": "IntegerSet.java",
+        "path": "plugins/de.ovgu.featureide.examples/featureide_examples/IntegerSet-FH-JML/features/Tree/IntegerSet.java",
+        "url": "/github.com/FeatureIDE/FeatureIDE/-/blob/plugins/de.ovgu.featureide.examples/featureide_examples/IntegerSet-FH-JML/features/Tree/IntegerSet.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 167,
+          "offsetAndLengths": [
+            [
+              4,
+              13
+            ]
+          ],
+          "preview": "    //@ requires left != null || right != null;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 206,
+          "offsetAndLengths": [
+            [
+              4,
+              13
+            ]
+          ],
+          "preview": "    //@ requires parent != null;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/FeatureIDE/FeatureIDE",
+        "url": "/github.com/FeatureIDE/FeatureIDE"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3046a14eddb76e0d7e037565f45a6b06ae9106f1"
+        },
+        "content": "// Copyright (C) 2003 Iowa State University\n\n// This file is part of JML\n\n// JML is free software; you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation; either version 2, or (at your option)\n// any later version.\n\n// JML is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with JML; see the file COPYING.  If not, write to\n// the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.\n\n\npackage org.jmlspecs.samples.digraph;\n\n//@ model import org.jmlspecs.models.*;\n\n/** Directed arcs for directed graphs.\n * @author Katie Becker\n * @author Gary T. Leavens\n */\npublic class Arc implements Cloneable {\n\n    private /*@ spec_public non_null @*/ NodeType source;\n    private /*@ spec_public non_null @*/ NodeType target;\n    \n    //@ private invariant_redundantly source != null \u0026\u0026 target != null;\n\n    /** Initialize this arc with the given source and target. */\n    /*@ public normal_behavior\n      @   requires_redundantly source != null \u0026\u0026 target != null;\n      @   assignable this.source, this.target;\n      @   ensures this.source == source\n      @        \u0026\u0026 this.target == target;\n      @*/\n    public Arc(NodeType source, NodeType target) {\n        this.source = source;\n        this.target = target;\n    }\n\n    /*@ also\n      @   public normal_behavior\n      @     requires o instanceof Arc;\n      @     ensures \\result\n      @             ==\u003e ((Arc)o).source.equals(this.source)\n      @                 \u0026\u0026 ((Arc)o).target.equals(this.target);\n      @ also\n      @   public normal_behavior\n      @     requires !(o instanceof Arc);\n      @     ensures \\result == false;\n      @*/\n    public /*@nullable@*/ Object o) {\n        return (o instanceof Arc) \n            \u0026\u0026 ((Arc)o).source.equals(source)\n            \u0026\u0026 ((Arc)o).target.equals(target);\n    }\n\n    /*@ also\n      @   public normal_behavior\n      @     ensures \\result instanceof Arc\n      @         \u0026\u0026 ((Arc)\\result).equals(this);\n      @*/\n    public /*@ pure @*/ Object clone() {\n        Arc res;\n        try {\n            res = (Arc)super.clone();\n        } catch (CloneNotSupportedException e) {\n            // should not happen\n            throw new InternalError(e.getMessage());\n        }\n\t// source and target refs are shared between object and clone\n\t// so they do not need to be reassigned\n\t//@ assume res.source == source \u0026\u0026 res.target == target;\n\treturn res;\n    }\n    \n    public /*@ pure @*/ int hashCode() {\n        return source.hashCode() + target.hashCode();\n    }\n\n    /** Invert the direction of this arc. */\n    /*@ public normal_behavior\n      @   assignable source, target;\n      @   ensures source == \\old(target) \u0026\u0026 target == \\old(source);\n      @*/\n    public void flip() {\n        NodeType temp = source;\n        source = target;\n        target = temp;\n    }\n\n    /** Get the source node of this arc. */\n    /*@ public normal_behavior\n      @   assignable \\nothing;\n      @   ensures \\result == source;           \n      @*/\n    public /*@ pure @*/ NodeType getSource() {\n        return source;\n    }\n\n    /** Set the source node of this arc to the given node. */\n    /*@ public normal_behavior\n      @   requires_redundantly source != null;\n      @   assignable this.source;\n      @   ensures this.source == source;           \n      @*/\n    public void setSource(NodeType source) {\n        this.source = source;\n    }\n\n    /** Get the target node of this arc. */\n    /*@ public normal_behavior\n      @   assignable \\nothing;\n      @   ensures \\result == target;           \n      @*/\n    public /*@ pure @*/ NodeType getTarget() {\n        return target;\n    }\n\n    /** Set the target node of this arc to the given node. */\n    /*@ public normal_behavior\n      @   requires_redundantly target != null;\n      @   assignable this.target;\n      @   ensures this.target == target;           \n      @*/\n    public void setTarget(NodeType target) {\n        this.target = target;\n    }\n\n    /** Return the name of this class. */\n    //@ ensures \\result != null;\n    protected /*@ pure @*/ String className() {\n        return \"Arc\";\n    }\n\n    public String toString() {\n        return className() + \"[from: \" + source + \", to: \" + target + \"]\";\n    }\n}\n",
+        "name": "Arc.java",
+        "path": "plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/originalProject/DiGraph/src/org/jmlspecs/samples/digraph/Arc.java",
+        "url": "/github.com/FeatureIDE/FeatureIDE/-/blob/plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/originalProject/DiGraph/src/org/jmlspecs/samples/digraph/Arc.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 136,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result != null;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/FeatureIDE/FeatureIDE",
+        "url": "/github.com/FeatureIDE/FeatureIDE"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "3046a14eddb76e0d7e037565f45a6b06ae9106f1"
+        },
+        "content": "// @(#)$Id: ArcType.java 1199 2009-02-17 19:42:32Z smshaner $\n\n// Copyright (C) 1998, 1999 Iowa State University\n\n// This file is part of JML\n\n// JML is free software; you can redistribute it and/or modify\n// it under the terms of the GNU General Public License as published by\n// the Free Software Foundation; either version 2, or (at your option)\n// any later version.\n\n// JML is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n// GNU General Public License for more details.\n\n// You should have received a copy of the GNU General Public License\n// along with JML; see the file COPYING.  If not, write to\n// the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.\n\n\npackage org.jmlspecs.samples.digraph;\n\n//@ refine \"ArcType.jml\";\n\nimport org.jmlspecs.models.JMLType;\n\n/*@ pure */ public class ArcType implements JMLType {\n\n    private NodeType _from;\n    //@                   in from;\n\n    private NodeType _to;\n    //@                 in to;\n\n    //@ private represents from \u003c- _from;\n    //@ private represents to \u003c- _to;\n\n    //@ private invariant_redundantly _from != null \u0026\u0026 _to != null;\n\n    public ArcType(NodeType from, NodeType to) {\n        _from = from;\n        _to = to;\n    }\n\n    public boolean equals(/*@nullable@*/ Object o) {\n        return o instanceof ArcType\n            \u0026\u0026 ((ArcType)o)._from.equals(_from)\n            \u0026\u0026 ((ArcType)o)._to.equals(_to);\n    }\n\n    public int hashCode() {\n        return _from.hashCode() + _to.hashCode();\n    }\n\n    //@ ensures \\result == from;\n    public NodeType getFrom() {\n        return _from;\n    }\n\n    //@ ensures \\result == to;\n    public NodeType getTo() {\n        return _to;\n    }\n\n    public Object clone() {\n        return new ArcType(_from, _to);\n    }\n\n    protected String className() {\n        return \"ArcType\";\n    }\n\n    public String toString() {\n        return className() + \"[from: \" + _from + \", to: \" + _to + \"]\";\n    }\n}\n",
+        "name": "ArcType.java",
+        "path": "plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/originalProject/DiGraph/src/org/jmlspecs/samples/digraph/ArcType.java",
+        "url": "/github.com/FeatureIDE/FeatureIDE/-/blob/plugins/de.ovgu.featureide.examples/featureide_examples/DiGraph-FH-JML/originalProject/DiGraph/src/org/jmlspecs/samples/digraph/ArcType.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 55,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == from;"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 60,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "    //@ ensures \\result == to;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/FeatureIDE/FeatureIDE",
+        "url": "/github.com/FeatureIDE/FeatureIDE"
+      }
+    }
+  ],
+  "LimitHit": false,
+  "Cloning": [],
+  "Missing": [],
+  "Timedout": [],
+  "ResultCount": 9,
+  "ElapsedMilliseconds": 1098,
+  "Alert": {
+    "Title": "",
+    "Description": "",
+    "ProposedQueries": null
+  }
+}

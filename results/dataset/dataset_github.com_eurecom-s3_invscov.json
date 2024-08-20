@@ -1,0 +1,50 @@
+[
+    {
+        "repository": "github.com/eurecom-s3/invscov",
+        "file": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/GeoSegment.java",
+        "code": "  public GeoSegment reverse()\n  {\n    return new GeoSegment(name, p2, p1);\n  }\n",
+        "methodStartingLine": 85,
+        "methodEndingLine": 88,
+        "jml": "//@ ensures \\result != null // sample feeding"
+    },
+    {
+        "repository": "github.com/eurecom-s3/invscov",
+        "file": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/PathFinder.java",
+        "code": "  public static Path findPath(Graph g, Set starts, Set goals)\n    throws NoPathException\n  {\n    Assert.assertNotNull(g);\n    Assert.assertNotNull(starts);\n    Assert.assertNotNull(goals);\n    Assert.assert(starts.size() >= 1);\n    Assert.assert(goals.size() >= 1);\n    //@ set goals.elementType = \\type(Object) // dumb\n\n    // check arguments\n    if (false) // jeremy\n    {\n      //@ assume false // engineering\n      Iterator iter = starts.iterator();\n      while (iter.hasNext()) {\n        Path startpath = (Path) iter.next();\n        Iterator elts = startpath.elements();\n        if (!elts.hasNext()) throw new IllegalArgumentException(startpath + \" has no elements\");\n        Object start = elts.next();\n        if (elts.hasNext()) throw new IllegalArgumentException(startpath + \" has more than one element\");\n        if (!g.containsNode(start)) throw new IllegalArgumentException(start + \" is not in the graph\");\n      }\n      iter = goals.iterator();\n      while (iter.hasNext()) {\n        Object goal = iter.next();\n        if (!g.containsNode(goal)) throw new IllegalArgumentException(goal + \" is not in the graph\");\n      }\n    }\n\n\n    // Map paths = { forall start in starts | (start, [start]) }\n    // PriorityQueue active = starts\n\n    Map paths = new HashMap();\n    //@ set paths.keyType = \\type(Object) // dumb\n    //@ set paths.elementType = \\type(Path) // local variable outside Daikon scope\n    PriorityQueue active = new PriorityQueue();\n    {\n      Iterator iter = starts.iterator();\n      while (iter.hasNext()) {\n        Path startpath;\n\t{\n\t  Object jeremy_added = iter.next();\n\t  //@ assume \\typeof(jeremy_added) == \\type(Path) // dumb\n\t  startpath = (Path) jeremy_added;\n\t}\n\tIterator jeremy_added = startpath.elements();\n\t//@ assume jeremy_added.moreElements == true // not traced in Daikon, inexpressible in ESC\n        Object start = jeremy_added.next();\n        Object old = paths.put(start, startpath);\n        Assert.assert(old == null);\n\ttry { active.insert(startpath.cost(), start); } catch (PriorityQueue.DuplicateElementException e) { //@ assume false // algorithmic understanding\n\t}\n      }\n    }\n\n    // Set finished = { }\n\n    Set finished = new HashSet();\n    //@ set finished.elementType = \\type(Object) // dumb\n\n    // while active is non-empty do\n\n    while (active.size() > 0) {\n\n      // y = active.extractMin()\n      // ypath = paths(y)\n      Object y = active.extractMin(); //@ nowarn Exception; // PriorityQueue not ghost-specified\n      Path ypath = (Path) paths.get(y);\n      Assert.assert(y != null);\n      Assert.assert(ypath != null);\n\n      // if (y in goals)\n      //   return ypath\n      if (goals.contains(y)) {\n        return ypath;\n      }\n\n      // for each child z of y\n      Iterator zs = g.childrenOf(y).iterator();\n      while (zs.hasNext()) {\n        Object z = zs.next();\n\t//@ assume z != null // local variable\n\n        // zpath = ypath + [z]\n        Path zpath = ypath.extend(z);\n\n        // if (z not in finished) and (z not in active)\n        if (!finished.contains(z) && !active.contains(z)) {\n\n          // [ missing from algorithm: check for y != z ]\n          if (y.equals(z)) {\n            continue;\n          }\n\n          // paths(z) = zpath\n          // insert z in active\n          Object old = paths.put(z, zpath);\n          Assert.assert(old == null);\n\t  //@ nowarn Exception; // local variable / algorithmic understanding\n          active.insert(zpath.cost(), z);\n        }\n\n      }\n\n      // insert y in finished\n      finished.add(y);\n    }\n\n    // No Path Exists\n    throw new NoPathException();\n  }\n",
+        "methodStartingLine": 42,
+        "methodEndingLine": 154,
+        "jml": "//@ requires starts.elementType == \\type(Path) // dfej non-List\n//@ requires starts.containsNull == false // dfej non-List"
+    },
+    {
+        "repository": "github.com/eurecom-s3/invscov",
+        "file": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick/PriorityQueue.java",
+        "code": "    public int size()\n    {\n        // the heap has a dummy element\n        int mistere = heap.size()-1;\n\t//@ assume mistere >= 0 // inexpressable object invariant\n\treturn mistere;\n    }\n",
+        "methodStartingLine": 59,
+        "methodEndingLine": 65,
+        "jml": "//@ ensures \\result >= 0 // Daikon has >=1 unjustified"
+    },
+    {
+        "repository": "github.com/eurecom-s3/invscov",
+        "file": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick/KillfileReader.java",
+        "code": "  public static StreetSegmentFilter fromDir(File dbdir)\n  {\n    if (!dbdir.isDirectory()) {\n      throw new KillfileException(\"Not a directory: \" + dbdir);\n    }\n\n    File[] files = dbdir.listFiles(killfile_filter);\n    if (files.length == 0) {\n      return new AllPassStreetSegmentFilter();\n    }\n\n    StreetSegmentFilter result = fromFile(files[0]);\n    for (int i=1; i<files.length; i++) {\n      StreetSegmentFilter another = fromFile(files[i]);\n      result = new CompositeStreetSegmentFilter(result, another);\n    }\n\n    return result;\n  }\n",
+        "methodStartingLine": 37,
+        "methodEndingLine": 55,
+        "jml": "//@ requires dbdir.isDirectory // outside of Daikon's grammar"
+    },
+    {
+        "repository": "github.com/eurecom-s3/invscov",
+        "file": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick/KillfileReader.java",
+        "code": "    private String nextToken()\n\n    {\n      if (line == null) {\n        throw new KillfileException(\"Ran out of tokens\");\n      }\n\n      String result;\n      int n = line.indexOf('$');\n      if (n >= 0) {\n        result = line.substring(0, n);\n        line = line.substring(n+1);\n      } else {\n\t//@ assume false // incompleteness: modular analysis\n        result = line;\n        line = null;\n      }\n\n      return result;\n    }\n",
+        "methodStartingLine": 242,
+        "methodEndingLine": 261,
+        "jml": "//@ ensures this.line != null // incompleteness: modular analysis"
+    },
+    {
+        "repository": "github.com/eurecom-s3/invscov",
+        "file": "daikon/tests/daikon-tests/MapQuick/issta-goals/MapQuick2/DirectionsFinder.java",
+        "code": "    static DirectionsFinder getDirectionsFinder(String databaseName,\n\t\t\t\t\t\tCollection zf,\n\t\t\t\t\t\tString dumpPrefix)\n        throws InvalidDatabaseException\n    {\n        StreetSegReader ssr;\n\n\tSystem.err.println(\"Making DF for \" + databaseName);\n\tSystem.err.flush();\n\n        try\n        {\n            ssr = new StreetSegReader(databaseName);\n        }\n        catch (StreetSegReader.InvalidSourceException e)\n        {\n            throw new InvalidDatabaseException(\"Invalid Tiger database \" +\n                                               databaseName);\n        }\n\n        return new DirectionsFinder(ssr.streetSegments(), zf, dumpPrefix);\n    }\n",
+        "methodStartingLine": 138,
+        "methodEndingLine": 159,
+        "jml": "//@ ensures \\result != null // code not instrumented"
+    }
+]

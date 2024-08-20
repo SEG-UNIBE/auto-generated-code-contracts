@@ -1,0 +1,1602 @@
+[
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1541,
+        "methodEndingLine": 1549,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ int[] array, /*@non_null@*/  int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1564,
+        "methodEndingLine": 1572,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1587,
+        "methodEndingLine": 1600,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ int[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1615,
+        "methodEndingLine": 1628,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "    public QueueNode next(QueueNode next) {\n      return m_Next = next;\n    } //@ nowarn Invariant; // Because it stupidly checks the Queue invariant!\n",
+        "methodStartingLine": 70,
+        "methodEndingLine": 72,
+        "jml": "//@ requires contents != null;\n//@ ensures m_Contents == contents;\n//@ ensures m_Next == null;\n//@ requires next != this ;\n//@ ensures m_Next==next && \\result==next;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "    public /*@ pure @*/ QueueNode next() {\n      return m_Next;\n    }\n",
+        "methodStartingLine": 78,
+        "methodEndingLine": 80,
+        "jml": "//@ ensures \\result == m_Next;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "    public Object contents(Object contents) {\n      return m_Contents = contents;\n    }\n",
+        "methodStartingLine": 88,
+        "methodEndingLine": 90,
+        "jml": "//@ requires contents != null;\n//@ ensures  m_Contents == contents && \\result == contents;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "    public /*@ pure @*/ Object contents() {\n      return m_Contents;\n    }\n",
+        "methodStartingLine": 96,
+        "methodEndingLine": 98,
+        "jml": "//@ ensures \\result == m_Contents;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public final synchronized void removeAllElements() {\n    m_Size = 0;\n    m_Head = null;\n    m_Tail = null;\n  }\n",
+        "methodStartingLine": 127,
+        "methodEndingLine": 131,
+        "jml": "//@ ensures m_Size == 0;\n//@ ensures m_Head == null;\n//@ ensures m_Tail == null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public synchronized Object push(Object item) {\n    QueueNode newNode = new QueueNode(item);\n    \n    if (m_Head == null) {\n      m_Head = m_Tail = newNode;\n    } else {\n      m_Tail = m_Tail.next(newNode);\n    }\n    m_Size++;\n    return item;\n  }\n",
+        "methodStartingLine": 148,
+        "methodEndingLine": 158,
+        "jml": "//@ requires item != null;\n//@ ensures m_Head != null;\n//@ ensures m_Tail != \\old(m_Tail);\n//@ ensures m_Size == \\old(m_Size) + 1;\n//@ ensures \\old(m_Size) == 0 ==> m_Head == m_Tail; \n//@ ensures \\old(m_Size) != 0 ==> m_Head == \\old(m_Head);\n//@ ensures m_Tail.contents() == \\old(item);\n//@ ensures \\result == item;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public synchronized Object pop() \n      throws RuntimeException   // REDUNDANT, BUT ESCJAVA REQUIRES THIS\n  {\n    if (m_Head == null) {\n\tthrow new RuntimeException(\"Queue is empty\");\n    }\n    Object retval = m_Head.contents();\n    m_Size--;\n    m_Head = m_Head.next();\n    // Here we need to either tell ESC/Java some facts about\n    // the contents of the list after popping off the head,\n    // or turn off the 'invariant' warnings.\n    //\n    //@ assume m_Size == 0 <==> m_Head == null;\n    //@ assume m_Size == 1 <==> m_Head == m_Tail;\n    if (m_Head == null) {\n      m_Tail = null;\n    }\n    return retval;\n  }\n",
+        "methodStartingLine": 172,
+        "methodEndingLine": 191,
+        "jml": "//@ ensures m_Size == \\old(m_Size) - 1;\n//@ ensures m_Head == \\old(m_Head.m_Next);\n//@ ensures m_Head != null ==> m_Tail == \\old(m_Tail);\n//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public /*@ pure @*/ synchronized Object peek() \n    throws RuntimeException\n  { \n    if (m_Head == null) {\n      throw new RuntimeException(\"Queue is empty\");\n    }\n    return m_Head.contents();\n  }\n",
+        "methodStartingLine": 201,
+        "methodEndingLine": 208,
+        "jml": "//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public /*@ pure @*/ boolean empty() {\n    return m_Head == null;\n  }\n",
+        "methodStartingLine": 216,
+        "methodEndingLine": 218,
+        "jml": "//@ ensures \\result <==> m_Head == null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public /*@ pure @*/ int size() {\n    return m_Size;\n  }\n",
+        "methodStartingLine": 226,
+        "methodEndingLine": 228,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public  /*@ pure @*/ String toString() {\n\n    String retval = \"Queue Contents \"+m_Size+\" elements\\n\";\n    QueueNode current = m_Head;\n    if (current == null) {\n      return retval + \"Empty\\n\";\n    } else {\n      while (current != null) {\n        retval += current.contents().toString()+\"\\n\"; //@nowarn Modifies;\n\tcurrent = current.next();\n      }\n    }\n    return retval;\n  } //@ nowarn Post;\n",
+        "methodStartingLine": 238,
+        "methodEndingLine": 251,
+        "jml": "//@ ensures \\result != null;\n//@ ensures (* \\result == textual description of the queue *);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Queue.java",
+        "code": "  public static void main(String [] argv) {\n\n    try {\n      Queue queue = new Queue();\n      for(int i = 0; i < argv.length; i++) {\n\tqueue.push(argv[i]);\n      }\n      System.out.println(\"After pushing command line arguments\");\n      System.out.println(queue.toString());\n      while (!queue.empty()) {\n\tSystem.out.println(\"Pop: \" + queue.pop().toString());\n      }\n      // try one more pop, to make sure we get an exception\n      try \n\t{\n\t  queue.pop();\n\t  System.out.println(\"ERROR: pop did not throw exception!\");\n\t}\n      catch (RuntimeException ex)\n        {\n\t  System.out.println(\"Pop on empty queue correctly gave exception.\");\n\t}\n    } catch (Exception ex) {\n      System.out.println(ex.getMessage());\n    }\n  }\n",
+        "methodStartingLine": 261,
+        "methodEndingLine": 286,
+        "jml": "//@ requires argv.length >= 0;\n//@ requires argv != null;\n//@ requires (\\forall int i; 0 <= i && i < argv.length; argv[i] != null);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ Attribute attribute(int index) {\n   \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.attribute(index);\n  }\n",
+        "methodStartingLine": 146,
+        "methodEndingLine": 152,
+        "jml": "//@ ensures m_Dataset == null;\n//@ ensures m_Dataset == null;\n//@ requires numAttributes > 0;    // Or maybe == 0 is okay too?\n//@ ensures m_Dataset == null;\n//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ Attribute attributeSparse(int indexOfIndex) {\n   \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.attribute(indexOfIndex);\n  }\n",
+        "methodStartingLine": 164,
+        "methodEndingLine": 170,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ Attribute classAttribute() {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.classAttribute();\n  }\n",
+        "methodStartingLine": 180,
+        "methodEndingLine": 186,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ int classIndex() {\n    \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.classIndex();\n  }\n",
+        "methodStartingLine": 196,
+        "methodEndingLine": 202,
+        "jml": "//@ requires m_Dataset != null;\n//@ ensures  \\result == m_Dataset.classIndex();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ boolean classIsMissing() {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    return isMissing(classIndex());\n  }\n",
+        "methodStartingLine": 212,
+        "methodEndingLine": 218,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ double classValue() {\n    \n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    return value(classIndex());\n  }\n",
+        "methodStartingLine": 231,
+        "methodEndingLine": 237,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ Instances dataset() {\n\n    return m_Dataset;\n  }\n",
+        "methodStartingLine": 265,
+        "methodEndingLine": 268,
+        "jml": "//@ ensures \\result == m_Dataset;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public void deleteAttributeAt(int position) {\n\n    if (m_Dataset != null) {\n      throw new RuntimeException(\"Instance has access to a dataset!\");\n    }\n    forceDeleteAttributeAt(position);\n  }\n",
+        "methodStartingLine": 281,
+        "methodEndingLine": 287,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ Enumeration enumerateAttributes() {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.enumerateAttributes();\n  }\n",
+        "methodStartingLine": 297,
+        "methodEndingLine": 303,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ boolean equalHeaders(Instance inst) {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.equalHeaders(inst.m_Dataset);\n  }\n",
+        "methodStartingLine": 315,
+        "methodEndingLine": 321,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ boolean hasMissingValue() {\n    \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    for (int i = 0; i < numAttributes(); i++) {\n      if (i != classIndex()) {\n\tif (isMissing(i)) {\n\t  return true;\n\t}\n      }\n    }\n    return false;\n  }\n",
+        "methodStartingLine": 330,
+        "methodEndingLine": 343,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public void insertAttributeAt(int position) {\n\n    if (m_Dataset != null) {\n      throw new RuntimeException(\"Instance has accesss to a dataset!\");\n    }\n    if ((position < 0) ||\n\t(position > numAttributes())) {\n      throw new IllegalArgumentException(\"Can't insert attribute: index out \"+\n                                         \"of range\");\n    }\n    forceInsertAttributeAt(position);\n  }\n",
+        "methodStartingLine": 370,
+        "methodEndingLine": 381,
+        "jml": "//@ requires m_Dataset == null;\n//@ requires 0 <= position && position <= numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ int numAttributes() {\n\n    return m_AttValues.length;\n  }\n",
+        "methodStartingLine": 468,
+        "methodEndingLine": 471,
+        "jml": "//@ ensures \\result == m_AttValues.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ int numClasses() {\n    \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.numClasses();\n  }\n",
+        "methodStartingLine": 482,
+        "methodEndingLine": 488,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public /*@pure@*/ int numValues() {\n\n    return m_AttValues.length;\n  }\n",
+        "methodStartingLine": 496,
+        "methodEndingLine": 499,
+        "jml": "//@ ensures \\result == m_AttValues.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public void setClassMissing() {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    setMissing(classIndex());\n  }\n",
+        "methodStartingLine": 534,
+        "methodEndingLine": 540,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public void setClassValue(double value) {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    setValue(classIndex(), value);\n  }\n",
+        "methodStartingLine": 555,
+        "methodEndingLine": 561,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public final void setClassValue(String value) {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    setValue(classIndex(), value);\n  }\n",
+        "methodStartingLine": 578,
+        "methodEndingLine": 584,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public final void setValue(int attIndex, String value) {\n    \n    int valIndex;\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    if (!attribute(attIndex).isNominal() &&\n\t!attribute(attIndex).isString()) {\n      throw new IllegalArgumentException(\"Attribute neither nominal nor string!\");\n    }\n    valIndex = attribute(attIndex).indexOfValue(value);\n    if (valIndex == -1) {\n      if (attribute(attIndex).isNominal()) {\n\tthrow new IllegalArgumentException(\"Value not defined for given nominal attribute!\");\n      } else {\n\tattribute(attIndex).forceAddValue(value);\n\tvalIndex = attribute(attIndex).indexOfValue(value);\n      }\n    }\n    setValue(attIndex, (double)valIndex); \n  }\n",
+        "methodStartingLine": 671,
+        "methodEndingLine": 692,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public final /*@pure@*/ String stringValue(int attIndex) {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    } \n    return stringValue(m_Dataset.attribute(attIndex));\n  }\n",
+        "methodStartingLine": 767,
+        "methodEndingLine": 773,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instance.java",
+        "code": "  public static void main(String[] options) {\n\n    try {\n\n      // Create numeric attributes \"length\" and \"weight\"\n      Attribute length = new Attribute(\"length\");\n      Attribute weight = new Attribute(\"weight\");\n      \n      // Create vector to hold nominal values \"first\", \"second\", \"third\" \n      FastVector my_nominal_values = new FastVector(3); \n      my_nominal_values.addElement(\"first\"); \n      my_nominal_values.addElement(\"second\"); \n      my_nominal_values.addElement(\"third\"); \n      \n      // Create nominal attribute \"position\" \n      Attribute position = new Attribute(\"position\", my_nominal_values);\n      \n      // Create vector of the above attributes \n      FastVector attributes = new FastVector(3);\n      attributes.addElement(length);\n      attributes.addElement(weight);\n      attributes.addElement(position);\n      \n      // Create the empty dataset \"race\" with above attributes\n      Instances race = new Instances(\"race\", attributes, 0);\n      \n      // Make position the class attribute\n      race.setClassIndex(position.index());\n      \n      // Create empty instance with three attribute values\n      Instance inst = new Instance(3);\n      \n      // Set instance's values for the attributes \"length\", \"weight\", and \"position\"\n      inst.setValue(length, 5.3);\n      inst.setValue(weight, 300);\n      inst.setValue(position, \"first\");\n      \n      // Set instance's dataset to be the dataset \"race\"\n      inst.setDataset(race);\n      \n      // Print the instance\n      System.out.println(\"The instance: \" + inst);\n      \n      // Print the first attribute\n      System.out.println(\"First attribute: \" + inst.attribute(0));\n      \n      // Print the class attribute\n      System.out.println(\"Class attribute: \" + inst.classAttribute());\n      \n      // Print the class index\n      System.out.println(\"Class index: \" + inst.classIndex());\n      \n      // Say if class is missing\n      System.out.println(\"Class is missing: \" + inst.classIsMissing());\n      \n      // Print the instance's class value in internal format\n      System.out.println(\"Class value (internal format): \" + inst.classValue());\n      \n      // Print a shallow copy of this instance\n      Instance copy = (Instance) inst.copy();\n      System.out.println(\"Shallow copy: \" + copy);\n      \n      // Set dataset for shallow copy\n      copy.setDataset(inst.dataset());\n      System.out.println(\"Shallow copy with dataset set: \" + copy);\n      \n      // Unset dataset for copy, delete first attribute, and insert it again\n      copy.setDataset(null);\n      copy.deleteAttributeAt(0);\n      copy.insertAttributeAt(0);\n      copy.setDataset(inst.dataset());\n      System.out.println(\"Copy with first attribute deleted and inserted: \" + copy); \n      \n      // Enumerate attributes (leaving out the class attribute)\n      System.out.println(\"Enumerating attributes (leaving out class):\");\n      Enumeration enu = inst.enumerateAttributes();\n      while (enu.hasMoreElements()) {\n\tAttribute att = (Attribute) enu.nextElement();\n\tSystem.out.println(att);\n      }\n      \n      // Headers are equivalent?\n      System.out.println(\"Header of original and copy equivalent: \" +\n\t\t\t inst.equalHeaders(copy));\n\n      // Test for missing values\n      System.out.println(\"Length of copy missing: \" + copy.isMissing(length));\n      System.out.println(\"Weight of copy missing: \" + copy.isMissing(weight.index()));\n      System.out.println(\"Length of copy missing: \" + \n\t\t\t Instance.isMissingValue(copy.value(length)));\n      System.out.println(\"Missing value coded as: \" + Instance.missingValue());\n\n      // Prints number of attributes and classes\n      System.out.println(\"Number of attributes: \" + copy.numAttributes());\n      System.out.println(\"Number of classes: \" + copy.numClasses());\n\n      // Replace missing values\n      double[] meansAndModes = {2, 3, 0};\n      copy.replaceMissingValues(meansAndModes);\n      System.out.println(\"Copy with missing value replaced: \" + copy);\n\n      // Setting and getting values and weights\n      copy.setClassMissing();\n      System.out.println(\"Copy with missing class: \" + copy);\n      copy.setClassValue(0);\n      System.out.println(\"Copy with class value set to first value: \" + copy);\n      copy.setClassValue(\"third\");\n      System.out.println(\"Copy with class value set to \\\"third\\\": \" + copy);\n      copy.setMissing(1);\n      System.out.println(\"Copy with second attribute set to be missing: \" + copy);\n      copy.setMissing(length);\n      System.out.println(\"Copy with length set to be missing: \" + copy);\n      copy.setValue(0, 0);\n      System.out.println(\"Copy with first attribute set to 0: \" + copy);\n      copy.setValue(weight, 1);\n      System.out.println(\"Copy with weight attribute set to 1: \" + copy);\n      copy.setValue(position, \"second\");\n      System.out.println(\"Copy with position set to \\\"second\\\": \" + copy);\n      copy.setValue(2, \"first\");\n      System.out.println(\"Copy with last attribute set to \\\"first\\\": \" + copy);\n      System.out.println(\"Current weight of instance copy: \" + copy.weight());\n      copy.setWeight(2);\n      System.out.println(\"Current weight of instance copy (set to 2): \" + copy.weight());\n      System.out.println(\"Last value of copy: \" + copy.toString(2));\n      System.out.println(\"Value of position for copy: \" + copy.toString(position));\n      System.out.println(\"Last value of copy (internal format): \" + copy.value(2));\n      System.out.println(\"Value of position for copy (internal format): \" + \n\t\t\t copy.value(position));\n    } catch (Exception e) {\n      e.printStackTrace();\n    }\n  }\n",
+        "methodStartingLine": 993,
+        "methodEndingLine": 1124,
+        "jml": "//@ requires options != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public Instances stringFreeStructure() {\n\n    FastVector atts = (FastVector)m_Attributes.copy();\n    for (int i = 0 ; i < atts.size(); i++) {\n      Attribute att = (Attribute)atts.elementAt(i);\n      if (att.type() == Attribute.STRING) {\n        atts.setElementAt(new Attribute(att.name(), (FastVector)null), i);\n      }\n    }\n    Instances result = new Instances(relationName(), atts, 0);\n    result.m_ClassIndex = m_ClassIndex;\n    return result;\n  }\n",
+        "methodStartingLine": 238,
+        "methodEndingLine": 250,
+        "jml": "//@ requires capacity >= 0;\n//@ ensures classIndex() == -1;\n//@ requires 0 <= first;\n//@ requires 0 <= toCopy;\n//@ requires first + toCopy <= source.numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ Attribute attribute(int index) {\n    \n    return (Attribute) m_Attributes.elementAt(index);\n  }\n",
+        "methodStartingLine": 278,
+        "methodEndingLine": 281,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < m_Attributes.size();\n//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ Attribute classAttribute() {\n\n    if (m_ClassIndex < 0) {\n      throw new UnassignedClassException(\"Class index is negative (not set)!\");\n    }\n    return attribute(m_ClassIndex);\n  }\n",
+        "methodStartingLine": 357,
+        "methodEndingLine": 363,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public void delete(int index) {\n    \n    m_Instances.removeElementAt(index);\n  }\n",
+        "methodStartingLine": 400,
+        "methodEndingLine": 403,
+        "jml": "//@ requires 0 <= index && index < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public void deleteAttributeAt(int position) {\n\t \n    if ((position < 0) || (position >= m_Attributes.size())) {\n      throw new IllegalArgumentException(\"Index out of range\");\n    }\n    if (position == m_ClassIndex) {\n      throw new IllegalArgumentException(\"Can't delete class attribute\");\n    }\n    freshAttributeInfo();\n    if (m_ClassIndex > position) {\n      m_ClassIndex--;\n    }\n    m_Attributes.removeElementAt(position);\n    for (int i = position; i < m_Attributes.size(); i++) {\n      Attribute current = (Attribute)m_Attributes.elementAt(i);\n      current.setIndex(current.index() - 1);\n    }\n    for (int i = 0; i < numInstances(); i++) {\n      instance(i).forceDeleteAttributeAt(position); \n    }\n  }\n",
+        "methodStartingLine": 416,
+        "methodEndingLine": 436,
+        "jml": "//@ requires 0 <= position && position < numAttributes();\n//@ requires position != classIndex();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public void deleteWithMissing(int attIndex) {\n\n    FastVector newInstances = new FastVector(numInstances());\n\n    for (int i = 0; i < numInstances(); i++) {\n      if (!instance(i).isMissing(attIndex)) {\n\tnewInstances.addElement(instance(i));\n      }\n    }\n    m_Instances = newInstances;\n  }\n",
+        "methodStartingLine": 464,
+        "methodEndingLine": 474,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@non_null pure@*/ Instance firstInstance() {\n    \n    return (Instance)m_Instances.firstElement();\n  }\n",
+        "methodStartingLine": 551,
+        "methodEndingLine": 554,
+        "jml": "//@ requires numInstances() > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public void insertAttributeAt(/*@non_null@*/ Attribute att, int position) {\n\t \n    if ((position < 0) ||\n\t(position > m_Attributes.size())) {\n      throw new IllegalArgumentException(\"Index out of range\");\n    }\n    att = (Attribute)att.copy();\n    freshAttributeInfo();\n    att.setIndex(position);\n    m_Attributes.insertElementAt(att, position);\n    for (int i = position + 1; i < m_Attributes.size(); i++) {\n      Attribute current = (Attribute)m_Attributes.elementAt(i);\n      current.setIndex(current.index() + 1);\n    }\n    for (int i = 0; i < numInstances(); i++) {\n      instance(i).forceInsertAttributeAt(position);\n    }\n    if (m_ClassIndex >= position) {\n      m_ClassIndex++;\n    }\n  }\n",
+        "methodStartingLine": 584,
+        "methodEndingLine": 604,
+        "jml": "//@ requires 0 <= position;\n//@ requires position <= numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@non_null pure@*/ Instance instance(int index) {\n\n    return (Instance)m_Instances.elementAt(index);\n  }\n",
+        "methodStartingLine": 614,
+        "methodEndingLine": 617,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@non_null pure@*/ Instance lastInstance() {\n    \n    return (Instance)m_Instances.lastElement();\n  }\n",
+        "methodStartingLine": 678,
+        "methodEndingLine": 681,
+        "jml": "//@ requires numInstances() > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ int numAttributes() {\n\n    return m_Attributes.size();\n  }\n",
+        "methodStartingLine": 741,
+        "methodEndingLine": 744,
+        "jml": "//@ ensures \\result == m_Attributes.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ int numClasses() {\n    \n    if (m_ClassIndex < 0) {\n      throw new UnassignedClassException(\"Class index is negative (not set)!\");\n    }\n    if (!classAttribute().isNominal()) {\n      return 1;\n    } else {\n      return classAttribute().numValues();\n    }\n  }\n",
+        "methodStartingLine": 754,
+        "methodEndingLine": 764,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ int numDistinctValues(int attIndex) {\n\n    if (attribute(attIndex).isNumeric()) {\n      double [] attVals = attributeToDoubleArray(attIndex);\n      int [] sorted = Utils.sort(attVals);\n      double prev = 0;\n      int counter = 0;\n      for (int i = 0; i < sorted.length; i++) {\n\tInstance current = instance(sorted[i]);\n\tif (current.isMissing(attIndex)) {\n\t  break;\n\t}\n\tif ((i == 0) || \n\t    (current.value(attIndex) > prev)) {\n\t  prev = current.value(attIndex);\n\t  counter++;\n\t}\n      }\n      return counter;\n    } else {\n      return attribute(attIndex).numValues();\n    }\n  }\n",
+        "methodStartingLine": 776,
+        "methodEndingLine": 798,
+        "jml": "//@ requires 0 <= attIndex;\n//@ requires attIndex < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ int numInstances() {\n\n    return m_Instances.size();\n  }\n",
+        "methodStartingLine": 819,
+        "methodEndingLine": 822,
+        "jml": "//@ ensures \\result == m_Instances.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ String relationName() {\n\n    return m_RelationName;\n  }\n",
+        "methodStartingLine": 862,
+        "methodEndingLine": 865,
+        "jml": "//@ ensures \\result == m_RelationName;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public Instances testCV(int numFolds, int numFold) {\n\n    int numInstForFold, first, offset;\n    Instances test;\n    \n    if (numFolds < 2) {\n      throw new IllegalArgumentException(\"Number of folds must be at least 2!\");\n    }\n    if (numFolds > numInstances()) {\n      throw new IllegalArgumentException(\"Can't have more folds than instances!\");\n    }\n    numInstForFold = numInstances() / numFolds;\n    if (numFold < numInstances() % numFolds){\n      numInstForFold++;\n      offset = numFold;\n    }else\n      offset = numInstances() % numFolds;\n    test = new Instances(this, numInstForFold);\n    first = numFold * (numInstances() / numFolds) + offset;\n    copyInstances(first, test, numInstForFold);\n    return test;\n  }\n",
+        "methodStartingLine": 1172,
+        "methodEndingLine": 1193,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public Instances trainCV(int numFolds, int numFold) {\n\n    int numInstForFold, first, offset;\n    Instances train;\n \n    if (numFolds < 2) {\n      throw new IllegalArgumentException(\"Number of folds must be at least 2!\");\n    }\n    if (numFolds > numInstances()) {\n      throw new IllegalArgumentException(\"Can't have more folds than instances!\");\n    }\n    numInstForFold = numInstances() / numFolds;\n    if (numFold < numInstances() % numFolds) {\n      numInstForFold++;\n      offset = numFold;\n    }else\n      offset = numInstances() % numFolds;\n    train = new Instances(this, numInstances() - numInstForFold);\n    first = numFold * (numInstances() / numFolds) + offset;\n    copyInstances(0, train, first);\n    copyInstances(first + numInstForFold, train,\n\t\t  numInstances() - first - numInstForFold);\n\n    return train;\n  }\n",
+        "methodStartingLine": 1234,
+        "methodEndingLine": 1258,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public Instances trainCV(int numFolds, int numFold, Random random) {\n\n    Instances train = trainCV(numFolds, numFold);\n    train.randomize(random);\n    return train;\n  }\n",
+        "methodStartingLine": 1275,
+        "methodEndingLine": 1280,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public AttributeStats attributeStats(int index) {\n\n    AttributeStats result = new AttributeStats();\n    if (attribute(index).isNominal()) {\n      result.nominalCounts = new int [attribute(index).numValues()];\n    }\n    if (attribute(index).isNumeric()) {\n      result.numericStats = new weka.experiment.Stats();\n    }\n    result.totalCount = numInstances();\n\n    double [] attVals = attributeToDoubleArray(index);\n    int [] sorted = Utils.sort(attVals);\n    int currentCount = 0;\n    double prev = Instance.missingValue();\n    for (int j = 0; j < numInstances(); j++) {\n      Instance current = instance(sorted[j]);\n      if (current.isMissing(index)) {\n\tresult.missingCount = numInstances() - j;\n\tbreak;\n      }\n      if (current.value(index) == prev) {\n\tcurrentCount++;\n      } else {\n\tresult.addDistinct(prev, currentCount);\n\tcurrentCount = 1;\n\tprev = current.value(index);\n      }\n    }\n    result.addDistinct(prev, currentCount);\n    result.distinctCount--; // So we don't count \"missing\" as a value \n    return result;\n  }\n",
+        "methodStartingLine": 1341,
+        "methodEndingLine": 1373,
+        "jml": "//@ requires 0 <= index && index < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public /*@pure@*/ double [] attributeToDoubleArray(int index) {\n\n    double [] result = new double[numInstances()];\n    for (int i = 0; i < result.length; i++) {\n      result[i] = instance(i).value(index);\n    }\n    return result;\n  }\n",
+        "methodStartingLine": 1385,
+        "methodEndingLine": 1392,
+        "jml": "//@ requires 0 <= index && index < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  protected void copyInstances(int from, /*@non_null@*/ Instances dest, int num) {\n    \n    for (int i = 0; i < num; i++) {\n      dest.add(instance(from + i));\n    }\n  }\n",
+        "methodStartingLine": 1822,
+        "methodEndingLine": 1827,
+        "jml": "//@ requires 0 <= from && from <= numInstances() - num;\n//@ requires 0 <= num;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  protected int partition(int attIndex, int l, int r) {\n    \n    double pivot = instance((l + r) / 2).value(attIndex);\n\n    while (l < r) {\n      while ((instance(l).value(attIndex) < pivot) && (l < r)) {\n        l++;\n      }\n      while ((instance(r).value(attIndex) > pivot) && (l < r)) {\n        r--;\n      }\n      if (l < r) {\n        swap(l, r);\n        l++;\n        r--;\n      }\n    }\n    if ((l == r) && (instance(r).value(attIndex) > pivot)) {\n      r--;\n    } \n\n    return r;\n  }\n",
+        "methodStartingLine": 1974,
+        "methodEndingLine": 1996,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= left && left <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  protected void quickSort(int attIndex, int left, int right) {\n\n    if (left < right) {\n      int middle = partition(attIndex, left, right);\n      quickSort(attIndex, left, middle);\n      quickSort(attIndex, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 2008,
+        "methodEndingLine": 2015,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= first && first <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  protected int select(int attIndex, int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(attIndex, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(attIndex, left, middle, k);\n      } else {\n        return select(attIndex, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 2042,
+        "methodEndingLine": 2054,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= first && first <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public void swap(int i, int j){\n    \n    m_Instances.swap(i, j);\n  }\n",
+        "methodStartingLine": 2086,
+        "methodEndingLine": 2089,
+        "jml": "//@ requires 0 <= i && i < numInstances();\n//@ requires 0 <= j && j < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Instances.java",
+        "code": "  public static void test(String [] argv) {\n\n    Instances instances, secondInstances, train, test, transformed, empty;\n    Instance instance;\n    Random random = new Random(2);\n    Reader reader;\n    int start, num;\n    double newWeight;\n    FastVector testAtts, testVals;\n    int i,j;\n    \n    try{\n      if (argv.length > 1) {\n\tthrow (new Exception(\"Usage: Instances [<filename>]\"));\n      }\n      \n      // Creating set of instances from scratch\n      testVals = new FastVector(2);\n      testVals.addElement(\"first_value\");\n      testVals.addElement(\"second_value\");\n      testAtts = new FastVector(2);\n      testAtts.addElement(new Attribute(\"nominal_attribute\", testVals));\n      testAtts.addElement(new Attribute(\"numeric_attribute\"));\n      instances = new Instances(\"test_set\", testAtts, 10);\n      instances.add(new Instance(instances.numAttributes()));\n      instances.add(new Instance(instances.numAttributes()));\n      instances.add(new Instance(instances.numAttributes()));\n      instances.setClassIndex(0);\n      System.out.println(\"\\nSet of instances created from scratch:\\n\");\n      System.out.println(instances);\n      \n      if (argv.length == 1) {\n\tString filename = argv[0];\n\treader = new FileReader(filename);\n\t\n\t// Read first five instances and print them\n\tSystem.out.println(\"\\nFirst five instances from file:\\n\");\n\tinstances = new Instances(reader, 1);\n\tinstances.setClassIndex(instances.numAttributes() - 1);\n\ti = 0;\n\twhile ((i < 5) && (instances.readInstance(reader))) {\n\t  i++;\n\t}\n\tSystem.out.println(instances);\n\n\t// Read all the instances in the file\n\treader = new FileReader(filename);\n\tinstances = new Instances(reader);\n\n\t// Make the last attribute be the class \n\tinstances.setClassIndex(instances.numAttributes() - 1);\n\t\n\t// Print header and instances.\n\tSystem.out.println(\"\\nDataset:\\n\");\n\tSystem.out.println(instances);\n\tSystem.out.println(\"\\nClass index: \"+instances.classIndex());\n      }\n      \n      // Test basic methods based on class index.\n      System.out.println(\"\\nClass name: \"+instances.classAttribute().name());\n      System.out.println(\"\\nClass index: \"+instances.classIndex());\n      System.out.println(\"\\nClass is nominal: \" +\n\t\t\t instances.classAttribute().isNominal());\n      System.out.println(\"\\nClass is numeric: \" +\n\t\t\t instances.classAttribute().isNumeric());\n      System.out.println(\"\\nClasses:\\n\");\n      for (i = 0; i < instances.numClasses(); i++) {\n\tSystem.out.println(instances.classAttribute().value(i));\n      }\n      System.out.println(\"\\nClass values and labels of instances:\\n\");\n      for (i = 0; i < instances.numInstances(); i++) {\n\tInstance inst = instances.instance(i);\n\tSystem.out.print(inst.classValue() + \"\\t\");\n\tSystem.out.print(inst.toString(inst.classIndex()));\n\tif (instances.instance(i).classIsMissing()) {\n\t  System.out.println(\"\\tis missing\");\n\t} else {\n\t  System.out.println();\n\t}\n      }\n      \n      // Create random weights.\n      System.out.println(\"\\nCreating random weights for instances.\");\n      for (i = 0; i < instances.numInstances(); i++) {\n\tinstances.instance(i).setWeight(random.nextDouble()); \n      }\n      \n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(instances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(instances.sumOfWeights());\n      \n      // Insert an attribute\n      secondInstances = new Instances(instances);\n      Attribute testAtt = new Attribute(\"Inserted\");\n      secondInstances.insertAttributeAt(testAtt, 0);\n      System.out.println(\"\\nSet with inserted attribute:\\n\");\n      System.out.println(secondInstances);\n      System.out.println(\"\\nClass name: \"\n\t\t\t + secondInstances.classAttribute().name());\n      \n      // Delete the attribute\n      secondInstances.deleteAttributeAt(0);\n      System.out.println(\"\\nSet with attribute deleted:\\n\");\n      System.out.println(secondInstances);\n      System.out.println(\"\\nClass name: \"\n\t\t\t + secondInstances.classAttribute().name());\n      \n      // Test if headers are equal\n      System.out.println(\"\\nHeaders equal: \"+\n\t\t\t instances.equalHeaders(secondInstances) + \"\\n\");\n      \n      // Print data in internal format.\n      System.out.println(\"\\nData (internal values):\\n\");\n      for (i = 0; i < instances.numInstances(); i++) {\n\tfor (j = 0; j < instances.numAttributes(); j++) {\n\t  if (instances.instance(i).isMissing(j)) {\n\t    System.out.print(\"? \");\n\t  } else {\n\t    System.out.print(instances.instance(i).value(j) + \" \");\n\t  }\n\t}\n\tSystem.out.println();\n      }\n      \n      // Just print header\n      System.out.println(\"\\nEmpty dataset:\\n\");\n      empty = new Instances(instances, 0);\n      System.out.println(empty);\n      System.out.println(\"\\nClass name: \"+empty.classAttribute().name());\n\n      // Create copy and rename an attribute and a value (if possible)\n      if (empty.classAttribute().isNominal()) {\n\tInstances copy = new Instances(empty, 0);\n\tcopy.renameAttribute(copy.classAttribute(), \"new_name\");\n\tcopy.renameAttributeValue(copy.classAttribute(), \n\t\t\t\t  copy.classAttribute().value(0), \n\t\t\t\t  \"new_val_name\");\n\tSystem.out.println(\"\\nDataset with names changed:\\n\" + copy);\n\tSystem.out.println(\"\\nOriginal dataset:\\n\" + empty);\n      }\n\n      // Create and prints subset of instances.\n      start = instances.numInstances() / 4;\n      num = instances.numInstances() / 2;\n      System.out.print(\"\\nSubset of dataset: \");\n      System.out.println(num + \" instances from \" + (start + 1) \n\t\t\t + \". instance\");\n      secondInstances = new Instances(instances, start, num);\n      System.out.println(\"\\nClass name: \"\n\t\t\t + secondInstances.classAttribute().name());\n\n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(secondInstances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(secondInstances.sumOfWeights());\n      \n      // Create and print training and test sets for 3-fold\n      // cross-validation.\n      System.out.println(\"\\nTrain and test folds for 3-fold CV:\");\n      if (instances.classAttribute().isNominal()) {\n\tinstances.stratify(3);\n      }\n      for (j = 0; j < 3; j++) {\n        train = instances.trainCV(3,j, new Random(1));\n\ttest = instances.testCV(3,j);\n                      \n\t// Print all instances and their weights (and the sum of weights).\n\tSystem.out.println(\"\\nTrain: \");\n\tSystem.out.println(\"\\nInstances and their weights:\\n\");\n\tSystem.out.println(train.instancesAndWeights());\n\tSystem.out.print(\"\\nSum of weights: \");\n\tSystem.out.println(train.sumOfWeights());\n\tSystem.out.println(\"\\nClass name: \"+train.classAttribute().name());\n\tSystem.out.println(\"\\nTest: \");\n\tSystem.out.println(\"\\nInstances and their weights:\\n\");\n\tSystem.out.println(test.instancesAndWeights());\n\tSystem.out.print(\"\\nSum of weights: \");\n\tSystem.out.println(test.sumOfWeights());\n\tSystem.out.println(\"\\nClass name: \"+test.classAttribute().name());\n      }\n\n      // Randomize instances and print them.\n      System.out.println(\"\\nRandomized dataset:\");\n      instances.randomize(random);\n      \n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(instances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(instances.sumOfWeights());\n\n      // Sort instances according to first attribute and\n      // print them.\n      System.out.print(\"\\nInstances sorted according to first attribute:\\n \");\n      instances.sort(0);\n        \n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(instances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(instances.sumOfWeights());\n    } catch (Exception e) {\n      e.printStackTrace(); \n    }\n  }\n",
+        "methodStartingLine": 2136,
+        "methodEndingLine": 2343,
+        "jml": "//@ requires argv != null;\n//@ requires argv.length == 1;\n//@ requires argv[0] != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public /*@ pure non_null @*/ Object copy() {\n\n    Attribute copy = new Attribute(m_Name);\n\n    copy.m_Index = m_Index;\n    copy.m_Type = m_Type;\n    copy.m_Values = m_Values;\n    copy.m_Hashtable = m_Hashtable;\n    copy.m_DateFormat = m_DateFormat;\n    copy.setMetadata(m_Metadata);\n \n    return copy;\n  }\n",
+        "methodStartingLine": 338,
+        "methodEndingLine": 350,
+        "jml": "//@ requires attributeName != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires metadata != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires dateFormat != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires dateFormat != null;\n//@ requires metadata != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires metadata != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ int index() {\n\n    return m_Index;\n  }\n",
+        "methodStartingLine": 415,
+        "methodEndingLine": 418,
+        "jml": "//@ ensures \\result == m_Index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isNominal() {\n\n    return (m_Type == NOMINAL);\n  }\n",
+        "methodStartingLine": 453,
+        "methodEndingLine": 456,
+        "jml": "//@ ensures \\result <==> (m_Type == NOMINAL);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isNumeric() {\n\n    return ((m_Type == NUMERIC) || (m_Type == DATE));\n  }\n",
+        "methodStartingLine": 464,
+        "methodEndingLine": 467,
+        "jml": "//@ ensures \\result <==> ((m_Type == NUMERIC) || (m_Type == DATE));"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isString() {\n\n    return (m_Type == STRING);\n  }\n",
+        "methodStartingLine": 475,
+        "methodEndingLine": 478,
+        "jml": "//@ ensures \\result <==> (m_Type == STRING);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isDate() {\n\n    return (m_Type == DATE);\n  }\n",
+        "methodStartingLine": 486,
+        "methodEndingLine": 489,
+        "jml": "//@ ensures \\result <==> (m_Type == DATE);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ String name() {\n\n    return m_Name;\n  }\n",
+        "methodStartingLine": 497,
+        "methodEndingLine": 500,
+        "jml": "//@ ensures \\result == m_Name;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ int type() {\n\n    return m_Type;\n  }\n",
+        "methodStartingLine": 561,
+        "methodEndingLine": 564,
+        "jml": "//@ ensures \\result == m_Type;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public int addStringValue(String value) {\n\n    if (!isString()) {\n      return -1;\n    }\n    Object store = value;\n\n    if (value.length() > STRING_COMPRESS_THRESHOLD) {\n      try {\n        store = new SerializedObject(value, true);\n      } catch (Exception ex) {\n        System.err.println(\"Couldn't compress string attribute value -\"\n                           + \" storing uncompressed.\");\n      }\n    }\n    Integer index = (Integer)m_Hashtable.get(store);\n    if (index != null) {\n      return index.intValue();\n    } else {\n      int intIndex = m_Values.size();\n      m_Values.addElement(store);\n      m_Hashtable.put(store, new Integer(intIndex));\n      return intIndex;\n    }\n  }\n",
+        "methodStartingLine": 659,
+        "methodEndingLine": 683,
+        "jml": "//@ requires attributeName != null;\n//@ requires index >= 0;\n//@ ensures  m_Name == attributeName;\n//@ ensures  m_Index == index;\n//@ requires attributeName != null;\n//@ requires index >= 0;\n//@ ensures  m_Name == attributeName;\n//@ ensures  m_Index == index;\n//@ requires attributeName != null;\n//@ requires index >= 0;\n//@ ensures  m_Name == attributeName;\n//@ ensures  m_Index == index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  final /*@ pure non_null @*/ Attribute copy(String newName) {\n\n    Attribute copy = new Attribute(newName);\n\n    copy.m_Index = m_Index;\n    copy.m_DateFormat = m_DateFormat;\n    copy.m_Type = m_Type;\n    copy.m_Values = m_Values;\n    copy.m_Hashtable = m_Hashtable;\n    copy.setMetadata(m_Metadata);\n \n    return copy;\n  }\n",
+        "methodStartingLine": 740,
+        "methodEndingLine": 752,
+        "jml": "//@ requires newName != null;\n//@ ensures \\result.m_Name  == newName;\n//@ ensures \\result.m_Index == m_Index;\n//@ ensures \\result.m_Type  == m_Type;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  final void delete(int index) {\n    \n    if (!isNominal() && !isString()) \n      throw new IllegalArgumentException(\"Can only remove value of\" +\n                                         \"nominal or string attribute!\");\n    else {\n      m_Values = (FastVector)m_Values.copy();\n      m_Values.removeElementAt(index);\n      Hashtable hash = new Hashtable(m_Hashtable.size());\n      Enumeration enu = m_Hashtable.keys();\n      while (enu.hasMoreElements()) {\n\tObject string = enu.nextElement();\n\tInteger valIndexObject = (Integer)m_Hashtable.get(string);\n\tint valIndex = valIndexObject.intValue();\n\tif (valIndex > index) {\n\t  hash.put(string, new Integer(valIndex - 1));\n\t} else if (valIndex < index) {\n\t  hash.put(string, valIndexObject);\n\t}\n      }\n      m_Hashtable = hash;\n    }\n  }\n",
+        "methodStartingLine": 763,
+        "methodEndingLine": 785,
+        "jml": "//@ requires isNominal() || isString();\n//@ requires 0 <= index && index < m_Values.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  final void forceAddValue(String value) {\n\n    Object store = value;\n    if (value.length() > STRING_COMPRESS_THRESHOLD) {\n      try {\n        store = new SerializedObject(value, true);\n      } catch (Exception ex) {\n        System.err.println(\"Couldn't compress string attribute value -\"\n                           + \" storing uncompressed.\");\n      }\n    }\n    m_Values.addElement(store);\n    m_Hashtable.put(store, new Integer(m_Values.size() - 1));\n  }\n",
+        "methodStartingLine": 794,
+        "methodEndingLine": 807,
+        "jml": "//@ requires value != null;\n//@ ensures  m_Values.size() == \\old(m_Values.size()) + 1;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  final void setIndex(int index) {\n\n    m_Index = index;\n  }\n",
+        "methodStartingLine": 817,
+        "methodEndingLine": 820,
+        "jml": "//@ requires 0 <= index;\n//@ ensures m_Index == index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  final void setValue(int index, String string) {\n    \n    switch (m_Type) {\n    case NOMINAL:\n    case STRING:\n      m_Values = (FastVector)m_Values.copy();\n      m_Hashtable = (Hashtable)m_Hashtable.clone();\n      Object store = string;\n      if (string.length() > STRING_COMPRESS_THRESHOLD) {\n        try {\n          store = new SerializedObject(string, true);\n        } catch (Exception ex) {\n          System.err.println(\"Couldn't compress string attribute value -\"\n                             + \" storing uncompressed.\");\n        }\n      }\n      m_Hashtable.remove(m_Values.elementAt(index));\n      m_Values.setElementAt(store, index);\n      m_Hashtable.put(store, new Integer(index));\n      break;\n    default:\n      throw new IllegalArgumentException(\"Can only set values for nominal\"\n                                         + \" or string attributes!\");\n    }\n  }\n",
+        "methodStartingLine": 834,
+        "methodEndingLine": 858,
+        "jml": "//@ requires string != null;\n//@ requires isNominal() || isString();\n//@ requires 0 <= index && index < m_Values.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public /*@pure@*/ String formatDate(double date) {\n    switch (m_Type) {\n    case DATE:\n      return m_DateFormat.format(new Date((long)date));\n    default:\n      throw new IllegalArgumentException(\"Can only format date values for date\"\n                                         + \" attributes!\");\n    }\n  }\n",
+        "methodStartingLine": 861,
+        "methodEndingLine": 869,
+        "jml": "//@ requires isDate();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public double parseDate(String string) throws ParseException {\n    switch (m_Type) {\n    case DATE:\n      long time = m_DateFormat.parse(string).getTime();\n      // TODO put in a safety check here if we can't store the value in a double.\n      return (double)time;\n    default:\n      throw new IllegalArgumentException(\"Can only parse date values for date\"\n                                         + \" attributes!\");\n    }\n  }\n",
+        "methodStartingLine": 873,
+        "methodEndingLine": 883,
+        "jml": "//@ requires isDate();\n//@ requires string != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  private void setMetadata(ProtectedProperties metadata) {\n    \n    m_Metadata = metadata;\n\n    if (m_Type == DATE) {\n      m_Ordering = ORDERING_ORDERED;\n      m_IsRegular = true;\n      m_IsAveragable = false;\n      m_HasZeropoint = false;\n    } else {\n\n      // get ordering\n      String orderString = m_Metadata.getProperty(\"ordering\",\"\");\n      \n      // numeric ordered attributes are averagable and zeropoint by default\n      String def;\n      if (m_Type == NUMERIC\n\t  && orderString.compareTo(\"modulo\") != 0\n\t  && orderString.compareTo(\"symbolic\") != 0)\n\tdef = \"true\";\n      else def = \"false\";\n      \n      // determine boolean states\n      m_IsAveragable =\n\t(m_Metadata.getProperty(\"averageable\",def).compareTo(\"true\") == 0);\n      m_HasZeropoint =\n\t(m_Metadata.getProperty(\"zeropoint\",def).compareTo(\"true\") == 0);\n      // averagable or zeropoint implies regular\n      if (m_IsAveragable || m_HasZeropoint) def = \"true\";\n      m_IsRegular =\n\t(m_Metadata.getProperty(\"regular\",def).compareTo(\"true\") == 0);\n      \n      // determine ordering\n      if (orderString.compareTo(\"symbolic\") == 0)\n\tm_Ordering = ORDERING_SYMBOLIC;\n      else if (orderString.compareTo(\"ordered\") == 0)\n\tm_Ordering = ORDERING_ORDERED;\n      else if (orderString.compareTo(\"modulo\") == 0)\n\tm_Ordering = ORDERING_MODULO;\n      else {\n\tif (m_Type == NUMERIC || m_IsAveragable || m_HasZeropoint)\n\t  m_Ordering = ORDERING_ORDERED;\n\telse m_Ordering = ORDERING_SYMBOLIC;\n      }\n    }\n\n    // consistency checks\n    if (m_IsAveragable && !m_IsRegular)\n      throw new IllegalArgumentException(\"An averagable attribute must be\"\n\t\t\t\t\t + \" regular\");\n    if (m_HasZeropoint && !m_IsRegular)\n      throw new IllegalArgumentException(\"A zeropoint attribute must be\"\n\t\t\t\t\t + \" regular\");\n    if (m_IsRegular && m_Ordering == ORDERING_SYMBOLIC)\n      throw new IllegalArgumentException(\"A symbolic attribute cannot be\"\n\t\t\t\t\t + \" regular\");\n    if (m_IsAveragable && m_Ordering != ORDERING_ORDERED)\n      throw new IllegalArgumentException(\"An averagable attribute must be\"\n\t\t\t\t\t + \" ordered\");\n    if (m_HasZeropoint && m_Ordering != ORDERING_ORDERED)\n      throw new IllegalArgumentException(\"A zeropoint attribute must be\"\n\t\t\t\t\t + \" ordered\");\n\n    // determine weight\n    m_Weight = 1.0;\n    String weightString = m_Metadata.getProperty(\"weight\");\n    if (weightString != null) {\n      try{\n\tm_Weight = Double.valueOf(weightString).doubleValue();\n      } catch (NumberFormatException e) {\n\t// Check if value is really a number\n\tthrow new IllegalArgumentException(\"Not a valid attribute weight: '\" \n\t\t\t\t\t   + weightString + \"'\");\n      }\n    }\n\n    // determine numeric range\n    if (m_Type == NUMERIC) setNumericRange(m_Metadata.getProperty(\"range\"));\n  }\n",
+        "methodStartingLine": 1035,
+        "methodEndingLine": 1113,
+        "jml": "//@ requires metadata != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  private void setNumericRange(String rangeString)\n  {\n    // set defaults\n    m_LowerBound = Double.NEGATIVE_INFINITY;\n    m_LowerBoundIsOpen = false;\n    m_UpperBound = Double.POSITIVE_INFINITY;\n    m_UpperBoundIsOpen = false;\n\n    if (rangeString == null) return;\n\n    // set up a tokenzier to parse the string\n    StreamTokenizer tokenizer =\n      new StreamTokenizer(new StringReader(rangeString));\n    tokenizer.resetSyntax();         \n    tokenizer.whitespaceChars(0, ' ');    \n    tokenizer.wordChars(' '+1,'\\u00FF');\n    tokenizer.ordinaryChar('[');\n    tokenizer.ordinaryChar('(');\n    tokenizer.ordinaryChar(',');\n    tokenizer.ordinaryChar(']');\n    tokenizer.ordinaryChar(')');\n\n    try {\n\n      // get opening brace\n      tokenizer.nextToken();\n    \n      if (tokenizer.ttype == '[') m_LowerBoundIsOpen = false;\n      else if (tokenizer.ttype == '(') m_LowerBoundIsOpen = true;\n      else throw new IllegalArgumentException(\"Expected opening brace on range,\"\n\t\t\t\t\t      + \" found: \"\n\t\t\t\t\t      + tokenizer.toString());\n\n      // get lower bound\n      tokenizer.nextToken();\n      if (tokenizer.ttype != tokenizer.TT_WORD)\n\tthrow new IllegalArgumentException(\"Expected lower bound in range,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n      if (tokenizer.sval.compareToIgnoreCase(\"-inf\") == 0)\n\tm_LowerBound = Double.NEGATIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"+inf\") == 0)\n\tm_LowerBound = Double.POSITIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"inf\") == 0)\n\tm_LowerBound = Double.NEGATIVE_INFINITY;\n      else try {\n\tm_LowerBound = Double.valueOf(tokenizer.sval).doubleValue();\n      } catch (NumberFormatException e) {\n\tthrow new IllegalArgumentException(\"Expected lower bound in range,\"\n\t\t\t\t\t   + \" found: '\" + tokenizer.sval + \"'\");\n      }\n\n      // get separating comma\n      if (tokenizer.nextToken() != ',')\n\tthrow new IllegalArgumentException(\"Expected comma in range,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n\n      // get upper bound\n      tokenizer.nextToken();\n      if (tokenizer.ttype != tokenizer.TT_WORD)\n\tthrow new IllegalArgumentException(\"Expected upper bound in range,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n      if (tokenizer.sval.compareToIgnoreCase(\"-inf\") == 0)\n\tm_UpperBound = Double.NEGATIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"+inf\") == 0)\n\tm_UpperBound = Double.POSITIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"inf\") == 0)\n\tm_UpperBound = Double.POSITIVE_INFINITY;\n      else try {\n\tm_UpperBound = Double.valueOf(tokenizer.sval).doubleValue();\n      } catch (NumberFormatException e) {\n\tthrow new IllegalArgumentException(\"Expected upper bound in range,\"\n\t\t\t\t\t   + \" found: '\" + tokenizer.sval + \"'\");\n      }\n\n      // get closing brace\n      tokenizer.nextToken();\n    \n      if (tokenizer.ttype == ']') m_UpperBoundIsOpen = false;\n      else if (tokenizer.ttype == ')') m_UpperBoundIsOpen = true;\n      else throw new IllegalArgumentException(\"Expected closing brace on range,\"\n\t\t\t\t\t      + \" found: \"\n\t\t\t\t\t      + tokenizer.toString());\n\n      // check for rubbish on end\n      if (tokenizer.nextToken() != tokenizer.TT_EOF)\n\tthrow new IllegalArgumentException(\"Expected end of range string,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n\n    } catch (IOException e) {\n      throw new IllegalArgumentException(\"IOException reading attribute range\"\n\t\t\t\t\t + \" string: \" + e.getMessage());\n    }\n\n    if (m_UpperBound < m_LowerBound)\n      throw new IllegalArgumentException(\"Upper bound (\" + m_UpperBound\n\t\t\t\t\t + \") on numeric range is\"\n\t\t\t\t\t + \" less than lower bound (\"\n\t\t\t\t\t + m_LowerBound + \")!\");\n  }\n",
+        "methodStartingLine": 1125,
+        "methodEndingLine": 1227,
+        "jml": "//@ requires rangeString != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/Attribute.java",
+        "code": "  public static void main(String[] ops) {\n\n    try {\n      \n      // Create numeric attributes \"length\" and \"weight\"\n      Attribute length = new Attribute(\"length\");\n      Attribute weight = new Attribute(\"weight\");\n\n      // Create date attribute \"date\"\n      Attribute date = new Attribute(\"date\", \"yyyy-MM-dd HH:mm:ss\");\n\n      System.out.println(date);\n      double dd = date.parseDate(\"2001-04-04 14:13:55\");\n      System.out.println(\"Test date = \" + dd);\n      System.out.println(date.formatDate(dd));\n\n      dd = new Date().getTime();\n      System.out.println(\"Date now = \" + dd);\n      System.out.println(date.formatDate(dd));\n      \n      // Create vector to hold nominal values \"first\", \"second\", \"third\" \n      FastVector my_nominal_values = new FastVector(3); \n      my_nominal_values.addElement(\"first\"); \n      my_nominal_values.addElement(\"second\"); \n      my_nominal_values.addElement(\"third\"); \n      \n      // Create nominal attribute \"position\" \n      Attribute position = new Attribute(\"position\", my_nominal_values);\n\n      // Print the name of \"position\"\n      System.out.println(\"Name of \\\"position\\\": \" + position.name());\n\n      // Print the values of \"position\"\n      Enumeration attValues = position.enumerateValues();\n      while (attValues.hasMoreElements()) {\n\tString string = (String)attValues.nextElement();\n\tSystem.out.println(\"Value of \\\"position\\\": \" + string);\n      }\n\n      // Shallow copy attribute \"position\"\n      Attribute copy = (Attribute) position.copy();\n\n      // Test if attributes are the same\n      System.out.println(\"Copy is the same as original: \" + copy.equals(position));\n\n      // Print index of attribute \"weight\" (should be unset: -1)\n      System.out.println(\"Index of attribute \\\"weight\\\" (should be -1): \" + \n\t\t\t weight.index());\n\n      // Print index of value \"first\" of attribute \"position\"\n      System.out.println(\"Index of value \\\"first\\\" of \\\"position\\\" (should be 0): \" +\n\t\t\t position.indexOfValue(\"first\"));\n\n      // Tests type of attribute \"position\"\n      System.out.println(\"\\\"position\\\" is numeric: \" + position.isNumeric());\n      System.out.println(\"\\\"position\\\" is nominal: \" + position.isNominal());\n      System.out.println(\"\\\"position\\\" is string: \" + position.isString());\n\n      // Prints name of attribute \"position\"\n      System.out.println(\"Name of \\\"position\\\": \" + position.name());\n    \n      // Prints number of values of attribute \"position\"\n      System.out.println(\"Number of values for \\\"position\\\": \" + position.numValues());\n\n      // Prints the values (againg)\n      for (int i = 0; i < position.numValues(); i++) {\n\tSystem.out.println(\"Value \" + i + \": \" + position.value(i));\n      }\n\n      // Prints the attribute \"position\" in ARFF format\n      System.out.println(position);\n\n      // Checks type of attribute \"position\" using constants\n      switch (position.type()) {\n      case Attribute.NUMERIC:\n\tSystem.out.println(\"\\\"position\\\" is numeric\");\n\tbreak;\n      case Attribute.NOMINAL:\n\tSystem.out.println(\"\\\"position\\\" is nominal\");\n\tbreak;\n      case Attribute.STRING:\n\tSystem.out.println(\"\\\"position\\\" is string\");\n\tbreak;\n      case Attribute.DATE:\n\tSystem.out.println(\"\\\"position\\\" is date\");\n\tbreak;\n      default:\n\tSystem.out.println(\"\\\"position\\\" has unknown type\");\n      }\n    } catch (Exception e) {\n      e.printStackTrace();\n    }\n  }\n",
+        "methodStartingLine": 1234,
+        "methodEndingLine": 1326,
+        "jml": "//@ requires ops != null;\n//@ requires \\nonnullelements(ops);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "    public final /*@pure@*/ boolean hasMoreElements() {\n\n      if (m_Counter < m_Vector.size()) {\n\treturn true;\n      }\n      return false;\n    }\n",
+        "methodStartingLine": 95,
+        "methodEndingLine": 101,
+        "jml": "//@ requires 0 <= special && special < vector.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final void addElement(Object element) {\n\n    Object[] newObjects;\n\n    if (m_Size == m_Objects.length) {\n      newObjects = new Object[m_CapacityMultiplier *\n\t\t\t     (m_Objects.length +\n\t\t\t      m_CapacityIncrement)];\n      System.arraycopy(m_Objects, 0, newObjects, 0, m_Size);\n      m_Objects = newObjects;\n    }\n    m_Objects[m_Size] = element;\n    m_Size++;\n  }\n",
+        "methodStartingLine": 168,
+        "methodEndingLine": 181,
+        "jml": "//@ requires capacity >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int capacity() {\n  \n    return m_Objects.length;\n  }\n",
+        "methodStartingLine": 189,
+        "methodEndingLine": 192,
+        "jml": "//@ ensures \\result == m_Objects.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object elementAt(int index) {\n\n    return m_Objects[index];\n  }\n",
+        "methodStartingLine": 237,
+        "methodEndingLine": 240,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < m_Objects.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Enumeration elements(int index) {\n  \n    return new FastVectorEnumeration(this, index);\n  }\n",
+        "methodStartingLine": 260,
+        "methodEndingLine": 263,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object firstElement() {\n\n    return m_Objects[0];\n  }\n",
+        "methodStartingLine": 286,
+        "methodEndingLine": 289,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object lastElement() {\n\n    return m_Objects[m_Size - 1];\n  }\n",
+        "methodStartingLine": 342,
+        "methodEndingLine": 345,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final void removeElementAt(int index) {\n\n    System.arraycopy(m_Objects, index + 1, m_Objects, index, \n                     m_Size - index - 1);\n    m_Size--;\n  }\n",
+        "methodStartingLine": 353,
+        "methodEndingLine": 358,
+        "jml": "//@ requires 0 <= index && index < m_Size;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final void setElementAt(Object element, int index) {\n\n    m_Objects[index] = element;\n  }\n",
+        "methodStartingLine": 416,
+        "methodEndingLine": 419,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int size() {\n\n    return m_Size;\n  }\n",
+        "methodStartingLine": 427,
+        "methodEndingLine": 430,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/FastVector.java",
+        "code": "  public final void swap(int first, int second) {\n\n    Object help = m_Objects[first];\n\n    m_Objects[first] = m_Objects[second];\n    m_Objects[second] = help;\n  }\n",
+        "methodStartingLine": 440,
+        "methodEndingLine": 446,
+        "jml": "//@ requires 0 <= first && first < size();\n//@ requires 0 <= second && second < size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/SingleIndex.java",
+        "code": "  public void setUpper(int newUpper) {\n\n    if (newUpper >= 0) {\n      m_Upper = newUpper;\n      setValue();\n    }\n  }\n",
+        "methodStartingLine": 89,
+        "methodEndingLine": 95,
+        "jml": "//@ ensures m_SelectedIndex == -1;\n//@ ensures m_Upper == -1;\n//@ ensures m_IndexString == index;\n//@ ensures m_SelectedIndex == -1;\n//@ ensures m_Upper == -1;\n//@ ensures newUpper < 0 ==> m_Upper == \\old(m_Upper);\n//@ ensures newUpper >= 0 ==> m_Upper == newUpper;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ String getSingleIndex() {\n\n    return m_IndexString;\n  }\n",
+        "methodStartingLine": 103,
+        "methodEndingLine": 106,
+        "jml": "//@ ensures \\result == m_IndexString;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/SingleIndex.java",
+        "code": "  public void setSingleIndex(/*@non_null@*/ String index) {\n\n    m_IndexString = index;\n    m_SelectedIndex = -1;\n  }\n",
+        "methodStartingLine": 118,
+        "methodEndingLine": 122,
+        "jml": "//@ ensures m_IndexString == index;\n//@ ensures m_SelectedIndex == -1;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ String toString() {\n\n    if (m_IndexString.equals(\"\")) {\n      return \"No index set\";\n    }\n    if (m_Upper == -1) {\n      throw new RuntimeException(\"Upper limit has not been specified\");\n    }\n    return m_IndexString;\n  }\n",
+        "methodStartingLine": 132,
+        "methodEndingLine": 141,
+        "jml": "//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ int getIndex() {\n\n    if (m_IndexString.equals(\"\")) {\n      throw new RuntimeException(\"No index set\");\n    }\n    if (m_Upper == -1) {\n      throw new RuntimeException(\"No upper limit has been specified for index\");\n    }\n    return m_SelectedIndex;\n  }\n",
+        "methodStartingLine": 152,
+        "methodEndingLine": 161,
+        "jml": "//@ requires m_Upper >= 0;\n//@ requires m_IndexString.length() > 0;\n//@ ensures \\result == m_SelectedIndex;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/SingleIndex.java",
+        "code": "  public static /*@pure non_null@*/ String indexToString(int index) {\n\n    return \"\" + (index + 1);\n  }\n",
+        "methodStartingLine": 171,
+        "methodEndingLine": 174,
+        "jml": "//@ requires index >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/core/SingleIndex.java",
+        "code": "  public static void main(/*@non_null@*/ String [] argv) {\n\n    try {\n      if (argv.length == 0) {\n\tthrow new Exception(\"Usage: SingleIndex <indexspec>\");\n      }\n      SingleIndex singleIndex = new SingleIndex();\n      singleIndex.setSingleIndex(argv[0]);\n      singleIndex.setUpper(9);\n      System.out.println(\"Input: \" + argv[0] + \"\\n\"\n\t\t\t + singleIndex.toString());\n      int selectedIndex = singleIndex.getIndex();\n      System.out.println(selectedIndex + \"\");\n    } catch (Exception ex) {\n      ex.printStackTrace();\n      System.out.println(ex.getMessage());\n    }\n  }\n",
+        "methodStartingLine": 211,
+        "methodEndingLine": 228,
+        "jml": "//@ requires \\nonnullelements(argv);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1541,
+        "methodEndingLine": 1549,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Utils.java",
+        "code": "  private static void quickSort(/*@non_null@*/ int[] array, /*@non_null@*/  int[] index, \n                                int left, int right) {\n\n    if (left < right) {\n      int middle = partition(array, index, left, right);\n      quickSort(array, index, left, middle);\n      quickSort(array, index, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 1564,
+        "methodEndingLine": 1572,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;\n//@ requires (\\forall int i; 0 <= i && i < index.length; 0 <= index[i] && index[i] < array.length);\n//@ requires array != index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ double[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1587,
+        "methodEndingLine": 1600,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Utils.java",
+        "code": "  private static int select(/*@non_null@*/ int[] array, /*@non_null@*/ int[] index, \n                            int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(array, index, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(array, index, left, middle, k);\n      } else {\n        return select(array, index, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 1615,
+        "methodEndingLine": 1628,
+        "jml": "//@ requires 0 <= first && first <= right && right < array.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "    public QueueNode next(QueueNode next) {\n      return m_Next = next;\n    } //@ nowarn Invariant; // Because it stupidly checks the Queue invariant!\n",
+        "methodStartingLine": 70,
+        "methodEndingLine": 72,
+        "jml": "//@ requires contents != null;\n//@ ensures m_Contents == contents;\n//@ ensures m_Next == null;\n//@ requires next != this ;\n//@ ensures m_Next==next && \\result==next;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "    public /*@ pure @*/ QueueNode next() {\n      return m_Next;\n    }\n",
+        "methodStartingLine": 78,
+        "methodEndingLine": 80,
+        "jml": "//@ ensures \\result == m_Next;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "    public Object contents(Object contents) {\n      return m_Contents = contents;\n    }\n",
+        "methodStartingLine": 88,
+        "methodEndingLine": 90,
+        "jml": "//@ requires contents != null;\n//@ ensures  m_Contents == contents && \\result == contents;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "    public /*@ pure @*/ Object contents() {\n      return m_Contents;\n    }\n",
+        "methodStartingLine": 96,
+        "methodEndingLine": 98,
+        "jml": "//@ ensures \\result == m_Contents;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public final synchronized void removeAllElements() {\n    m_Size = 0;\n    m_Head = null;\n    m_Tail = null;\n  }\n",
+        "methodStartingLine": 127,
+        "methodEndingLine": 131,
+        "jml": "//@ ensures m_Size == 0;\n//@ ensures m_Head == null;\n//@ ensures m_Tail == null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public synchronized Object push(Object item) {\n    QueueNode newNode = new QueueNode(item);\n    \n    if (m_Head == null) {\n      m_Head = m_Tail = newNode;\n    } else {\n      m_Tail = m_Tail.next(newNode);\n    }\n    m_Size++;\n    return item;\n  }\n",
+        "methodStartingLine": 148,
+        "methodEndingLine": 158,
+        "jml": "//@ requires item != null;\n//@ ensures m_Head != null;\n//@ ensures m_Tail != \\old(m_Tail);\n//@ ensures m_Size == \\old(m_Size) + 1;\n//@ ensures \\old(m_Size) == 0 ==> m_Head == m_Tail; \n//@ ensures \\old(m_Size) != 0 ==> m_Head == \\old(m_Head);\n//@ ensures m_Tail.contents() == \\old(item);\n//@ ensures \\result == item;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public synchronized Object pop() \n      throws RuntimeException   // REDUNDANT, BUT ESCJAVA REQUIRES THIS\n  {\n    if (m_Head == null) {\n\tthrow new RuntimeException(\"Queue is empty\");\n    }\n    Object retval = m_Head.contents();\n    m_Size--;\n    m_Head = m_Head.next();\n    // Here we need to either tell ESC/Java some facts about\n    // the contents of the list after popping off the head,\n    // or turn off the 'invariant' warnings.\n    //\n    //@ assume m_Size == 0 <==> m_Head == null;\n    //@ assume m_Size == 1 <==> m_Head == m_Tail;\n    if (m_Head == null) {\n      m_Tail = null;\n    }\n    return retval;\n  }\n",
+        "methodStartingLine": 172,
+        "methodEndingLine": 191,
+        "jml": "//@ ensures m_Size == \\old(m_Size) - 1;\n//@ ensures m_Head == \\old(m_Head.m_Next);\n//@ ensures m_Head != null ==> m_Tail == \\old(m_Tail);\n//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public /*@ pure @*/ synchronized Object peek() \n    throws RuntimeException\n  { \n    if (m_Head == null) {\n      throw new RuntimeException(\"Queue is empty\");\n    }\n    return m_Head.contents();\n  }\n",
+        "methodStartingLine": 201,
+        "methodEndingLine": 208,
+        "jml": "//@ ensures \\result == \\old(m_Head.m_Contents);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public /*@ pure @*/ boolean empty() {\n    return m_Head == null;\n  }\n",
+        "methodStartingLine": 216,
+        "methodEndingLine": 218,
+        "jml": "//@ ensures \\result <==> m_Head == null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public /*@ pure @*/ int size() {\n    return m_Size;\n  }\n",
+        "methodStartingLine": 226,
+        "methodEndingLine": 228,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public  /*@ pure @*/ String toString() {\n\n    String retval = \"Queue Contents \"+m_Size+\" elements\\n\";\n    QueueNode current = m_Head;\n    if (current == null) {\n      return retval + \"Empty\\n\";\n    } else {\n      while (current != null) {\n        retval += current.contents().toString()+\"\\n\"; //@nowarn Modifies;\n\tcurrent = current.next();\n      }\n    }\n    return retval;\n  } //@ nowarn Post;\n",
+        "methodStartingLine": 238,
+        "methodEndingLine": 251,
+        "jml": "//@ ensures \\result != null;\n//@ ensures (* \\result == textual description of the queue *);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Queue.java",
+        "code": "  public static void main(String [] argv) {\n\n    try {\n      Queue queue = new Queue();\n      for(int i = 0; i < argv.length; i++) {\n\tqueue.push(argv[i]);\n      }\n      System.out.println(\"After pushing command line arguments\");\n      System.out.println(queue.toString());\n      while (!queue.empty()) {\n\tSystem.out.println(\"Pop: \" + queue.pop().toString());\n      }\n      // try one more pop, to make sure we get an exception\n      try \n\t{\n\t  queue.pop();\n\t  System.out.println(\"ERROR: pop did not throw exception!\");\n\t}\n      catch (RuntimeException ex)\n        {\n\t  System.out.println(\"Pop on empty queue correctly gave exception.\");\n\t}\n    } catch (Exception ex) {\n      System.out.println(ex.getMessage());\n    }\n  }\n",
+        "methodStartingLine": 261,
+        "methodEndingLine": 286,
+        "jml": "//@ requires argv.length >= 0;\n//@ requires argv != null;\n//@ requires (\\forall int i; 0 <= i && i < argv.length; argv[i] != null);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ Attribute attribute(int index) {\n   \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.attribute(index);\n  }\n",
+        "methodStartingLine": 146,
+        "methodEndingLine": 152,
+        "jml": "//@ ensures m_Dataset == null;\n//@ ensures m_Dataset == null;\n//@ requires numAttributes > 0;    // Or maybe == 0 is okay too?\n//@ ensures m_Dataset == null;\n//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ Attribute attributeSparse(int indexOfIndex) {\n   \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.attribute(indexOfIndex);\n  }\n",
+        "methodStartingLine": 164,
+        "methodEndingLine": 170,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ Attribute classAttribute() {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.classAttribute();\n  }\n",
+        "methodStartingLine": 180,
+        "methodEndingLine": 186,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ int classIndex() {\n    \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.classIndex();\n  }\n",
+        "methodStartingLine": 196,
+        "methodEndingLine": 202,
+        "jml": "//@ requires m_Dataset != null;\n//@ ensures  \\result == m_Dataset.classIndex();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ boolean classIsMissing() {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    return isMissing(classIndex());\n  }\n",
+        "methodStartingLine": 212,
+        "methodEndingLine": 218,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ double classValue() {\n    \n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    return value(classIndex());\n  }\n",
+        "methodStartingLine": 231,
+        "methodEndingLine": 237,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ Instances dataset() {\n\n    return m_Dataset;\n  }\n",
+        "methodStartingLine": 265,
+        "methodEndingLine": 268,
+        "jml": "//@ ensures \\result == m_Dataset;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public void deleteAttributeAt(int position) {\n\n    if (m_Dataset != null) {\n      throw new RuntimeException(\"Instance has access to a dataset!\");\n    }\n    forceDeleteAttributeAt(position);\n  }\n",
+        "methodStartingLine": 281,
+        "methodEndingLine": 287,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ Enumeration enumerateAttributes() {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.enumerateAttributes();\n  }\n",
+        "methodStartingLine": 297,
+        "methodEndingLine": 303,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ boolean equalHeaders(Instance inst) {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.equalHeaders(inst.m_Dataset);\n  }\n",
+        "methodStartingLine": 315,
+        "methodEndingLine": 321,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ boolean hasMissingValue() {\n    \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    for (int i = 0; i < numAttributes(); i++) {\n      if (i != classIndex()) {\n\tif (isMissing(i)) {\n\t  return true;\n\t}\n      }\n    }\n    return false;\n  }\n",
+        "methodStartingLine": 330,
+        "methodEndingLine": 343,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public void insertAttributeAt(int position) {\n\n    if (m_Dataset != null) {\n      throw new RuntimeException(\"Instance has accesss to a dataset!\");\n    }\n    if ((position < 0) ||\n\t(position > numAttributes())) {\n      throw new IllegalArgumentException(\"Can't insert attribute: index out \"+\n                                         \"of range\");\n    }\n    forceInsertAttributeAt(position);\n  }\n",
+        "methodStartingLine": 370,
+        "methodEndingLine": 381,
+        "jml": "//@ requires m_Dataset == null;\n//@ requires 0 <= position && position <= numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ int numAttributes() {\n\n    return m_AttValues.length;\n  }\n",
+        "methodStartingLine": 468,
+        "methodEndingLine": 471,
+        "jml": "//@ ensures \\result == m_AttValues.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ int numClasses() {\n    \n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    return m_Dataset.numClasses();\n  }\n",
+        "methodStartingLine": 482,
+        "methodEndingLine": 488,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public /*@pure@*/ int numValues() {\n\n    return m_AttValues.length;\n  }\n",
+        "methodStartingLine": 496,
+        "methodEndingLine": 499,
+        "jml": "//@ ensures \\result == m_AttValues.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public void setClassMissing() {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    setMissing(classIndex());\n  }\n",
+        "methodStartingLine": 534,
+        "methodEndingLine": 540,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public void setClassValue(double value) {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    setValue(classIndex(), value);\n  }\n",
+        "methodStartingLine": 555,
+        "methodEndingLine": 561,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public final void setClassValue(String value) {\n\n    if (classIndex() < 0) {\n      throw new UnassignedClassException(\"Class is not set!\");\n    }\n    setValue(classIndex(), value);\n  }\n",
+        "methodStartingLine": 578,
+        "methodEndingLine": 584,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public final void setValue(int attIndex, String value) {\n    \n    int valIndex;\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    }\n    if (!attribute(attIndex).isNominal() &&\n\t!attribute(attIndex).isString()) {\n      throw new IllegalArgumentException(\"Attribute neither nominal nor string!\");\n    }\n    valIndex = attribute(attIndex).indexOfValue(value);\n    if (valIndex == -1) {\n      if (attribute(attIndex).isNominal()) {\n\tthrow new IllegalArgumentException(\"Value not defined for given nominal attribute!\");\n      } else {\n\tattribute(attIndex).forceAddValue(value);\n\tvalIndex = attribute(attIndex).indexOfValue(value);\n      }\n    }\n    setValue(attIndex, (double)valIndex); \n  }\n",
+        "methodStartingLine": 671,
+        "methodEndingLine": 692,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public final /*@pure@*/ String stringValue(int attIndex) {\n\n    if (m_Dataset == null) {\n      throw new UnassignedDatasetException(\"Instance doesn't have access to a dataset!\");\n    } \n    return stringValue(m_Dataset.attribute(attIndex));\n  }\n",
+        "methodStartingLine": 767,
+        "methodEndingLine": 773,
+        "jml": "//@ requires m_Dataset != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instance.java",
+        "code": "  public static void main(String[] options) {\n\n    try {\n\n      // Create numeric attributes \"length\" and \"weight\"\n      Attribute length = new Attribute(\"length\");\n      Attribute weight = new Attribute(\"weight\");\n      \n      // Create vector to hold nominal values \"first\", \"second\", \"third\" \n      FastVector my_nominal_values = new FastVector(3); \n      my_nominal_values.addElement(\"first\"); \n      my_nominal_values.addElement(\"second\"); \n      my_nominal_values.addElement(\"third\"); \n      \n      // Create nominal attribute \"position\" \n      Attribute position = new Attribute(\"position\", my_nominal_values);\n      \n      // Create vector of the above attributes \n      FastVector attributes = new FastVector(3);\n      attributes.addElement(length);\n      attributes.addElement(weight);\n      attributes.addElement(position);\n      \n      // Create the empty dataset \"race\" with above attributes\n      Instances race = new Instances(\"race\", attributes, 0);\n      \n      // Make position the class attribute\n      race.setClassIndex(position.index());\n      \n      // Create empty instance with three attribute values\n      Instance inst = new Instance(3);\n      \n      // Set instance's values for the attributes \"length\", \"weight\", and \"position\"\n      inst.setValue(length, 5.3);\n      inst.setValue(weight, 300);\n      inst.setValue(position, \"first\");\n      \n      // Set instance's dataset to be the dataset \"race\"\n      inst.setDataset(race);\n      \n      // Print the instance\n      System.out.println(\"The instance: \" + inst);\n      \n      // Print the first attribute\n      System.out.println(\"First attribute: \" + inst.attribute(0));\n      \n      // Print the class attribute\n      System.out.println(\"Class attribute: \" + inst.classAttribute());\n      \n      // Print the class index\n      System.out.println(\"Class index: \" + inst.classIndex());\n      \n      // Say if class is missing\n      System.out.println(\"Class is missing: \" + inst.classIsMissing());\n      \n      // Print the instance's class value in internal format\n      System.out.println(\"Class value (internal format): \" + inst.classValue());\n      \n      // Print a shallow copy of this instance\n      Instance copy = (Instance) inst.copy();\n      System.out.println(\"Shallow copy: \" + copy);\n      \n      // Set dataset for shallow copy\n      copy.setDataset(inst.dataset());\n      System.out.println(\"Shallow copy with dataset set: \" + copy);\n      \n      // Unset dataset for copy, delete first attribute, and insert it again\n      copy.setDataset(null);\n      copy.deleteAttributeAt(0);\n      copy.insertAttributeAt(0);\n      copy.setDataset(inst.dataset());\n      System.out.println(\"Copy with first attribute deleted and inserted: \" + copy); \n      \n      // Enumerate attributes (leaving out the class attribute)\n      System.out.println(\"Enumerating attributes (leaving out class):\");\n      Enumeration enu = inst.enumerateAttributes();\n      while (enu.hasMoreElements()) {\n\tAttribute att = (Attribute) enu.nextElement();\n\tSystem.out.println(att);\n      }\n      \n      // Headers are equivalent?\n      System.out.println(\"Header of original and copy equivalent: \" +\n\t\t\t inst.equalHeaders(copy));\n\n      // Test for missing values\n      System.out.println(\"Length of copy missing: \" + copy.isMissing(length));\n      System.out.println(\"Weight of copy missing: \" + copy.isMissing(weight.index()));\n      System.out.println(\"Length of copy missing: \" + \n\t\t\t Instance.isMissingValue(copy.value(length)));\n      System.out.println(\"Missing value coded as: \" + Instance.missingValue());\n\n      // Prints number of attributes and classes\n      System.out.println(\"Number of attributes: \" + copy.numAttributes());\n      System.out.println(\"Number of classes: \" + copy.numClasses());\n\n      // Replace missing values\n      double[] meansAndModes = {2, 3, 0};\n      copy.replaceMissingValues(meansAndModes);\n      System.out.println(\"Copy with missing value replaced: \" + copy);\n\n      // Setting and getting values and weights\n      copy.setClassMissing();\n      System.out.println(\"Copy with missing class: \" + copy);\n      copy.setClassValue(0);\n      System.out.println(\"Copy with class value set to first value: \" + copy);\n      copy.setClassValue(\"third\");\n      System.out.println(\"Copy with class value set to \\\"third\\\": \" + copy);\n      copy.setMissing(1);\n      System.out.println(\"Copy with second attribute set to be missing: \" + copy);\n      copy.setMissing(length);\n      System.out.println(\"Copy with length set to be missing: \" + copy);\n      copy.setValue(0, 0);\n      System.out.println(\"Copy with first attribute set to 0: \" + copy);\n      copy.setValue(weight, 1);\n      System.out.println(\"Copy with weight attribute set to 1: \" + copy);\n      copy.setValue(position, \"second\");\n      System.out.println(\"Copy with position set to \\\"second\\\": \" + copy);\n      copy.setValue(2, \"first\");\n      System.out.println(\"Copy with last attribute set to \\\"first\\\": \" + copy);\n      System.out.println(\"Current weight of instance copy: \" + copy.weight());\n      copy.setWeight(2);\n      System.out.println(\"Current weight of instance copy (set to 2): \" + copy.weight());\n      System.out.println(\"Last value of copy: \" + copy.toString(2));\n      System.out.println(\"Value of position for copy: \" + copy.toString(position));\n      System.out.println(\"Last value of copy (internal format): \" + copy.value(2));\n      System.out.println(\"Value of position for copy (internal format): \" + \n\t\t\t copy.value(position));\n    } catch (Exception e) {\n      e.printStackTrace();\n    }\n  }\n",
+        "methodStartingLine": 993,
+        "methodEndingLine": 1124,
+        "jml": "//@ requires options != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public Instances stringFreeStructure() {\n\n    FastVector atts = (FastVector)m_Attributes.copy();\n    for (int i = 0 ; i < atts.size(); i++) {\n      Attribute att = (Attribute)atts.elementAt(i);\n      if (att.type() == Attribute.STRING) {\n        atts.setElementAt(new Attribute(att.name(), (FastVector)null), i);\n      }\n    }\n    Instances result = new Instances(relationName(), atts, 0);\n    result.m_ClassIndex = m_ClassIndex;\n    return result;\n  }\n",
+        "methodStartingLine": 238,
+        "methodEndingLine": 250,
+        "jml": "//@ requires capacity >= 0;\n//@ ensures classIndex() == -1;\n//@ requires 0 <= first;\n//@ requires 0 <= toCopy;\n//@ requires first + toCopy <= source.numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ Attribute attribute(int index) {\n    \n    return (Attribute) m_Attributes.elementAt(index);\n  }\n",
+        "methodStartingLine": 278,
+        "methodEndingLine": 281,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < m_Attributes.size();\n//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ Attribute classAttribute() {\n\n    if (m_ClassIndex < 0) {\n      throw new UnassignedClassException(\"Class index is negative (not set)!\");\n    }\n    return attribute(m_ClassIndex);\n  }\n",
+        "methodStartingLine": 357,
+        "methodEndingLine": 363,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public void delete(int index) {\n    \n    m_Instances.removeElementAt(index);\n  }\n",
+        "methodStartingLine": 400,
+        "methodEndingLine": 403,
+        "jml": "//@ requires 0 <= index && index < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public void deleteAttributeAt(int position) {\n\t \n    if ((position < 0) || (position >= m_Attributes.size())) {\n      throw new IllegalArgumentException(\"Index out of range\");\n    }\n    if (position == m_ClassIndex) {\n      throw new IllegalArgumentException(\"Can't delete class attribute\");\n    }\n    freshAttributeInfo();\n    if (m_ClassIndex > position) {\n      m_ClassIndex--;\n    }\n    m_Attributes.removeElementAt(position);\n    for (int i = position; i < m_Attributes.size(); i++) {\n      Attribute current = (Attribute)m_Attributes.elementAt(i);\n      current.setIndex(current.index() - 1);\n    }\n    for (int i = 0; i < numInstances(); i++) {\n      instance(i).forceDeleteAttributeAt(position); \n    }\n  }\n",
+        "methodStartingLine": 416,
+        "methodEndingLine": 436,
+        "jml": "//@ requires 0 <= position && position < numAttributes();\n//@ requires position != classIndex();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public void deleteWithMissing(int attIndex) {\n\n    FastVector newInstances = new FastVector(numInstances());\n\n    for (int i = 0; i < numInstances(); i++) {\n      if (!instance(i).isMissing(attIndex)) {\n\tnewInstances.addElement(instance(i));\n      }\n    }\n    m_Instances = newInstances;\n  }\n",
+        "methodStartingLine": 464,
+        "methodEndingLine": 474,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@non_null pure@*/ Instance firstInstance() {\n    \n    return (Instance)m_Instances.firstElement();\n  }\n",
+        "methodStartingLine": 551,
+        "methodEndingLine": 554,
+        "jml": "//@ requires numInstances() > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public void insertAttributeAt(/*@non_null@*/ Attribute att, int position) {\n\t \n    if ((position < 0) ||\n\t(position > m_Attributes.size())) {\n      throw new IllegalArgumentException(\"Index out of range\");\n    }\n    att = (Attribute)att.copy();\n    freshAttributeInfo();\n    att.setIndex(position);\n    m_Attributes.insertElementAt(att, position);\n    for (int i = position + 1; i < m_Attributes.size(); i++) {\n      Attribute current = (Attribute)m_Attributes.elementAt(i);\n      current.setIndex(current.index() + 1);\n    }\n    for (int i = 0; i < numInstances(); i++) {\n      instance(i).forceInsertAttributeAt(position);\n    }\n    if (m_ClassIndex >= position) {\n      m_ClassIndex++;\n    }\n  }\n",
+        "methodStartingLine": 584,
+        "methodEndingLine": 604,
+        "jml": "//@ requires 0 <= position;\n//@ requires position <= numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@non_null pure@*/ Instance instance(int index) {\n\n    return (Instance)m_Instances.elementAt(index);\n  }\n",
+        "methodStartingLine": 614,
+        "methodEndingLine": 617,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@non_null pure@*/ Instance lastInstance() {\n    \n    return (Instance)m_Instances.lastElement();\n  }\n",
+        "methodStartingLine": 678,
+        "methodEndingLine": 681,
+        "jml": "//@ requires numInstances() > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ int numAttributes() {\n\n    return m_Attributes.size();\n  }\n",
+        "methodStartingLine": 741,
+        "methodEndingLine": 744,
+        "jml": "//@ ensures \\result == m_Attributes.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ int numClasses() {\n    \n    if (m_ClassIndex < 0) {\n      throw new UnassignedClassException(\"Class index is negative (not set)!\");\n    }\n    if (!classAttribute().isNominal()) {\n      return 1;\n    } else {\n      return classAttribute().numValues();\n    }\n  }\n",
+        "methodStartingLine": 754,
+        "methodEndingLine": 764,
+        "jml": "//@ requires classIndex() >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ int numDistinctValues(int attIndex) {\n\n    if (attribute(attIndex).isNumeric()) {\n      double [] attVals = attributeToDoubleArray(attIndex);\n      int [] sorted = Utils.sort(attVals);\n      double prev = 0;\n      int counter = 0;\n      for (int i = 0; i < sorted.length; i++) {\n\tInstance current = instance(sorted[i]);\n\tif (current.isMissing(attIndex)) {\n\t  break;\n\t}\n\tif ((i == 0) || \n\t    (current.value(attIndex) > prev)) {\n\t  prev = current.value(attIndex);\n\t  counter++;\n\t}\n      }\n      return counter;\n    } else {\n      return attribute(attIndex).numValues();\n    }\n  }\n",
+        "methodStartingLine": 776,
+        "methodEndingLine": 798,
+        "jml": "//@ requires 0 <= attIndex;\n//@ requires attIndex < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ int numInstances() {\n\n    return m_Instances.size();\n  }\n",
+        "methodStartingLine": 819,
+        "methodEndingLine": 822,
+        "jml": "//@ ensures \\result == m_Instances.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ String relationName() {\n\n    return m_RelationName;\n  }\n",
+        "methodStartingLine": 862,
+        "methodEndingLine": 865,
+        "jml": "//@ ensures \\result == m_RelationName;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public Instances testCV(int numFolds, int numFold) {\n\n    int numInstForFold, first, offset;\n    Instances test;\n    \n    if (numFolds < 2) {\n      throw new IllegalArgumentException(\"Number of folds must be at least 2!\");\n    }\n    if (numFolds > numInstances()) {\n      throw new IllegalArgumentException(\"Can't have more folds than instances!\");\n    }\n    numInstForFold = numInstances() / numFolds;\n    if (numFold < numInstances() % numFolds){\n      numInstForFold++;\n      offset = numFold;\n    }else\n      offset = numInstances() % numFolds;\n    test = new Instances(this, numInstForFold);\n    first = numFold * (numInstances() / numFolds) + offset;\n    copyInstances(first, test, numInstForFold);\n    return test;\n  }\n",
+        "methodStartingLine": 1172,
+        "methodEndingLine": 1193,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public Instances trainCV(int numFolds, int numFold) {\n\n    int numInstForFold, first, offset;\n    Instances train;\n \n    if (numFolds < 2) {\n      throw new IllegalArgumentException(\"Number of folds must be at least 2!\");\n    }\n    if (numFolds > numInstances()) {\n      throw new IllegalArgumentException(\"Can't have more folds than instances!\");\n    }\n    numInstForFold = numInstances() / numFolds;\n    if (numFold < numInstances() % numFolds) {\n      numInstForFold++;\n      offset = numFold;\n    }else\n      offset = numInstances() % numFolds;\n    train = new Instances(this, numInstances() - numInstForFold);\n    first = numFold * (numInstances() / numFolds) + offset;\n    copyInstances(0, train, first);\n    copyInstances(first + numInstForFold, train,\n\t\t  numInstances() - first - numInstForFold);\n\n    return train;\n  }\n",
+        "methodStartingLine": 1234,
+        "methodEndingLine": 1258,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public Instances trainCV(int numFolds, int numFold, Random random) {\n\n    Instances train = trainCV(numFolds, numFold);\n    train.randomize(random);\n    return train;\n  }\n",
+        "methodStartingLine": 1275,
+        "methodEndingLine": 1280,
+        "jml": "//@ requires 2 <= numFolds && numFolds < numInstances();\n//@ requires 0 <= numFold && numFold < numFolds;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public AttributeStats attributeStats(int index) {\n\n    AttributeStats result = new AttributeStats();\n    if (attribute(index).isNominal()) {\n      result.nominalCounts = new int [attribute(index).numValues()];\n    }\n    if (attribute(index).isNumeric()) {\n      result.numericStats = new weka.experiment.Stats();\n    }\n    result.totalCount = numInstances();\n\n    double [] attVals = attributeToDoubleArray(index);\n    int [] sorted = Utils.sort(attVals);\n    int currentCount = 0;\n    double prev = Instance.missingValue();\n    for (int j = 0; j < numInstances(); j++) {\n      Instance current = instance(sorted[j]);\n      if (current.isMissing(index)) {\n\tresult.missingCount = numInstances() - j;\n\tbreak;\n      }\n      if (current.value(index) == prev) {\n\tcurrentCount++;\n      } else {\n\tresult.addDistinct(prev, currentCount);\n\tcurrentCount = 1;\n\tprev = current.value(index);\n      }\n    }\n    result.addDistinct(prev, currentCount);\n    result.distinctCount--; // So we don't count \"missing\" as a value \n    return result;\n  }\n",
+        "methodStartingLine": 1341,
+        "methodEndingLine": 1373,
+        "jml": "//@ requires 0 <= index && index < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public /*@pure@*/ double [] attributeToDoubleArray(int index) {\n\n    double [] result = new double[numInstances()];\n    for (int i = 0; i < result.length; i++) {\n      result[i] = instance(i).value(index);\n    }\n    return result;\n  }\n",
+        "methodStartingLine": 1385,
+        "methodEndingLine": 1392,
+        "jml": "//@ requires 0 <= index && index < numAttributes();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  protected void copyInstances(int from, /*@non_null@*/ Instances dest, int num) {\n    \n    for (int i = 0; i < num; i++) {\n      dest.add(instance(from + i));\n    }\n  }\n",
+        "methodStartingLine": 1822,
+        "methodEndingLine": 1827,
+        "jml": "//@ requires 0 <= from && from <= numInstances() - num;\n//@ requires 0 <= num;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  protected int partition(int attIndex, int l, int r) {\n    \n    double pivot = instance((l + r) / 2).value(attIndex);\n\n    while (l < r) {\n      while ((instance(l).value(attIndex) < pivot) && (l < r)) {\n        l++;\n      }\n      while ((instance(r).value(attIndex) > pivot) && (l < r)) {\n        r--;\n      }\n      if (l < r) {\n        swap(l, r);\n        l++;\n        r--;\n      }\n    }\n    if ((l == r) && (instance(r).value(attIndex) > pivot)) {\n      r--;\n    } \n\n    return r;\n  }\n",
+        "methodStartingLine": 1974,
+        "methodEndingLine": 1996,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= left && left <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  protected void quickSort(int attIndex, int left, int right) {\n\n    if (left < right) {\n      int middle = partition(attIndex, left, right);\n      quickSort(attIndex, left, middle);\n      quickSort(attIndex, middle + 1, right);\n    }\n  }\n",
+        "methodStartingLine": 2008,
+        "methodEndingLine": 2015,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= first && first <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  protected int select(int attIndex, int left, int right, int k) {\n    \n    if (left == right) {\n      return left;\n    } else {\n      int middle = partition(attIndex, left, right);\n      if ((middle - left + 1) >= k) {\n        return select(attIndex, left, middle, k);\n      } else {\n        return select(attIndex, middle + 1, right, k - (middle - left + 1));\n      }\n    }\n  }\n",
+        "methodStartingLine": 2042,
+        "methodEndingLine": 2054,
+        "jml": "//@ requires 0 <= attIndex && attIndex < numAttributes();\n//@ requires 0 <= first && first <= right && right < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public void swap(int i, int j){\n    \n    m_Instances.swap(i, j);\n  }\n",
+        "methodStartingLine": 2086,
+        "methodEndingLine": 2089,
+        "jml": "//@ requires 0 <= i && i < numInstances();\n//@ requires 0 <= j && j < numInstances();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Instances.java",
+        "code": "  public static void test(String [] argv) {\n\n    Instances instances, secondInstances, train, test, transformed, empty;\n    Instance instance;\n    Random random = new Random(2);\n    Reader reader;\n    int start, num;\n    double newWeight;\n    FastVector testAtts, testVals;\n    int i,j;\n    \n    try{\n      if (argv.length > 1) {\n\tthrow (new Exception(\"Usage: Instances [<filename>]\"));\n      }\n      \n      // Creating set of instances from scratch\n      testVals = new FastVector(2);\n      testVals.addElement(\"first_value\");\n      testVals.addElement(\"second_value\");\n      testAtts = new FastVector(2);\n      testAtts.addElement(new Attribute(\"nominal_attribute\", testVals));\n      testAtts.addElement(new Attribute(\"numeric_attribute\"));\n      instances = new Instances(\"test_set\", testAtts, 10);\n      instances.add(new Instance(instances.numAttributes()));\n      instances.add(new Instance(instances.numAttributes()));\n      instances.add(new Instance(instances.numAttributes()));\n      instances.setClassIndex(0);\n      System.out.println(\"\\nSet of instances created from scratch:\\n\");\n      System.out.println(instances);\n      \n      if (argv.length == 1) {\n\tString filename = argv[0];\n\treader = new FileReader(filename);\n\t\n\t// Read first five instances and print them\n\tSystem.out.println(\"\\nFirst five instances from file:\\n\");\n\tinstances = new Instances(reader, 1);\n\tinstances.setClassIndex(instances.numAttributes() - 1);\n\ti = 0;\n\twhile ((i < 5) && (instances.readInstance(reader))) {\n\t  i++;\n\t}\n\tSystem.out.println(instances);\n\n\t// Read all the instances in the file\n\treader = new FileReader(filename);\n\tinstances = new Instances(reader);\n\n\t// Make the last attribute be the class \n\tinstances.setClassIndex(instances.numAttributes() - 1);\n\t\n\t// Print header and instances.\n\tSystem.out.println(\"\\nDataset:\\n\");\n\tSystem.out.println(instances);\n\tSystem.out.println(\"\\nClass index: \"+instances.classIndex());\n      }\n      \n      // Test basic methods based on class index.\n      System.out.println(\"\\nClass name: \"+instances.classAttribute().name());\n      System.out.println(\"\\nClass index: \"+instances.classIndex());\n      System.out.println(\"\\nClass is nominal: \" +\n\t\t\t instances.classAttribute().isNominal());\n      System.out.println(\"\\nClass is numeric: \" +\n\t\t\t instances.classAttribute().isNumeric());\n      System.out.println(\"\\nClasses:\\n\");\n      for (i = 0; i < instances.numClasses(); i++) {\n\tSystem.out.println(instances.classAttribute().value(i));\n      }\n      System.out.println(\"\\nClass values and labels of instances:\\n\");\n      for (i = 0; i < instances.numInstances(); i++) {\n\tInstance inst = instances.instance(i);\n\tSystem.out.print(inst.classValue() + \"\\t\");\n\tSystem.out.print(inst.toString(inst.classIndex()));\n\tif (instances.instance(i).classIsMissing()) {\n\t  System.out.println(\"\\tis missing\");\n\t} else {\n\t  System.out.println();\n\t}\n      }\n      \n      // Create random weights.\n      System.out.println(\"\\nCreating random weights for instances.\");\n      for (i = 0; i < instances.numInstances(); i++) {\n\tinstances.instance(i).setWeight(random.nextDouble()); \n      }\n      \n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(instances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(instances.sumOfWeights());\n      \n      // Insert an attribute\n      secondInstances = new Instances(instances);\n      Attribute testAtt = new Attribute(\"Inserted\");\n      secondInstances.insertAttributeAt(testAtt, 0);\n      System.out.println(\"\\nSet with inserted attribute:\\n\");\n      System.out.println(secondInstances);\n      System.out.println(\"\\nClass name: \"\n\t\t\t + secondInstances.classAttribute().name());\n      \n      // Delete the attribute\n      secondInstances.deleteAttributeAt(0);\n      System.out.println(\"\\nSet with attribute deleted:\\n\");\n      System.out.println(secondInstances);\n      System.out.println(\"\\nClass name: \"\n\t\t\t + secondInstances.classAttribute().name());\n      \n      // Test if headers are equal\n      System.out.println(\"\\nHeaders equal: \"+\n\t\t\t instances.equalHeaders(secondInstances) + \"\\n\");\n      \n      // Print data in internal format.\n      System.out.println(\"\\nData (internal values):\\n\");\n      for (i = 0; i < instances.numInstances(); i++) {\n\tfor (j = 0; j < instances.numAttributes(); j++) {\n\t  if (instances.instance(i).isMissing(j)) {\n\t    System.out.print(\"? \");\n\t  } else {\n\t    System.out.print(instances.instance(i).value(j) + \" \");\n\t  }\n\t}\n\tSystem.out.println();\n      }\n      \n      // Just print header\n      System.out.println(\"\\nEmpty dataset:\\n\");\n      empty = new Instances(instances, 0);\n      System.out.println(empty);\n      System.out.println(\"\\nClass name: \"+empty.classAttribute().name());\n\n      // Create copy and rename an attribute and a value (if possible)\n      if (empty.classAttribute().isNominal()) {\n\tInstances copy = new Instances(empty, 0);\n\tcopy.renameAttribute(copy.classAttribute(), \"new_name\");\n\tcopy.renameAttributeValue(copy.classAttribute(), \n\t\t\t\t  copy.classAttribute().value(0), \n\t\t\t\t  \"new_val_name\");\n\tSystem.out.println(\"\\nDataset with names changed:\\n\" + copy);\n\tSystem.out.println(\"\\nOriginal dataset:\\n\" + empty);\n      }\n\n      // Create and prints subset of instances.\n      start = instances.numInstances() / 4;\n      num = instances.numInstances() / 2;\n      System.out.print(\"\\nSubset of dataset: \");\n      System.out.println(num + \" instances from \" + (start + 1) \n\t\t\t + \". instance\");\n      secondInstances = new Instances(instances, start, num);\n      System.out.println(\"\\nClass name: \"\n\t\t\t + secondInstances.classAttribute().name());\n\n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(secondInstances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(secondInstances.sumOfWeights());\n      \n      // Create and print training and test sets for 3-fold\n      // cross-validation.\n      System.out.println(\"\\nTrain and test folds for 3-fold CV:\");\n      if (instances.classAttribute().isNominal()) {\n\tinstances.stratify(3);\n      }\n      for (j = 0; j < 3; j++) {\n        train = instances.trainCV(3,j, new Random(1));\n\ttest = instances.testCV(3,j);\n                      \n\t// Print all instances and their weights (and the sum of weights).\n\tSystem.out.println(\"\\nTrain: \");\n\tSystem.out.println(\"\\nInstances and their weights:\\n\");\n\tSystem.out.println(train.instancesAndWeights());\n\tSystem.out.print(\"\\nSum of weights: \");\n\tSystem.out.println(train.sumOfWeights());\n\tSystem.out.println(\"\\nClass name: \"+train.classAttribute().name());\n\tSystem.out.println(\"\\nTest: \");\n\tSystem.out.println(\"\\nInstances and their weights:\\n\");\n\tSystem.out.println(test.instancesAndWeights());\n\tSystem.out.print(\"\\nSum of weights: \");\n\tSystem.out.println(test.sumOfWeights());\n\tSystem.out.println(\"\\nClass name: \"+test.classAttribute().name());\n      }\n\n      // Randomize instances and print them.\n      System.out.println(\"\\nRandomized dataset:\");\n      instances.randomize(random);\n      \n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(instances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(instances.sumOfWeights());\n\n      // Sort instances according to first attribute and\n      // print them.\n      System.out.print(\"\\nInstances sorted according to first attribute:\\n \");\n      instances.sort(0);\n        \n      // Print all instances and their weights (and the sum of weights).\n      System.out.println(\"\\nInstances and their weights:\\n\");\n      System.out.println(instances.instancesAndWeights());\n      System.out.print(\"\\nSum of weights: \");\n      System.out.println(instances.sumOfWeights());\n    } catch (Exception e) {\n      e.printStackTrace(); \n    }\n  }\n",
+        "methodStartingLine": 2136,
+        "methodEndingLine": 2343,
+        "jml": "//@ requires argv != null;\n//@ requires argv.length == 1;\n//@ requires argv[0] != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public /*@ pure non_null @*/ Object copy() {\n\n    Attribute copy = new Attribute(m_Name);\n\n    copy.m_Index = m_Index;\n    copy.m_Type = m_Type;\n    copy.m_Values = m_Values;\n    copy.m_Hashtable = m_Hashtable;\n    copy.m_DateFormat = m_DateFormat;\n    copy.setMetadata(m_Metadata);\n \n    return copy;\n  }\n",
+        "methodStartingLine": 338,
+        "methodEndingLine": 350,
+        "jml": "//@ requires attributeName != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires metadata != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires dateFormat != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires dateFormat != null;\n//@ requires metadata != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ ensures  m_Name == attributeName;\n//@ requires attributeName != null;\n//@ requires metadata != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ int index() {\n\n    return m_Index;\n  }\n",
+        "methodStartingLine": 415,
+        "methodEndingLine": 418,
+        "jml": "//@ ensures \\result == m_Index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isNominal() {\n\n    return (m_Type == NOMINAL);\n  }\n",
+        "methodStartingLine": 453,
+        "methodEndingLine": 456,
+        "jml": "//@ ensures \\result <==> (m_Type == NOMINAL);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isNumeric() {\n\n    return ((m_Type == NUMERIC) || (m_Type == DATE));\n  }\n",
+        "methodStartingLine": 464,
+        "methodEndingLine": 467,
+        "jml": "//@ ensures \\result <==> ((m_Type == NUMERIC) || (m_Type == DATE));"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isString() {\n\n    return (m_Type == STRING);\n  }\n",
+        "methodStartingLine": 475,
+        "methodEndingLine": 478,
+        "jml": "//@ ensures \\result <==> (m_Type == STRING);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ boolean isDate() {\n\n    return (m_Type == DATE);\n  }\n",
+        "methodStartingLine": 486,
+        "methodEndingLine": 489,
+        "jml": "//@ ensures \\result <==> (m_Type == DATE);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ String name() {\n\n    return m_Name;\n  }\n",
+        "methodStartingLine": 497,
+        "methodEndingLine": 500,
+        "jml": "//@ ensures \\result == m_Name;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public final /*@ pure @*/ int type() {\n\n    return m_Type;\n  }\n",
+        "methodStartingLine": 561,
+        "methodEndingLine": 564,
+        "jml": "//@ ensures \\result == m_Type;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public int addStringValue(String value) {\n\n    if (!isString()) {\n      return -1;\n    }\n    Object store = value;\n\n    if (value.length() > STRING_COMPRESS_THRESHOLD) {\n      try {\n        store = new SerializedObject(value, true);\n      } catch (Exception ex) {\n        System.err.println(\"Couldn't compress string attribute value -\"\n                           + \" storing uncompressed.\");\n      }\n    }\n    Integer index = (Integer)m_Hashtable.get(store);\n    if (index != null) {\n      return index.intValue();\n    } else {\n      int intIndex = m_Values.size();\n      m_Values.addElement(store);\n      m_Hashtable.put(store, new Integer(intIndex));\n      return intIndex;\n    }\n  }\n",
+        "methodStartingLine": 659,
+        "methodEndingLine": 683,
+        "jml": "//@ requires attributeName != null;\n//@ requires index >= 0;\n//@ ensures  m_Name == attributeName;\n//@ ensures  m_Index == index;\n//@ requires attributeName != null;\n//@ requires index >= 0;\n//@ ensures  m_Name == attributeName;\n//@ ensures  m_Index == index;\n//@ requires attributeName != null;\n//@ requires index >= 0;\n//@ ensures  m_Name == attributeName;\n//@ ensures  m_Index == index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  final /*@ pure non_null @*/ Attribute copy(String newName) {\n\n    Attribute copy = new Attribute(newName);\n\n    copy.m_Index = m_Index;\n    copy.m_DateFormat = m_DateFormat;\n    copy.m_Type = m_Type;\n    copy.m_Values = m_Values;\n    copy.m_Hashtable = m_Hashtable;\n    copy.setMetadata(m_Metadata);\n \n    return copy;\n  }\n",
+        "methodStartingLine": 740,
+        "methodEndingLine": 752,
+        "jml": "//@ requires newName != null;\n//@ ensures \\result.m_Name  == newName;\n//@ ensures \\result.m_Index == m_Index;\n//@ ensures \\result.m_Type  == m_Type;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  final void delete(int index) {\n    \n    if (!isNominal() && !isString()) \n      throw new IllegalArgumentException(\"Can only remove value of\" +\n                                         \"nominal or string attribute!\");\n    else {\n      m_Values = (FastVector)m_Values.copy();\n      m_Values.removeElementAt(index);\n      Hashtable hash = new Hashtable(m_Hashtable.size());\n      Enumeration enu = m_Hashtable.keys();\n      while (enu.hasMoreElements()) {\n\tObject string = enu.nextElement();\n\tInteger valIndexObject = (Integer)m_Hashtable.get(string);\n\tint valIndex = valIndexObject.intValue();\n\tif (valIndex > index) {\n\t  hash.put(string, new Integer(valIndex - 1));\n\t} else if (valIndex < index) {\n\t  hash.put(string, valIndexObject);\n\t}\n      }\n      m_Hashtable = hash;\n    }\n  }\n",
+        "methodStartingLine": 763,
+        "methodEndingLine": 785,
+        "jml": "//@ requires isNominal() || isString();\n//@ requires 0 <= index && index < m_Values.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  final void forceAddValue(String value) {\n\n    Object store = value;\n    if (value.length() > STRING_COMPRESS_THRESHOLD) {\n      try {\n        store = new SerializedObject(value, true);\n      } catch (Exception ex) {\n        System.err.println(\"Couldn't compress string attribute value -\"\n                           + \" storing uncompressed.\");\n      }\n    }\n    m_Values.addElement(store);\n    m_Hashtable.put(store, new Integer(m_Values.size() - 1));\n  }\n",
+        "methodStartingLine": 794,
+        "methodEndingLine": 807,
+        "jml": "//@ requires value != null;\n//@ ensures  m_Values.size() == \\old(m_Values.size()) + 1;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  final void setIndex(int index) {\n\n    m_Index = index;\n  }\n",
+        "methodStartingLine": 817,
+        "methodEndingLine": 820,
+        "jml": "//@ requires 0 <= index;\n//@ ensures m_Index == index;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  final void setValue(int index, String string) {\n    \n    switch (m_Type) {\n    case NOMINAL:\n    case STRING:\n      m_Values = (FastVector)m_Values.copy();\n      m_Hashtable = (Hashtable)m_Hashtable.clone();\n      Object store = string;\n      if (string.length() > STRING_COMPRESS_THRESHOLD) {\n        try {\n          store = new SerializedObject(string, true);\n        } catch (Exception ex) {\n          System.err.println(\"Couldn't compress string attribute value -\"\n                             + \" storing uncompressed.\");\n        }\n      }\n      m_Hashtable.remove(m_Values.elementAt(index));\n      m_Values.setElementAt(store, index);\n      m_Hashtable.put(store, new Integer(index));\n      break;\n    default:\n      throw new IllegalArgumentException(\"Can only set values for nominal\"\n                                         + \" or string attributes!\");\n    }\n  }\n",
+        "methodStartingLine": 834,
+        "methodEndingLine": 858,
+        "jml": "//@ requires string != null;\n//@ requires isNominal() || isString();\n//@ requires 0 <= index && index < m_Values.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public /*@pure@*/ String formatDate(double date) {\n    switch (m_Type) {\n    case DATE:\n      return m_DateFormat.format(new Date((long)date));\n    default:\n      throw new IllegalArgumentException(\"Can only format date values for date\"\n                                         + \" attributes!\");\n    }\n  }\n",
+        "methodStartingLine": 861,
+        "methodEndingLine": 869,
+        "jml": "//@ requires isDate();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public double parseDate(String string) throws ParseException {\n    switch (m_Type) {\n    case DATE:\n      long time = m_DateFormat.parse(string).getTime();\n      // TODO put in a safety check here if we can't store the value in a double.\n      return (double)time;\n    default:\n      throw new IllegalArgumentException(\"Can only parse date values for date\"\n                                         + \" attributes!\");\n    }\n  }\n",
+        "methodStartingLine": 873,
+        "methodEndingLine": 883,
+        "jml": "//@ requires isDate();\n//@ requires string != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  private void setMetadata(ProtectedProperties metadata) {\n    \n    m_Metadata = metadata;\n\n    if (m_Type == DATE) {\n      m_Ordering = ORDERING_ORDERED;\n      m_IsRegular = true;\n      m_IsAveragable = false;\n      m_HasZeropoint = false;\n    } else {\n\n      // get ordering\n      String orderString = m_Metadata.getProperty(\"ordering\",\"\");\n      \n      // numeric ordered attributes are averagable and zeropoint by default\n      String def;\n      if (m_Type == NUMERIC\n\t  && orderString.compareTo(\"modulo\") != 0\n\t  && orderString.compareTo(\"symbolic\") != 0)\n\tdef = \"true\";\n      else def = \"false\";\n      \n      // determine boolean states\n      m_IsAveragable =\n\t(m_Metadata.getProperty(\"averageable\",def).compareTo(\"true\") == 0);\n      m_HasZeropoint =\n\t(m_Metadata.getProperty(\"zeropoint\",def).compareTo(\"true\") == 0);\n      // averagable or zeropoint implies regular\n      if (m_IsAveragable || m_HasZeropoint) def = \"true\";\n      m_IsRegular =\n\t(m_Metadata.getProperty(\"regular\",def).compareTo(\"true\") == 0);\n      \n      // determine ordering\n      if (orderString.compareTo(\"symbolic\") == 0)\n\tm_Ordering = ORDERING_SYMBOLIC;\n      else if (orderString.compareTo(\"ordered\") == 0)\n\tm_Ordering = ORDERING_ORDERED;\n      else if (orderString.compareTo(\"modulo\") == 0)\n\tm_Ordering = ORDERING_MODULO;\n      else {\n\tif (m_Type == NUMERIC || m_IsAveragable || m_HasZeropoint)\n\t  m_Ordering = ORDERING_ORDERED;\n\telse m_Ordering = ORDERING_SYMBOLIC;\n      }\n    }\n\n    // consistency checks\n    if (m_IsAveragable && !m_IsRegular)\n      throw new IllegalArgumentException(\"An averagable attribute must be\"\n\t\t\t\t\t + \" regular\");\n    if (m_HasZeropoint && !m_IsRegular)\n      throw new IllegalArgumentException(\"A zeropoint attribute must be\"\n\t\t\t\t\t + \" regular\");\n    if (m_IsRegular && m_Ordering == ORDERING_SYMBOLIC)\n      throw new IllegalArgumentException(\"A symbolic attribute cannot be\"\n\t\t\t\t\t + \" regular\");\n    if (m_IsAveragable && m_Ordering != ORDERING_ORDERED)\n      throw new IllegalArgumentException(\"An averagable attribute must be\"\n\t\t\t\t\t + \" ordered\");\n    if (m_HasZeropoint && m_Ordering != ORDERING_ORDERED)\n      throw new IllegalArgumentException(\"A zeropoint attribute must be\"\n\t\t\t\t\t + \" ordered\");\n\n    // determine weight\n    m_Weight = 1.0;\n    String weightString = m_Metadata.getProperty(\"weight\");\n    if (weightString != null) {\n      try{\n\tm_Weight = Double.valueOf(weightString).doubleValue();\n      } catch (NumberFormatException e) {\n\t// Check if value is really a number\n\tthrow new IllegalArgumentException(\"Not a valid attribute weight: '\" \n\t\t\t\t\t   + weightString + \"'\");\n      }\n    }\n\n    // determine numeric range\n    if (m_Type == NUMERIC) setNumericRange(m_Metadata.getProperty(\"range\"));\n  }\n",
+        "methodStartingLine": 1035,
+        "methodEndingLine": 1113,
+        "jml": "//@ requires metadata != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  private void setNumericRange(String rangeString)\n  {\n    // set defaults\n    m_LowerBound = Double.NEGATIVE_INFINITY;\n    m_LowerBoundIsOpen = false;\n    m_UpperBound = Double.POSITIVE_INFINITY;\n    m_UpperBoundIsOpen = false;\n\n    if (rangeString == null) return;\n\n    // set up a tokenzier to parse the string\n    StreamTokenizer tokenizer =\n      new StreamTokenizer(new StringReader(rangeString));\n    tokenizer.resetSyntax();         \n    tokenizer.whitespaceChars(0, ' ');    \n    tokenizer.wordChars(' '+1,'\\u00FF');\n    tokenizer.ordinaryChar('[');\n    tokenizer.ordinaryChar('(');\n    tokenizer.ordinaryChar(',');\n    tokenizer.ordinaryChar(']');\n    tokenizer.ordinaryChar(')');\n\n    try {\n\n      // get opening brace\n      tokenizer.nextToken();\n    \n      if (tokenizer.ttype == '[') m_LowerBoundIsOpen = false;\n      else if (tokenizer.ttype == '(') m_LowerBoundIsOpen = true;\n      else throw new IllegalArgumentException(\"Expected opening brace on range,\"\n\t\t\t\t\t      + \" found: \"\n\t\t\t\t\t      + tokenizer.toString());\n\n      // get lower bound\n      tokenizer.nextToken();\n      if (tokenizer.ttype != tokenizer.TT_WORD)\n\tthrow new IllegalArgumentException(\"Expected lower bound in range,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n      if (tokenizer.sval.compareToIgnoreCase(\"-inf\") == 0)\n\tm_LowerBound = Double.NEGATIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"+inf\") == 0)\n\tm_LowerBound = Double.POSITIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"inf\") == 0)\n\tm_LowerBound = Double.NEGATIVE_INFINITY;\n      else try {\n\tm_LowerBound = Double.valueOf(tokenizer.sval).doubleValue();\n      } catch (NumberFormatException e) {\n\tthrow new IllegalArgumentException(\"Expected lower bound in range,\"\n\t\t\t\t\t   + \" found: '\" + tokenizer.sval + \"'\");\n      }\n\n      // get separating comma\n      if (tokenizer.nextToken() != ',')\n\tthrow new IllegalArgumentException(\"Expected comma in range,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n\n      // get upper bound\n      tokenizer.nextToken();\n      if (tokenizer.ttype != tokenizer.TT_WORD)\n\tthrow new IllegalArgumentException(\"Expected upper bound in range,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n      if (tokenizer.sval.compareToIgnoreCase(\"-inf\") == 0)\n\tm_UpperBound = Double.NEGATIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"+inf\") == 0)\n\tm_UpperBound = Double.POSITIVE_INFINITY;\n      else if (tokenizer.sval.compareToIgnoreCase(\"inf\") == 0)\n\tm_UpperBound = Double.POSITIVE_INFINITY;\n      else try {\n\tm_UpperBound = Double.valueOf(tokenizer.sval).doubleValue();\n      } catch (NumberFormatException e) {\n\tthrow new IllegalArgumentException(\"Expected upper bound in range,\"\n\t\t\t\t\t   + \" found: '\" + tokenizer.sval + \"'\");\n      }\n\n      // get closing brace\n      tokenizer.nextToken();\n    \n      if (tokenizer.ttype == ']') m_UpperBoundIsOpen = false;\n      else if (tokenizer.ttype == ')') m_UpperBoundIsOpen = true;\n      else throw new IllegalArgumentException(\"Expected closing brace on range,\"\n\t\t\t\t\t      + \" found: \"\n\t\t\t\t\t      + tokenizer.toString());\n\n      // check for rubbish on end\n      if (tokenizer.nextToken() != tokenizer.TT_EOF)\n\tthrow new IllegalArgumentException(\"Expected end of range string,\"\n\t\t\t\t\t   + \" found: \"\n\t\t\t\t\t   + tokenizer.toString());\n\n    } catch (IOException e) {\n      throw new IllegalArgumentException(\"IOException reading attribute range\"\n\t\t\t\t\t + \" string: \" + e.getMessage());\n    }\n\n    if (m_UpperBound < m_LowerBound)\n      throw new IllegalArgumentException(\"Upper bound (\" + m_UpperBound\n\t\t\t\t\t + \") on numeric range is\"\n\t\t\t\t\t + \" less than lower bound (\"\n\t\t\t\t\t + m_LowerBound + \")!\");\n  }\n",
+        "methodStartingLine": 1125,
+        "methodEndingLine": 1227,
+        "jml": "//@ requires rangeString != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/Attribute.java",
+        "code": "  public static void main(String[] ops) {\n\n    try {\n      \n      // Create numeric attributes \"length\" and \"weight\"\n      Attribute length = new Attribute(\"length\");\n      Attribute weight = new Attribute(\"weight\");\n\n      // Create date attribute \"date\"\n      Attribute date = new Attribute(\"date\", \"yyyy-MM-dd HH:mm:ss\");\n\n      System.out.println(date);\n      double dd = date.parseDate(\"2001-04-04 14:13:55\");\n      System.out.println(\"Test date = \" + dd);\n      System.out.println(date.formatDate(dd));\n\n      dd = new Date().getTime();\n      System.out.println(\"Date now = \" + dd);\n      System.out.println(date.formatDate(dd));\n      \n      // Create vector to hold nominal values \"first\", \"second\", \"third\" \n      FastVector my_nominal_values = new FastVector(3); \n      my_nominal_values.addElement(\"first\"); \n      my_nominal_values.addElement(\"second\"); \n      my_nominal_values.addElement(\"third\"); \n      \n      // Create nominal attribute \"position\" \n      Attribute position = new Attribute(\"position\", my_nominal_values);\n\n      // Print the name of \"position\"\n      System.out.println(\"Name of \\\"position\\\": \" + position.name());\n\n      // Print the values of \"position\"\n      Enumeration attValues = position.enumerateValues();\n      while (attValues.hasMoreElements()) {\n\tString string = (String)attValues.nextElement();\n\tSystem.out.println(\"Value of \\\"position\\\": \" + string);\n      }\n\n      // Shallow copy attribute \"position\"\n      Attribute copy = (Attribute) position.copy();\n\n      // Test if attributes are the same\n      System.out.println(\"Copy is the same as original: \" + copy.equals(position));\n\n      // Print index of attribute \"weight\" (should be unset: -1)\n      System.out.println(\"Index of attribute \\\"weight\\\" (should be -1): \" + \n\t\t\t weight.index());\n\n      // Print index of value \"first\" of attribute \"position\"\n      System.out.println(\"Index of value \\\"first\\\" of \\\"position\\\" (should be 0): \" +\n\t\t\t position.indexOfValue(\"first\"));\n\n      // Tests type of attribute \"position\"\n      System.out.println(\"\\\"position\\\" is numeric: \" + position.isNumeric());\n      System.out.println(\"\\\"position\\\" is nominal: \" + position.isNominal());\n      System.out.println(\"\\\"position\\\" is string: \" + position.isString());\n\n      // Prints name of attribute \"position\"\n      System.out.println(\"Name of \\\"position\\\": \" + position.name());\n    \n      // Prints number of values of attribute \"position\"\n      System.out.println(\"Number of values for \\\"position\\\": \" + position.numValues());\n\n      // Prints the values (againg)\n      for (int i = 0; i < position.numValues(); i++) {\n\tSystem.out.println(\"Value \" + i + \": \" + position.value(i));\n      }\n\n      // Prints the attribute \"position\" in ARFF format\n      System.out.println(position);\n\n      // Checks type of attribute \"position\" using constants\n      switch (position.type()) {\n      case Attribute.NUMERIC:\n\tSystem.out.println(\"\\\"position\\\" is numeric\");\n\tbreak;\n      case Attribute.NOMINAL:\n\tSystem.out.println(\"\\\"position\\\" is nominal\");\n\tbreak;\n      case Attribute.STRING:\n\tSystem.out.println(\"\\\"position\\\" is string\");\n\tbreak;\n      case Attribute.DATE:\n\tSystem.out.println(\"\\\"position\\\" is date\");\n\tbreak;\n      default:\n\tSystem.out.println(\"\\\"position\\\" has unknown type\");\n      }\n    } catch (Exception e) {\n      e.printStackTrace();\n    }\n  }\n",
+        "methodStartingLine": 1234,
+        "methodEndingLine": 1326,
+        "jml": "//@ requires ops != null;\n//@ requires \\nonnullelements(ops);"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "    public final /*@pure@*/ boolean hasMoreElements() {\n\n      if (m_Counter < m_Vector.size()) {\n\treturn true;\n      }\n      return false;\n    }\n",
+        "methodStartingLine": 95,
+        "methodEndingLine": 101,
+        "jml": "//@ requires 0 <= special && special < vector.size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final void addElement(Object element) {\n\n    Object[] newObjects;\n\n    if (m_Size == m_Objects.length) {\n      newObjects = new Object[m_CapacityMultiplier *\n\t\t\t     (m_Objects.length +\n\t\t\t      m_CapacityIncrement)];\n      System.arraycopy(m_Objects, 0, newObjects, 0, m_Size);\n      m_Objects = newObjects;\n    }\n    m_Objects[m_Size] = element;\n    m_Size++;\n  }\n",
+        "methodStartingLine": 168,
+        "methodEndingLine": 181,
+        "jml": "//@ requires capacity >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int capacity() {\n  \n    return m_Objects.length;\n  }\n",
+        "methodStartingLine": 189,
+        "methodEndingLine": 192,
+        "jml": "//@ ensures \\result == m_Objects.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object elementAt(int index) {\n\n    return m_Objects[index];\n  }\n",
+        "methodStartingLine": 237,
+        "methodEndingLine": 240,
+        "jml": "//@ requires 0 <= index;\n//@ requires index < m_Objects.length;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Enumeration elements(int index) {\n  \n    return new FastVectorEnumeration(this, index);\n  }\n",
+        "methodStartingLine": 260,
+        "methodEndingLine": 263,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object firstElement() {\n\n    return m_Objects[0];\n  }\n",
+        "methodStartingLine": 286,
+        "methodEndingLine": 289,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final /*@pure@*/ Object lastElement() {\n\n    return m_Objects[m_Size - 1];\n  }\n",
+        "methodStartingLine": 342,
+        "methodEndingLine": 345,
+        "jml": "//@ requires m_Size > 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final void removeElementAt(int index) {\n\n    System.arraycopy(m_Objects, index + 1, m_Objects, index, \n                     m_Size - index - 1);\n    m_Size--;\n  }\n",
+        "methodStartingLine": 353,
+        "methodEndingLine": 358,
+        "jml": "//@ requires 0 <= index && index < m_Size;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final void setElementAt(Object element, int index) {\n\n    m_Objects[index] = element;\n  }\n",
+        "methodStartingLine": 416,
+        "methodEndingLine": 419,
+        "jml": "//@ requires 0 <= index && index < size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final /*@pure@*/ int size() {\n\n    return m_Size;\n  }\n",
+        "methodStartingLine": 427,
+        "methodEndingLine": 430,
+        "jml": "//@ ensures \\result == m_Size;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/FastVector.java",
+        "code": "  public final void swap(int first, int second) {\n\n    Object help = m_Objects[first];\n\n    m_Objects[first] = m_Objects[second];\n    m_Objects[second] = help;\n  }\n",
+        "methodStartingLine": 440,
+        "methodEndingLine": 446,
+        "jml": "//@ requires 0 <= first && first < size();\n//@ requires 0 <= second && second < size();"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/SingleIndex.java",
+        "code": "  public void setUpper(int newUpper) {\n\n    if (newUpper >= 0) {\n      m_Upper = newUpper;\n      setValue();\n    }\n  }\n",
+        "methodStartingLine": 89,
+        "methodEndingLine": 95,
+        "jml": "//@ ensures m_SelectedIndex == -1;\n//@ ensures m_Upper == -1;\n//@ ensures m_IndexString == index;\n//@ ensures m_SelectedIndex == -1;\n//@ ensures m_Upper == -1;\n//@ ensures newUpper < 0 ==> m_Upper == \\old(m_Upper);\n//@ ensures newUpper >= 0 ==> m_Upper == newUpper;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ String getSingleIndex() {\n\n    return m_IndexString;\n  }\n",
+        "methodStartingLine": 103,
+        "methodEndingLine": 106,
+        "jml": "//@ ensures \\result == m_IndexString;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/SingleIndex.java",
+        "code": "  public void setSingleIndex(/*@non_null@*/ String index) {\n\n    m_IndexString = index;\n    m_SelectedIndex = -1;\n  }\n",
+        "methodStartingLine": 118,
+        "methodEndingLine": 122,
+        "jml": "//@ ensures m_IndexString == index;\n//@ ensures m_SelectedIndex == -1;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ String toString() {\n\n    if (m_IndexString.equals(\"\")) {\n      return \"No index set\";\n    }\n    if (m_Upper == -1) {\n      throw new RuntimeException(\"Upper limit has not been specified\");\n    }\n    return m_IndexString;\n  }\n",
+        "methodStartingLine": 132,
+        "methodEndingLine": 141,
+        "jml": "//@ ensures \\result != null;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/SingleIndex.java",
+        "code": "  public /*@pure@*/ int getIndex() {\n\n    if (m_IndexString.equals(\"\")) {\n      throw new RuntimeException(\"No index set\");\n    }\n    if (m_Upper == -1) {\n      throw new RuntimeException(\"No upper limit has been specified for index\");\n    }\n    return m_SelectedIndex;\n  }\n",
+        "methodStartingLine": 152,
+        "methodEndingLine": 161,
+        "jml": "//@ requires m_Upper >= 0;\n//@ requires m_IndexString.length() > 0;\n//@ ensures \\result == m_SelectedIndex;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/SingleIndex.java",
+        "code": "  public static /*@pure non_null@*/ String indexToString(int index) {\n\n    return \"\" + (index + 1);\n  }\n",
+        "methodStartingLine": 171,
+        "methodEndingLine": 174,
+        "jml": "//@ requires index >= 0;"
+    },
+    {
+        "repository": "github.com/LASER-UMASS/Themis",
+        "file": "subjectSystems/C,D/src/weka/core/SingleIndex.java",
+        "code": "  public static void main(/*@non_null@*/ String [] argv) {\n\n    try {\n      if (argv.length == 0) {\n\tthrow new Exception(\"Usage: SingleIndex <indexspec>\");\n      }\n      SingleIndex singleIndex = new SingleIndex();\n      singleIndex.setSingleIndex(argv[0]);\n      singleIndex.setUpper(9);\n      System.out.println(\"Input: \" + argv[0] + \"\\n\"\n\t\t\t + singleIndex.toString());\n      int selectedIndex = singleIndex.getIndex();\n      System.out.println(selectedIndex + \"\");\n    } catch (Exception ex) {\n      ex.printStackTrace();\n      System.out.println(ex.getMessage());\n    }\n  }\n",
+        "methodStartingLine": 211,
+        "methodEndingLine": 228,
+        "jml": "//@ requires \\nonnullelements(argv);"
+    }
+]

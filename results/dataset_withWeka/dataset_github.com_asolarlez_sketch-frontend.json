@@ -1,0 +1,18 @@
+[
+    {
+        "repository": "github.com/asolarlez/sketch-frontend",
+        "file": "src/experiments/sk/seq/ras/SKETCH/Sparse/DenseMV.java",
+        "code": "    static int dot(/*@ non_null */ int[] a, /*@ non_null */ int[] b) {\n        return 1;\n    }\n",
+        "methodStartingLine": 17,
+        "methodEndingLine": 19,
+        "jml": "//@ requires a.length == b.length\n//@ ensures \\result "
+    },
+    {
+        "repository": "github.com/asolarlez/sketch-frontend",
+        "file": "src/experiments/sk/seq/ras/SKETCH/Sparse/DenseMV.java",
+        "code": "    static int[] multiply(/*@ non_null */ int[][] A, /*@ non_null */ int[] x) {\n        int[] y = new int[A.length];\n        //@ assume y.length == A.length;\n        for (int i = 0; i < A.length; i++) {\n            y[i] = 0;\n            //@ assume x.length == A[i].length;\n            //@ assume A[i] != null;\n            for (int j = 0; j < A[i].length; j++) {\n                y[i] += A[i][j]*x[j];\n            }\n        }\n      return y; \n    }\n",
+        "methodStartingLine": 22,
+        "methodEndingLine": 34,
+        "jml": "//@ ensures (\\forall int i; 0<=i<y.length ==> y[i] == dot(A[i],x))"
+    }
+]

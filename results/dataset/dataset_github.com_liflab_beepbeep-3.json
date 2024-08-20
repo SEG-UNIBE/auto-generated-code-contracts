@@ -1,0 +1,34 @@
+[
+    {
+        "repository": "github.com/liflab/beepbeep-3",
+        "file": "Core/src/ca/uqac/lif/cep/Processor.java",
+        "code": "  /*@ non_null @*/ public final Set<Class<?>> getInputType(int index)\n  {\n    Set<Class<?>> classes = new HashSet<Class<?>>();\n    if (index >= 0 && index < m_inputArity)\n    {\n      getInputTypesFor(classes, index);\n    }\n    return classes;\n  }\n",
+        "methodStartingLine": 553,
+        "methodEndingLine": 561,
+        "jml": "//@ requires index >= 0"
+    },
+    {
+        "repository": "github.com/liflab/beepbeep-3",
+        "file": "Core/src/ca/uqac/lif/cep/util/Maps.java",
+        "code": "    @SuppressWarnings(\"unchecked\")\n    @Override\n    public Map getValue(Map x)\n    {\n      Map<Object,Object> out = new HashMap<Object,Object>();\n      Object[] a_out = new Object[1];\n      for (Object o  : x.entrySet())\n      {\n        Map.Entry<Object,Object> e = (Map.Entry<Object,Object>) o;\n        m_function.evaluate(new Object[]{e.getValue()}, a_out);\n        out.put(e.getKey(), a_out[0]);\n      }\n      return out;\n    }\n",
+        "methodStartingLine": 268,
+        "methodEndingLine": 281,
+        "jml": "//@ requires f.getInputArity() == 1\n//@ requires f.getOutputArity() == 1"
+    },
+    {
+        "repository": "github.com/liflab/beepbeep-3",
+        "file": "Core/src/ca/uqac/lif/cep/functions/RaiseArity.java",
+        "code": "  @Override\n  public void evaluate(Object[] inputs, Object[] outputs)\n  {\n    m_function.evaluate(inputs, outputs);\n  }\n",
+        "methodStartingLine": 62,
+        "methodEndingLine": 66,
+        "jml": "//@ requires arity >= 0"
+    },
+    {
+        "repository": "github.com/liflab/beepbeep-3-palettes",
+        "file": "Signal/src/ca/uqac/lif/cep/signal/Persist.java",
+        "code": "  @Override\n  protected boolean compute(Object[] inputs, Object[] outputs)\n  {\n    float f = ((Number) inputs[0]).floatValue();\n    m_timeSinceLast++;\n    if (Math.abs(f) > Math.abs(m_lastValue))\n    {\n      m_lastValue = f;\n      m_timeSinceLast = 0;\n    }\n    if (m_timeSinceLast > m_width)\n    {\n      m_lastValue = 0f;\n      m_timeSinceLast = 0;\n    }\n    outputs[0] = m_lastValue;\n    return true;\n  }\n",
+        "methodStartingLine": 47,
+        "methodEndingLine": 64,
+        "jml": "//@ requires width > 0"
+    }
+]

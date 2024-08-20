@@ -1,0 +1,10 @@
+[
+    {
+        "repository": "github.com/liflab/beepbeep-3-palettes",
+        "file": "Signal/src/ca/uqac/lif/cep/signal/Persist.java",
+        "code": "  @Override\n  protected boolean compute(Object[] inputs, Object[] outputs)\n  {\n    float f = ((Number) inputs[0]).floatValue();\n    m_timeSinceLast++;\n    if (Math.abs(f) > Math.abs(m_lastValue))\n    {\n      m_lastValue = f;\n      m_timeSinceLast = 0;\n    }\n    if (m_timeSinceLast > m_width)\n    {\n      m_lastValue = 0f;\n      m_timeSinceLast = 0;\n    }\n    outputs[0] = m_lastValue;\n    return true;\n  }\n",
+        "methodStartingLine": 47,
+        "methodEndingLine": 64,
+        "jml": "//@ requires width > 0"
+    }
+]

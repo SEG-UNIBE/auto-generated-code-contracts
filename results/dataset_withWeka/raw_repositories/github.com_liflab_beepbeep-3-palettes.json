@@ -1,0 +1,49 @@
+{
+  "SourcegraphEndpoint": "https://sourcegraph.com",
+  "Query": "(//@ requires )|(//@ ensures ) repo:github.com/liflab/beepbeep-3-palettes lang:java count:all case:yes type:file patterntype:regexp",
+  "Site": {
+    "BuildVersion": "238702_2023-08-16_5.1-acf4bcc841e5"
+  },
+  "Results": [
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "83644ed63bf2b1cbbdfe085ad7054309e16abe7a"
+        },
+        "content": "/*\n    BeepBeep, an event stream processor\n    Copyright (C) 2008-2018 Sylvain Hallé\n\n    This program is free software: you can redistribute it and/or modify\n    it under the terms of the GNU Lesser General Public License as published\n    by the Free Software Foundation, either version 3 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU Lesser General Public License for more details.\n\n    You should have received a copy of the GNU Lesser General Public License\n    along with this program.  If not, see \u003chttp://www.gnu.org/licenses/\u003e.\n */\npackage ca.uqac.lif.cep.signal;\n\nimport ca.uqac.lif.cep.UniformProcessor;\n\n/**\n * Persists a locally maximal value for a certain amount of time.\n * @author Sylvain Hallé\n */\npublic class Persist extends UniformProcessor\n{\n  protected int m_width;\n  \n  protected float m_lastValue;\n  \n  protected int m_timeSinceLast;\n  \n  /**\n   * Creates a new decay processor\n   * @param width The width of the window\n   */\n  //@ requires width \u003e 0\n  public Persist(int width)\n  {\n    super(1, 1);\n    m_width = width;\n    m_lastValue = 0f;\n    m_timeSinceLast = 0;\n  }\n  \n  @Override\n  protected boolean compute(Object[] inputs, Object[] outputs)\n  {\n    float f = ((Number) inputs[0]).floatValue();\n    m_timeSinceLast++;\n    if (Math.abs(f) \u003e Math.abs(m_lastValue))\n    {\n      m_lastValue = f;\n      m_timeSinceLast = 0;\n    }\n    if (m_timeSinceLast \u003e m_width)\n    {\n      m_lastValue = 0f;\n      m_timeSinceLast = 0;\n    }\n    outputs[0] = m_lastValue;\n    return true;\n  }\n\n  @Override\n  public Persist duplicate(boolean with_state)\n  {\n    Persist d = new Persist(m_width);\n    d.m_context.putAll(getContext());\n    if (with_state)\n    {\n      d.m_lastValue = m_lastValue;\n      d.m_timeSinceLast = m_timeSinceLast;\n    }\n    return d;\n  }\n  \n  @Override\n  public void reset()\n  {\n    super.reset();\n    m_lastValue = 0f;\n    m_timeSinceLast = 0;\n  }\n}\n",
+        "name": "Persist.java",
+        "path": "Signal/src/ca/uqac/lif/cep/signal/Persist.java",
+        "url": "/github.com/liflab/beepbeep-3-palettes/-/blob/Signal/src/ca/uqac/lif/cep/signal/Persist.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 37,
+          "offsetAndLengths": [
+            [
+              2,
+              13
+            ]
+          ],
+          "preview": "  //@ requires width \u003e 0"
+        }
+      ],
+      "repository": {
+        "name": "github.com/liflab/beepbeep-3-palettes",
+        "url": "/github.com/liflab/beepbeep-3-palettes"
+      }
+    }
+  ],
+  "LimitHit": false,
+  "Cloning": [],
+  "Missing": [],
+  "Timedout": [],
+  "ResultCount": 1,
+  "ElapsedMilliseconds": 78,
+  "Alert": {
+    "Title": "",
+    "Description": "",
+    "ProposedQueries": null
+  }
+}

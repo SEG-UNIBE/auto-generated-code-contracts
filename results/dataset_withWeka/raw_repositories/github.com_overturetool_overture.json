@@ -1,0 +1,282 @@
+{
+  "SourcegraphEndpoint": "https://sourcegraph.com",
+  "Query": "(//@ requires )|(//@ ensures ) repo:github.com/overturetool/overture lang:java count:all case:yes type:file patterntype:regexp",
+  "Site": {
+    "BuildVersion": "238702_2023-08-16_5.1-acf4bcc841e5"
+  },
+  "Results": [
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "8e73876ae1e259b041db9a11afc7f8b93c385fa6"
+        },
+        "content": "package project;\n\nimport java.util.*;\nimport org.overture.codegen.runtime.*;\nimport org.overture.codegen.vdm2jml.runtime.*;\n\n@SuppressWarnings(\"all\")\n//@ nullable_by_default\n\nfinal public class Entry {\n  /*@ spec_public @*/\n\n  private static project.Entrytypes.St St = new project.Entrytypes.St(5L);\n  /*@ public ghost static boolean invChecksOn = true; @*/\n\n  private Entry() {}\n\n  public static Object Run() {\n\n    final Number ignorePattern_1 = opRet(1L);\n    //@ assert Utils.is_nat(ignorePattern_1);\n\n    {\n      opVoid(2L);\n      IO.println(\"Before breaking pre condition\");\n      {\n        final Number ignorePattern_2 = id(-1L);\n        //@ assert Utils.is_int(ignorePattern_2);\n\n        /* skip */\n      }\n\n      IO.println(\"After breaking pre condition\");\n      return 0L;\n    }\n  }\n  //@ requires pre_opRet(a,St);\n\n  public static Number opRet(final Number a) {\n\n    //@ assert Utils.is_nat(a);\n\n    //@ assert St != null;\n\n    St.set_x(a.longValue() + 1L);\n\n    Number ret_1 = St.get_x();\n    //@ assert Utils.is_nat(ret_1);\n\n    return ret_1;\n  }\n  //@ requires pre_opVoid(a,St);\n\n  public static void opVoid(final Number a) {\n\n    //@ assert Utils.is_nat(a);\n\n    //@ assert St != null;\n\n    St.set_x(a.longValue() + 1L);\n  }\n  //@ requires pre_id(a);\n  /*@ pure @*/\n\n  public static Number id(final Number a) {\n\n    //@ assert Utils.is_int(a);\n\n    Number ret_2 = a;\n    //@ assert Utils.is_int(ret_2);\n\n    return ret_2;\n  }\n  /*@ pure @*/\n\n  public static Boolean pre_opRet(final Number a, final project.Entrytypes.St St) {\n\n    //@ assert Utils.is_nat(a);\n\n    //@ assert Utils.is_(St,project.Entrytypes.St.class);\n\n    Boolean ret_3 = St.get_x().longValue() \u003e 0L;\n    //@ assert Utils.is_bool(ret_3);\n\n    return ret_3;\n  }\n  /*@ pure @*/\n\n  public static Boolean pre_opVoid(final Number a, final project.Entrytypes.St St) {\n\n    //@ assert Utils.is_nat(a);\n\n    //@ assert Utils.is_(St,project.Entrytypes.St.class);\n\n    Boolean ret_4 = St.get_x().longValue() \u003e 0L;\n    //@ assert Utils.is_bool(ret_4);\n\n    return ret_4;\n  }\n  /*@ pure @*/\n\n  public static Boolean pre_id(final Number a) {\n\n    //@ assert Utils.is_int(a);\n\n    Boolean ret_5 = a.longValue() \u003e 0L;\n    //@ assert Utils.is_bool(ret_5);\n\n    return ret_5;\n  }\n\n  public String toString() {\n\n    return \"Entry{\" + \"St := \" + Utils.toString(St) + \"}\";\n  }\n}\n",
+        "name": "Entry.java",
+        "path": "core/codegen/vdm2jml/src/test/resources/dynamic_analysis/prepost/PreCond/Entry.java",
+        "url": "/github.com/overturetool/overture/-/blob/core/codegen/vdm2jml/src/test/resources/dynamic_analysis/prepost/PreCond/Entry.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 36,
+          "offsetAndLengths": [
+            [
+              2,
+              13
+            ]
+          ],
+          "preview": "  //@ requires pre_opRet(a,St);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 51,
+          "offsetAndLengths": [
+            [
+              2,
+              13
+            ]
+          ],
+          "preview": "  //@ requires pre_opVoid(a,St);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 61,
+          "offsetAndLengths": [
+            [
+              2,
+              13
+            ]
+          ],
+          "preview": "  //@ requires pre_id(a);"
+        }
+      ],
+      "repository": {
+        "name": "github.com/overturetool/overture",
+        "url": "/github.com/overturetool/overture"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "8e73876ae1e259b041db9a11afc7f8b93c385fa6"
+        },
+        "content": "package project;\n\nimport java.util.*;\nimport org.overture.codegen.runtime.*;\nimport org.overture.codegen.vdm2jml.runtime.*;\n\n@SuppressWarnings(\"all\")\n//@ nullable_by_default\n\nfinal public class Entry {\n  /*@ spec_public @*/\n\n  private static project.Entrytypes.St St = new project.Entrytypes.St(0L);\n  /*@ public ghost static boolean invChecksOn = true; @*/\n\n  private Entry() {}\n\n  public static Object Run() {\n\n    final Number ignorePattern_1 = opRet(1L);\n    //@ assert Utils.is_nat(ignorePattern_1);\n\n    final Number ignorePattern_2 = f(3L);\n    //@ assert Utils.is_nat(ignorePattern_2);\n\n    {\n      opVoid();\n      IO.println(\"Before breaking post condition\");\n      {\n        final Number ignorePattern_3 = opRet(4L);\n        //@ assert Utils.is_nat(ignorePattern_3);\n\n        /* skip */\n      }\n\n      IO.println(\"After breaking post condition\");\n      return 0L;\n    }\n  }\n  //@ ensures post_opVoid(\\old(St.copy()),St);\n\n  public static void opVoid() {\n\n    //@ assert St != null;\n\n    St.set_x(St.get_x().longValue() + 1L);\n  }\n  //@ ensures post_opRet(a,\\result,\\old(St.copy()),St);\n\n  public static Number opRet(final Number a) {\n\n    //@ assert Utils.is_nat(a);\n\n    //@ assert St != null;\n\n    St.set_x(St.get_x().longValue() + 1L);\n\n    Number ret_1 = St.get_x();\n    //@ assert Utils.is_nat(ret_1);\n\n    return ret_1;\n  }\n  //@ ensures post_f(a,\\result);\n  /*@ pure @*/\n\n  public static Number f(final Number a) {\n\n    //@ assert Utils.is_nat(a);\n\n    if (Utils.equals(Utils.mod(a.longValue(), 2L), 0L)) {\n      Number ret_2 = a.longValue() + 2L;\n      //@ assert Utils.is_nat(ret_2);\n\n      return ret_2;\n\n    } else {\n      Number ret_3 = a.longValue() + 1L;\n      //@ assert Utils.is_nat(ret_3);\n\n      return ret_3;\n    }\n  }\n  /*@ pure @*/\n\n  public static Boolean post_opVoid(\n      final project.Entrytypes.St _St, final project.Entrytypes.St St) {\n\n    //@ assert Utils.is_(_St,project.Entrytypes.St.class);\n\n    //@ assert Utils.is_(St,project.Entrytypes.St.class);\n\n    Boolean ret_4 = Utils.equals(St.get_x(), _St.get_x().longValue() + 1L);\n    //@ assert Utils.is_bool(ret_4);\n\n    return ret_4;\n  }\n  /*@ pure @*/\n\n  public static Boolean post_opRet(\n      final Number a,\n      final Number RESULT,\n      final project.Entrytypes.St _St,\n      final project.Entrytypes.St St) {\n\n    //@ assert Utils.is_nat(a);\n\n    //@ assert Utils.is_nat(RESULT);\n\n    //@ assert Utils.is_(_St,project.Entrytypes.St.class);\n\n    //@ assert Utils.is_(St,project.Entrytypes.St.class);\n\n    Boolean andResult_1 = false;\n    //@ assert Utils.is_bool(andResult_1);\n\n    if (Utils.equals(St.get_x(), _St.get_x().longValue() + 1L)) {\n      if (Utils.equals(RESULT, a)) {\n        andResult_1 = true;\n        //@ assert Utils.is_bool(andResult_1);\n\n      }\n    }\n\n    Boolean ret_5 = andResult_1;\n    //@ assert Utils.is_bool(ret_5);\n\n    return ret_5;\n  }\n  /*@ pure @*/\n\n  public static Boolean post_f(final Number a, final Number RESULT) {\n\n    //@ assert Utils.is_nat(a);\n\n    //@ assert Utils.is_nat(RESULT);\n\n    Boolean ret_6 = Utils.equals(Utils.mod(RESULT.longValue(), 2L), 0L);\n    //@ assert Utils.is_bool(ret_6);\n\n    return ret_6;\n  }\n\n  public String toString() {\n\n    return \"Entry{\" + \"St := \" + Utils.toString(St) + \"}\";\n  }\n}\n",
+        "name": "Entry.java",
+        "path": "core/codegen/vdm2jml/src/test/resources/dynamic_analysis/prepost/PostCond/Entry.java",
+        "url": "/github.com/overturetool/overture/-/blob/core/codegen/vdm2jml/src/test/resources/dynamic_analysis/prepost/PostCond/Entry.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 39,
+          "offsetAndLengths": [
+            [
+              2,
+              12
+            ]
+          ],
+          "preview": "  //@ ensures post_opVoid(\\old(St.copy()),St);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 47,
+          "offsetAndLengths": [
+            [
+              2,
+              12
+            ]
+          ],
+          "preview": "  //@ ensures post_opRet(a,\\result,\\old(St.copy()),St);"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 62,
+          "offsetAndLengths": [
+            [
+              2,
+              12
+            ]
+          ],
+          "preview": "  //@ ensures post_f(a,\\result);"
+        }
+      ],
+      "repository": {
+        "name": "github.com/overturetool/overture",
+        "url": "/github.com/overturetool/overture"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "8e73876ae1e259b041db9a11afc7f8b93c385fa6"
+        },
+        "content": "package org.overture.vdm2jml.tests;\n\nimport org.junit.Assert;\nimport org.junit.BeforeClass;\nimport org.junit.Test;\nimport org.overture.ast.analysis.AnalysisException;\nimport org.overture.codegen.ir.declarations.AMethodDeclIR;\n\npublic class PreCondNoStateTests extends AnnotationTestsBase\n{\n\t@BeforeClass\n\tpublic static void init() throws AnalysisException\n\t{\n\t\tAnnotationTestsBase.init(\"PreCondNoState.vdmsl\");\n\t}\n\n\t@Test\n\tpublic void testPreCondOfFuncIsPure()\n\t{\n\t\tassertFuncIsPureOnly(\"pre_f\");\n\t}\n\n\t@Test\n\tpublic void testFuncRequiresAnnotation()\n\t{\n\t\tAMethodDeclIR func = getMethod(genModule.getMethods(), \"f\");\n\n\t\tAssert.assertEquals(\"Got unexpected requires annotation for function 'f'\", \"//@ requires pre_f(a,b);\", getAnnotation(func, 0));\n\t}\n\n\t@Test\n\tpublic void testPreCondOfOpIsPure()\n\t{\n\t\tassertFuncIsPureOnly(\"pre_op\");\n\t}\n\n\t@Test\n\tpublic void testOpRequiresAnnotation()\n\t{\n\t\tAMethodDeclIR op = getMethod(genModule.getMethods(), \"op\");\n\n\t\t// Note here that no state is expected to be passed\n\t\t// to the pre condition (the module has no state)\n\t\tAssert.assertEquals(\"Got unexpected requires annotation for operation 'op'\", \"//@ requires pre_op(a);\", getAnnotation(op, 0));\n\t}\n}\n",
+        "name": "PreCondNoStateTests.java",
+        "path": "core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PreCondNoStateTests.java",
+        "url": "/github.com/overturetool/overture/-/blob/core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PreCondNoStateTests.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 27,
+          "offsetAndLengths": [
+            [
+              78,
+              13
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected requires annotation for function 'f'\", \"//@ requires pre_f(a,b);\", getAnnotation(func, 0));"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 43,
+          "offsetAndLengths": [
+            [
+              80,
+              13
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected requires annotation for operation 'op'\", \"//@ requires pre_op(a);\", getAnnotation(op, 0));"
+        }
+      ],
+      "repository": {
+        "name": "github.com/overturetool/overture",
+        "url": "/github.com/overturetool/overture"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "8e73876ae1e259b041db9a11afc7f8b93c385fa6"
+        },
+        "content": "package org.overture.vdm2jml.tests;\n\nimport org.junit.Assert;\nimport org.junit.BeforeClass;\nimport org.junit.Test;\nimport org.overture.ast.analysis.AnalysisException;\nimport org.overture.codegen.ir.declarations.AMethodDeclIR;\n\npublic class PostCondNoStateTests extends AnnotationTestsBase\n{\n\t@BeforeClass\n\tpublic static void init() throws AnalysisException\n\t{\n\t\tAnnotationTestsBase.init(\"PostCondNoState.vdmsl\");\n\t}\n\n\t@Test\n\tpublic void testPostCondOfFuncIsPure()\n\t{\n\t\tassertFuncIsPureOnly(\"post_f\");\n\t}\n\n\t@Test\n\tpublic void testFuncEnsuresAnnotation()\n\t{\n\t\tAMethodDeclIR func = getMethod(genModule.getMethods(), \"f\");\n\n\t\tAssert.assertEquals(\"Got unexpected ensures annotation for function 'f'\", \"//@ ensures post_f(a,b,\\\\result);\", getAnnotation(func, 0));\n\t}\n\n\t@Test\n\tpublic void testPostCondOfOpNoResIsPure()\n\t{\n\t\tassertFuncIsPureOnly(\"post_opNoRes\");\n\t}\n\n\t@Test\n\tpublic void testOpNoResRequiresAnnotation()\n\t{\n\t\tAMethodDeclIR opNoRes = getMethod(genModule.getMethods(), \"opNoRes\");\n\n\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opNoRes'\", \"//@ ensures post_opNoRes();\", getAnnotation(opNoRes, 0));\n\t}\n\n\t// We'll not test that the post condition of 'opRes' is pure\n\n\t@Test\n\tpublic void testOpResRequresAnnotation()\n\t{\n\t\tAMethodDeclIR opRes = getMethod(genModule.getMethods(), \"opRes\");\n\n\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opRes'\", \"//@ ensures post_opRes(a,\\\\result);\", getAnnotation(opRes, 0));\n\t}\n}\n",
+        "name": "PostCondNoStateTests.java",
+        "path": "core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PostCondNoStateTests.java",
+        "url": "/github.com/overturetool/overture/-/blob/core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PostCondNoStateTests.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 27,
+          "offsetAndLengths": [
+            [
+              77,
+              12
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected ensures annotation for function 'f'\", \"//@ ensures post_f(a,b,\\\\result);\", getAnnotation(func, 0));"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 41,
+          "offsetAndLengths": [
+            [
+              84,
+              12
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opNoRes'\", \"//@ ensures post_opNoRes();\", getAnnotation(opNoRes, 0));"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 51,
+          "offsetAndLengths": [
+            [
+              82,
+              12
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opRes'\", \"//@ ensures post_opRes(a,\\\\result);\", getAnnotation(opRes, 0));"
+        }
+      ],
+      "repository": {
+        "name": "github.com/overturetool/overture",
+        "url": "/github.com/overturetool/overture"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "8e73876ae1e259b041db9a11afc7f8b93c385fa6"
+        },
+        "content": "package org.overture.vdm2jml.tests;\n\nimport org.junit.Assert;\nimport org.junit.BeforeClass;\nimport org.junit.Test;\nimport org.overture.ast.analysis.AnalysisException;\nimport org.overture.codegen.ir.declarations.AMethodDeclIR;\n\n/**\n * This test is like the PreCondNoStateTests test except that it produces a different requires annotation for the module\n * operation since the test input module has state\n * \n * @author pvj\n */\npublic class PreCondWithStateTests extends PreCondNoStateTests\n{\n\t@BeforeClass\n\tpublic static void init() throws AnalysisException\n\t{\n\t\tAnnotationTestsBase.init(\"PreCondWithState.vdmsl\");\n\t}\n\n\t@Test\n\t@Override\n\tpublic void testOpRequiresAnnotation()\n\t{\n\t\tAMethodDeclIR op = getMethod(genModule.getMethods(), \"op\");\n\n\t\t// The generated module has a state component, which must be passed to the\n\t\t// pre condition function\n\t\tAssert.assertEquals(\"Got unexpected requires annotation for operation 'op'\", \"//@ requires pre_op(a,St);\", getAnnotation(op, 0));\n\t}\n}\n",
+        "name": "PreCondWithStateTests.java",
+        "path": "core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PreCondWithStateTests.java",
+        "url": "/github.com/overturetool/overture/-/blob/core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PreCondWithStateTests.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 30,
+          "offsetAndLengths": [
+            [
+              80,
+              13
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected requires annotation for operation 'op'\", \"//@ requires pre_op(a,St);\", getAnnotation(op, 0));"
+        }
+      ],
+      "repository": {
+        "name": "github.com/overturetool/overture",
+        "url": "/github.com/overturetool/overture"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "8e73876ae1e259b041db9a11afc7f8b93c385fa6"
+        },
+        "content": "package org.overture.vdm2jml.tests;\n\nimport org.junit.Assert;\nimport org.junit.BeforeClass;\nimport org.junit.Test;\nimport org.overture.ast.analysis.AnalysisException;\nimport org.overture.codegen.ir.declarations.AMethodDeclIR;\n\npublic class PostCondWithStateTests extends PostCondNoStateTests\n{\n\t@BeforeClass\n\tpublic static void init() throws AnalysisException\n\t{\n\t\tAnnotationTestsBase.init(\"PostCondWithState.vdmsl\");\n\t}\n\n\t@Test\n\t@Override\n\tpublic void testOpNoResRequiresAnnotation()\n\t{\n\t\tAMethodDeclIR opNoRes = getMethod(genModule.getMethods(), \"opNoRes\");\n\n\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opNoRes'\", \"//@ ensures post_opNoRes(\\\\old(St.copy()),St);\", getAnnotation(opNoRes, 0));\n\t}\n\n\t@Test\n\t@Override\n\tpublic void testOpResRequresAnnotation()\n\t{\n\t\tAMethodDeclIR opRes = getMethod(genModule.getMethods(), \"opRes\");\n\n\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opRes'\", \"//@ ensures post_opRes(a,\\\\result,\\\\old(St.copy()),St);\", getAnnotation(opRes, 0));\n\t}\n}\n",
+        "name": "PostCondWithStateTests.java",
+        "path": "core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PostCondWithStateTests.java",
+        "url": "/github.com/overturetool/overture/-/blob/core/codegen/vdm2jml/src/test/java/org/overture/vdm2jml/tests/PostCondWithStateTests.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 22,
+          "offsetAndLengths": [
+            [
+              84,
+              12
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opNoRes'\", \"//@ ensures post_opNoRes(\\\\old(St.copy()),St);\", getAnnotation(opNoRes, 0));"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 31,
+          "offsetAndLengths": [
+            [
+              82,
+              12
+            ]
+          ],
+          "preview": "\t\tAssert.assertEquals(\"Got unexpected ensures annotation for operation 'opRes'\", \"//@ ensures post_opRes(a,\\\\result,\\\\old(St.copy()),St);\", getAnnotation(opRes, 0));"
+        }
+      ],
+      "repository": {
+        "name": "github.com/overturetool/overture",
+        "url": "/github.com/overturetool/overture"
+      }
+    }
+  ],
+  "LimitHit": false,
+  "Cloning": [],
+  "Missing": [],
+  "Timedout": [],
+  "ResultCount": 14,
+  "ElapsedMilliseconds": 122,
+  "Alert": {
+    "Title": "",
+    "Description": "",
+    "ProposedQueries": null
+  }
+}

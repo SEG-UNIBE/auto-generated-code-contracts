@@ -1,0 +1,548 @@
+{
+  "SourcegraphEndpoint": "https://sourcegraph.com",
+  "Query": "(//@ requires )|(//@ ensures ) repo:github.com/formidablae/unibg_magistrale_esame_informatica_III_a lang:java count:all case:yes type:file patterntype:regexp",
+  "Site": {
+    "BuildVersion": "238702_2023-08-16_5.1-acf4bcc841e5"
+  },
+  "Results": [
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "package pure;\r\n\r\npublic class BankingExample {\r\n\r\n\t   public static final int MAX_BALANCE = 1000; \r\n\t   private int balance;\r\n\t   private /*@ spec_public @*/ boolean isLocked = false; \r\n\r\n\t   //@ public invariant balance \u003e= 0 \u0026\u0026 balance \u003c= MAX_BALANCE;\r\n\r\n\t   \r\n\t   //@ assignable balance;\r\n\t   //@ ensures balance == 0;\r\n\t   public BankingExample() { balance = 0; }\r\n\r\n\t   //@ requires 0 \u003c amount \u0026\u0026 amount + balance \u003c MAX_BALANCE;\r\n\t   //@ assignable balance;\r\n\t   //@ ensures balance == \\old(balance) + amount;\r\n\t   public void credit(int amount) { balance += amount; }\r\n\r\n\t   //@ requires 0 \u003c amount \u0026\u0026 amount \u003c= balance;\r\n\t   //@ assignable balance;\r\n\t   //@ ensures balance == \\old(balance) - amount;\r\n\t   public void debit(int amount) { balance -= amount; }\r\n\r\n\t   //@ ensures isLocked == true;\r\n\t   public void lockAccount() { isLocked = true; }\r\n\r\n\t   //@   requires !isLocked;\r\n\t   //@   ensures \\result == balance;\r\n\t   //@ also\r\n\t   //@   requires isLocked;\r\n\t   //@   signals_only BankingException;\r\n\t   public /*@ pure @*/ int getBalance() throws BankingException {\r\n\t       if (!isLocked) { return balance; }\r\n\t       else { throw new BankingException(); }\r\n\t   }\r\n\t}",
+        "name": "BankingExample.java",
+        "path": "Java/Info_3_Old_JML_Java_es0/src/pure/BankingExample.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_es0/src/pure/BankingExample.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 12,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "\t   //@ ensures balance == 0;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 15,
+          "offsetAndLengths": [
+            [
+              4,
+              13
+            ]
+          ],
+          "preview": "\t   //@ requires 0 \u003c amount \u0026\u0026 amount + balance \u003c MAX_BALANCE;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 17,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "\t   //@ ensures balance == \\old(balance) + amount;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 20,
+          "offsetAndLengths": [
+            [
+              4,
+              13
+            ]
+          ],
+          "preview": "\t   //@ requires 0 \u003c amount \u0026\u0026 amount \u003c= balance;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 22,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "\t   //@ ensures balance == \\old(balance) - amount;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 25,
+          "offsetAndLengths": [
+            [
+              4,
+              12
+            ]
+          ],
+          "preview": "\t   //@ ensures isLocked == true;\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": " \npublic class Prova {\n\t\n\t\n\tpublic static void main(String[] args) {\n\t\tint x = 10;\n\t\tassert x \u003c 9 : \"hai sbagliato x\";\n\t\tsqrt2(0);\n\t}\n\t\n\t//@ requires x \u003e= 0;\n\tprivate static void sqrt2(int x){\n\t\treturn;\n\t}\n\n}\n",
+        "name": "Prova.java",
+        "path": "Java/Info_3_Old_JML_Java_es0/src/Prova.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_es0/src/Prova.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 10,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires x \u003e= 0;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "public class Persona {\r\n\tpublic float altezza, peso;\r\n\r\n\tpublic float getAltezza() {\r\n\t\treturn altezza;\r\n\t}\r\n\t//@ requires a \u003e 0;\r\n\t//@ ensures altezza == a;\r\n\tpublic void setAltezza(float a) {\r\n\t\tthis.altezza = a;\r\n\t}\r\n\tpublic float getPeso() {\r\n\t\treturn peso;\r\n\t}\r\n\tpublic void setPeso(float peso) {\r\n\t\tthis.peso = peso;\r\n\t}\r\n\t\r\n\tpublic float getIndiceDiMassa(){\r\n\t\tfloat indice = peso /((altezza/100) * (altezza/100) );\r\n\t\treturn indice;\r\n\t}\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\tPersona p = new Persona();\r\n\t\tp.setAltezza(170);\r\n\t\tp.setPeso(70);\r\n\t\tSystem.out.println(p.getIndiceDiMassa());\r\n\t}\r\n\r\n}\r\n",
+        "name": "Persona.java",
+        "path": "Java/Info_3_Old_JML_Java_es0/src/Persona.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_es0/src/Persona.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires a \u003e 0;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 7,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures altezza == a;\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "public class Account {\r\n\r\n\t//@ invariant balance \u003e= minBal;\r\n\tpublic int balance;\r\n\r\n\tpublic static int minBal = 1000;\r\n\r\n\t//@ requires amount \u003e= minBal;\r\n\t//@ ensures balance == amount;\r\n\tpublic Account(int amount) {\r\n\t\tbalance = amount;\r\n\t}\r\n\t\r\n\t//@ requires ok(somma);\r\n\t//@ ensures \\old(balance) - somma == balance;\r\n\t//@ ensures \\result == balance; \r\n\tpublic int withdraw(int somma){\r\n\t\tbalance -= somma;\r\n\t\treturn balance;\r\n\t}\r\n\tprivate boolean ok(int somma){\r\n\t\treturn  somma \u003e= (balance - minBal);\r\n\t}\r\n\t\r\n\t\r\n\t//@ requires amount \u003e0;\r\n\t//@ ensures balance ==\\old(balance) + amount;\r\n\tpublic int deposit(int amount) {\r\n\t\tbalance += amount;\r\n\t\treturn 0;\r\n\t}\r\n\t\r\n\tpublic static void main(String[] args) {\r\n\t\tAccount a = new Account(5000);\r\n\t\tSystem.out.println(a.balance);\r\n\t\ta.deposit(100);\r\n\t\ta.withdraw(4100);\r\n\t}\r\n}\r\n",
+        "name": "Account.java",
+        "path": "Java/Info_3_Old_JML_Java_es0/src/Account.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_es0/src/Account.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 7,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires amount \u003e= minBal;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 8,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures balance == amount;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 13,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires ok(somma);\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 14,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures \\old(balance) - somma == balance;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 15,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures \\result == balance; \r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 25,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires amount \u003e0;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 26,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures balance ==\\old(balance) + amount;\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "\r\npublic class ContoBanca {\r\n\r\n\tint balance;\r\n\t \r\n\t//@ requires amount \u003e 0;\r\n\tpublic ContoBanca(int amount){\r\n\t\tbalance = amount;\r\n\t}\r\n\t\r\n\tpublic static void main(String[] args) {\r\n\t\tContoBanca p = new ContoBanca(0);\r\n\t}\r\n}\r\n",
+        "name": "ContoBanca.java",
+        "path": "Java/Info_3_Old_JML_Java_es0/src/ContoBanca.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_es0/src/ContoBanca.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 5,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires amount \u003e 0;\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "public class Account {\n\n\tprivate String accountId;\n\tprivate int MAX_value;\n\n\tprivate int balance; // saldo\n\n\tprivate int opcost;\n\n\tpublic Account(String Id, int initialBalance, int costoConcordato, int vmax) {\n\t\taccountId = Id;\n\t\tbalance = initialBalance;\n\t\topcost = costoConcordato;\n\t\tMAX_value = vmax;\n\t}\n\n\tpublic boolean debit(int amount) {\n\t\tif (amount \u003c= balance) {\n\t\t\tbalance = balance - amount - opcost;\n\t\t\treturn true;\n\t\t} else\n\t\t\treturn false;\n\t}\n\n\t//@ requires amount \u003e 0;\n\tpublic boolean credit(int amount) {\n\t\tint tmp = balance + amount - opcost;\n\t\tif (tmp \u003c= MAX_value) {\n\t\t\tbalance = tmp;\n\t\t\treturn true;\n\t\t} else\n\t\t\treturn false;\n\t}\n\n\tpublic int getBalance() {\n\t\treturn balance;\n\t}\n\n\tpublic int getMAX() {\n\t\treturn MAX_value;\n\t}\n\n\tpublic String getID() {\n\t\treturn accountId;\n\t}\n\n\tpublic int getOpcost() {\n\t\treturn opcost;\n\t}\n\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"inizio\");\n\t\tAccount utente = new Account(\"elvinia\", 0, 5, 10000);\n\t\tSystem.out.println(\"utente = \" + utente.getID());\n\t\tSystem.out.println(\"bilancio  = \" + utente.getBalance());\n\t\tSystem.out.println(\"costo operazione = \" + utente.getOpcost());\n\t\tSystem.out.println(\"massimo saldo = \" + utente.getMAX());\n\n\t\tutente.credit(-500);\n\t\tSystem.out.println(\"eseguito versamento\");\n\t\tSystem.out.println(\"utente = \" + utente.getID());\n\t\tSystem.out.println(\"bilancio  = \" + utente.getBalance());\n\t\tSystem.out.println(\"costo operazione = \" + utente.getOpcost());\n\t\tSystem.out.println(\"massimo saldo = \" + utente.getMAX());\n\n\t\tutente.debit(200);\n\t\tSystem.out.println(\"eseguito prelievo\");\n\t\tSystem.out.println(\"utente = \" + utente.getID());\n\t\tSystem.out.println(\"bilancio  = \" + utente.getBalance());\n\t\tSystem.out.println(\"costo operazione = \" + utente.getOpcost());\n\t\tSystem.out.println(\"massimo saldo = \" + utente.getMAX());\n\n\t\tSystem.out.println(\"esito prelievo \" + utente.debit(5000));\n\n\t}\n}\n",
+        "name": "Account.java",
+        "path": "Java/Info_3_Old_JML_Java_elvinia/src/Account.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_elvinia/src/Account.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 24,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires amount \u003e 0;"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "package ered;\r\n\r\npublic class Person {\r\n\r\n\t//@ requires x \u003e= 0;\r\n\tpublic void setAge(int x){\r\n\t\t\r\n\t}\r\n\t\r\n\t//@ requires s != null;\r\n\tpublic void setName(String s){\r\n\t\t\r\n\t}\r\n\t\r\n\t\r\n}\r\n",
+        "name": "Person.java",
+        "path": "Java/Info_3_Old_JML_Java_es0/src/ered/Person.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_es0/src/ered/Person.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 4,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires x \u003e= 0;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 9,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires s != null;\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "\r\npublic class Max1 {\r\n\t\r\n\t\r\n\t//@ requires true;\r\n\t//@ ensures \\result \u003e= x \u0026\u0026 \\result \u003e= y;\r\n\t//@ ensures \\result == x || \\result == y;\r\n\t//@ ensures (x\u003e=y ) ==\u003e \\result == x;\r\n\t//@ ensures (y\u003e=x ) ==\u003e \\result == y;\r\n\t\r\n\tstatic int max(int y, int x){\r\n\t\tif (y \u003e= x){\r\n\t\t\t//@ assert y \u003e= x;\r\n\t\t\treturn y;\r\n\t\t} else{\r\n\t\t\treturn x;\r\n\t\t}\t\t\r\n\t}\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\tassert Max1.max(3, 4) == 4;\r\n\t\tSystem.out.println(Max1.max(4, 3));\r\n\t\tSystem.out.println(Max1.max(3, 3));\r\n\t}\r\n}\r\n",
+        "name": "Max1.java",
+        "path": "Java/Info_3_Old_JML_Java_yices_proofs/src/Max1.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_yices_proofs/src/Max1.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 4,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires true;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 5,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures \\result \u003e= x \u0026\u0026 \\result \u003e= y;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures \\result == x || \\result == y;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 7,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures (x\u003e=y ) ==\u003e \\result == x;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 8,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures (y\u003e=x ) ==\u003e \\result == y;\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "/**\r\n * a very simple proof\r\n * \r\n * @author garganti\r\n * \r\n */\r\npublic class SimpleProof {\r\n\r\n\t//@ ensures \\result == y;\r\n\tstatic int foo(int x, int y) {\r\n\t\treturn y;\r\n\t}\r\n\r\n\tpublic static void main(String[] args) {\r\n\r\n\t\tSystem.out.println(SimpleProof.foo(3, 4));\r\n\t\t\r\n\r\n\t}\r\n}\r\n",
+        "name": "SimpleProof.java",
+        "path": "Java/Info_3_Old_JML_Java_yices_proofs/src/SimpleProof.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_yices_proofs/src/SimpleProof.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 8,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures \\result == y;\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "\r\npublic class SimpleProof2 {\r\n\t\r\n\t\r\n\t//@ ensures (x \u003e= y ==\u003e \\result == x) \u0026\u0026 (x \u003c= y ==\u003e \\result == y);\r\n\tstatic int max(int x, int y){\r\n\t\tif (x \u003e= y) return 0;\r\n\t\telse return y;\r\n\t}\r\n\t\r\n\tpublic static void main(String[] args) {\r\n\t\t\r\n\t\tSystem.out.println(SimpleProof2.max(3,4));\r\n\t\tSystem.out.println(SimpleProof2.max(4,3));\r\n\t\t\r\n\t}\r\n}\r\n",
+        "name": "SimpleProof2.java",
+        "path": "Java/Info_3_Old_JML_Java_yices_proofs/src/SimpleProof2.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_yices_proofs/src/SimpleProof2.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 4,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures (x \u003e= y ==\u003e \\result == x) \u0026\u0026 (x \u003c= y ==\u003e \\result == y);\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    },
+    {
+      "__typename": "FileMatch",
+      "file": {
+        "commit": {
+          "oid": "0ff688824b4eaee4e2a13d09ceeb7ce416a42a73"
+        },
+        "content": "package quantificatori;\r\n\r\npublic class ProvaMAssimo {\r\n\t\r\n\t//@ requires a!=null \u0026\u0026 a.length \u003e= 1;\r\n\t//@ ensures (\\forall int i ; 0\u003c=i \u0026\u0026 i \u003c a.length; \\result \u003e= a[i]);\r\n\t//@ ensures (\\exists int i; 0\u003c=i \u0026\u0026 i \u003c a.length; \\result == a[i]);\r\n\tint max(int a[]) {\r\n\t\treturn Integer.MAX_VALUE;\r\n\t}\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\tProvaMAssimo pm = new ProvaMAssimo();\r\n\t\t//System.out.println(pm.max(null));\r\n\t\t//System.out.println(pm.max(new int[]{}));\r\n\t\tSystem.out.println(pm.max(new int[] { 5, 6 }));\r\n\t}\r\n}\r\n",
+        "name": "ProvaMAssimo.java",
+        "path": "Java/Info_3_Old_JML_Java_es0/src/quantificatori/ProvaMAssimo.java",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a/-/blob/Java/Info_3_Old_JML_Java_es0/src/quantificatori/ProvaMAssimo.java"
+      },
+      "lineMatches": [
+        {
+          "limitHit": false,
+          "lineNumber": 4,
+          "offsetAndLengths": [
+            [
+              1,
+              13
+            ]
+          ],
+          "preview": "\t//@ requires a!=null \u0026\u0026 a.length \u003e= 1;\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 5,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures (\\forall int i ; 0\u003c=i \u0026\u0026 i \u003c a.length; \\result \u003e= a[i]);\r"
+        },
+        {
+          "limitHit": false,
+          "lineNumber": 6,
+          "offsetAndLengths": [
+            [
+              1,
+              12
+            ]
+          ],
+          "preview": "\t//@ ensures (\\exists int i; 0\u003c=i \u0026\u0026 i \u003c a.length; \\result == a[i]);\r"
+        }
+      ],
+      "repository": {
+        "name": "github.com/formidablae/unibg_magistrale_esame_informatica_III_a",
+        "url": "/github.com/formidablae/unibg_magistrale_esame_informatica_III_a"
+      }
+    }
+  ],
+  "LimitHit": false,
+  "Cloning": [],
+  "Missing": [],
+  "Timedout": [],
+  "ResultCount": 30,
+  "ElapsedMilliseconds": 390,
+  "Alert": {
+    "Title": "",
+    "Description": "",
+    "ProposedQueries": null
+  }
+}
