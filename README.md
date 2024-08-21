@@ -2,7 +2,6 @@
 
 This repository provides the setup and results to generate OpenJML code contracts for Java source code by fine-tuning and employing the resulting CodeT5 and CodeT5+ transformer models.
 
-
 # Contents of this repository
 
 This repository contains all artifacts that we used to generate code contracts with CodeT5 models and evaluate their capabilities.
@@ -23,7 +22,9 @@ Furthermore, we performed automated analyses of the studied source code classes 
   - [JavaStatisticsScanner](scripts/JavaStatisticsScanner.java)  computes the number of contained annotations, LOC, ... of Java files in a given directory
   - [CompilationAnalysisScanner.java](scripts/CompilationAnalysisScanner.java) 	counts the number of OpenJML compilation errors in a given file
 
-Finally, we add and link the results of our experiment:
+Finally, we add and link (https://doi.org/10.5281/zenodo.13351003) the results of our experiment:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13351003.svg)](https://doi.org/10.5281/zenodo.13351003)
 
 - **Results** from our study including
 
@@ -33,6 +34,7 @@ Finally, we add and link the results of our experiment:
 
 
 # Getting started
+
 ## Prerequisites
 
 To use the Python scripts you need to have installed:
@@ -62,31 +64,47 @@ e.g. `python 1_dataset.py -h` will print the description of the the script inclu
 For this reason we only provide a short summary of the main scripts' functionality here.
 
 ### 1_dataset.py
+
 This script collects the Java methods with JML annotations from the Sourcegraph code search engine.
 It takes care of all the necessary preprocessing that is needed to use the collected dataset for the fine-tuning with 2_training.py.
+
 ### 2_training.py
+
 This script is used to fine-tune CodeT5 or CodeT5+ using the dataset created by 1_dataset.py.
 A GPU compatible with CUDA is highly recommended to speed up this script.
+
 ### 3_application.py
+
 This script is used to apply the fine-tuned model to a Java project.
 The script will create a copy of the project with JML annotated copies of the Java source files.
 A GPU compatible with CUDA is highly recommended to speed up this script.
 
 ## Results
 
-The results folder contains the
+Our results can be found in the Zenodo replication package (https://doi.org/10.5281/zenodo.13351003) that contains the following artifacts:
 
-- two datasets:
-	- one including the [weka-project](https://github.com/svn2github/weka) which contributes two-thirds of the contracts
-	- one without weka, which is significantly smaller and was used to examine the performance bias when training and testing without weka
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13351003.svg)](https://doi.org/10.5281/zenodo.13351003)
 
-- two CodeT5 models
-	+ the best performing CodeT5+ model which was fine-tuned to create OpenJML annotations for methods
-	+ the CodeT5+ model which was trained without weka on the same task
+### Sourcegraph Search Results
 
-- in application_tests
-	- the subjects to which we applied the best performing CodeT5+
-	- the compilation results and their analysis
+- ```sourcegraph-results.tar```: the results of the Sourcegraph search queries 
 
-- the analysis of logic validity of SimpleStack and SimpleTicTacToe
+### Datasets
 
+- ```dataset.tar```: the dataset including the [weka-project](https://github.com/svn2github/weka) which contributes two-thirds of the contracts
+- ```dataset-withoutweka.tar```: the dataset without weka, which is significantly smaller and was used to examine the performance bias when training and testing without weka
+
+### CodeT5 Models
+
+- ```codet5-contracts.tar```: the best performing CodeT5 model which was fine-tuned to create OpenJML annotations for methods
+- ```codet5p-contracts.tar```: the best performing CodeT5+ model which was fine-tuned to create OpenJML annotations for methods
+- ```codet5p-contracts-withoutweka.tar```: the CodeT5+ model which was trained without weka on the same task
+
+### Analysis Results
+
+- ```analysis-results.tar/compilability-analysis```: the results of the compilability analysis
+  - the subjects to which we applied the best performing CodeT5+
+  - the compilation results and their analysis
+
+- ```analysis-results.tar/logical-analysis``` the results of the logical analysis
+  - the analysis of logic validity of SimpleStack and SimpleTicTacToe
