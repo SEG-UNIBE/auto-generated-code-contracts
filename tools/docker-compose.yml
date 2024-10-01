@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  srcml:
+    build: .
+    volumes:
+      - ./build:/usr/src/srcML/build/output
+    command: /bin/bash -c "mkdir -p /usr/src/srcML/build/output && cp /usr/local/bin/srcml /usr/src/srcML/build/output && cp /usr/local/lib/libsrcml.so.1 /usr/src/srcML/build/output"
